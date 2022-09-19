@@ -1,4 +1,4 @@
-# eatorstarve
+# Eat or Starve
 
 ## Project setup
 ```
