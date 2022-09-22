@@ -31,7 +31,6 @@ export default {
               message: 'Join this room'
             });
             this.$router.push({
-              name: 'Room',
               params: {id: this.$route.params.id, nickname: res.data.nickname}
             })
             console.log(res)

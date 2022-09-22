@@ -17,6 +17,13 @@ io.on('connection', function (socket) {
         io.emit('new-message', { message: data });
     });
 });
+// get list of players
+router.get('/', (req, res, next) => {
+    Player.find(function (err, rooms) {
+        if (err) return next(err);
+        res.json(rooms);
+    });
+});
 
 /* GET ALL CHATS */
 router.get('/:roomid', function(req, res, next) {
