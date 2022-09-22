@@ -1,7 +1,10 @@
 const mongoose = require("mongoose")
 
 const RoomSchema = new mongoose.Schema({
-    room_name: { type: String },
+    pin: { type: String },
+    hostId: { type: String },
+    roomLive: { type: String },
+    roomData: { type: JSON },
     created_date: { type: Date, default: Date.now },
 });
 
