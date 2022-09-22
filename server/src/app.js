@@ -9,8 +9,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 const mongodb_conn_module = require('./mongodbConnModule');
-const db = mongodb_conn_module.connect();
-
+mongodb_conn_module.connect();
 var Room = require("../models/room");
 
 app.get('/', (req, res) => {
@@ -20,8 +19,8 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/:id', (req, res) => {
-    Room.findById(req.params.id, function (err, room) {
+app.get('/:room_code', (req, res) => {
+    Room.findOne({},{room_name: req.params.id}, function (err, room) {
         if (err) console.error(err);
         res.send(room)
     })
