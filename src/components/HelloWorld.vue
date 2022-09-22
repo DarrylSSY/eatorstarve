@@ -31,8 +31,14 @@
 </template>
 
 <script>
+import {io} from 'socket.io-client'
 export default {
   name: 'HelloWorld',
+  data (){
+    return {
+      socket: io('http://localhost:4000', { transports : ['websocket'] })
+    }
+  },
   props: {
     msg: String
   }
