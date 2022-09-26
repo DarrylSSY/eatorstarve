@@ -7,7 +7,8 @@ const routes = [
         {
             path: '/',
             name: 'Home',
-            component: HomeView
+            component: HomeView,
+            props: { msg: Math.random().toString(36).slice(9)}
         },
         {
             path: '/room/:id',

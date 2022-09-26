@@ -1,42 +1,48 @@
 <template>
   <div class="home">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <h5>If you can see the animation below, Rive.JS is working</h5>
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <h5>If you can see the code below, code generation is working</h5>
+    <p>{{ msg }}</p>
+    <h5>If you can see the address below, Google Places API is working</h5>
+    <p>{{ location }}</p>
+    <h5>If you see the avatar below, DiceBear API is working</h5>
+    <img style="width: 100px" src="https://avatars.dicebear.com/api/pixel-art/darryl.svg">
+    <h5>If you see a black button, SCSS is working</h5>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <h5>If you see a retro button, NES.css is working</h5>
+    <button type="button" class="nes-btn is-primary">Primary</button>
   </div>
 </template>
 
 <script>
+import {Rive} from "rive-js";
+import axios from "axios";
 export default {
   name: 'HomeView',
+  data () {
+    return {
+      location: null,
+      avatar: null
+    }
+  },
   props: {
     msg: String
+  },
+  mounted() {
+    new Rive({
+      src: 'https://cdn.rive.app/animations/off_road_car_v7.riv',
+      canvas: document.getElementById("canvas"),
+      autoplay: true
+    });
+    axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=chinese vegetarian&inputtype=textquery&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&fields=formatted_address,name,geometry\n')
+        .then(response => {
+          console.log(response);
+          this.location = response.data.candidates[0].formatted_address;
+        })
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
