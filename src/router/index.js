@@ -1,25 +1,20 @@
 import { createWebHistory, createRouter } from "vue-router";
-import HelloWorld from '@/components/HelloWorld'
-import CreateRoom from '@/components/CreateRoom'
-import JoinRoom from '@/components/JoinRoom'
+import HomeView from '@/views/Home'
+import RoomView from "@/views/Room";
 
 
 const routes = [
         {
             path: '/',
-            name: 'HelloWorld',
-            component: HelloWorld
+            name: 'Home',
+            component: HomeView
         },
         {
-            path: '/create-room',
-            name: 'CreateRoom',
-            component: CreateRoom
-        },
-        {
-            path: '/join-room/:id',
-            name: 'JoinRoom',
-            component: JoinRoom
-        },
+            path: '/room/:id',
+            name: 'Room',
+            component: RoomView
+        }
+
 ]
 
 const router = createRouter({

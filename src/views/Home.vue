@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <h1>{{ msg }}</h1>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
@@ -31,14 +31,8 @@
 </template>
 
 <script>
-import {io} from 'socket.io-client'
 export default {
-  name: 'HelloWorld',
-  data (){
-    return {
-      socket: io('http://localhost:4000', { transports : ['websocket'] })
-    }
-  },
+  name: 'HomeView',
   props: {
     msg: String
   }
@@ -61,7 +55,7 @@ li {
 a {
   color: #42b983;
 }
-#app {
+#index {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
