@@ -5,9 +5,10 @@
     <h5>If you can see the code below, code generation is working</h5>
     <p>{{ msg }}</p>
     <h5>If you can see the address below, Google Places API is working</h5>
+    <p>{{ place }}</p>
     <p>{{ location }}</p>
     <h5>If you see the avatar below, DiceBear API is working</h5>
-    <img style="width: 100px" src="https://avatars.dicebear.com/api/pixel-art/darryl.svg">
+    <img style="width: 100px" src="https://avatars.dicebear.com/api/pixel-art/sarah.svg">
     <h5>If you see a black button, SCSS is working</h5>
     <button type="button" class="btn btn-primary">Primary</button>
     <h5>If you see a retro button, NES.css is working</h5>
@@ -22,6 +23,7 @@ export default {
   name: 'HomeView',
   data () {
     return {
+      place : null,
       location: null,
       avatar: null
     }
@@ -31,14 +33,15 @@ export default {
   },
   mounted() {
     new Rive({
-      src: 'https://cdn.rive.app/animations/off_road_car_v7.riv',
+      src: 'https://cdn.rive.app/animations/vehicles.riv',
       canvas: document.getElementById("canvas"),
       autoplay: true
     });
-    axios.get('https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=chinese vegetarian&inputtype=textquery&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&fields=formatted_address,name,geometry\n')
+    axios.get('')
+    axios.post('http://localhost:8081/api/places',{"parameters":"seafood"})
         .then(response => {
-          console.log(response);
-          this.location = response.data.candidates[0].formatted_address;
+          this.place = response["data"]["name"]
+          this.location = response["data"]["address"]
         })
   }
 }
