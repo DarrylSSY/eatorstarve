@@ -1,20 +1,32 @@
 import { createWebHistory, createRouter } from "vue-router";
-import HomeView from '@/views/Home'
+import SampleView from '@/views/Sample'
 import RoomView from "@/views/Room";
-
+import HomeView from "@/views/Home";
+import Question1View from "@/views/Question1";
 
 const routes = [
-        {
-            path: '/',
-            name: 'Home',
-            component: HomeView,
-            props: { msg: Math.random().toString(36).slice(9)}
-        },
-        {
-            path: '/room/:id',
-            name: 'Room',
-            component: RoomView
-        }
+    {
+        path: '/',
+        name: 'Home',
+        component: HomeView,
+    },
+    {
+        path: '/room/:code',
+        name: 'Room',
+        component: RoomView
+    },
+    {
+        path: '/room/:code/1',
+        name: 'Question1',
+        component: Question1View,
+        props: true
+    },
+    {
+        path: '/sample',
+        name: 'Sample',
+        component: SampleView,
+        props: { msg: Math.random().toString(36).slice(9)}
+    },
 
 ]
 

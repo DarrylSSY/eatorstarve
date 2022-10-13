@@ -1,75 +1,51 @@
 <template>
-  <div class="home">
-    <h5>If you can see the animation below, Rive.JS is working</h5>
-    <canvas id="canvas" width="400" height="300"></canvas>
-    <h5>If you can see the code below, code generation is working</h5>
-    <p>{{ msg }}</p>
-    <h5>If you can see the address below, Google Places API is working</h5>
-    <p>{{ place }}</p>
-    <p>{{ location }}</p>
-    <h5>If you see the avatar below, DiceBear API is working</h5>
-    <img style="width: 100px" src="https://avatars.dicebear.com/api/pixel-art/sarah.svg">
-    <h5>If you see a black button, SCSS is working</h5>
-    <button type="button" class="btn btn-primary">Primary</button>
-    <h5>If you see a retro button, NES.css is working</h5>
-    <button type="button" class="nes-btn is-primary">Primary</button>
-  </div>
+  <input v-model="code" placeholder="RoomCode"/>
+  <button v-on:click="join">Join</button>
+  <button v-on:click="create">Create</button>
 </template>
 
 <script>
-import {Rive} from "rive-js";
-import axios from "axios";
+import router from "@/router";
+
 export default {
-  name: 'HomeView',
+  name: "RoomView",
   data () {
     return {
-      place : null,
-      location: null,
-      avatar: null
+      code: ""
     }
   },
-  props: {
-    msg: String
-  },
-  mounted() {
-    new Rive({
-      src: 'https://cdn.rive.app/animations/vehicles.riv',
-      canvas: document.getElementById("canvas"),
-      autoplay: true
-    });
-    axios.get('')
-    axios.post('http://localhost:8081/api/places',{"parameters":"seafood"})
-        .then(response => {
-          this.place = response["data"]["name"]
-          this.location = response["data"]["address"]
-        })
+  methods: {
+    join: function (){
+      // Incomplete code
+      // Check if room exists
+      let error = false
+      // If don't exist or code empty, give error
+      if (error || this.code == "") {
+        alert("Room doesn't exist")
+      }
+      // Else go to room
+      else {
+        router.push("room/" + this.code)
+      }
+    },
+    create: function (){
+      // Incomplete code
+      // Generate random code
+      let generated_code = Math.random().toString(36).slice(9)
+      // Check if room exists
+      let error = false
+      // Keep generating until room doesn't exist
+      while (error) {
+        generated_code = Math.random().toString(36).slice(9)
+        error = false
+      }
+      // Else create room
+      router.push("room/" + generated_code)
+    }
   }
 }
-
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-#index {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
