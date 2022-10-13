@@ -10,8 +10,8 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-// const mongodb_conn_module = require('./mongodbConnModule');
-// mongodb_conn_module.connect();
+const mongodb_conn_module = require('./mongodbConnModule');
+mongodb_conn_module.connect();
 
 app.use('/api/', routes);
 
