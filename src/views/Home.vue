@@ -4,6 +4,7 @@
   <button v-on:click="create">Create</button>
 
 </template>
+<h1>Hi</h1>
 
 <script>
 import router from "@/router";
