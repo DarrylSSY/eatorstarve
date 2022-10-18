@@ -2,11 +2,11 @@
   <input v-model="code" placeholder="RoomCode"/>
   <button v-on:click="join">Join</button>
   <button v-on:click="create">Create</button>
+
 </template>
 
 <script>
 import router from "@/router";
-
 export default {
   name: "RoomView",
   data () {
@@ -33,6 +33,7 @@ export default {
       // Generate random code
       let generated_code = Math.random().toString(36).slice(9)
       // Check if room exists
+
       let error = false
       // Keep generating until room doesn't exist
       while (error) {

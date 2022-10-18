@@ -1,5 +1,5 @@
 <template>
-  <input v-model="username" placeholder="username"/>
+  <input v-model="currentUsername" placeholder="username"/>
   <button v-on:click="play">Play</button>
   Hi, this is the room page for room code {{code}}
   <button v-on:click="home">Home</button>
@@ -8,18 +8,21 @@
 
 <script>
 import router from "@/router";
+import { useSessionStore } from '../stores/session';
 
 export default {
   name: "RoomView",
   data() {
     return {
       code: this.$route.params.code,
-      username: ""
+      currentUsername: "",
     }
   },
   methods: {
     play: function (){
-      router.push({ name: 'Question1', query: {username: 'hihi'}, props: true})
+      const username = useSessionStore()
+      username.setUsername(this.currentUsername)
+      router.push({ name: 'Question1', props: true})
     },
     home: function (){
       router.push("/")

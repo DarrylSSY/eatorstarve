@@ -19,7 +19,6 @@ const routes = [
         path: '/room/:code/1',
         name: 'Question1',
         component: Question1View,
-        props: true
     },
     {
         path: '/sample',
