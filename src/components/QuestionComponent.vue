@@ -1,7 +1,7 @@
 <template>
   {{question}} {{category}}
-  <button v-on:click="option1">{{answer1}}</button>
-  <button v-on:click="option2">{{answer2}}</button>
+  <button @click="option1">{{answer1}}</button>
+  <button @click="option2">{{answer2}}</button>
 </template>
 
 <script>
@@ -27,7 +27,9 @@ export default {
     }
   },
   mounted() {
+
     axios.get('http://localhost:8081/api/questions/cuisine').then(
+
         response => {
           this.answer1 = response['data'][0]['answer']
           this.answer2 = response['data'][1]['answer']
@@ -58,7 +60,3 @@ export default {
 
 }
 </script>
-
-<style scoped>
-
-</style>

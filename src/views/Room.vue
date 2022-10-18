@@ -1,9 +1,9 @@
 <template>
   <input v-model="currentUsername" placeholder="username"/>
-  <button v-on:click="play">Play</button>
+  <button @click="play">Play</button>
   Hi, this is the room page for room code {{code}}
-  <button v-on:click="home">Home</button>
-  <button v-on:click="copy_link">Copy Link</button>
+  <button @click="home">Home</button>
+  <button @click="copy_link">Copy Link</button>
 </template>
 
 <script>

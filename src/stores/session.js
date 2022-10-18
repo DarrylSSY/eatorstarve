@@ -16,5 +16,6 @@ export const useSessionStore = defineStore('session', {
         setUsername(username) {
             this.username = username
         },
+
     }
 });

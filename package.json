@@ -4,7 +4,8 @@
   "scripts": {
     "client": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "format": "prettier .  --write",
     "server": "node ./node_modules/nodemon/bin/nodemon.js server/src/app.js",
     "start": "concurrently \"npm run client\" \"npm run server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,12 +21,14 @@
     "core-js": "^3.8.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
+    "eslint-config-prettier": "^8.5.0",
     "express": "^4.18.1",
     "mongoose": "^6.6.1",
     "morgan": "^1.10.0",
     "node-sass": "^7.0.3",
     "nodemon": "^2.0.20",
     "pinia": "^2.0.23",
+    "prettier": "^2.7.1",
     "rive-js": "^0.7.33",
     "sass-loader": "^13.0.2",
     "vue": "^3.2.13",
@@ -38,7 +41,7 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3"
+    "eslint-plugin-vue": "^8.7.1"
   },
   "eslintConfig": {
     "root": true,

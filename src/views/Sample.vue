@@ -21,15 +21,15 @@ import {Rive} from "rive-js";
 import axios from "axios";
 export default {
   name: 'HomeView',
+  props: {
+    msg: String
+  },
   data () {
     return {
       place : null,
       location: null,
       avatar: null
     }
-  },
-  props: {
-    msg: String
   },
   mounted() {
     new Rive({

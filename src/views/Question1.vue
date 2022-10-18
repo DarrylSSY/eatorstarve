@@ -1,8 +1,8 @@
 <template>
-  <button v-on:click="next">Next</button>
+  <button @click="next">Next</button>
   Hi {{username}}, this is Question 1 {{code}}
-  <button v-on:click="home">Home</button>
-  <QuestionComponent category="cuisine" :code="code" />
+  <button @click="home">Home</button>
+  <QuestionComponent category="abc" :code="code" />
 </template>
 
 <script>
