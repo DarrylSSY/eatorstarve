@@ -2,7 +2,7 @@
   <input v-model="code" placeholder="RoomCode"/>
   <button v-on:click="join">Join</button>
   <button v-on:click="create">Create</button>
-
+  <button></button>
 </template>
 
 <script>
