@@ -3,6 +3,7 @@
   <button v-on:click="join">Join</button>
   <button v-on:click="create">Create</button>
 
+  <input type="text" value="lol"/>
 </template>
 
 <script>
