@@ -3,6 +3,12 @@
   Hi {{username}}, this is Question 1 {{code}}
   <button @click="home">Home</button>
   <QuestionComponent category="abc" :code="code" />
+=======
+  <button v-on:click="next">Next</button>
+  Hi {{username}}, this is Question 1 {{code}}
+  <button v-on:click="home">Home</button>
+  <QuestionComponent category="spice" :code="code" />
+>>>>>>> Stashed changes
 </template>
 
 <script>
