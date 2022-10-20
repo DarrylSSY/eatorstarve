@@ -33,9 +33,9 @@ router.get('/answers/:code', (req, res) => {
 router.post('/answers', (req, res) => {
     Answer.create(req.body, function(err, answer) {
         if (err) {
-          res.send(err);
+            res.send(err);
         } else {
-          res.json(answer);
+            res.json(answer);
         }
     });
 });
@@ -56,11 +56,11 @@ router.get('/questions/:category', (req, res) => {
 // add question
 router.post('/questions', (req, res) => {
     Question.create(req.body, function(err, question) {
-      if (err) {
-        res.send(err);
-      } else {
-        res.json(question);
-      }
+        if (err) {
+            res.send(err);
+        } else {
+            res.json(question);
+        }
     });
 });
 

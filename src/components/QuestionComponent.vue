@@ -1,7 +1,8 @@
 <template>
-  {{question}} {{category}}
-  <button @click="option1">{{answer1}}</button>
-  <button @click="option2">{{answer2}}</button>
+  {{question}} {{category}} 
+  <br>
+  <button type="button" class="nes-btn is-success" @click="option1">{{answer1}}</button>
+  <button type="button" class="nes-btn is-warning" @click="option2">{{answer2}}</button>
 </template>
 
 <script>
