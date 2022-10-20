@@ -3,16 +3,19 @@
   Hi {{username}}, this is Question 1 {{code}}
   <button @click="home">Home</button>
   <QuestionComponent category="abc" :code="code" />
+  <UsernameCheckerComponent />
 </template>
 
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
 import QuestionComponent from "../components/QuestionComponent";
+import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 
 export default {
   name: "Question1View",
   components: {
+    UsernameCheckerComponent,
     QuestionComponent
   },
   setup() {
