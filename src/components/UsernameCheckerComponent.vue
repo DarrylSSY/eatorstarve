@@ -22,7 +22,9 @@ export default {
     }
   },
   mounted() {
-    document.getElementById('dialog-default').showModal();
+    if ( document.getElementById('dialog-default')) {
+      document.getElementById('dialog-default').showModal();
+    }
   },
   methods: {
     home: function (){
