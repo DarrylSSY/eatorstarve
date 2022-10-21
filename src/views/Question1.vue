@@ -1,29 +1,63 @@
 <template>
-  <div>
-    <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
-      Home
-    </button>
-    <dialog class="nes-dialog is-rounded" id="dialog-rounded">
-      <form method="dialog">
-        <p class="title">Are you sure you want to exit?</p>
-        <p>Your progress will not be saved.</p>
-        <menu class="dialog-menu">
-          <button class="nes-btn">Cancel</button>
-          <button class="nes-btn is-primary" @click="home">Confirm</button>
-        </menu>
-      </form>
-    </dialog>
-    <button type="button" class="nes-btn is-primary" @click="next">Next</button>
+  <div class="container-fluid row">
+    <div class="col-xl-1 col-lg-2 col-md-2 col-sm-3">
+      <!-- Home Button -->
+      <button type="button" class="nes-btn is-primary home_btn" onclick="document.getElementById('dialog-rounded').showModal();">
+        Home
+      </button>
+      <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
+        <form method="dialog">
+          <p class="title">Are you sure you want to exit?</p>
+          <p>Your progress will not be saved.</p>
+          <menu class="dialog-menu">
+            <button class="nes-btn">Cancel</button>
+            <button class="nes-btn is-primary" @click="home">Confirm</button>
+          </menu>
+        </form>
+      </dialog>
+    </div>
+    <div class="col-xl-10 col-lg-8 col-md-8 col-sm-6">
+      <!-- Progress Bar -->
+      <progress class="nes-progress is-error progress_bar" value="10" max="100"></progress>
+    </div>
+    <div class="col-xl-1 col-lg-2 col-md-2 col-sm-3">
+      <!-- Next button -->
+      <button type="button" class="nes-btn is-primary next_btn" @click="next">Next</button>
+    </div>
   </div>
-  <div class="nes-container is-rounded">
-    <p>Hi {{username}}, this is Question 1</p>
+    
+    
+    
+
+  <div class="main">
+    <QuestionComponent category="spice" :code="code" />
+    <UsernameCheckerComponent />
   </div>
   
-  <!-- <button @click="next">Next</button>
-  Hi {{username}}, this is Question 1
-  <button @click="home">Home</button> -->
-  <QuestionComponent category="spice" :code="code" />
-  <UsernameCheckerComponent />
+
+  <!-- Avatar-->
+  <div class="avatar container-fluid">
+    <img src="https://avatars.dicebear.com/api/pixel-art/sarah.svg">
+  </div>
+
+  <!-- Timer -->
+  <div class="timer">
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large heart"></i>
+    <i class="nes-icon is-large is-half heart"></i>
+    <i class="nes-icon is-large is-transparent heart"></i>
+  </div>
+    
+  <!-- Footer which is the text box for the question number -->
+  <div class="footer nes-container is-rounded">
+    <p>Hi {{username}}, this is Question 1</p>
+  </div>
 </template>
 
 <script>
@@ -59,11 +93,65 @@ export default {
 </script>
 
 <style scoped>
-
-div.nes-container {
-  margin:10px;
-  position: sticky; /* This shit doesnt work */
-  bottom: 0;
+.nes-btn {
+  min-width: fit-content;
+}
+.nes-progress{
+  width: 100%;
+  min-width: fit-content;
+}
+/* .header{
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  white-space: nowrap;
+  margin: auto;
+} */
+/* * {
+  max-width: 1000px;
+} */
+/* .home_btn{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  margin: 10px;
+}
+.next_btn{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  margin: 10px;
+}
+.progress_bar{
+  width: 100%;
+  margin: 10px 150px 10px 150px;
+  overflow: hidden;
+  display: inline-block;
+} */
+/* .main{
+  margin: 100px;
+} */
+.timer{
+  position: fixed;
+  bottom: 170px;
+  left: 140px;
+}
+.avatar{
+  position: fixed;
+  bottom: 170px;
+  width: 120px; 
+  left: 10px;
+}
+.footer{
+  position: fixed;
+  bottom: 10px;
+  height: 150px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  margin: auto
+  ;
+  width: 100%;
+  /* border-width: 5px; */
 }
 
 </style>
