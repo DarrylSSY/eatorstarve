@@ -53,13 +53,15 @@
         <div class="col-4"></div>
     <!-- Footer which is the text box for the question number -->
     <div class="nes-container is-rounded col-12">
-      <p>Hi {{username}}, this is Question 1</p>
+      <p>Hi {{username}}, this is Question 6</p>
     </div>
       </div>
   </div>
     
     
     
+
+
 </template>
 
 <script>
@@ -69,7 +71,7 @@ import QuestionComponent from "../components/QuestionComponent";
 import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 
 export default {
-  name: "Question1View",
+  name: "Question6View",
   components: {
     UsernameCheckerComponent,
     QuestionComponent
@@ -88,7 +90,7 @@ export default {
   },
   methods: {
     next: function (){
-      router.push({ name: 'Question2', params: {id:this.code} })
+      router.push({ name: 'Question7', params: {id:this.code} })
     },
   },
 }

@@ -21,6 +21,30 @@ const routes = [
         component: Question1View,
     },
     {
+        path: '/room/:code/2',
+        name: 'Question2',
+    },
+    {
+        path: '/room/:code/3',
+        name: 'Question3',
+    },
+    {
+        path: '/room/:code/4',
+        name: 'Question4',
+    },
+    {
+        path: '/room/:code/5',
+        name: 'Question5',
+    },
+    {
+        path: '/room/:code/6',
+        name: 'Question6',
+    },
+    {
+        path: '/room/:code/7',
+        name: 'Question7',
+    },
+    {
         path: '/sample',
         name: 'Sample',
         component: SampleView,

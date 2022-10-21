@@ -50,7 +50,6 @@ export default {
   },
   methods: {
     option1: function (){
-
       console.log(this.username + "selected" + this.answer1)
       axios.post('http://localhost:8081/api/answers', {
         code: this.code,
