@@ -1,8 +1,19 @@
 <template>
   {{question}} {{category}} 
   <br>
-  <button type="button" class="nes-btn is-success" @click="option1">{{answer1}}</button>
-  <button type="button" class="nes-btn is-warning" @click="option2">{{answer2}}</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="nes-badge position-absolute">
+        <span class="is-dark position-absolute">OR</span>
+      </div>
+      <div class="col-6 row offset-3">
+        <button type="button" class="nes-btn is-success option-btn" @click="option1">{{answer1}}</button>
+      </div>
+      <div class="col-6 row offset-3">
+        <button type="button" class="nes-btn is-warning option-btn" @click="option2">{{answer2}}</button>
+      </div>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -61,3 +72,29 @@ export default {
 
 }
 </script>
+<style>
+.option-btn{
+  height: 30vh;
+  font-size: 3vw;
+  width: 100%;
+}
+
+.nes-badge{
+  z-index: 100;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.is-dark{
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+</style>
