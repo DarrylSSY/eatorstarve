@@ -28,31 +28,30 @@
       <QuestionComponent category="spice" :code="code" />
       <UsernameCheckerComponent />
     </div>
+  </div>
 
     <div class="fixed-bottom">
-    <!-- Avatar-->
       <div class="row align-items-end">
-    <div class="avatar container-fluid col-1">
-      <img src="https://avatars.dicebear.com/api/pixel-art/sarah.svg">
-    </div>
-
-    <!-- Timer -->
-    <div class="timer col-5">
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large heart"></i>
-      <i class="nes-icon is-large is-half heart"></i>
-      <i class="nes-icon is-large is-transparent heart"></i>
-    </div>
-        <div class="col 6"/>
+      <!-- Avatar-->
+      <div class="col-1">
+        <img src="https://avatars.dicebear.com/api/pixel-art/sarah.svg">
       </div>
-    <!-- Footer which is the text box for the question number -->
 
+      <!-- Timer -->
+      <div class="col-7">
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium heart"></i>
+        <i class="nes-icon is-medium is-half heart"></i>
+        <i class="nes-icon is-medium is-transparent heart"></i>
+      </div>
+        <div class="col-4"></div>
+    <!-- Footer which is the text box for the question number -->
     <div class="nes-container is-rounded col-12">
       <p>Hi {{username}}, this is Question 1</p>
     </div>
