@@ -3,6 +3,8 @@ import SampleView from '@/views/Sample'
 import RoomView from "@/views/Room";
 import HomeView from "@/views/Home";
 import Question1View from "@/views/Question1";
+import Question2View from "@/views/Question2";
+import HoldingView from "@/views/Holding";
 
 const routes = [
     {
@@ -19,6 +21,16 @@ const routes = [
         path: '/room/:code/1',
         name: 'Question1',
         component: Question1View,
+    },
+    {
+        path: '/room/:code/2',
+        name: 'Question2',
+        component: Question2View,
+    },
+    {
+        path: '/room/:code/holding',
+        name: 'Holding',
+        component: HoldingView,
     },
     {
         path: '/sample',
