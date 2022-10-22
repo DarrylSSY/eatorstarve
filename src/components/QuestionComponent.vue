@@ -28,12 +28,24 @@ export default {
     }
   },
   mounted() {
+    function generate2RandomNumber(x){
+      let num1 = Math.floor(Math.random() * x);
+      let num2 = Math.floor(Math.random() * x);
+      if (num2>0){
+        num2 = num2 - 1
+      }
+      else if (num2<x) {
+        num2 = num2 + 1
+      }
+      return [num1, num2];
 
-    axios.get('http://localhost:8081/api/questions/cuisine').then(
+    }
+    axios.get('http://localhost:8081/api/questions/'+this.category).then(
 
         response => {
-          this.answer1 = response['data'][0]['answer']
-          this.answer2 = response['data'][1]['answer']
+          let randomNum = generate2RandomNumber(response['data'].length);
+          this.answer1 = response['data'][randomNum[0]]['answer']
+          this.answer2 = response['data'][randomNum[1]]['answer']
         }
     )
   },

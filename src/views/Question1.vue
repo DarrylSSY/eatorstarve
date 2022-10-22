@@ -22,7 +22,7 @@
   <!-- <button @click="next">Next</button>
   Hi {{username}}, this is Question 1
   <button @click="home">Home</button> -->
-  <QuestionComponent category="spice" :code="code" />
+  <QuestionComponent category="cuisine" :code="code" />
   <UsernameCheckerComponent />
 </template>
 
