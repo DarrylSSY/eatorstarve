@@ -57,9 +57,12 @@
     </div>
       </div>
   </div>
-    
-    
-    
+  
+  <!-- <button @click="next">Next</button>
+  Hi {{username}}, this is Question 1
+  <button @click="home">Home</button> -->
+  <QuestionComponent category="cuisine" :code="code" />
+  <UsernameCheckerComponent />
 </template>
 
 <script>

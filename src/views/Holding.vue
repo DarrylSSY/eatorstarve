@@ -16,27 +16,29 @@
     <button type="button" class="nes-btn is-primary" @click="next">Next</button>
   </div>
   <div class="nes-container is-rounded">
-    <p>Hi {{username}}, this is Question 2</p>
+    <p>Hi {{username}}, the following has completed</p>
+    <ul>
+      <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
+        {{ user }}
+      </li>
+    </ul>
   </div>
-  
-  <!-- <button @click="next">Next</button>
-  Hi {{username}}, this is Question 1
-  <button @click="home">Home</button> -->
-  <QuestionComponent category="poultry" :code="code" />
+  <GenerateResultsComponent :code="code"/>
   <UsernameCheckerComponent />
 </template>
 
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
-import QuestionComponent from "../components/QuestionComponent";
 import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
+import axios from "axios";
+import GenerateResultsComponent from "@/components/GenerateResultsComponent";
 
 export default {
-  name: "Question2View",
+  name: "HoldingView",
   components: {
+    GenerateResultsComponent,
     UsernameCheckerComponent,
-    QuestionComponent
   },
   setup() {
     const store = useSessionStore()
@@ -47,12 +49,19 @@ export default {
   data() {
     return {
       code: this.$route.params.code,
+      answered: []
+
 
     }
   },
+  mounted() {
+    axios.get('http://localhost:8081/api/room/' + this.code).then(response => {
+      this.answered = response.data
+    })
+  },
   methods: {
     next: function (){
-      router.push({ name: 'Holding', params: {id:this.code} })
+      router.push({ name: 'Results', params: {id:this.code} })
     },
   },
 }
