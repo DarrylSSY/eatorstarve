@@ -16,13 +16,13 @@
     <button type="button" class="nes-btn is-primary" @click="next">Next</button>
   </div>
   <div class="nes-container is-rounded">
-    <p>Hi {{username}}, this is Question 1</p>
+    <p>Hi {{username}}, this is Question 2</p>
   </div>
   
   <!-- <button @click="next">Next</button>
   Hi {{username}}, this is Question 1
   <button @click="home">Home</button> -->
-  <QuestionComponent category="cuisine" :code="code" />
+  <QuestionComponent category="poultry" :code="code" />
   <UsernameCheckerComponent />
 </template>
 
@@ -33,7 +33,7 @@ import QuestionComponent from "../components/QuestionComponent";
 import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 
 export default {
-  name: "Question1View",
+  name: "Question2View",
   components: {
     UsernameCheckerComponent,
     QuestionComponent
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     next: function (){
-      router.push({ name: 'Question2', params: {id:this.code} })
+      router.push({ name: 'Holding', params: {id:this.code} })
     },
   },
 }
