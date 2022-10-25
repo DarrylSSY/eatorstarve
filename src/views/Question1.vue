@@ -1,15 +1,16 @@
 <template>
+  <!-- Top -->
   <div class="container-fluid row">
     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-4">
       <!-- Home Button -->
-      <button type="button" class="nes-btn is-primary home_btn" onclick="document.getElementById('dialog-rounded').showModal();">
-        Home
+      <button type="button" class="nes-btn is-error home_btn" onclick="document.getElementById('dialog-rounded').showModal();">
+        Quit
       </button>
       <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
         <form method="dialog">
           <p class="title">Are you sure you want to exit?</p>
           <p>Your progress will not be saved.</p>
-          <menu class="dialog-menu">
+          <menu class="dialog-menu p-0">
             <button class="nes-btn">Cancel</button>
             <button class="nes-btn is-primary" @click="home">Confirm</button>
           </menu>
@@ -24,21 +25,26 @@
       <!-- Next button -->
       <button type="button" class="nes-btn is-primary next_btn" @click="next">Next</button>
     </div>
+  </div>
+
+  <!-- Body -->
+  <div class="container-fluid row">
     <div class="main col-12 align-items-center">
       <QuestionComponent category="spice" :code="code" />
       <UsernameCheckerComponent />
     </div>
   </div>
 
-    <div class="fixed-bottom">
-      <div class="row align-items-end">
+  <!-- Bottom -->
+  <div class="fixed-bottom">
+    <div class="row container-fluid align-items-end">
       <!-- Avatar-->
-      <div class="col-1">
-        <img src="https://avatars.dicebear.com/api/pixel-art/sarah.svg">
+      <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-4 p-0">
+        <img src="https://avatars.dicebear.com/api/pixel-art/sarah.svg" style="height:48px; max-height: 48px; max-width:48px; width: 48px;">
       </div>
 
       <!-- Timer -->
-      <div class="col-7">
+      <div class="col-xl-7 col-lg-7 col-md-9 col-sm-11 col-xs-8 p-0">
         <i class="nes-icon is-medium heart"></i>
         <i class="nes-icon is-medium heart"></i>
         <i class="nes-icon is-medium heart"></i>
@@ -50,19 +56,19 @@
         <i class="nes-icon is-medium is-half heart"></i>
         <i class="nes-icon is-medium is-transparent heart"></i>
       </div>
-        <div class="col-4"></div>
-    <!-- Footer which is the text box for the question number -->
-    <div class="nes-container is-rounded col-12">
-      <p>Hi {{username}}, this is Question 1</p>
+      <div class="col-xl-4 col-lg-4 col-md-2 col-sm-0 col-xs-0"></div>
     </div>
-      </div>
+    <!-- Footer which is the text box for the question number -->
+    <!-- <div class="row nes-container is-rounded col-12">
+      <p>Hi {{username}}, this is Question 1</p>
+    </div> -->
   </div>
   
   <!-- <button @click="next">Next</button>
   Hi {{username}}, this is Question 1
   <button @click="home">Home</button> -->
-  <QuestionComponent category="cuisine" :code="code" />
-  <UsernameCheckerComponent />
+  <!-- <QuestionComponent category="cuisine" :code="code" />
+  <UsernameCheckerComponent /> -->
 </template>
 
 <script>
