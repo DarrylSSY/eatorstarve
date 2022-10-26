@@ -1,6 +1,8 @@
 <template>
-  <QuestionComponent category="cuisine" :code="code" />
-  <UsernameCheckerComponent />
+  <div class="container-sm">
+    <QuestionComponent category="cuisine" :code="code" />
+    <UsernameCheckerComponent />
+  </div>
 </template>
 
 <script>
