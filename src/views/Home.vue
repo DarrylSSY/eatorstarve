@@ -1,6 +1,6 @@
 <template>
   <body>
-    <div class="container">
+    <div class="container-sm">
       <div class="d-flex align-items-center flex-column">
         <div class="row mb-5 pb-5">
           <div class="col-12 col-md-auto">

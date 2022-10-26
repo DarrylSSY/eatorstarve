@@ -1,9 +1,11 @@
 <template>
-  <input v-model="currentUsername" placeholder="username"/>
-  <button @click="play">Play</button>
-  Hi, this is the room page for room code {{code}}
-  <button @click="home">Home</button>
-  <button @click="copy_link">Copy Link</button>
+  <div class="container-sm">
+    <input v-model="currentUsername" placeholder="username"/>
+    <button @click="play">Play</button>
+    Hi, this is the room page for room code {{code}}
+    <button @click="home">Home</button>
+    <button @click="copy_link">Copy Link</button>
+  </div>
 </template>
 
 <script>

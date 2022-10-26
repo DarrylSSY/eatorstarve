@@ -10,17 +10,17 @@
       </menu>
     </form>
   </dialog>
-  <div class="row">
-    <div class="col-2">
+  <div class="row gx-4">
+    <div class="col-4 col-md-2 ps-0">
       <button type="button" class="nes-btn is-error" onclick="document.getElementById('dialog-rounded').showModal();">Quit</button>
     </div>
-    <div class="col-10"><progress class="nes-progress is-error" value="30" max="100"></progress>
+    <div class="col-8 col-md-10 pe-0"><progress class="nes-progress is-error" value="30" max="100"></progress>
     </div>
     <div class="col-1" />
     <div class="nes-container is-rounded col-10 game-options">
-      <button type="button" class="game-option nes-btn is-primary" @click="option1"><h2>{{answer1}}</h2></button>
+      <button type="button" class="game-option nes-btn is-primary" @click="option1"><h3>{{answer1}}</h3></button>
       <div class="auto-layout"><div class="line" /> <h4>OR</h4> <div class="line" /></div>
-      <button type="button" class="game-option nes-btn is-warning" @click="option2"><h2>{{answer2}}</h2></button>
+      <button type="button" class="game-option nes-btn is-warning" @click="option2"><h3>{{answer2}}</h3></button>
     </div>
     <div class="col-1" />
     <div class="chat-box nes-container is-centered is-rounded col-12">
@@ -102,6 +102,9 @@ export default {
       })
       router.push({ name: this.next, params: {id:this.code} })
     },
+    home: function (){
+      router.push("/")
+    },
   }
 
 }
@@ -109,11 +112,12 @@ export default {
 
 <style scoped>
 .nes-btn {
-  width: 100%;
   height: 64px;
+  width: calc(100% - 8px);
 }
 
 .nes-progress {
+  width: calc(100% - 8px);
   height: 64px;
 }
 
@@ -151,11 +155,11 @@ export default {
 
 .chat-box {
   height: 136px;
+  width: calc(100% - 8px);
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 
 
