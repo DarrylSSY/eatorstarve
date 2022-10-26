@@ -102,6 +102,9 @@ export default {
       })
       router.push({ name: this.next, params: {id:this.code} })
     },
+    home: function (){
+      router.push("/")
+    },
   }
 
 }
