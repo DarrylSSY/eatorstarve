@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import SampleView from '@/views/Sample'
 import RoomView from "@/views/Room";
 import HomeView from "@/views/Home";
+import SetupView from "@/views/Setup";
 import Question1View from "@/views/Question1";
 import Question2View from "@/views/Question2";
 import HoldingView from "@/views/Holding";
@@ -11,6 +12,11 @@ const routes = [
         path: '/',
         name: 'Home',
         component: HomeView,
+    },
+    {
+        path: '/setup',
+        name: 'Setup',
+        component: SetupView,
     },
     {
         path: '/room/:code',
