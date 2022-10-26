@@ -1,8 +1,32 @@
 <template>
-  {{question}} {{category}} 
   <br>
-  <button type="button" class="nes-btn is-success" @click="option1">{{answer1}}</button>
-  <button type="button" class="nes-btn is-warning" @click="option2">{{answer2}}</button>
+  <dialog class="nes-dialog is-rounded" id="dialog-rounded">
+    <form method="dialog">
+      <p class="title">Are you sure you want to exit?</p>
+      <p>Your progress will not be saved.</p>
+      <menu class="dialog-menu">
+        <button class="nes-btn">Cancel</button>
+        <button class="nes-btn is-primary" @click="home">Confirm</button>
+      </menu>
+    </form>
+  </dialog>
+  <div class="row">
+    <div class="col-2">
+      <button type="button" class="nes-btn is-error" onclick="document.getElementById('dialog-rounded').showModal();">Quit</button>
+    </div>
+    <div class="col-10"><progress class="nes-progress is-error" value="30" max="100"></progress>
+    </div>
+    <div class="col-1" />
+    <div class="nes-container is-rounded col-10 game-options">
+      <button type="button" class="game-option nes-btn is-primary" @click="option1"><h2>{{answer1}}</h2></button>
+      <div class="auto-layout"><div class="line" /> <h4>OR</h4> <div class="line" /></div>
+      <button type="button" class="game-option nes-btn is-warning" @click="option2"><h2>{{answer2}}</h2></button>
+    </div>
+    <div class="col-1" />
+    <div class="chat-box nes-container is-centered is-rounded col-12">
+      <h2>{{question}} {{category}}</h2>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -82,3 +106,57 @@ export default {
 
 }
 </script>
+
+<style scoped>
+.nes-btn {
+  width: 100%;
+  height: 64px;
+}
+
+.nes-progress {
+  height: 64px;
+}
+
+.line {
+  width: 32%;
+  border: 4px solid #000000;
+  margin: 8px;
+  vertical-align: top;
+}
+
+.game-option {
+  width: 100%;
+  aspect-ratio: 6/1;
+  height: auto;
+}
+
+.game-options {
+  margin-top: 64px;
+  margin-bottom: 64px;
+}
+
+.auto-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 28px;
+  width: 100%;
+}
+
+.auto-layout h4 {
+  margin-bottom: 0;
+}
+
+.chat-box {
+  height: 136px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+</style>
