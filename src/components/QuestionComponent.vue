@@ -15,7 +15,7 @@
     <div class="col-4 col-md-2 ps-0">
       <button type="button" class="nes-btn is-error" onclick="document.getElementById('dialog-rounded').showModal();">Quit</button>
     </div>
-    <div class="col-8 col-md-10 pe-0"><progress class="nes-progress is-error" value="30" max="100"></progress>
+    <div class="col-8 col-md-10 pe-0"><progress class="nes-progress" :class=color :value=progress max="100"></progress>
     </div>
     <!-- Options -->
     <div class="col-1 col-md-0"></div>
@@ -51,7 +51,7 @@
       </div>
         <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
           <img class="profile" v-bind:src="'https://avatars.dicebear.com/api/pixel-art/'+ username + '.svg'">
-          <h2>{{question}} {{category}}!</h2>
+          <h3>{{question}} {{category}}!</h3>
         </div>
     </div>
   </div>
@@ -78,31 +78,47 @@ export default {
       answer1: "a",
       answer2: "b",
       question: "Choose your ",
-      next: "Question2"
+      next: "Question2",
+      progress: 0,
+      color: "",
     }
   },
   mounted() {
 
     if (this.category=="cuisine"){
       this.next="Question2"
+      this.progress= 0
+      this.color= ""
     }
     else if (this.category=="poultry"){
       this.next="Question3"
+      this.progress= 10
+      this.color= "is-error"
     }
     else if (this.category=="price"){
       this.next="Question4"
+      this.progress= 25
+      this.color= "is-error"
     }
     else if (this.category=="texture"){
       this.next="Question5"
+      this.progress= 40
+      this.color= "is-warning"
     }
     else if (this.category=="base"){
       this.next="Question6"
+      this.progress= 55
+      this.color= "is-warning"
     }
     else if (this.category=="spice"){
       this.next="Question7"
+      this.progress= 75
+      this.color= "is-success"
     }
     else {
       this.next="Holding"
+      this.progress= 90
+      this.color= "is-success"
     }
     function generate2RandomNumber(x){
       let num1 = Math.floor(Math.random() * x);
@@ -217,7 +233,7 @@ export default {
 }
 
 .profile {
-  width: 20vw;
+  width: 15vw;
   right: -15px;
   position: absolute;
   bottom: -4px;
