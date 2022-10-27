@@ -1,27 +1,51 @@
 <template>
-  <div class="nes-container with-title is-centered is-rounded">
-    <p class="title">Question 1</p>
-    <p>{{question}} {{category}}!</p>
-  </div>
-  <div class="container-fluid">
-    <!-- <div class="row">
-      <div class="nes-badge position-absolute">
-        <span class="is-dark position-absolute">OR</span>
-      </div>
-    </div> -->
-    <!-- Option 1 -->
-    <div class="col-8 row offset-2">
-      <button type="button" class="nes-btn is-success option-btn" @click="option1">{{answer1}}</button>
+  <dialog class="nes-dialog is-rounded" id="dialog-rounded">
+    <form method="dialog">
+      <p class="title">Are you sure you want to exit?</p>
+      <p>Your progress will not be saved.</p>
+      <menu class="dialog-menu">
+        <button class="nes-btn">Cancel</button>
+        <button class="nes-btn is-primary" @click="home">Confirm</button>
+      </menu>
+    </form>
+  </dialog>
+  <div class="question-body row gx-4">
+    <div class="col-12"></div>
+    <div class="col-4 col-md-2 ps-0">
+      <button type="button" class="nes-btn is-error" onclick="document.getElementById('dialog-rounded').showModal();">Quit</button>
     </div>
-    <!-- OR -->
-    <div class="card col-8 row offset-2">
-      <div class="card-body">
-        -------- OR --------
+    <div class="col-8 col-md-10 pe-0"><progress class="nes-progress is-error" value="30" max="100"></progress>
+    </div>
+    <div class="col-1 col-md-0" />
+    <div class="nes-container is-rounded col-10 col-md-10 game-options">
+      <button type="button" class="game-option nes-btn is-primary" @click="option1"><h3>{{answer1}}</h3></button>
+      <div class="auto-layout"><div class="line" /> <h4>OR</h4> <div class="line" /></div>
+      <button type="button" class="game-option nes-btn is-warning" @click="option2"><h3>{{answer2}}</h3></button>
+    </div>
+    <div class="col-12 row px-0 mx-0">
+    <div class="info col-5 col-md-2 ps-0 py-0">
+    <div class="nes-container is-rounded">
+        {{username}}
       </div>
     </div>
-    <!-- Option 2 -->
-    <div class="col-8 row offset-2">
-      <button type="button" class="nes-btn is-warning option-btn" @click="option2">{{answer2}}</button>
+    <div class="info col-9 col-md-5 ps-0">
+      <div class="nes-container is-rounded">
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+        <i class="nes-icon heart"></i>
+      </div>
+    </div>
+      <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
+        <img class="profile" v-bind:src="'https://avatars.dicebear.com/api/pixel-art/'+ username + '.svg'">
+        <h2>{{question}} {{category}}</h2>
+      </div>
     </div>
   </div>
 </template>
@@ -99,38 +123,91 @@ export default {
       })
       router.push({ name: this.next, params: {id:this.code} })
     },
+    home: function (){
+      router.push("/")
+    },
   }
 
 }
 </script>
-<style>
-.option-btn{
-  height: 20vh;
-  font-size: 3vw;
+
+<style scoped>
+.nes-btn {
+  height: 64px;
+  width: calc(100% - 8px);
+}
+
+.nes-progress {
+  width: calc(100% - 8px);
+  height: 64px;
+}
+
+.line {
+  width: 32%;
+  border: 4px solid #000000;
+  margin: 8px;
+  vertical-align: top;
+}
+
+.game-option {
   width: 100%;
-  margin: 5px 0px;
-  
+  aspect-ratio: 7/1;
+  height: auto;
+  margin: 0px;
 }
 
-/* .nes-badge{
-  z-index: 100;
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-} */
-
-/* .is-dark{
-  z-index: 100;
-  top: 50%;
-  left: 50%;
-  margin: 0;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  text-align: center;
-} */
-.card{
-  border: none;
+.nes-icon{
+  transform: scale(1.1);
+  margin: 2px;
 }
+
+.game-options{
+  height: fit-content;
+}
+
+.auto-layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 28px;
+  width: 100%;
+}
+
+.auto-layout h4 {
+  margin-bottom: 0;
+}
+
+.chat-box {
+  height: 136px;
+  width: calc(100% - 8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  bottom: 0px;
+
+}
+
+.nes-container {
+  background-color: #ffffff;
+}
+
+.profile {
+  width: 20vw;
+  right: 0px;
+  position: absolute;
+  bottom: -4px;
+}
+
+.question-body{
+  height: 100%;
+}
+
+.info {
+  height: fit-content;
+}
+
+
 </style>

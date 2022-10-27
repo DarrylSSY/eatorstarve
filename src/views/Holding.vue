@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-sm">
     <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
       Home
     </button>
