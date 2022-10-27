@@ -1,5 +1,6 @@
 <template>
   <div class="container-sm">
+    <br>
     <h1>Pre-Game Setup</h1>
   </div>
 

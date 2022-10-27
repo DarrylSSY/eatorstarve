@@ -1,8 +1,10 @@
 <template>
-  <div class="container-sm">
-    <QuestionComponent category="cuisine" :code="code" />
-    <UsernameCheckerComponent />
-  </div>
+  <body>
+    <div class="container-sm">
+      <QuestionComponent category="cuisine" :code="code" />
+      <UsernameCheckerComponent />
+    </div>
+  </body>
 </template>
 
 <script>
@@ -38,4 +40,20 @@ export default {
 </script>
 
 <style scoped>
+body {
+  height: 100%;
+  background: linear-gradient(
+      0deg,
+      rgba(245, 200, 95, 0.66),
+      rgba(245, 200, 95, 0.66)
+  ),
+  url(../assets/bg1.jpeg);
+}
+.container {
+  height: 100%;
+}
+
+.container-sm {
+  height: 100%;
+}
 </style>
