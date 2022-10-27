@@ -8,7 +8,47 @@
           <h1>Pre-Game Setup</h1>
         </div>
       </div>
-      
+
+      <div class="row">
+        <div class="col">
+          <div class="nes-container is-rounded is-centered my-5 mx-auto">
+
+            <div class="row">
+              <input v-model="date" type="text" class="nes-input is-primary" placeholder="Date" />
+            </div>
+
+            <div class="row">
+              <input v-model="time" type="text" class="nes-input is-primary" placeholder="Time" />
+            </div>
+
+            <div class="row">
+              Special Dietary Needs:
+            </div>
+            <div class="row text-start mx-3">
+              <div class="col-6">
+                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Halal-certified</span></label>
+              </div>
+              <div class="col-6">
+                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Vegan</span></label>
+              </div>
+              <div class="col-6">
+                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Vegetarian</span></label>
+              </div>
+              <div class="col-6">
+                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Gluten-free</span></label>
+              </div>
+              <div class="col-6">
+                <label><input v-model="checked" type="checkbox" class="nes-checkbox" @click="prompt()"  /><span>Others:</span></label>
+                <input  v-show="checked" type="text" class="nes-input is-primary" placeholder="Other requirements" /> 
+                <!-- working on showing input box when others clicked -->
+              </div>
+              
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
   </body>
 
@@ -22,7 +62,11 @@ export default {
   name: "SetupView",
   data() {
     return {
-      code: ""
+      date: "",
+      time: "",
+      dietary: [],
+      extra: "",
+      clicked: false,
     }
   },
   methods: {
@@ -40,8 +84,16 @@ export default {
       }
       // Else create room
       router.push("room/" + generated_code)
+    },
+    prompt: function () {
+      this.clicked=true
+      let others = this.extra.split(",")
+      for (var details of others){
+        this.dietary.push(details)
+      }
     }
-  }
+  },
+
 }
 </script>
 
@@ -79,6 +131,7 @@ body {
 
 .nes-container {
   width: 50%;
-  background-color: #EDEDED;;
+  background-color: #EDEDED;
+  ;
 }
 </style>
