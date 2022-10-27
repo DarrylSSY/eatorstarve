@@ -1,6 +1,6 @@
 <template>
   
-  <div>
+  <div class="whole">
     <!-- <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
       Home
     </button>
@@ -15,28 +15,49 @@
       </form>
     </dialog>
     <button type="button" class="nes-btn is-primary" @click="next">Next</button> -->
-    <div class="typewriter">
-      Hi {{username}}, your yum craves has been recorded
-    </div>
-    <div class="nes-container is-rounded">
-      <p>There are {{answered.length - 1}} other yummers that are hungry and waiting... </p>
+    
+    <h1 class="end">The End.</h1>
+    <div class="main_component nes-container is-rounded">
+      <p>Completed: </p>
       <div class="container">
         <div class="row">
-          <div class="col"></div>
-          <div class="user_list col-9">
+          <!-- <div class="col"></div> -->
+          <div class="user_list col">
             <ul>
               <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
                 <img style="width: 50px" :src="get_avatar(user)">   {{ user }}
               </li>
             </ul>
           </div>
-          <div class="col-2"></div>
+          <!-- <div class="col-2"></div> -->
         </div>
       </div>
     </div>
+
+    <div class="text_component nes-container is-rounded">
+      <div class="typewriter">
+        <!-- Hi {{username}}, your yum craves has been recorded. -->
+        Cravings recorded succesfully.
+        Do you want to view results?
+      </div>
+
+      <div style="display: flex; justify-content: space-evenly; margin-top: 30px;">
+        <label>
+          <input type="radio" class="nes-radio" name="answer" checked />
+          <span>Yes</span>
+        </label>
+
+        <label>
+          <input type="radio" class="nes-radio" name="answer" />
+          <span>No</span>
+        </label>
+      </div>
+    </div>
+    
+
   </div>
-  <GenerateResultsComponent :code="code"/>
-  <UsernameCheckerComponent />
+  <!-- <GenerateResultsComponent :code="code"/>
+  <UsernameCheckerComponent /> -->
 </template>
 
 
@@ -86,23 +107,51 @@ export default {
 
 <style scoped>
 
-div.nes-container {
+.whole {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.end {
+  margin-top: 150px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+div.main_component {
   margin-right: auto;
   margin-left: auto;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 10px;
-  width: 800px;
-  height: 400px;
-  position: sticky; /* This shit doesnt work */
+  width: 400px;
+  height: 250px;
+  /* position: sticky; This shit doesnt work */
   bottom: 0;
   background-color: rgb(247, 213, 29);
   margin-bottom: 20px;
   
 }
 
+div.text_component {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 75%;
+  height: 150px;
+  /* position: sticky; This shit doesnt work */
+  bottom: 0;
+  /* background-color: rgb(247, 213, 29); */
+  margin-bottom: 20px;
+  text-align: left;
+  
+}
+
 .user_list {
   overflow-y: auto;
-  height: 300px;
+  height: 180px;
   overflow-y: scroll;
 }
 
@@ -128,15 +177,18 @@ user_list {
   margin-bottom: 100px;
 } */
 
+
+/* typewriter , @keyframes typing and blink-caret can be removed to remove animation */
 .typewriter {
+  margin-bottom: 20px;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   border-right: .15em solid orange; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: 0 auto; /* Gives that scrolling effect as the typing happens */
   letter-spacing: .15em; /* Adjust as needed */
   animation: 
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end infinite;
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;
 }
 
 
@@ -153,6 +205,7 @@ user_list {
 }
 
 
+
 li {
   list-style-type: none;
   text-align: left;
@@ -166,6 +219,12 @@ img {
 button {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.nes-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 </style>
