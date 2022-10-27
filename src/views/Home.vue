@@ -1,33 +1,58 @@
 <template>
   <body>
     <div class="container-sm">
-      <br>
-      <div class="d-flex align-items-center flex-column">
-        <div class="row mb-5 pb-5">
-          <div class="col-12 col-md-auto">
+      <br />
+        <div class="row">
+          <div class="col-12">
             <h1 class="text-center">Eat or Starve</h1>
           </div>
+
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-8">
+            <div class="nes-container is-rounded mt-5 is-centered">
+                  <div class="row">
+                    <div class="col">
+                      <input v-model="code" type="text" class="nes-input is-primary" placeholder="RoomCode"/>
+                    </div>
+                  </div>
+
+                  <div class="row my-3">
+                    <div class="col">
+                      <button type="button" class="nes-btn is-warning" @click="join">Join</button>
+                    </div>
+                  </div>
+
+                  <div class="row text-center my-3">
+                    <div class="col">
+                      <span class="align-middle"> ---OR--- </span>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col">
+                      <button type="button" class="nes-btn is-warning" @click="create">Create</button>
+                    </div>
+                  </div>
+                </div>
+          </div>
+          <div class="col-2"></div>
         </div>
+        
 
-        <div class="row pt-5 mt-5">
-          <div class="col-md-auto">
-            <div id="container2" class="container d-flex align-items-center flex-column">
-              <div class="row">
-                <input v-model="code" placeholder="RoomCode" />
-              </div>
-              <div class="row">
-                <button @click="join">Join</button>
-              </div>
-
-              <span class="align-middle"> ---OR--- </span>
-
-              <div class="row">
-                <button type="button" @click="create">Create</button>
-              </div>
-            </div>
+        <div class="row mx-5 mt-5">
+          <div class="nes-balloon from-left col-8">
+            <p>Hello NES.css</p>
           </div>
         </div>
+
+        <div class="row">
+          <i class="nes-octocat animate pl-3 mt-2"></i>
+        </div>
+
       </div>
+      
+          
     </div>
   </body>
 </template>
@@ -64,33 +89,23 @@ export default {
 </script>
 
 <style scoped>
-#container2 {
-  padding: 22px 22px;
-  gap: 16px;
-
-  background: #ededed;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-}
 
 input {
-  width: 383.48px;
+  width: 342px;
   height: 64px;
   background: #ededed;
-  border: 3px solid rgba(245, 200, 95, 0.5);
-  border-radius: 20px;
+  /* border: 3px solid rgba(245, 200, 95, 0.5); */
+  /* border-radius: 20px; */
   text-align: center;
 
   color: rgba(245, 200, 95, 0.5);
 }
 
 button {
-  width: 383.48px;
+  width: 342px;
   height: 64px;
-
   background: #f5c85f;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
 }
 h1 {
   font-size: 60px;
@@ -105,5 +120,5 @@ body {
     ),
     url(../assets/bg1.jpeg);
   box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
-}
+} 
 </style>
