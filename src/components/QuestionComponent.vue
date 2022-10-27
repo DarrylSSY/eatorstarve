@@ -1,51 +1,58 @@
 <template>
-  <dialog class="nes-dialog is-rounded" id="dialog-rounded">
+  <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
     <form method="dialog">
       <p class="title">Are you sure you want to exit?</p>
       <p>Your progress will not be saved.</p>
-      <menu class="dialog-menu">
+      <menu class="dialog-menu p-0">
         <button class="nes-btn">Cancel</button>
         <button class="nes-btn is-primary" @click="home">Confirm</button>
       </menu>
     </form>
   </dialog>
   <div class="question-body row gx-4">
+    <!-- Header (Quit button and progress bar) -->
     <div class="col-12"></div>
     <div class="col-4 col-md-2 ps-0">
       <button type="button" class="nes-btn is-error" onclick="document.getElementById('dialog-rounded').showModal();">Quit</button>
     </div>
     <div class="col-8 col-md-10 pe-0"><progress class="nes-progress is-error" value="30" max="100"></progress>
     </div>
-    <div class="col-1 col-md-0" />
+    <!-- Options -->
+    <div class="col-1 col-md-0"></div>
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <button type="button" class="game-option nes-btn is-primary" @click="option1"><h3>{{answer1}}</h3></button>
-      <div class="auto-layout"><div class="line" /> <h4>OR</h4> <div class="line" /></div>
+      <div class="auto-layout">
+        <div class="line"></div> <h4>OR</h4> <div class="line"></div>
+      </div>
       <button type="button" class="game-option nes-btn is-warning" @click="option2"><h3>{{answer2}}</h3></button>
     </div>
+    <!-- Question number, health bar and username -->
     <div class="col-12 row px-0 mx-0">
-    <div class="info col-5 col-md-2 ps-0 py-0">
-    <div class="nes-container is-rounded">
-        {{username}}
+      <div class="info col-5 col-md-2 ps-0 py-0">
+        <!-- Username -->
+        <div class="nes-container is-centered is-rounded">
+          {{username}}
+        </div>
       </div>
-    </div>
-    <div class="info col-9 col-md-5 ps-0">
-      <div class="nes-container is-rounded">
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
+      <!-- Healthbar -->
+      <div class="info col-9 col-md-5 ps-0">
+        <div class="nes-container is-centered is-rounded">
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+          <i class="nes-icon heart"></i>
+        </div>
       </div>
-    </div>
-      <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
-        <img class="profile" v-bind:src="'https://avatars.dicebear.com/api/pixel-art/'+ username + '.svg'">
-        <h2>{{question}} {{category}}</h2>
-      </div>
+        <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
+          <img class="profile" v-bind:src="'https://avatars.dicebear.com/api/pixel-art/'+ username + '.svg'">
+          <h2>{{question}} {{category}}!</h2>
+        </div>
     </div>
   </div>
 </template>
@@ -78,6 +85,21 @@ export default {
 
     if (this.category=="cuisine"){
       this.next="Question2"
+    }
+    else if (this.category=="poultry"){
+      this.next="Question3"
+    }
+    else if (this.category=="price"){
+      this.next="Question4"
+    }
+    else if (this.category=="texture"){
+      this.next="Question5"
+    }
+    else if (this.category=="base"){
+      this.next="Question6"
+    }
+    else if (this.category=="spice"){
+      this.next="Question7"
     }
     else {
       this.next="Holding"
@@ -196,13 +218,13 @@ export default {
 
 .profile {
   width: 20vw;
-  right: 0px;
+  right: -15px;
   position: absolute;
   bottom: -4px;
 }
 
 .question-body{
-  height: 100%;
+  height: 100vh;
 }
 
 .info {
