@@ -61,6 +61,8 @@ export default {
   },
   methods: {
     next: function (){
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
       router.push({ name: 'Results', params: {id:this.code} })
     },
   },
