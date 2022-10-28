@@ -12,37 +12,42 @@
       <div class="row">
         <div class="col">
           <div class="nes-container is-rounded is-centered my-5 mx-auto">
-
-            <div class="row">
+            
+            <!-- date calendar -->
+            <div class="row mb-2">
               <input v-model="date" type="text" class="nes-input is-primary" placeholder="Date" />
             </div>
-
-            <div class="row">
+            
+            <!-- time input -->
+            <div class="row mb-2">
               <input v-model="time" type="text" class="nes-input is-primary" placeholder="Time" />
             </div>
-
+            
+            <!-- dietary needs options -->
             <div class="row">
               Special Dietary Needs:
             </div>
-            <div class="row text-start mx-3">
-              <div class="col-6">
-                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Halal-certified</span></label>
-              </div>
-              <div class="col-6">
-                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Vegan</span></label>
-              </div>
-              <div class="col-6">
-                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Vegetarian</span></label>
-              </div>
-              <div class="col-6">
-                <label><input type="checkbox" class="nes-checkbox" :name="dietary"/><span>Gluten-free</span></label>
-              </div>
-              <div class="col-6">
-                <label><input v-model="checked" type="checkbox" class="nes-checkbox" @click="prompt()"  /><span>Others:</span></label>
-                <input  v-show="checked" type="text" class="nes-input is-primary" placeholder="Other requirements" /> 
-                <!-- working on showing input box when others clicked -->
+            
+            <div id="options" class="row text-start mx-3">
+              <div v-for="option of options" :key="option.id">
+                  <label><input v-model="dietaryNeeds" type="checkbox" class="nes-checkbox" :value="option"/><span>{{option}}</span></label>
+                
               </div>
               
+              <div class="col">
+                <label><input v-model="checked" type="checkbox" class="nes-checkbox col" />
+                  <span>Others:
+                    <input v-show="checked" v-model="extra" type="text" class="nes-input is-primary col"  placeholder="Other requirements" /> 
+                  </span></label>
+              </div>
+
+            </div>
+
+            <!-- submit button -->
+            <div class="row mt-2">
+              <button type="button" class="nes-btn is-warning" @click="create">
+                Submit & Create
+              </button>
             </div>
 
           </div>
@@ -64,13 +69,22 @@ export default {
     return {
       date: "",
       time: "",
-      dietary: [],
+      options: ["Halal-certified", "Vegan", "Vegetarian", "Gluten-free"],
+      dietaryNeeds: [],
       extra: "",
-      clicked: false,
+      checked: null,
     }
   },
   methods: {
     create: function () {
+      //get all dietary needs here
+      if (this.extra != "") {
+        let other = this.extra.split(",");
+        for (let i = 0; i < other.length; i++) {
+          this.dietaryNeeds.push(other[i]);
+        }
+
+      }
       // Incomplete code
       // Generate random code
       let generated_code = Math.random().toString(36).slice(9)
@@ -85,13 +99,8 @@ export default {
       // Else create room
       router.push("room/" + generated_code)
     },
-    prompt: function () {
-      this.clicked=true
-      let others = this.extra.split(",")
-      for (var details of others){
-        this.dietary.push(details)
-      }
-    }
+    
+    
   },
 
 }
@@ -103,7 +112,6 @@ input {
   height: 100%;
   background: rgb(234, 234, 168);
   text-align: center;
-
   color: grey;
 }
 
@@ -133,5 +141,8 @@ body {
   width: 50%;
   background-color: #EDEDED;
   ;
+}
+#options{
+  font-size: 80%;
 }
 </style>
