@@ -1,5 +1,5 @@
 <template>
-  <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
+  <dialog id="dialog-rounded" class="nes-dialog is-rounded">
     <form method="dialog">
       <p class="title">Are you sure you want to exit?</p>
       <p>Your progress will not be saved.</p>
@@ -13,67 +13,90 @@
     <!-- Header (Quit button and progress bar) -->
     <div class="col-12"></div>
     <div class="col-4 col-md-2 ps-0">
-      <button type="button" class="nes-btn is-error" onclick="document.getElementById('dialog-rounded').showModal();">Quit</button>
+      <button
+        type="button"
+        class="nes-btn is-error"
+        onclick="document.getElementById('dialog-rounded').showModal();"
+      >
+        Quit
+      </button>
     </div>
-    <div class="col-8 col-md-10 pe-0"><progress class="nes-progress" :class=color :value=progress max="100"></progress>
+    <div class="col-8 col-md-10 pe-0">
+      <progress
+        class="nes-progress"
+        :class="color"
+        :value="progress"
+        max="100"
+      ></progress>
     </div>
     <!-- Options -->
     <div class="col-1 col-md-0"></div>
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
-      <button type="button" class="game-option nes-btn is-primary" @click="option1"><h3>{{answer1}}</h3></button>
+      <button
+        type="button"
+        class="game-option nes-btn is-primary"
+        @click="option1"
+      >
+        <h3>{{ answer1 }}</h3>
+      </button>
       <div class="auto-layout">
-        <div class="line"></div> <h4>OR</h4> <div class="line"></div>
+
+        <h4>-- OR --</h4>
+
       </div>
-      <button type="button" class="game-option nes-btn is-warning" @click="option2"><h3>{{answer2}}</h3></button>
+      <button
+        type="button"
+        class="game-option nes-btn is-warning"
+        @click="option2"
+      >
+        <h3>{{ answer2 }}</h3>
+      </button>
     </div>
     <!-- Question number, health bar and username -->
     <div class="col-12 row px-0 mx-0">
       <div class="info col-5 col-md-2 ps-0 py-0">
         <!-- Username -->
         <div class="nes-container is-centered is-rounded">
-          {{username}}
+          {{ username }}
         </div>
       </div>
-      <!-- Healthbar -->
       <div class="info col-9 col-md-5 ps-0">
-        <div class="nes-container is-centered is-rounded">
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
-          <i class="nes-icon heart"></i>
+        <div class="nes-container is-rounded">
+          <canvas id="canvas" height="20"></canvas>
         </div>
       </div>
-        <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
-          <img class="profile" v-bind:src="'https://avatars.dicebear.com/api/pixel-art/'+ username + '.svg'">
-          <h3>{{question}} {{category}}!</h3>
-        </div>
+    </div>
+
+    <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
+      <img
+        class="profile"
+        v-bind:src="
+          'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
+        "
+      />
+      <h3>{{ question }} {{ category }}!</h3>
     </div>
   </div>
 </template>
 
 <script>
-import { useSessionStore } from '../stores/session';
+import { useSessionStore } from "../stores/session";
 import axios from "axios";
 import router from "@/router";
+import { Rive, Layout } from "@rive-app/canvas";
 export default {
   name: "QuestionComponent",
   props: {
     category: String,
-    code: String
+    code: String,
   },
-  setup () {
-    const store = useSessionStore()
+  setup() {
+    const store = useSessionStore();
     return {
-      username: store.getUsername
-    }
+      username: store.getUsername,
+    };
   },
-  data () {
+  data() {
     return {
       answer1: "a",
       answer2: "b",
@@ -81,103 +104,123 @@ export default {
       next: "Question2",
       progress: 0,
       color: "",
-    }
+      timer: null,
+    };
   },
   mounted() {
+    this.$timer = new Rive({
+      src: "../../timer.riv",
+      canvas: document.getElementById("canvas"),
+      layout: new Layout({ fit: "fitHeight", alignment: "right" }),
+      autoplay: false,
+      animations: "Timer",
+    });
+    let oof = new Audio("../../oof.mp3");
 
-    if (this.category=="cuisine"){
-      this.next="Question2"
-      this.progress= 0
-      this.color= ""
+    this.$timer.play("Timer");
+    this.$timer.on("stop", () => {
+      console.log("ended");
+      oof.play();
+      axios.post("http://localhost:8081/api/answers", {
+        code: this.code,
+        username: this.username,
+        answer: this.answer1,
+        category: this.category,
+      });
+      router.push({ name: this.next, params: { id: this.code } });
+    });
+    if (this.category == "cuisine") {
+      this.next = "Question2";
+      this.progress = 0;
+      this.color = "";
+    } else if (this.category == "poultry") {
+      this.next = "Question3";
+      this.progress = 10;
+      this.color = "is-error";
+    } else if (this.category == "price") {
+      this.next = "Question4";
+      this.progress = 25;
+      this.color = "is-error";
+    } else if (this.category == "texture") {
+      this.next = "Question5";
+      this.progress = 40;
+      this.color = "is-warning";
+    } else if (this.category == "base") {
+      this.next = "Question6";
+      this.progress = 55;
+      this.color = "is-warning";
+    } else if (this.category == "spice") {
+      this.next = "Question7";
+      this.progress = 75;
+      this.color = "is-success";
+    } else {
+      this.next = "Holding";
+      this.progress = 90;
+      this.color = "is-success";
     }
-    else if (this.category=="poultry"){
-      this.next="Question3"
-      this.progress= 10
-      this.color= "is-error"
-    }
-    else if (this.category=="price"){
-      this.next="Question4"
-      this.progress= 25
-      this.color= "is-error"
-    }
-    else if (this.category=="texture"){
-      this.next="Question5"
-      this.progress= 40
-      this.color= "is-warning"
-    }
-    else if (this.category=="base"){
-      this.next="Question6"
-      this.progress= 55
-      this.color= "is-warning"
-    }
-    else if (this.category=="spice"){
-      this.next="Question7"
-      this.progress= 75
-      this.color= "is-success"
-    }
-    else {
-      this.next="Holding"
-      this.progress= 90
-      this.color= "is-success"
-    }
-    function generate2RandomNumber(x){
+    function generate2RandomNumber(x) {
       let num1 = Math.floor(Math.random() * x);
       let num2 = Math.floor(Math.random() * x);
       if (num1 == num2) {
         if (num2 > 0) {
-          num2 = num2 - 1
+          num2 = num2 - 1;
         } else if (num2 < x) {
-          num2 = num2 + 1
+          num2 = num2 + 1;
         }
       }
-      return [num1, num2]
+      return [num1, num2];
     }
-    axios.get('http://localhost:8081/api/questions/'+this.category).then(
-
-        response => {
-          let randomNum = generate2RandomNumber(response['data'].length);
-          this.answer1 = response['data'][randomNum[0]]['answer']
-          this.answer2 = response['data'][randomNum[1]]['answer']
-        }
-    )
+    axios
+      .get("http://localhost:8081/api/questions/" + this.category)
+      .then((response) => {
+        let randomNum = generate2RandomNumber(response["data"].length);
+        this.answer1 = response["data"][randomNum[0]]["answer"];
+        this.answer2 = response["data"][randomNum[1]]["answer"];
+      });
+  },
+  beforeUnmount() {
+    this.$timer.unsubscribeAll();
   },
   methods: {
-    option1: function (){
-      axios.post('http://localhost:8081/api/answers', {
+    option1: function () {
+      axios.post("http://localhost:8081/api/answers", {
         code: this.code,
         username: this.username,
         answer: this.answer1,
-        category: this.category
-      })
-      router.push({ name: this.next, params: {id:this.code} })
+        category: this.category,
+      });
+      let optionpress = new Audio("../../optionpress.mp3");
+      optionpress.play()
+      router.push({ name: this.next, params: { id: this.code } });
     },
-    option2: function (){
-      console.log(this.username + "selected" + this.answer2)
-      axios.post('http://localhost:8081/api/answers', {
+    option2: function () {
+      console.log(this.username + "selected" + this.answer2);
+      axios.post("http://localhost:8081/api/answers", {
         code: this.code,
         username: this.username,
         answer: this.answer2,
-        category: this.category
-      })
-      router.push({ name: this.next, params: {id:this.code} })
+        category: this.category,
+      });
+      let optionpress = new Audio("../../optionpress.mp3");
+      optionpress.play()
+      router.push({ name: this.next, params: { id: this.code } });
     },
-    home: function (){
-      router.push("/")
+    home: function () {
+      router.push("/");
     },
-  }
-
-}
+  },
+};
 </script>
 
 <style scoped>
 .nes-btn {
-  height: 64px;
+  height: 56px;
   width: calc(100% - 8px);
 }
 
 .nes-progress {
   width: calc(100% - 8px);
-  height: 64px;
+  height: 56px;
 }
 
 .line {
@@ -194,12 +237,16 @@ export default {
   margin: 0px;
 }
 
-.nes-icon{
+canvas {
+  padding: 0px;
+}
+
+.nes-icon {
   transform: scale(1.1);
   margin: 2px;
 }
 
-.game-options{
+.game-options {
   height: fit-content;
 }
 
@@ -225,7 +272,6 @@ export default {
   align-items: center;
   margin-top: 20px;
   bottom: 0px;
-
 }
 
 .nes-container {
@@ -239,13 +285,11 @@ export default {
   bottom: -4px;
 }
 
-.question-body{
+.question-body {
   height: 100vh;
 }
 
 .info {
   height: fit-content;
 }
-
-
 </style>

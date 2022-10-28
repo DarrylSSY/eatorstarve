@@ -28,6 +28,8 @@ export default {
   },
   methods: {
     home: function (){
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
       router.push("/")
     },
   }
