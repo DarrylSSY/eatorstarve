@@ -25,13 +25,13 @@
                 </div>
               </div>
 
-              <div class="row text-center my-3">
+              <div class="row text-center">
                 <div class="col">
                   <span class="align-middle"> ---OR--- </span>
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row my-3">
                 <div class="col">
                   <button type="button" class="nes-btn is-warning" @click="create">
                     Create
