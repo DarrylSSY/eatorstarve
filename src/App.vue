@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <button class="nes-btn mute-btn" @click="playmusic">Toggle BGM</button>
     <router-view></router-view>
 
   </div>
@@ -9,25 +8,6 @@
 <script>
 export default {
   name: "App",
-  data() {
-    return {
-      music: null,
-    }
-  },
-  mounted() {
-    this.bgm = new Audio("../../bgm.mp3");
-  },
-  updated() {
-  },
-  methods: {
-    playmusic: function (){
-      if (this.bgm.paused) {
-        this.bgm.play();
-      } else {
-        this.bgm.pause();
-      }
-    },
-  }
 };
 </script>
 
