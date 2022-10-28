@@ -59,7 +59,6 @@
         <div class="nes-container is-centered is-rounded">
           {{ username }}
         </div>
-
       </div>
       <div class="info col-9 col-md-5 ps-0">
         <div class="nes-container is-rounded">
@@ -68,23 +67,23 @@
       </div>
     </div>
 
-      <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
-        <img
-          class="profile"
-          v-bind:src="
-            'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
-          "
-        />
-        <h3>{{ question }} {{ category }}!</h3>
-      </div>
+    <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
+      <img
+        class="profile"
+        v-bind:src="
+          'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
+        "
+      />
+      <h3>{{ question }} {{ category }}!</h3>
     </div>
+  </div>
 </template>
 
 <script>
 import { useSessionStore } from "../stores/session";
 import axios from "axios";
 import router from "@/router";
-import { Rive, Layout } from "rive-js";
+import { Rive, Layout } from "@rive-app/canvas";
 export default {
   name: "QuestionComponent",
   props: {
@@ -105,10 +104,11 @@ export default {
       next: "Question2",
       progress: 0,
       color: "",
+      timer: null,
     };
   },
   mounted() {
-    let timer = new Rive({
+    this.$timer = new Rive({
       src: "../../timer.riv",
       canvas: document.getElementById("canvas"),
       layout: new Layout({ fit: "fitHeight", alignment: "right" }),
@@ -116,8 +116,8 @@ export default {
       animations: "Timer",
     });
     let audio = new Audio("../../oof.mp3");
-    timer.play("Timer");
-    timer.on("stop", () => {
+    this.$timer.play("Timer");
+    this.$timer.on("stop", () => {
       console.log("ended");
       audio.play();
       axios.post("http://localhost:8081/api/answers", {
@@ -176,6 +176,9 @@ export default {
         this.answer1 = response["data"][randomNum[0]]["answer"];
         this.answer2 = response["data"][randomNum[1]]["answer"];
       });
+  },
+  beforeUnmount() {
+    this.$timer.unsubscribeAll();
   },
   methods: {
     option1: function () {

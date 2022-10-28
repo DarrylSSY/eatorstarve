@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import {Rive} from "rive-js";
+import {Rive} from "@rive-app/canvas";
 import axios from "axios";
 export default {
   name: 'HomeView',
