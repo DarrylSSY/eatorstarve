@@ -30,16 +30,7 @@
     </div>
     <div class="info col-9 col-md-5 ps-0">
       <div class="nes-container is-rounded">
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
-        <i class="nes-icon heart"></i>
+        <canvas id="canvas" height="20"></canvas>
       </div>
     </div>
       <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
@@ -54,6 +45,7 @@
 import { useSessionStore } from '../stores/session';
 import axios from "axios";
 import router from "@/router";
+import {Rive, Layout} from "rive-js";
 export default {
   name: "QuestionComponent",
   props: {
@@ -75,7 +67,26 @@ export default {
     }
   },
   mounted() {
-
+    let timer = new Rive({
+      src: "../../timer.riv",
+      canvas: document.getElementById("canvas"),
+      layout: new Layout({fit: 'fitHeight', alignment: 'right'}),
+      autoplay: false,
+      animations: 'Timer',
+    });
+    let audio = new Audio('../../oof.mp3');
+    timer.play("Timer")
+    timer.on("stop", () => {
+      console.log("ended")
+      audio.play()
+      axios.post('http://localhost:8081/api/answers', {
+        code: this.code,
+        username: this.username,
+        answer: this.answer1,
+        category: this.category
+      })
+      router.push({ name: this.next, params: {id:this.code} })
+    })
     if (this.category=="cuisine"){
       this.next="Question2"
     }
@@ -154,6 +165,10 @@ export default {
   aspect-ratio: 7/1;
   height: auto;
   margin: 0px;
+}
+
+canvas{
+  padding: 0px;
 }
 
 .nes-icon{
