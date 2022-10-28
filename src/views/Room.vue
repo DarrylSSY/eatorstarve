@@ -36,8 +36,7 @@ export default {
       } catch($e) {
         alert("Error copying link to clipboard")
       }
-
-    }
+    },
   }
 }
 </script>

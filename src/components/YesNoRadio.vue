@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     onEnter: function() {
-       alert('success');
+      alert('success');
     }
   }
 }
