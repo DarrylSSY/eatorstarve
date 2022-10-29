@@ -19,10 +19,25 @@
 
               <div class="row my-3">
                 <div class="col">
-                  <button type="button" class="nes-btn is-warning" @click="join">
+                  <button v-if="error == false && code!='' " type="button" class="nes-btn is-warning" @click="join">
                     Join
                   </button>
+
+                  <button v-else type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
+                    Join
+                  </button>
+                  <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
+                    <form method="dialog">
+                      <h2 class="mb-3">Error</h2>
+                      <p>Wrong room code. Check again.</p>
+                      <menu class="dialog-menu ps-0 mx-auto">
+                        <button class="nes-btn mt-3 is-warning">Ok</button>
+                      </menu>
+                    </form>
+                  </dialog>
+
                 </div>
+                
               </div>
 
               <div class="row text-center">
@@ -45,8 +60,8 @@
         <div class="row mx-5">
           <div class="nes-balloon from-left col-10">
             <p>
-              Welcome to <b>Eat or Starve</b> where we help to give suggestions on
-              where your next food adventure should be. <br /><br />
+              Welcome to <b>Eat or Starve</b> where we help to give suggestions
+              on where your next food adventure should be. <br /><br />
               Simply create a new game or join one hosted by your friend to
               kickstart the game of choice!
             </p>
@@ -69,6 +84,7 @@ export default {
     return {
       code: "",
       logo: "Eat or Starve",
+      error: false,
     };
   },
   methods: {
@@ -76,25 +92,20 @@ export default {
       // Incomplete code
       // Check if room exists
       let buttonpress = new Audio("../../buttonpress.mp3");
-      buttonpress.play()
-      let error = false;
+      buttonpress.play();
 
-      // If don't exist or code empty, give error
-      if (error || this.code == "") {
-        alert("Room doesn't exist");
-      }
-      // Else go to room
-      else {
-        router.push("room/" + this.code);
-      }
+
+      // If don't exist , give error
+
+      //no error, push to new page
+      router.push("room/" + this.code);
     },
     create: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
-      buttonpress.play()
+      buttonpress.play();
       router.push("setup");
     },
   },
-
 };
 </script>
 
@@ -112,7 +123,7 @@ button {
   width: 100%;
   height: 100%;
   /* bg color not working */
-  background-color: #f5c85f;
+  /* background-color: #f5c85f; */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -132,6 +143,6 @@ body {
 
 .nes-container {
   width: 50%;
-  background-color: #EDEDED;;
+  background-color: #ededed;
 }
 </style>
