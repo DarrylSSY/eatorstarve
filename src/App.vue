@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
+
   </div>
 </template>
 
@@ -17,6 +18,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   height: 100vh;
+}
+
+.mute-btn {
+  position:fixed;
+  bottom: 8px;
+  right: 8px;
 }
 
 </style>

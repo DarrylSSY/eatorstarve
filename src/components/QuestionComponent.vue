@@ -40,9 +40,9 @@
         <h3>{{ answer1 }}</h3>
       </button>
       <div class="auto-layout">
-        <div class="line"></div>
-        <h4>OR</h4>
-        <div class="line"></div>
+
+        <h4>-- OR --</h4>
+
       </div>
       <button
         type="button"
@@ -115,11 +115,12 @@ export default {
       autoplay: false,
       animations: "Timer",
     });
-    let audio = new Audio("../../oof.mp3");
+    let oof = new Audio("../../oof.mp3");
+
     this.$timer.play("Timer");
     this.$timer.on("stop", () => {
       console.log("ended");
-      audio.play();
+      oof.play();
       axios.post("http://localhost:8081/api/answers", {
         code: this.code,
         username: this.username,
@@ -188,8 +189,9 @@ export default {
         answer: this.answer1,
         category: this.category,
       });
+      let optionpress = new Audio("../../optionpress.mp3");
+      optionpress.play()
       router.push({ name: this.next, params: { id: this.code } });
-      return;
     },
     option2: function () {
       console.log(this.username + "selected" + this.answer2);
@@ -199,8 +201,9 @@ export default {
         answer: this.answer2,
         category: this.category,
       });
+      let optionpress = new Audio("../../optionpress.mp3");
+      optionpress.play()
       router.push({ name: this.next, params: { id: this.code } });
-      return;
     },
     home: function () {
       router.push("/");
@@ -211,13 +214,13 @@ export default {
 
 <style scoped>
 .nes-btn {
-  height: 64px;
+  height: 56px;
   width: calc(100% - 8px);
 }
 
 .nes-progress {
   width: calc(100% - 8px);
-  height: 64px;
+  height: 56px;
 }
 
 .line {

@@ -13,7 +13,7 @@
             <div class="nes-container is-rounded is-centered my-5 mx-auto">
               <div class="row">
                 <div class="col">
-                  <input v-model="code" type="text" class="nes-input is-primary" placeholder="RoomCode" />
+                  <input v-model="code" type="text" class="nes-input is-primary" placeholder="Room Code" />
                 </div>
               </div>
 
@@ -27,7 +27,7 @@
 
               <div class="row text-center">
                 <div class="col">
-                  <span class="align-middle"> ---OR--- </span>
+                  <span class="align-middle"> --- OR --- </span>
                 </div>
               </div>
 
@@ -75,6 +75,8 @@ export default {
     join: function () {
       // Incomplete code
       // Check if room exists
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
       let error = false;
 
       // If don't exist or code empty, give error
@@ -87,6 +89,8 @@ export default {
       }
     },
     create: function () {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
       router.push("setup");
     },
   },
@@ -101,7 +105,7 @@ input {
   background: rgb(234, 234, 168);
   text-align: center;
 
-  color: grey;
+  color: black;
 }
 
 button {
