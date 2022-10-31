@@ -3,18 +3,18 @@
   <body>
     <div class="container-sm">
       <br />
-      <div class="row">
-        <div class="col text-center">
+      <div class="row gx-4">
+        <div class="col-12 text-center mb-5">
           <h1>Pre-Game Setup</h1>
         </div>
-      </div>
+      
 
-      <div class="row">
-        <div class="col-12 col-md-12 col-lg-8 mx-auto">
-          <div class="nes-container is-rounded is-centered my-5 mx-auto">
+      <div class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
+        <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+          <div class="nes-container is-rounded is-centered">
 
             <!-- date and time input -->
-            <div id="day" class="row mb-3 mx-auto">
+            <div id="day" class="col-12">
               <Datepicker 
               v-model="date" class="nes-input is-primary dp__theme_dark" placeholder="Date & Time"
               :min-date="new Date()" :is24="false">
@@ -22,7 +22,7 @@
             </div>
 
             <!-- dietary needs options -->
-            <div class="row mx-auto mb-3">Special Dietary Needs:</div>
+            <div class="col-12 d-flex align-content-start my-3">Special Dietary Needs:</div>
 
             <div id="options" class="row text-start mb-3 mx-auto">
               <div v-for="option of options" :key="option.id">
@@ -42,7 +42,7 @@
             </div>
 
             <!-- submit button -->
-            <div v-show="date" class="row mx-auto">
+            <div v-show="date" class="col">
               <button type="button" class="nes-btn is-warning" @click="create">
                 Submit & Create
               </button>
@@ -50,6 +50,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </body>
 </template>
@@ -139,15 +140,9 @@ input {
 button {
   width: 100%;
   height: 100%;
-  /* bg color not working */
-}
-
-h1 {
-  font-size: 60px;
 }
 
 body {
-  width: 100%;
   height: 100%;
   background: linear-gradient(0deg,
       rgba(245, 200, 95, 0.66),
@@ -159,7 +154,4 @@ body {
   background-color: #ededed;
 }
 
-#options {
-  font-size: 80%;
-}
 </style>

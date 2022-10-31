@@ -1,5 +1,4 @@
 <template>
-
   <body>
     <div class="container-sm">
       <br />
@@ -12,45 +11,73 @@
       </div>
 
       <div class="row gx-4">
-        <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-12 col-md-12 col-lg-12">
           <!-- username, avatar, home button and play buttons -->
           <div class="nes-container is-rounded is-centered my-5 mx-auto">
-            <div class="row">
-              <div class="col-12 ">
+            <div class="row align-items-center mb-3">
+              <div class="col input-group align-middle">
+                
                 <!-- check username -->
-                <input id="username" v-model="currentUsername" type="text"
-                  class="nes-input is-primary" placeholder="Enter a username"
-                  @input="checkUsername()" />
+                <input
+                  id="username"
+                  v-model="currentUsername"
+                  type="text"
+                  class="nes-input is-primary form-control me-3"
+                  placeholder="Enter a username"
+                  @input="checkUsername()"
+                />
+
+                <!-- if username valid -->
+                <div class="input-group-append">
+                  <button
+                    v-if="validUser"
+                    style="width: auto; height: auto"
+                    type="button"
+                    class="nes-btn is-success"
+                    @click="showAvatar()"
+                  >
+                    Confirm
+                  </button>
+
+                  <!-- if username invalid -->
+                  <button
+                    v-else
+                    style="width: auto; height: auto"
+                    type="button"
+                    class="nes-btn is-disabled"
+                  >
+                    Confirm
+                  </button>
+                </div>
               </div>
             </div>
-
-            <!-- if username invalid, this will appear in red below username -->
-            <div class="col-12">
-              <p v-show="validUser == false && currentUsername != ''" id="usernameError">
+            
+            <!-- if username invalid -->
+            <div class="row">
+              <p v-show="validUser == false && currentUsername !='' " id="usernameError">
                 Username already exists.
               </p>
             </div>
 
             <div class="row">
               <div class="col my-3">
-                <img style="width: 100px" :src="
-                  'https://avatars.dicebear.com/api/pixel-art/' +
-                  currentUsername +
-                  '.svg'
-                " />
+                <img
+                  v-show="avatar"
+                  style="width: 100px"
+                  src="https://avatars.dicebear.com/api/pixel-art/{{currentUsername}}.svg"
+                />
               </div>
             </div>
 
             <!--home and start game button -->
             <div class="row">
-              <div class="col-6">
-                <button type="button" class="nes-btn is-primary d-flex align-items-center justify-content-center" @click="home">
-                  <font-awesome-icon icon="fa-solid fa-arrow-left" class="me-2"/>
+              <div class="col mx-auto">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <button type="button" class="nes-btn is-primary" @click="home">
                   Go Home
                 </button>
               </div>
-              <div class="col-6">
+              <div class="col mx-auto">
                 <button type="button" class="nes-btn is-warning" @click="play">
                   Start Game!
                 </button>
@@ -61,31 +88,27 @@
       </div>
 
       <!-- copy link button -->
-      <div class="col-12 input-group ">
-        <div class="col-8 text-center is-rounded d-flex justify-content-center border is-dark">
+      <div class="row mx-auto">
+        <div class="col-8 text-center is-rounded mx-auto">
           {{ currentUrl }}
         </div>
         <div class="col-4">
-          <button type="button" class="nes-btn is-warning d-flex justify-content-center" @click="copy_link">
+          <button type="button" class="nes-btn is-warning" @click="copy_link">
             Copy Link
           </button>
-          <RoomCheckerComponent :roomcode="code" />
         </div>
       </div>
+      
     </div>
   </body>
 </template>
 
 <script>
 import router from "@/router";
-import RoomCheckerComponent from "../components/RoomCheckerComponent";
 import { useSessionStore } from "../stores/session";
 
 export default {
   name: "RoomView",
-  components: {
-    RoomCheckerComponent,
-  },
   data() {
     return {
       code: this.$route.params.code,
@@ -95,6 +118,9 @@ export default {
       // username function need use
       validUser: false,
       currentUsername: "",
+
+      //to show avatar
+      avatar: false,
     };
   },
 
@@ -148,15 +174,23 @@ input {
   color: black;
 }
 
-.nes-btn {
+/* button {
   width: 100%;
-}
+  height: 100%;
+  bg color not working
+  background-color: #f5c85f;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+} */
+
 
 body {
+  width: 100%;
   height: 100%;
-  background: linear-gradient(0deg,
+  background: linear-gradient(
+      0deg,
       rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)),
+      rgba(245, 200, 95, 0.66)
+    ),
     url(../assets/bg1.jpeg);
   box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
 }
@@ -165,7 +199,6 @@ body {
   width: 100%;
   background-color: #ededed;
 }
-
 #usernameError {
   color: red;
   font-size: 80%;
