@@ -18,6 +18,26 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   height: 100vh;
+
+
+}
+h1 {
+    font-size: 60px;
+  }
+@media (max-width: 992px) {
+  h1 {
+    font-size: 50px;
+  }
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+@media (max-width: 576px) {
+  h1 {
+    font-size: 30px;
+  }
 }
 
 .mute-btn {
