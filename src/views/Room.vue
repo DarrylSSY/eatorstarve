@@ -1,72 +1,96 @@
 <template>
-
   <body>
     <div class="container-sm">
       <br />
-      <div class="row">
-        <div class="col text-center">
+      <div class="row gx-4 room-body">
+        <div class="col-12 text-center">
           <h1>Welcome to Game Room</h1>
-          <br />
+        </div>
+
+        <div class="col-12 text-center">
           <h2>{{ code }}</h2>
         </div>
-      </div>
 
-      <div class="row gx-4">
         <div class="col-2"></div>
         <div class="col-8">
           <!-- username, avatar, home button and play buttons -->
-          <div class="nes-container is-rounded is-centered my-5 mx-auto">
-            <div class="row">
-              <div class="col-12 ">
-                <!-- check username -->
-                <input id="username" v-model="currentUsername" type="text"
-                  class="nes-input is-primary" placeholder="Enter a username"
-                  @input="checkUsername()" />
-              </div>
+          <div class="nes-container is-rounded is-centered">
+            <div class="col-12">
+              <!-- check username -->
+              <input
+                id="username"
+                v-model="currentUsername"
+                type="text"
+                class="nes-input is-primary"
+                placeholder="Enter a username"
+                @input="checkUsername()"
+              />
             </div>
 
             <!-- if username invalid, this will appear in red below username -->
-            <div class="col-12">
-              <p v-show="validUser == false && currentUsername != ''" id="usernameError">
+            <div class="col-12 my-3">
+              <p
+                v-show="validUser == false && currentUsername != ''"
+                id="usernameError"
+              >
                 Username already exists.
               </p>
             </div>
 
-            <div class="row">
-              <div class="col my-3">
-                <img style="width: 100px" :src="
+            <div class="col-12">
+              <img
+                :src="
                   'https://avatars.dicebear.com/api/pixel-art/' +
                   currentUsername +
                   '.svg'
-                " />
-              </div>
+                "
+              />
             </div>
 
             <!--home and start game button -->
-            <div class="row">
+            <div class="row mt-3">
               <div class="col-6">
-                <button type="button" class="nes-btn is-primary d-flex align-items-center justify-content-center" @click="home">
-                  <font-awesome-icon icon="fa-solid fa-arrow-left" class="me-2"/>
+                <button
+                  type="button"
+                  class="nes-btn is-primary d-flex align-items-center justify-content-center col-6"
+                  @click="home"
+                >
+                  <font-awesome-icon
+                    icon="fa-solid fa-arrow-left"
+                    class="me-2"
+                  />
                   Go Home
                 </button>
               </div>
               <div class="col-6">
-                <button type="button" class="nes-btn is-warning" @click="play">
+                <button
+                  type="button"
+                  class="nes-btn is-warning col-6"
+                  @click="play"
+                >
                   Start Game!
                 </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div class="col-2"></div>
 
-      <!-- copy link button -->
-      <div class="col-12 input-group ">
-        <div class="col-8 text-center is-rounded d-flex justify-content-center border is-dark">
-          {{ currentUrl }}
+        <!-- copy link button -->
+        <div class="col-1"></div>
+        <div class="col-8 text-center is-rounded">
+          <input
+            type="text"
+            class="nes-input is-primary"
+            :value="currentUrl"
+          />
         </div>
-        <div class="col-4">
-          <button type="button" class="nes-btn is-warning d-flex justify-content-center" @click="copy_link">
+        <div class="col-2">
+          <button
+            type="button"
+            class="nes-btn is-warning d-flex justify-content-center"
+            @click="copy_link"
+          >
             Copy Link
           </button>
           <RoomCheckerComponent :roomcode="code" />
@@ -133,9 +157,6 @@ export default {
         this.validUser = false;
       }
     },
-    showAvatar() {
-      this.avatar = true;
-    },
   },
 };
 </script>
@@ -144,7 +165,8 @@ export default {
 input {
   background: rgb(234, 234, 168);
   text-align: center;
-
+  width: 100%;
+  height: fit-content;
   color: black;
 }
 
@@ -154,20 +176,30 @@ input {
 
 body {
   height: 100%;
-  background: linear-gradient(0deg,
+  background: linear-gradient(
+      0deg,
       rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)),
+      rgba(245, 200, 95, 0.66)
+    ),
     url(../assets/bg1.jpeg);
   box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
 }
 
 .nes-container {
-  width: 100%;
+  height: fit-content;
   background-color: #ededed;
 }
-
+.room-body {
+  height: 100%;
+}
+.container-sm {
+  height: 100%;
+}
 #usernameError {
   color: red;
-  font-size: 80%;
+}
+img {
+  height: 200px;
+  width: 100%;
 }
 </style>

@@ -30,6 +30,10 @@ h2{
 p, body{
   font-size: 16px;
 }
+img{
+  height: 200px;
+  width: 100%;
+}
 @media (max-width: 992px) {
   h1 {
     font-size: 50px;
@@ -39,6 +43,10 @@ p, body{
   }
   p, body{
   font-size: 14px;
+  }
+  img{
+  height: 150px;
+  width: 100%;
   }
 }
 @media (max-width: 768px) {
@@ -51,6 +59,11 @@ p, body{
   p, body{
   font-size: 12px;
   }
+  img{
+  height: 100px;
+  width: 100%;
+  }
+  
 }
 @media (max-width: 576px) {
   h1 {
@@ -61,6 +74,10 @@ p, body{
   }
   p, body{
   font-size: 10px;
+  }
+  img{
+  height: 50px;
+  width: 100%;
   }
 }
 

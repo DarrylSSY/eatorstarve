@@ -75,11 +75,6 @@ export default {
       logo: "Eat or Starve",
     };
   },
-  computed: {
-    title(){
-      return this.logo;
-    }
-  },
   methods: {
     join: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
