@@ -7,7 +7,7 @@ const Question = require("./models/question");
 
 // get list of rooms
 router.post('/places', (req, res) => {
-    axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
+    axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&maxprice='+req.body["maxprice"]+'&minprice='+req.body["minprice"]+'&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
         .then(response => res.json({
 
             "name1": response.data["results"][0]["name"],
