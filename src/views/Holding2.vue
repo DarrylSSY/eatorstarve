@@ -1,92 +1,40 @@
 <template>
+    <!-- <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
+  <div class="container-sm">
+      Home
+    </button>
+    <dialog class="nes-dialog is-rounded" id="dialog-rounded">
+      <form method="dialog">
+        <p class="title">Are you sure you want to exit?</p>
+        <p>Your progress will not be saved.</p>
+        <menu class="dialog-menu">
+          <button class="nes-btn">Cancel</button>
+          <button class="nes-btn is-primary" @click="home">Confirm</button>
+        </menu>
+      </form>
+    </dialog>
+    <button type="button" class="nes-btn is-primary" @click="next">Next</button> -->
+    <div class="typewriter">
+      Hi {{username}}, your yum craves has been recorded
+    </div>
+    <div class="nes-container is-rounded">
+      <p>There are {{answered.length - 1}} other yummers that are hungry and waiting... </p>
+      <div class="container">
+        <div class="row">
+          <div class="col"></div>
+          <div class="user_list col-9">
+            <ul>
+              <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
+                <img style="width: 50px" :src="get_avatar(user)">   {{ user }}
+              </li>
+            </ul>
+          </div>
+          <div class="col-2"></div>
+        </div>
+      </div>
+    </div>
+  <!-- <GenerateResultsComponent :code="code"/> -->
   
-  <div class="whole container">   
-
-    <div class="row">
-      <div class="col-12">
-        <h1 class="end">The End.</h1>
-      </div>
-    </div> 
-
-
-    <div class="row">
-      <div class="col"></div>
-      <div class="col-12 col-md-10 col-lg-10">
-        <div class="main_component nes-container is-rounded">
-          <p> Completed: </p>
-          <div class="container">
-            <div class="row">
-              <!-- <div class="col"></div> -->
-              <div class="user_list col">
-                <ul>
-                  <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
-                    <img style="width: 50px" :src="get_avatar(user)">   {{ user }}
-                  </li>
-                </ul>
-              </div>
-              <!-- <div class="col-2"></div> -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col"></div>
-    </div>
-
-    <div class="row mt-5">
-      <div class="col"></div>
-          <div class="col-5 col-md-4 col-lg-2">
-            <div class="nes-container yesno">
-              <div class="row">
-                <label>
-                  <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" @keydown.enter="enter()" checked />
-                  <span>Yes</span>
-                </label>
-              </div>
-
-              <div class="row">
-                <label>
-                  <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter="enter()" />
-                  <span>No</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-    <div class="row">
-      <div class="col-12">
-      <div class="text_component container nes-container is-rounded">
-        
-        <div class="row py-sm-4">
-          <div class="col-8 col-md-12 col-lg-12">
-            <div class="typewriter">
-              Do you want to view results?
-            </div>
-          </div>
-        
-          <!-- <div class="col"></div> -->
-          <div class="col mt-md-5 mt-lg-5">
-            <div class="d-sm-none">
-              <button type="button" class="nes-btn is-warning" @click="enter()" >Enter</button>
-            </div>
-            
-            <div class="enter d-none d-sm-block">
-              Press 'Enter' to continue
-            </div>
-            
-          </div>
-      </div>
-          
-        
-
-      </div>
-    </div>
-  </div>
-    
-
-  </div>
-  <!-- <GenerateResultsComponent :code="code"/>
-  <UsernameCheckerComponent /> -->
 </template>
 
 
@@ -100,10 +48,9 @@ import axios from "axios";
 
 export default {
   name: "HoldingView",
-  // components: {
-  //   GenerateResultsComponent,
-  //   UsernameCheckerComponent,
   // },
+  //   GenerateResultsComponent,
+  // components: {
   setup() {
     const store = useSessionStore()
     return {
@@ -113,8 +60,7 @@ export default {
   data() {
     return {
       code: this.$route.params.code,
-      answered: [],
-      value: ""
+      answered: []
 
 
     }
@@ -126,13 +72,12 @@ export default {
   },
   methods: {
     next: function (){
+      // let buttonpress = new Audio("../../buttonpress.mp3");
+      // buttonpress.play()
       router.push({ name: 'Results', params: {id:this.code} })
     },
     get_avatar(user) {
       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
-    }, 
-    enter() {
-    alert(this.value)
     }
   },
 }
@@ -140,53 +85,24 @@ export default {
 
 <style scoped>
 
-.whole {
-  text-align: center;
-  position: relative;
-  margin: auto;
-  
-}
-
-.end {
-  margin-top: 150px;
-  margin-bottom: 50px;
-  text-align: center;
-}
-
-div.main_component {
+div.nes-container {
   margin-right: auto;
   margin-left: auto;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-bottom: 10px;
-  width: 60%;
-  height: auto;
-  /* position: sticky; This shit doesnt work */
+  width: 800px;
+  height: 400px;
+  position: sticky; /* This shit doesnt work */
   bottom: 0;
   background-color: rgb(247, 213, 29);
   margin-bottom: 20px;
   
 }
 
-div.text_component {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  width: 100%;
-  height: auto;
-  /* position: sticky; This shit doesnt work */
-  /* background-color: rgb(247, 213, 29); */
-  margin-bottom: 20px;
-  text-align: left;
-  
-  
-}
-
 .user_list {
   overflow-y: auto;
-  height: 180px;
+  height: 300px;
   overflow-y: scroll;
-  text-align: left;
 }
 
 /* div.nes-container.scroll { */
@@ -200,6 +116,10 @@ div.text_component {
   
 /* } */
 
+user_list {
+  text-align: left;
+}
+
 /* .heading {
   font-size: large;
   margin-top: 50px;
@@ -207,14 +127,28 @@ div.text_component {
   margin-bottom: 100px;
 } */
 
-
-/* typewriter , @keyframes typing and blink-caret can be removed to remove animation */
-
-
 .typewriter {
-  display: flex;
-  align-items: center;
-  font-size:larger;
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  border-right: .15em solid orange; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange; }
 }
 
 
@@ -228,28 +162,9 @@ img {
   margin-right: 20px;
 }
 
-/* button {
+button {
   margin-left: 20px;
   margin-right: 20px;
-} */
-
-.nes-btn {
-  position: absolute;
-  right: 20px;
-}
-
-.enter {
-  text-align: right;
-  color: grey;
-}
-
-/* .row{
-  height: 100px;
-} */
-
-.yesno {
-  padding-left: 30%;
-  text-align: left;
 }
 
 </style>
