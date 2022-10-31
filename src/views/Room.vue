@@ -101,14 +101,19 @@
       
     </div>
   </body>
+    <RoomCheckerComponent :roomcode="code"/>
 </template>
 
 <script>
 import router from "@/router";
+import RoomCheckerComponent from "../components/RoomCheckerComponent";
 import { useSessionStore } from "../stores/session";
 
 export default {
   name: "RoomView",
+  components: {
+    RoomCheckerComponent
+  },
   data() {
     return {
       code: this.$route.params.code,
