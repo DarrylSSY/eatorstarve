@@ -3,13 +3,13 @@ $theme-colors: (
   "primary": #000000,
 );
 
-// Change NES.css primary color
+
+  // Change NES.css primary color
 $primary-colors: (
   normal: #209cee,
   hover: #108de0,
   shadow: #006bb3
 );
-
 
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "scss/nes.scss";

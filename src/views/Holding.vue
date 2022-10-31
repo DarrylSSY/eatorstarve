@@ -1,7 +1,6 @@
 <template>
-  
-  <div>
-    <!-- <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
+    <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
+  <div class="container-sm">
       Home
     </button>
     <dialog class="nes-dialog is-rounded" id="dialog-rounded">
@@ -36,7 +35,6 @@
     </div>
   </div>
   <GenerateResultsComponent :code="code"/>
-  <UsernameCheckerComponent />
 </template>
 
 
@@ -44,7 +42,6 @@
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
-import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
 import GenerateResultsComponent from "@/components/GenerateResultsComponent";
 
@@ -52,7 +49,6 @@ export default {
   name: "HoldingView",
   components: {
     GenerateResultsComponent,
-    UsernameCheckerComponent,
   },
   setup() {
     const store = useSessionStore()
@@ -75,6 +71,8 @@ export default {
   },
   methods: {
     next: function (){
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
       router.push({ name: 'Results', params: {id:this.code} })
     },
     get_avatar(user) {

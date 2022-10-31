@@ -1,6 +1,6 @@
 <template>
   <div class="container-sm">
-    <QuestionComponent category="poultry" :code="code" />
+    <QuestionComponent category="price" :code="code" />
     <UsernameCheckerComponent />
   </div>
 </template>
@@ -12,7 +12,7 @@ import QuestionComponent from "../components/QuestionComponent";
 import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 
 export default {
-  name: "Question2View",
+  name: "Question3View",
   components: {
     UsernameCheckerComponent,
     QuestionComponent
