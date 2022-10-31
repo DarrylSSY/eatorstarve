@@ -76,6 +76,7 @@ import { ref } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import router from "@/router";
+import axios from "axios";
 export default {
   name: "SetupView",
   components: { Datepicker },
@@ -120,7 +121,16 @@ export default {
         error = false;
       }
       // Else create room
-      router.push("room/" + generated_code);
+      axios.post("http://localhost:8081/api/createdroom", {
+        code: generated_code,
+        status: "open"
+      }).then((response) => {
+        console.log(response);
+        router.push("room/" + generated_code);
+      }).catch((error) => {
+        console.log(error);
+      });
+
     },
   },
 };
