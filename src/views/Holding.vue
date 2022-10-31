@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
+    <!-- <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
   <div class="container-sm">
       Home
     </button>
@@ -33,9 +33,8 @@
         </div>
       </div>
     </div>
-  </div>
-  <GenerateResultsComponent :code="code"/>
-  <UsernameCheckerComponent />
+  <!-- <GenerateResultsComponent :code="code"/> -->
+  
 </template>
 
 
@@ -43,16 +42,15 @@
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
-import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
+// import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
-import GenerateResultsComponent from "@/components/GenerateResultsComponent";
+// import GenerateResultsComponent from "@/components/GenerateResultsComponent";
 
 export default {
   name: "HoldingView",
-  components: {
-    GenerateResultsComponent,
-    UsernameCheckerComponent,
-  },
+  // },
+  //   GenerateResultsComponent,
+  // components: {
   setup() {
     const store = useSessionStore()
     return {
@@ -74,8 +72,8 @@ export default {
   },
   methods: {
     next: function (){
-      let buttonpress = new Audio("../../buttonpress.mp3");
-      buttonpress.play()
+      // let buttonpress = new Audio("../../buttonpress.mp3");
+      // buttonpress.play()
       router.push({ name: 'Results', params: {id:this.code} })
     },
     get_avatar(user) {

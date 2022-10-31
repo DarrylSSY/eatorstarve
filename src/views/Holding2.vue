@@ -1,58 +1,87 @@
 <template>
   
-  <div class="whole">
-    <!-- <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded').showModal();">
-      Home
-    </button>
-    <dialog class="nes-dialog is-rounded" id="dialog-rounded">
-      <form method="dialog">
-        <p class="title">Are you sure you want to exit?</p>
-        <p>Your progress will not be saved.</p>
-        <menu class="dialog-menu">
-          <button class="nes-btn">Cancel</button>
-          <button class="nes-btn is-primary" @click="home">Confirm</button>
-        </menu>
-      </form>
-    </dialog>
-    <button type="button" class="nes-btn is-primary" @click="next">Next</button> -->
-    
-    <h1 class="end">The End.</h1>
-    <div class="main_component nes-container is-rounded">
-      <p>Completed: </p>
-      <div class="container">
-        <div class="row">
-          <!-- <div class="col"></div> -->
-          <div class="user_list col">
-            <ul>
-              <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
-                <img style="width: 50px" :src="get_avatar(user)">   {{ user }}
-              </li>
-            </ul>
+  <div class="whole container">   
+
+    <div class="row">
+      <div class="col-12">
+        <h1 class="end">The End.</h1>
+      </div>
+    </div> 
+
+
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-12 col-md-10 col-lg-10">
+        <div class="main_component nes-container is-rounded">
+          <p> Completed: </p>
+          <div class="container">
+            <div class="row">
+              <!-- <div class="col"></div> -->
+              <div class="user_list col">
+                <ul>
+                  <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
+                    <img style="width: 50px" :src="get_avatar(user)">   {{ user }}
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="col-2"></div> -->
+            </div>
           </div>
-          <!-- <div class="col-2"></div> -->
         </div>
       </div>
+      <div class="col"></div>
     </div>
 
-    <div class="text_component nes-container is-rounded">
-      <div class="typewriter">
-        <!-- Hi {{username}}, your yum craves has been recorded. -->
-        Cravings recorded succesfully.
-        Do you want to view results?
+    <div class="row mt-5">
+      <div class="col"></div>
+          <div class="col-5 col-md-4 col-lg-2">
+            <div class="nes-container yesno">
+              <div class="row">
+                <label>
+                  <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" @keydown.enter="enter()" checked />
+                  <span>Yes</span>
+                </label>
+              </div>
+
+              <div class="row">
+                <label>
+                  <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter="enter()" />
+                  <span>No</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <div class="row">
+      <div class="col-12">
+      <div class="text_component container nes-container is-rounded">
+        
+        <div class="row py-sm-4">
+          <div class="col-8 col-md-12 col-lg-12">
+            <div class="typewriter">
+              Do you want to view results?
+            </div>
+          </div>
+        
+          <!-- <div class="col"></div> -->
+          <div class="col mt-md-5 mt-lg-5">
+            <div class="d-sm-none">
+              <button type="button" class="nes-btn is-warning" @click="enter()" >Enter</button>
+            </div>
+            
+            <div class="enter d-none d-sm-block">
+              Press 'Enter' to continue
+            </div>
+            
+          </div>
       </div>
+          
+        
 
-      <div style="display: flex; justify-content: space-evenly; margin-top: 30px;">
-        <label>
-          <input type="radio" class="nes-radio" name="answer" checked />
-          <span>Yes</span>
-        </label>
-
-        <label>
-          <input type="radio" class="nes-radio" name="answer" />
-          <span>No</span>
-        </label>
       </div>
     </div>
+  </div>
     
 
   </div>
@@ -65,16 +94,16 @@
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
-import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
+// import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
-import GenerateResultsComponent from "@/components/GenerateResultsComponent";
+// import GenerateResultsComponent from "@/components/GenerateResultsComponent";
 
 export default {
   name: "HoldingView",
-  components: {
-    GenerateResultsComponent,
-    UsernameCheckerComponent,
-  },
+  // components: {
+  //   GenerateResultsComponent,
+  //   UsernameCheckerComponent,
+  // },
   setup() {
     const store = useSessionStore()
     return {
@@ -84,7 +113,8 @@ export default {
   data() {
     return {
       code: this.$route.params.code,
-      answered: []
+      answered: [],
+      value: ""
 
 
     }
@@ -100,6 +130,9 @@ export default {
     },
     get_avatar(user) {
       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
+    }, 
+    enter() {
+    alert(this.value)
     }
   },
 }
@@ -108,10 +141,10 @@ export default {
 <style scoped>
 
 .whole {
-  width: 100%;
-  height: 100%;
   text-align: center;
   position: relative;
+  margin: auto;
+  
 }
 
 .end {
@@ -125,8 +158,8 @@ div.main_component {
   margin-left: auto;
   margin-top: 20px;
   margin-bottom: 10px;
-  width: 400px;
-  height: 250px;
+  width: 60%;
+  height: auto;
   /* position: sticky; This shit doesnt work */
   bottom: 0;
   background-color: rgb(247, 213, 29);
@@ -139,13 +172,13 @@ div.text_component {
   margin-left: auto;
   margin-top: 20px;
   margin-bottom: 10px;
-  width: 75%;
-  height: 150px;
+  width: 100%;
+  height: auto;
   /* position: sticky; This shit doesnt work */
-  bottom: 0;
   /* background-color: rgb(247, 213, 29); */
   margin-bottom: 20px;
   text-align: left;
+  
   
 }
 
@@ -153,6 +186,7 @@ div.text_component {
   overflow-y: auto;
   height: 180px;
   overflow-y: scroll;
+  text-align: left;
 }
 
 /* div.nes-container.scroll { */
@@ -166,10 +200,6 @@ div.text_component {
   
 /* } */
 
-user_list {
-  text-align: left;
-}
-
 /* .heading {
   font-size: large;
   margin-top: 50px;
@@ -179,31 +209,13 @@ user_list {
 
 
 /* typewriter , @keyframes typing and blink-caret can be removed to remove animation */
+
+
 .typewriter {
-  margin-bottom: 20px;
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange; /* The typwriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em; /* Adjust as needed */
-  animation: 
-    typing 3.5s steps(30, end),
-    blink-caret .5s step-end infinite;
+  display: flex;
+  align-items: center;
+  font-size:larger;
 }
-
-
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
-}
-
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
-}
-
 
 
 li {
@@ -216,15 +228,28 @@ img {
   margin-right: 20px;
 }
 
-button {
+/* button {
   margin-left: 20px;
   margin-right: 20px;
-}
+} */
 
 .nes-btn {
   position: absolute;
-  bottom: 20px;
   right: 20px;
+}
+
+.enter {
+  text-align: right;
+  color: grey;
+}
+
+/* .row{
+  height: 100px;
+} */
+
+.yesno {
+  padding-left: 30%;
+  text-align: left;
 }
 
 </style>
