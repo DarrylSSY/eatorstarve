@@ -64,7 +64,7 @@
                 <img
                   v-show="avatar"
                   style="width: 100px"
-                  src="https://avatars.dicebear.com/api/pixel-art/{{currentUsername}}.svg"
+                  v-bind:src="'https://avatars.dicebear.com/api/pixel-art/' + currentUsername + '.svg'"
                 />
               </div>
             </div>
@@ -96,12 +96,13 @@
           <button type="button" class="nes-btn is-warning" @click="copy_link">
             Copy Link
           </button>
+          <RoomCheckerComponent :roomcode="code"/>
         </div>
       </div>
       
     </div>
   </body>
-    <RoomCheckerComponent :roomcode="code"/>
+    
 </template>
 
 <script>
