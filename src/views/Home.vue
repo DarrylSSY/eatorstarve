@@ -56,8 +56,8 @@
 
           <div class="nes-balloon from-left col-10">
             <p>
-              Welcome to <b>Eat or Starve</b> where we help to give suggestions on
-              where your next food adventure should be. <br /><br />
+              Welcome to <b>Eat or Starve</b> where we help to give suggestions
+              on where your next food adventure should be. <br /><br />
               Simply create a new game or join one hosted by your friend to
               kickstart the game of choice!
             </p>
