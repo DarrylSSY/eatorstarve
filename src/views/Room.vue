@@ -5,20 +5,15 @@
     Hi, this is the room page for room code {{code}}
     <button @click="home">Home</button>
     <button @click="copy_link">Copy Link</button>
-    <RoomCheckerComponent :roomcode="code"/>
   </div>
 </template>
 
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
-import RoomCheckerComponent from "../components/RoomCheckerComponent";
 
 export default {
   name: "RoomView",
-  components: {
-    RoomCheckerComponent
-  },
   data() {
     return {
       code: this.$route.params.code,

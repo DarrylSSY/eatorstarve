@@ -38,20 +38,11 @@ export default {
 </script>
 
 <style scoped>
-body {
-  height: 100%;
-  background: linear-gradient(
-      0deg,
-      rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)
-  ),
-  url(../assets/bg1.jpeg);
-}
-.container {
-  height: 100%;
+
+div.nes-container {
+  margin:10px;
+  position: sticky; /* This shit doesnt work */
+  bottom: 0;
 }
 
-.container-sm {
-  height: 100%;
-}
 </style>

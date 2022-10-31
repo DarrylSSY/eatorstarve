@@ -68,7 +68,7 @@ export default {
                     this.parameters += "spicy "
                   }
                   else if (response.data == "Little Kick"){
-                    this.parameters += "mild-spicy "
+                    this.parameters += "mild-spicy"
                   }
                   else {
                     this.parameters += "non-spicy "
@@ -85,7 +85,6 @@ export default {
           // generate place
           axios.post('http://localhost:8081/api/places',{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
               .then(response => {
-                axios.post('http://localhost:8081/api/createdroom/' + this.code, {"status": "close"})
                 this.first = [response["data"]["name1"], response["data"]["address1"]]
                 this.second = [response["data"]["name2"], response["data"]["address2"]]
                 this.third = [response["data"]["name3"], response["data"]["address3"]]
