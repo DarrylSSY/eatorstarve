@@ -1,60 +1,68 @@
 <template>
-
   <body>
     <div class="container-sm">
       <br />
-      <div class="row">
+      <div class="row gx-4 home-body">
         <div class="col-12">
-          <h1 class="text-center">Eat or Starve</h1>
+          <h1 class="text-center">
+            Eat or Starve
+          </h1>
         </div>
 
-        <div class="row">
-          <div class="col-12 col-md-12 col-lg-8 mx-auto">
-            <div class="nes-container is-rounded is-centered my-5 mx-auto">
-              <div class="row">
-                <div class="col">
-                  <input v-model="code" type="text" class="nes-input is-primary" placeholder="Room Code" />
-                </div>
-              </div>
+        <div class="col-1 col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
+        <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+          <div class="nes-container is-rounded is-centered">
+            <!-- room code input -->
+            <div class="col-12">
+              <input
+                v-model="code"
+                type="text"
+                class="nes-input is-primary"
+                placeholder="Room Code"
+              />
+            </div>
+            <!-- join button -->
+            <div class="col-12 my-2">
+              <button
+                v-if="code != ''"
+                type="button"
+                class="nes-btn is-primary"
+                @click="join"
+              >
+                Join
+              </button>
 
-              <div class="row my-3">
-                <div class="col">
-                  <button type="button" class="nes-btn is-warning" @click="join">
-                    Join
-                  </button>
-                </div>
-              </div>
-
-              <div class="row text-center">
-                <div class="col">
-                  <span class="align-middle"> --- OR --- </span>
-                </div>
-              </div>
-
-              <div class="row my-3">
-                <div class="col">
-                  <button type="button" class="nes-btn is-warning" @click="create">
-                    Create
-                  </button>
-                </div>
-              </div>
+              <button v-else type="button" class="nes-btn is-disabled">
+                Join
+              </button>
+            </div>
+            <div class="col-12">
+              <span class="align-middle"> --- OR --- </span>
+            </div>
+            <!-- create room button -->
+            <div class="col-12 mt-2">
+              <button type="button" class="nes-btn is-warning" @click="create">
+                Create
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-1 col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
+        <!-- bottom speech bubble with cat -->
+        <div class="col-1"></div>
+        <div class="col-11">
+          <div class="nes-balloon from-left">
+            <div>
+              Welcome to <b>Eat or Starve</b> where we help to give suggestions on where your next food
+              adventure should be. <br /><br>
+              Simply create a new game or join one hosted by your friend to
+              kickstart the game of choice!
             </div>
           </div>
         </div>
 
-        <div class="row mx-5">
-          <div class="nes-balloon from-left col-10">
-            <p>
-              Welcome to <b>Eat or Starve</b> where we help to give suggestions on
-              where your next food adventure should be. <br /><br />
-              Simply create a new game or join one hosted by your friend to
-              kickstart the game of choice!
-            </p>
-          </div>
-        </div>
-
-        <div class="row">
-          <i class="nes-octocat animate pl-3 mt-2"></i>
+        <div class="col-2">
+          <i class="nes-octocat animate"></i>
         </div>
       </div>
     </div>
@@ -68,33 +76,21 @@ export default {
   data() {
     return {
       code: "",
-      logo: "Eat or Starve",
     };
   },
   methods: {
     join: function () {
-      // Incomplete code
-      // Check if room exists
       let buttonpress = new Audio("../../buttonpress.mp3");
-      buttonpress.play()
-      let error = false;
+      buttonpress.play();
 
-      // If don't exist or code empty, give error
-      if (error || this.code == "") {
-        alert("Room doesn't exist");
-      }
-      // Else go to room
-      else {
-        router.push("room/" + this.code);
-      }
+      router.push("room/" + this.code);
     },
     create: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
-      buttonpress.play()
+      buttonpress.play();
       router.push("setup");
     },
   },
-
 };
 </script>
 
@@ -107,31 +103,39 @@ input {
 
   color: black;
 }
-
+#logo{
+  color: green;
+  font-weight: bold;
+}
 button {
   width: 100%;
-  height: 100%;
-  /* bg color not working */
-  background-color: #f5c85f;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-h1 {
-  font-size: 60px;
 }
 
 body {
-  width: 100%;
   height: 100%;
-  background: linear-gradient(0deg,
+
+  background: linear-gradient(
+      0deg,
       rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)),
+      rgba(245, 200, 95, 0.66)
+    ),
     url(../assets/bg1.jpeg);
   box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
 }
 
+.container-sm {
+  height: 100%;
+}
+
+.home-body {
+  height: 100%;
+}
+
 .nes-container {
-  width: 50%;
-  background-color: #EDEDED;;
+  background-color: #ededed;
+  height: fit-content;
+}
+.nes-balloon {
+  height: fit-content;
 }
 </style>
