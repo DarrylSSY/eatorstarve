@@ -63,7 +63,7 @@
 
     <div class="row mt-5">
       <div class="col"></div>
-          <div class="col-5 col-md-4 col-lg-2">
+          <div class="col-4 col-md-4 col-lg-2">
             <div :style="{'visibility': visible}" class="nes-container yesno">
               <div class="row">
                 <label>
@@ -156,8 +156,6 @@ export default {
       answered: [],
       value: "",
       visible: "hidden",
-      busy: false,
-      processing: false
 
 
     }
@@ -239,7 +237,7 @@ export default {
   margin: 0;
   float: right; /* makes animation go left-to-right */
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
-  height: 48px;
+  height: 60px;
   background: white; /* same as page background */
   animation: typing 2s steps(30, end);
   animation-fill-mode: both;  /* load first keyframe on page load, leave on last frame at end */
@@ -331,7 +329,7 @@ div.text_component {
   margin: 0;
   float: right; /* makes animation go left-to-right */
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
-  height: 32px;
+  height: 20px;
   background: white; /* same as page background */
   animation: typing 2s steps(30, end);
   animation-delay: 2s;
@@ -363,7 +361,7 @@ img {
 } */
 
 .nes-btn {
-  position: absolute;
+  
   right: 20px;
 }
 
