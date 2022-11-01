@@ -24,13 +24,11 @@
     </ul>
   </div>
   <GenerateResultsComponent :code="code"/>
-  <UsernameCheckerComponent />
 </template>
 
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
-import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
 import GenerateResultsComponent from "@/components/GenerateResultsComponent";
 
@@ -38,7 +36,6 @@ export default {
   name: "HoldingView",
   components: {
     GenerateResultsComponent,
-    UsernameCheckerComponent,
   },
   setup() {
     const store = useSessionStore()

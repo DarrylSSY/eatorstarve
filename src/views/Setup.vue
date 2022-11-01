@@ -1,65 +1,48 @@
 <template>
+
   <body>
     <div class="container-sm">
       <br />
-      <div class="row">
-        <div class="col text-center">
+      <div class="row gx-4">
+        <div class="col-12 text-center mb-5">
           <h1>Pre-Game Setup</h1>
         </div>
-      </div>
+      
 
-      <div class="row">
-        <div class="col">
-          <div class="nes-container is-rounded is-centered my-5 mx-auto">
+      <div class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
+        <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+          <div class="nes-container is-rounded is-centered">
 
             <!-- date and time input -->
-            <div id="day" class="row mb-3 mx-auto">
-              <Datepicker
-                v-model="date"
-                class="nes-input is-primary dp__theme_dark"
-                placeholder="Date & Time"
-                :min-date="new Date()"
-                :is24="false"
-              >
+            <div id="day" class="col-12">
+              <Datepicker 
+              v-model="date" class="nes-input is-primary dp__theme_dark" placeholder="Date & Time"
+              :min-date="new Date()" :is24="false">
               </Datepicker>
             </div>
 
             <!-- dietary needs options -->
-            <div class="row mx-auto mb-3">Special Dietary Needs:</div>
+            <div class="col-12 d-flex align-content-start my-3">Special Dietary Needs:</div>
 
             <div id="options" class="row text-start mb-3 mx-auto">
               <div v-for="option of options" :key="option.id">
-                <label
-                  ><input
-                    v-model="dietaryNeeds"
-                    type="checkbox"
-                    class="nes-checkbox"
-                    :value="option"
-                  /><span>{{ option }}</span></label
-                >
+                <label><input v-model="dietaryNeeds" type="checkbox" class="nes-checkbox" :value="option" /><span>{{
+                    option
+                }}</span></label>
               </div>
 
               <div class="col">
-                <label
-                  ><input
-                    v-model="checked"
-                    type="checkbox"
-                    class="nes-checkbox col" />
-                  <span
-                    >Others:
-                    <input
-                      v-show="checked"
-                      v-model="extra"
-                      type="text"
-                      class="nes-input is-primary col"
-                      placeholder="Other requirements"
-                    /> </span
-                ></label>
+                <label><input v-model="checked" type="checkbox" class="nes-checkbox col" />
+                  <span>Others:
+                    <input 
+                    v-show="checked" v-model="extra" type="text" class="nes-input is-primary col mt-3" placeholder="Other requirements" /> 
+                  </span>
+                </label>
               </div>
             </div>
 
             <!-- submit button -->
-            <div class="row mx-auto">
+            <div v-show="date" class="col">
               <button type="button" class="nes-btn is-warning" @click="create">
                 Submit & Create
               </button>
@@ -67,6 +50,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </body>
 </template>
@@ -76,6 +60,7 @@ import { ref } from "vue";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import router from "@/router";
+import axios from "axios";
 export default {
   name: "SetupView",
   components: { Datepicker },
@@ -120,7 +105,16 @@ export default {
         error = false;
       }
       // Else create room
-      router.push("room/" + generated_code);
+      axios.post("http://localhost:8081/api/createdroom", {
+        code: generated_code,
+        status: "open"
+      }).then((response) => {
+        console.log(response);
+        router.push("room/" + generated_code);
+      }).catch((error) => {
+        console.log(error);
+      });
+
     },
   },
 };
@@ -131,41 +125,33 @@ export default {
   background: rgb(234, 234, 168);
   color: grey;
 }
+
 .dp__theme_dark {
   --dp-background-color: rgb(234, 234, 168);
   --dp-text-color: grey;
   --dp-border-color: none;
 }
+
+input {
+  background: rgb(234, 234, 168);
+  color: grey;
+}
+
 button {
   width: 100%;
   height: 100%;
-  /* bg color not working */
-  background-color: #f5c85f;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-h1 {
-  font-size: 60px;
 }
 
 body {
-  width: 100%;
   height: 100%;
-  background: linear-gradient(
-      0deg,
+  background: linear-gradient(0deg,
       rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)
-    ),
+      rgba(245, 200, 95, 0.66)),
     url(../assets/bg1.jpeg);
-  box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
 }
 
 .nes-container {
-  width: 50%;
   background-color: #ededed;
 }
 
-#options {
-  font-size: 80%;
-}
 </style>
