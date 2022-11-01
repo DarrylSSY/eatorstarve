@@ -1,36 +1,45 @@
 <template>
-
   <body>
     <div class="container-sm">
       <br />
       <div class="row gx-4 home-body">
-
         <div class="col-12">
-          <h1 class="text-center">Eat or Starve</h1>
+          <h1 class="text-center">
+            Eat or Starve
+          </h1>
         </div>
 
         <div class="col-1 col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
         <div class="col-10 col-sm-10 col-md-8 col-lg-6 col-xl-4">
           <div class="nes-container is-rounded is-centered">
-
+            <!-- room code input -->
             <div class="col-12">
-              <input v-model="code" type="text" class="nes-input is-primary" placeholder="Room Code" />
+              <input
+                v-model="code"
+                type="text"
+                class="nes-input is-primary"
+                placeholder="Room Code"
+              />
             </div>
-
+            <!-- join button -->
             <div class="col-12 my-2">
-              <button v-if="code != ''" type="button" class="nes-btn is-primary" @click="join">
+              <button
+                v-if="code != ''"
+                type="button"
+                class="nes-btn is-primary"
+                @click="join"
+              >
                 Join
               </button>
 
               <button v-else type="button" class="nes-btn is-disabled">
                 Join
               </button>
-
             </div>
             <div class="col-12">
               <span class="align-middle"> --- OR --- </span>
             </div>
-
+            <!-- create room button -->
             <div class="col-12 mt-2">
               <button type="button" class="nes-btn is-warning" @click="create">
                 Create
@@ -39,27 +48,22 @@
           </div>
         </div>
         <div class="col-1 col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
-
+        <!-- bottom speech bubble with cat -->
         <div class="col-1"></div>
         <div class="col-11">
           <div class="nes-balloon from-left">
-            <p>
-              Welcome to <b>Eat or Starve</b> where we help to give suggestions
-              on where your next food adventure should be. <br /><br />
+            <div>
+              Welcome to <b>Eat or Starve</b> where we help to give suggestions on where your next food
+              adventure should be. <br /><br>
               Simply create a new game or join one hosted by your friend to
               kickstart the game of choice!
-            </p>
+            </div>
           </div>
         </div>
 
         <div class="col-2">
-          <i class="nes-octocat animate "></i>
+          <i class="nes-octocat animate"></i>
         </div>
-
-        
-        
-
-
       </div>
     </div>
   </body>
@@ -72,7 +76,6 @@ export default {
   data() {
     return {
       code: "",
-      logo: "Eat or Starve",
     };
   },
   methods: {
@@ -88,7 +91,6 @@ export default {
       router.push("setup");
     },
   },
-
 };
 </script>
 
@@ -101,18 +103,22 @@ input {
 
   color: black;
 }
-
+#logo{
+  color: green;
+  font-weight: bold;
+}
 button {
   width: 100%;
 }
 
-
 body {
   height: 100%;
 
-  background: linear-gradient(0deg,
+  background: linear-gradient(
+      0deg,
       rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)),
+      rgba(245, 200, 95, 0.66)
+    ),
     url(../assets/bg1.jpeg);
   box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
 }
@@ -129,7 +135,6 @@ body {
   background-color: #ededed;
   height: fit-content;
 }
-
 .nes-balloon {
   height: fit-content;
 }
