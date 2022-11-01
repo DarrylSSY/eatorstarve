@@ -28,9 +28,9 @@
             <!-- Result Gallery -->
             <div class="gallery">
                 <div id="suggestions" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
+                    <div class="carousel-inner nes-container">
                         <div v-for="(details, name) in top3_locations" :key="name" class="carousel-item active">
-                            <div class="card nes-container">
+                            <div class="card">
                                 <div class="row gx-4">
                                     <div class="col-md-4">
                                         <img :src="details.img_url" class="img-fluid rounded-start" alt="result1">
@@ -156,8 +156,9 @@ body {
     /* background-color: black; */
 }
 
-.carousell {
+.carousel-inner {
     margin: auto;
+    height: 460px;
 }
 
 .gallery {
@@ -165,11 +166,13 @@ body {
     margin-top: 30px;
     margin-bottom: 30px;
     width: 80%;
+    /* border: 4px black solid; */
 }
 
 .card, .card .row {
     width: 100%;
-    height: 460px;
+    height: 100%;
+    border: 0px;
 }
 
 .arrow-buttons {
