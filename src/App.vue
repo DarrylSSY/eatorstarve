@@ -17,13 +17,91 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  height: 100vh;
+  height: 100%;
+
+
+
+}
+.nes-btn {
+  width: 100%;
+}
+
+.nes-input {
+  width: 100%;
+}
+
+h1 {
+    font-size: 60px;
+  }
+h2{
+    font-size: 50px;
+  }
+p, body{
+  font-size: 16px;
+}
+img{
+  height: 200px;
+  width: 100%;
+}
+@media (max-width: 992px) {
+  h1 {
+    font-size: 50px;
+  }
+  h2{
+    font-size: 40px;
+  }
+  p, body{
+  font-size: 14px;
+  }
+  img{
+  height: 150px;
+  width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  h1 {
+    font-size: 40px;
+  }
+  h2{
+    font-size: 30px;
+  }
+  p, body{
+  font-size: 12px;
+  }
+  img{
+  height: 100px;
+  width: 100%;
+  }
+  
+}
+@media (max-width: 576px) {
+  h1 {
+    font-size: 30px;
+  }
+  h2{
+    font-size: 20px;
+  }
+  p, body{
+  font-size: 10px;
+  }
+  img{
+  height: 50px;
+  width: 100%;
+  }
 }
 
 .mute-btn {
   position:fixed;
   bottom: 8px;
   right: 8px;
+}
+
+html{
+  height: 100vh;
+}
+
+body {
+  height: 100vh;
 }
 
 </style>

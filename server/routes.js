@@ -12,10 +12,13 @@ router.post('/places', (req, res) => {
 
             "name1": response.data["results"][0]["name"],
             "address1": response.data["results"][0]["formatted_address"],
+            "photo1": response.data["results"][0]["photos"][0]["photo_reference"],
             "name2": response.data["results"][1]["name"],
             "address2": response.data["results"][1]["formatted_address"],
+            "photo2": response.data["results"][1]["photos"][0]["photo_reference"],
             "name3": response.data["results"][2]["name"],
             "address3": response.data["results"][2]["formatted_address"],
+            "photo3": response.data["results"][2]["photos"][0]["photo_reference"],ß
         }))
         .catch(err => res.json(err));
 });
