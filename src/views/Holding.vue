@@ -1,5 +1,27 @@
 <template>
-  
+   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
+    <form method="dialog">
+      <p class="title">Are you sure you want to exit?</p>
+      <p>Your progress will not be saved.</p>
+      <menu class="dialog-menu p-0">
+        <button class="nes-btn">Cancel</button>
+        <button class="nes-btn is-primary" @click="home">Confirm</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="dialog-rounded2" class="nes-dialog is-rounded">
+    <form method="dialog">
+      <p class="title">Are you sure you want to exit?</p>
+      <p>Your progress will not be saved.</p>
+      <menu class="dialog-menu p-0">
+        <button class="nes-btn">Cancel</button>
+        <button class="nes-btn is-primary" @click="home">Confirm</button>
+      </menu>
+    </form>
+  </dialog>
+
+
   <div class="whole container">   
 
     <div class="row">
@@ -102,6 +124,9 @@
   </div>
   <!-- <GenerateResultsComponent :code="code"/>
   <UsernameCheckerComponent /> -->
+  
+    
+
 </template>
 
 
@@ -130,7 +155,9 @@ export default {
       code: this.$route.params.code,
       answered: [],
       value: "",
-      visible: "hidden"
+      visible: "hidden",
+      busy: false,
+      processing: false
 
 
     }
@@ -153,7 +180,13 @@ export default {
       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
     }, 
     enter() {
-    alert(this.value)
+      if (this.value == 'yes') {
+        // alert("yes")
+        document.getElementById('dialog-rounded').showModal();
+      } else {
+        // alert("no")
+        document.getElementById('dialog-rounded2').showModal();
+      }
     }
   }
 
