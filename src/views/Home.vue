@@ -13,7 +13,7 @@
             <input
               v-model="code"
               type="text"
-              class="nes-input is-primary my-4"
+              class="nes-input is-primary my-2 mb-4"
               placeholder="Room Code"
             />
             <!-- join button -->
