@@ -20,7 +20,7 @@
             <button
               v-if="code != ''"
               type="button"
-              class="nes-btn is-primary my-4"
+              class="nes-btn is-primary my-2"
               @click="join"
             >
               Join
