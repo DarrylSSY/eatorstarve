@@ -80,7 +80,7 @@ import DialogueBox from '@/components/DialogueBox.vue';
 import { useSessionStore } from '../stores/session';
 
 export default {
-    name: "HoldingView",
+    name: "ResultView",
     components: { DialogueBox },
     setup() {
         const store = useSessionStore();
