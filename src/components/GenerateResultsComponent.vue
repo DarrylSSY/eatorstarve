@@ -38,13 +38,13 @@ export default {
   methods: {
     generate: function (){
       // qn 1
-      axios.get('http://localhost:8081/api/room/'+this.code+"/cuisine").then(response => {
+      axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
         this.parameters = response.data + " "
         // qn 2
-        axios.get('http://localhost:8081/api/room/'+this.code+"/poultry").then(response => {
+        axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
           this.parameters += response.data + " "
           // qn 3
-          axios.get('http://localhost:8081/api/room/'+this.code+"/price").then(response => {
+          axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
             if (response.data == "Rich Tai-Tai") {
               this.maxprice = 4
               this.minprice = 3
@@ -58,12 +58,12 @@ export default {
               this.minprice = 0
             }
             // qn 4
-            axios.get('http://localhost:8081/api/room/'+this.code+"/texture").then(response => {
+            axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
               this.parameters += response.data + " "
               // qn 5
-              axios.get('http://localhost:8081/api/room/'+this.code+"/base").then(response => {
+              axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
                 this.parameters += response.data + " "
-                axios.get('http://localhost:8081/api/room/'+this.code+"/spice").then(response => {
+                axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
                   if (response.data == "Stomachache Come!!"){
                     this.parameters += "spicy "
                   }
@@ -73,7 +73,7 @@ export default {
                   else {
                     this.parameters += "non-spicy "
                   }
-                  axios.get('http://localhost:8081/api/room/'+this.code+"/uniqueness").then(response => {
+                  axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
                     if (response.data == "Exotic"){
                       this.parameters += "unique "
                     }
@@ -83,9 +83,9 @@ export default {
             })
           })
           // generate place
-          axios.post('http://localhost:8081/api/places',{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
+          axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
               .then(response => {
-                axios.post('http://localhost:8081/api/createdroom/' + this.code, {"status": "close"})
+                axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, {"status": "close"})
                 this.first = [response["data"]["name1"], response["data"]["address1"]]
                 this.second = [response["data"]["name2"], response["data"]["address2"]]
                 this.third = [response["data"]["name3"], response["data"]["address3"]]

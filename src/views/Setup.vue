@@ -105,7 +105,7 @@ export default {
         error = false;
       }
       // Else create room
-      axios.post("http://localhost:8081/api/createdroom", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom`, {
         code: generated_code,
         status: "open"
       }).then((response) => {

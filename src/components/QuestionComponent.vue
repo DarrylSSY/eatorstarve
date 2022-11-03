@@ -121,7 +121,7 @@ export default {
     this.$timer.on("stop", () => {
       console.log("ended");
       oof.play();
-      axios.post("http://localhost:8081/api/answers", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,
         answer: this.answer1,
@@ -171,7 +171,7 @@ export default {
       return [num1, num2];
     }
     axios
-      .get("http://localhost:8081/api/questions/" + this.category)
+      .get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`)
       .then((response) => {
         let randomNum = generate2RandomNumber(response["data"].length);
         this.answer1 = response["data"][randomNum[0]]["answer"];
@@ -183,7 +183,7 @@ export default {
   },
   methods: {
     option1: function () {
-      axios.post("http://localhost:8081/api/answers", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,
         answer: this.answer1,
@@ -195,7 +195,7 @@ export default {
     },
     option2: function () {
       console.log(this.username + "selected" + this.answer2);
-      axios.post("http://localhost:8081/api/answers", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,
         answer: this.answer2,

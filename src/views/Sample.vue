@@ -38,7 +38,7 @@ export default {
       autoplay: true
     });
     axios.get('')
-    axios.post('http://localhost:8081/api/places',{"parameters":"seafood"})
+    axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":"seafood"})
         .then(response => {
           this.place = response["data"]["name"]
           this.location = response["data"]["address"]
