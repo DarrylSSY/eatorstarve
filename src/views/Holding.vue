@@ -49,7 +49,7 @@
               <div class="user_list col">
                 <ul>
                   <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
-                    <img style="width: 50px" :src="get_avatar(user)">   {{ user }}
+                    <img style="width: 50px; height: auto;" :src="get_avatar(user)">   {{ user }}
                   </li>
                 </ul>
               </div>
@@ -178,6 +178,8 @@ export default {
       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
     }, 
     enter() {
+        let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
       if (this.value == 'yes') {
         // alert("yes")
         document.getElementById('dialog-rounded').showModal();
@@ -228,7 +230,7 @@ export default {
   right: 0;
   margin: 0;
   width: 100%;
-  height: 48px;
+  /* height: 48px; */
 }
 
 .hiders p {
@@ -237,7 +239,7 @@ export default {
   margin: 0;
   float: right; /* makes animation go left-to-right */
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
-  height: 60px;
+  height: 70px;
   background: white; /* same as page background */
   animation: typing 2s steps(30, end);
   animation-fill-mode: both;  /* load first keyframe on page load, leave on last frame at end */
@@ -329,7 +331,7 @@ div.text_component {
   margin: 0;
   float: right; /* makes animation go left-to-right */
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
-  height: 20px;
+  height: 25px;
   background: white; /* same as page background */
   animation: typing 2s steps(30, end);
   animation-delay: 2s;
@@ -349,6 +351,7 @@ li {
   list-style-type: none;
   text-align: left;
   margin: 10px;
+  
 }
 
 img {

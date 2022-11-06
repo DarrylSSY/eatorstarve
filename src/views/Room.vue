@@ -131,7 +131,7 @@ export default {
       buttonpress.play();
       const username = useSessionStore();
       username.setUsername(this.currentUsername);
-      router.push({ name: "Question1", props: true });
+      router.push({ name: "Starting", props: true });
     },
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");

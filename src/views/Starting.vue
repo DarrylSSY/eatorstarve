@@ -1,25 +1,18 @@
 <template>
-    <div class="external">
+    <div class="external" @load="starttimer">
    <div class="whole container">   
  
      <div class="countdown">
         <div>
-            <h2>Game Starting in...</h2>
+            <h3>Game Starting in...</h3>
         </div>
-        <div>
-            
+        <div class="cdcircle rounded rounded-circle">
+            <h1> {{countDown}}</h1>
         </div>
      </div>
         
- 
- 
-     
- 
-     
- 
-     
        <div class="text_component container nes-container is-rounded">
-         <p>Remember to keep an eye on your HP!</p>
+         <h5>Remember to keep an eye on your HP!</h5>
        </div>
    </div>
 </div>
@@ -35,6 +28,7 @@
  import router from "@/router";
  import { useSessionStore } from '../stores/session';
  import axios from "axios";
+// import { setTimeout } from "timers";
  
  
  export default {
@@ -50,22 +44,26 @@
        code: this.$route.params.code,
        answered: [],
        value: "",
-       visible: "hidden",
-       busy: false,
-       processing: false
+       countDown: 5
  
  
      }
    },
  
    created() {
-     setTimeout(() => this.visible =  ``, 3500)
+      // setInterval(this.countdown(), 1000)
+      this.countDownTimer()
+           
    },
  
    mounted() {
      axios.get('http://localhost:8081/api/room/' + this.code).then(response => {
        this.answered = response.data
      })
+
+   
+    
+    // setTimeout(this.countdown(), 1000)
    },
    methods: {
      next: function (){
@@ -73,20 +71,36 @@
      },
      get_avatar(user) {
        return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
-     }, 
-     enter() {
-       if (this.value == 'yes') {
-         // alert("yes")
-         document.getElementById('dialog-rounded').showModal();
-       } else {
-         // alert("no")
-         document.getElementById('dialog-rounded2').showModal();
-       }
-     }
+     },
+    //  countdown() {
+    //   console.log("timer")
+    //   console.log(typeof(this.time))
+    //   console.log(this.time)
+    //   this.time -= 1
+    //   console.log(this.time)
+    //   //  setInterval(this.countdown(), 10000)
+
+    //  },
+
+     countDownTimer () { 
+      if (this.countDown > 0) { 
+        setTimeout(() => {
+          this.countDown -= 1 
+          this.countDownTimer() 
+        }, 1000) } 
+        else {
+          router.push({ name: "Question1", props: true });
+        }
+
+      
+      } 
+    
+    }
+     
    }
  
    
- }
+ 
  </script>
  
  <style scoped>
@@ -113,11 +127,23 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 20%;
+    top: 25%;
 
  }
  
- 
+ .cdcircle {
+  background-color:rgba(245, 200, 95, 1);
+  width: 210px;
+  height: 210px;
+  display: flex;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items:center;
+ }
  
  
 
