@@ -32,7 +32,7 @@ export default {
     }
   },
   async mounted() {
-    await axios.get('http://localhost:8081/api/createdroom/' + this.roomcode).then(response => {
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.roomcode}`).then(response => {
       if (response.data == "open") {
         console.log("hi")
         this.status = "open"

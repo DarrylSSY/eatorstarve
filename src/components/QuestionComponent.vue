@@ -34,7 +34,8 @@
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <button
         type="button"
-        class="game-option nes-btn is-primary"
+        class="game-option nes-btn"
+        :class="btn_state_1"
         @click="option1"
       >
         <h3>{{ answer1 }}</h3>
@@ -46,7 +47,8 @@
       </div>
       <button
         type="button"
-        class="game-option nes-btn is-warning"
+        class="game-option nes-btn"
+        :class="btn_state_2"
         @click="option2"
       >
         <h3>{{ answer2 }}</h3>
@@ -98,8 +100,10 @@ export default {
   },
   data() {
     return {
-      answer1: "a",
-      answer2: "b",
+      answer1: "Loading",
+      answer2: "Loading",
+      btn_state_1: "is-disabled",
+      btn_state_2: "is-disabled",
       question: "Choose your ",
       next: "Question2",
       progress: 0,
@@ -121,7 +125,7 @@ export default {
     this.$timer.on("stop", () => {
       console.log("ended");
       oof.play();
-      axios.post("http://localhost:8081/api/answers", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,
         answer: this.answer1,
@@ -171,11 +175,13 @@ export default {
       return [num1, num2];
     }
     axios
-      .get("http://localhost:8081/api/questions/" + this.category)
+      .get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`)
       .then((response) => {
         let randomNum = generate2RandomNumber(response["data"].length);
         this.answer1 = response["data"][randomNum[0]]["answer"];
         this.answer2 = response["data"][randomNum[1]]["answer"];
+        this.btn_state_1 = "is-primary";
+        this.btn_state_2 = "is-warning";
       });
   },
   beforeUnmount() {
@@ -183,7 +189,7 @@ export default {
   },
   methods: {
     option1: function () {
-      axios.post("http://localhost:8081/api/answers", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,
         answer: this.answer1,
@@ -195,7 +201,7 @@ export default {
     },
     option2: function () {
       console.log(this.username + "selected" + this.answer2);
-      axios.post("http://localhost:8081/api/answers", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,
         answer: this.answer2,

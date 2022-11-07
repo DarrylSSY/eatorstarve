@@ -2,15 +2,11 @@
 
   <body>
     <div class="container-sm">
-      <br />
-      <div class="row gx-4">
-        <div class="col-12 text-center mb-5">
-          <h1>Pre-Game Setup</h1>
+      <div class="row">
+        <div class="col-12 gy-4 text-center">
+          <h1 class="text-center">Pre-Game Setup</h1>
         </div>
-      
-
-      <div class="col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2"></div>
-        <div class="col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8">
+        <div class="col-10 col-md-8 offset-1 offset-md-2 gy-5">
           <div class="nes-container is-rounded is-centered">
 
             <!-- date and time input -->
@@ -105,7 +101,7 @@ export default {
         error = false;
       }
       // Else create room
-      axios.post("http://localhost:8081/api/createdroom", {
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom`, {
         code: generated_code,
         status: "open"
       }).then((response) => {

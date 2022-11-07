@@ -11,11 +11,14 @@ app.use(bodyParser.json())
 app.use(cors())
 
 const mongodb_conn_module = require('./mongodbConnModule');
+const path = require("path");
 mongodb_conn_module.connect();
 
+app.use(express.static(path.join(__dirname, "../../dist")))
 app.use('/api/', routes);
-
-
+app.get('/abc',(req,res)=>{
+    res.sendFile(path.join(__dirname, "../../dist/index.html"))
+})
 
 
 app.listen(process.env.PORT || 8081)

@@ -66,7 +66,7 @@ export default {
     }
   },
   mounted() {
-    axios.get('http://localhost:8081/api/room/' + this.code).then(response => {
+    axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}`).then(response => {
       this.answered = response.data
     })
   },
