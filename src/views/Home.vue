@@ -2,8 +2,8 @@
   <body>
     <div class="container-sm">
       <div class="row">
-        <div class="col-12 gy-4">
-          <h1 class="text-center">Eat or Starve</h1>
+        <div class="col-12 gy-4 text-center">
+          <h1>Eat or Starve</h1>
         </div>
         <div
           class="col-10 col-md-8 col-lg-6 col-xl-4 offset-1 offset-md-2 offset-lg-3 offset-xl-4 gy-5"
@@ -20,7 +20,7 @@
             <button
               v-if="code != ''"
               type="button"
-              class="nes-btn is-primary my-4"
+              class="nes-btn is-primary my-2"
               @click="join"
             >
               Join
