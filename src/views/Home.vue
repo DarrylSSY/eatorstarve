@@ -87,6 +87,9 @@ input {
 }
 
 body {
+  display: flex;
+  flex: 1;
+  overflow: auto;
   background: linear-gradient(
       0deg,
       rgba(245, 200, 95, 0.66),
