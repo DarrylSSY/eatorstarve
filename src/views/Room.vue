@@ -98,6 +98,8 @@
             >
               Copy Link
             </button>
+
+            
             <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
               <form method="dialog">
                 <p class="title">Link copied to clipboard!</p>
