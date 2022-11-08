@@ -99,7 +99,7 @@
               Copy Link
             </button>
 
-            
+
             <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
               <form method="dialog">
                 <p class="title">Link copied to clipboard!</p>
@@ -122,6 +122,7 @@
 import router from "@/router";
 import RoomCheckerComponent from "../components/RoomCheckerComponent";
 import { useSessionStore } from "../stores/session";
+import axios from "axios";
 
 export default {
   name: "RoomView",
@@ -147,9 +148,11 @@ export default {
     play: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play();
-      const username = useSessionStore();
-      username.setUsername(this.currentUsername);
-      router.push({ name: "Starting", props: true });
+      if (this.validUser == true) {
+        const username = useSessionStore();
+        username.setUsername(this.currentUsername);
+        router.push({ name: "Starting", props: true });
+      }
     },
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -169,6 +172,13 @@ export default {
     //check if username repeated in same room from database
     //username valid-> validUser=true -> can play game
     checkUsername() {
+      axios.get(`${process.env.VUE_APP_BACKEND_URL}api/user/${this.code}/${this.currentUsername}`).then(response => {
+        if (response.data == false) {
+          this.validUser = true;
+        } else {
+          this.validUser = false;
+        }
+      })
       if (this.currentUsername != "") {
         this.validUser = true;
       } else {
