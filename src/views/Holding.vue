@@ -1,9 +1,11 @@
 <template>
-   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
-    <form method="dialog">
+  <body>
+  <dialog id="dialog-rounded" class="nes-dialog is-rounded">
+    <form >
       <p class="title">Are you sure you want to exit?</p>
       <p>Your progress will not be saved.</p>
       <menu class="dialog-menu p-0">
+        <button>hello</button>
         <button class="nes-btn">Cancel</button>
         <button class="nes-btn is-primary" @click="home">Confirm</button>
       </menu>
@@ -11,7 +13,7 @@
   </dialog>
 
   <dialog id="dialog-rounded2" class="nes-dialog is-rounded">
-    <form method="dialog">
+    <form >
       <p class="title">Are you sure you want to exit?</p>
       <p>Your progress will not be saved.</p>
       <menu class="dialog-menu p-0">
@@ -122,7 +124,7 @@
   <!-- <GenerateResultsComponent :code="code"/>
   <UsernameCheckerComponent /> -->
   
-    
+</body>
 
 </template>
 
@@ -220,7 +222,7 @@ export default {
   left: 0;
   right: 0;
   margin: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .hiders {
@@ -257,6 +259,7 @@ div.main_component {
   height: auto;
   /* position: sticky; This shit doesnt work */
   bottom: 0;
+  /* background-color: yellow; */
   background-color: rgb(247, 213, 29);
   margin-bottom: 10px;
   
@@ -275,6 +278,7 @@ div.text_component {
   /* background-color: rgb(247, 213, 29); */
   /* margin-bottom: 20px; */
   text-align: left;
+  background-color: white;
   
 }
 
@@ -323,7 +327,7 @@ div.text_component {
   /* font-size:large; */
   top: 0;
   margin: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .hider {
@@ -389,7 +393,18 @@ img {
   text-align: left;
   margin-top: 0px;
   height: auto;
+  background-color: white;
 }
 
+body {
+  height: 100%;
+  background: linear-gradient(
+      0deg,
+      rgba(245, 200, 95, 0.66),
+      rgba(245, 200, 95, 0.66)
+    ),
+    url(../assets/bg1.jpeg);
+  box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
+}
 
 </style>
