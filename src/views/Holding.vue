@@ -253,7 +253,7 @@ div.main_component {
   margin-left: auto;
   margin-top: 100px;
   margin-bottom: 10px;
-  width: 45%;
+  width: 55%;
   height: auto;
   /* position: sticky; This shit doesnt work */
   bottom: 0;
@@ -287,7 +287,7 @@ div.text_component {
 
 .user_list {
   overflow-y: auto;
-  height: 140px;
+  height: 180px;
   overflow-y: scroll;
   text-align: left;
 }
