@@ -6,7 +6,7 @@
           <h1>Eat or Starve</h1>
         </div>
         <div
-          class="col-10 col-md-8 col-lg-6 col-xl-4 offset-1 offset-md-2 offset-lg-3 offset-xl-4 gy-5"
+          class="col-10 col-md-8 col-lg-6 col-xl-4 offset-1 offset-md-2 offset-lg-3 offset-xl-4 gy-2 gy-md-5"
         >
           <div class="nes-container is-rounded is-centered">
             <!-- room code input -->
@@ -37,7 +37,7 @@
           </div>
         </div>
         <!-- bottom speech bubble with cat -->
-        <div class="col-11 align-self-start offset-1 gy-5">
+        <div class="col-11 align-self-start offset-1 gy-5 d-none d-md-block">
           <div class="nes-balloon from-left">
             <div>
               Welcome to <b>Eat or Starve</b> where we help to give suggestions
@@ -47,8 +47,17 @@
             </div>
           </div>
         </div>
+        <div class="col-12 gy-2">
+          <div class="nes-container is-rounded is-centered d-block d-md-none">
+            Welcome to <b>Eat or Starve</b> where we help to give suggestions
+            on where your next food adventure should be. <br /><br />
+            Simply create a new game or join one hosted by your friend to
+            kickstart the game of choice!
+          </div>
+        </div>
+
         <div class="col-1">
-          <i class="nes-octocat animate"></i>
+          <i class="nes-octocat animate d-none d-md-block"></i>
         </div>
       </div>
     </div>

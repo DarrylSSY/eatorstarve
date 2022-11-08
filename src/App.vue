@@ -43,10 +43,6 @@ img {
   width: 100%;
 }
 
-.nes-octocat{
-  width: 84px;
-  height: 90px;
-}
 
 @media (max-width: 992px) {
   h1 {
@@ -63,11 +59,8 @@ img {
     height: 150px;
     width: 100%;
   }
-  .nes-octocat{
-    width: 64px;
-    height: 70px;
-  }
-  
+
+
 }
 
 @media (max-width: 768px) {
@@ -85,10 +78,6 @@ img {
     height: 100px;
     width: 100%;
   }
-  .nes-octocat{
-    width: 44px;
-    height: 50px;
-  }
 }
 
 @media (max-width: 576px) {
@@ -105,10 +94,6 @@ img {
   img {
     height: 50px;
     width: 100%;
-  }
-  .nes-octocat{
-    width: 24px;
-    height: 30px;
   }
 }
 
