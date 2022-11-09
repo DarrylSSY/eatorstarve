@@ -56,6 +56,12 @@ export default {
       buttonpress.play()
       router.push("/")
     },
+
+    results: function (){
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
+      router.push("/room/:code/result")
+    }
   }
 }
 </script>
