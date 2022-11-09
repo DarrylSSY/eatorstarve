@@ -1,25 +1,35 @@
 <template>
+    <dialog id="exitModal" class="nes-dialog is-rounded dialog">
+        <div >
+            <h4>You are about to Exit to Home</h4>
+            <p>some text</p>
+
+            <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Confirm</button>
+            <a class="nes-btn" onclick="document.getElementById('exitModal').close()">Cancel</a>
+        </div>
+    </dialog>
+
     <body>
 
         <div class="container-sm">
 
             <!-- Top Bar -->
             <div class="row top gx-4">
-                <div class="col-2 col-md-2 ps-0">
+                <div class="col-2 col-md-2 ps-0 col-content">
                     <button
                         type="button"
                         class="nes-btn is-error"
-                        onclick="document.getElementById('dialog-rounded').showModal();"
+                        onclick="document.getElementById('exitModal').showModal();"
                     >
                         Exit
                     </button>
                 </div>
 
-                <div class="col-8">
+                <div class="col-8 col-content">
                     <h4 class="logo">Eat or Starve</h4>
                 </div>
 
-                <div class="col-2 nes-container">
+                <div class="user col-2 col-content nes-container">
                     {{ username }}
                 </div>
             </div>
@@ -78,6 +88,7 @@
 <script>
 import DialogueBox from '@/components/DialogueBox.vue';
 import { useSessionStore } from '../stores/session';
+import router from "@/router";
 
 export default {
     name: "ResultView",
@@ -117,6 +128,12 @@ export default {
             }
         };
     },
+
+    methods: {
+        home: function () {
+            router.push("/");
+        },
+    }
     
 }
 </script>
@@ -131,6 +148,10 @@ div.nes-container {
     padding-top: 24px;
 }
 
+.col-content {
+    height: 70px;
+}
+
 button.is-error {
     width: 100%;
     height: 62.4px;
@@ -140,6 +161,11 @@ button.is-error {
     padding: 17.8px 0px;
     text-align: center;
     margin: 0;
+}
+
+.user {
+    padding: 20px;
+    text-align: center;
 }
 
 body {
@@ -163,8 +189,7 @@ body {
 
 .gallery {
     margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 60px;
     width: 80%;
     /* border: 4px black solid; */
 }
@@ -190,5 +215,10 @@ body {
     height: 15%;
     width: 6%;
     /* border-radius: 50%; */
+}
+
+.dialog {
+    padding: 40px;
+    width: 40%;
 }
 </style>
