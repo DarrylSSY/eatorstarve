@@ -1,8 +1,10 @@
 <template>
-  <div class="container-sm">
-    <QuestionComponent category="uniqueness" :code="code" />
-    <UsernameCheckerComponent />
-  </div>
+  <body>
+    <div class="container-sm">
+      <QuestionComponent category="uniqueness" :code="code" />
+      <UsernameCheckerComponent />
+    </div>
+  </body>
 </template>
 
 <script>
