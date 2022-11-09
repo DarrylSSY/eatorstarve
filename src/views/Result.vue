@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <DialogueBox message="<insert funny shit>"></DialogueBox>
+            <DialogueBox message="<insert funny shit>" type="developer"></DialogueBox>
         </div>
     </body>
 </template>
