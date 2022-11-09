@@ -53,7 +53,7 @@
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{name}}</h5>
-                                            <p class="card-text">
+                                            <div class="card-text">
                                                 {{details.rating}} 
                                                 <br>
                                                 {{details.type}}
@@ -63,7 +63,14 @@
                                                 Located in: {{details.building_name}}
                                                 <br>
                                                 Status: {{details.opening_time}}
-                                            </p>
+                                                <div class="row">
+                                                    <div v-for="tag in tags" :key="tag.id" class="col">
+                                                        <a class="nes-btn is-error tag-style" :href="'https://www.google.com/search?q=' + tag" target="_blank">
+                                                            <span>{{tag}}</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                             <button type="button" class="nes-btn is-warning open_map" @click="window.location.href='map_url'">Open URL</button>
                                         </div>
@@ -107,7 +114,7 @@ export default {
     data() {
         return {
             code: this.$route.params.code,
-            answered: [],
+            tags: ['sdssdfdsfsdfsdfdd', 'sdfdd', "djfasoufiwjk"],
             // will need retrive data after generation of result
             top3_locations: {
                 "Name": {
@@ -230,4 +237,23 @@ body {
 small {
     text-align: left;
 }
+
+.tag-style {
+    font-size: 8pt;
+    height: 30px;
+    padding: 3px 10px;
+    width: auto;
+}
+
+.card-body .col {
+    /* width: fit-content; */
+    width: fit-content;
+    /* margin: 1em auto; */
+    /* padding: 5px; */
+}
+
+.card-body .row {
+    width: auto;
+}
+
 </style>
