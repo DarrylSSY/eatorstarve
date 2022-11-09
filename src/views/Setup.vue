@@ -13,7 +13,7 @@
             <div id="day" class="col-12">
               <Datepicker 
               v-model="date" class="nes-input is-primary dp__theme_dark" placeholder="Date & Time"
-              :min-date="new Date()" :is24="false">
+              :min-date="new Date()" :is24="false" >
               </Datepicker>
             </div>
 
@@ -65,6 +65,7 @@ export default {
   components: { Datepicker },
   setup() {
     const today = ref(new Date());
+
 
     return {
       today,
@@ -123,12 +124,14 @@ export default {
 #day {
   background: rgb(234, 234, 168);
   color: grey;
+  font-family: "Press Start 2P";
 }
 
 .dp__theme_dark {
   --dp-background-color: rgb(234, 234, 168);
   --dp-text-color: grey;
   --dp-border-color: none;
+
 }
 
 input {
@@ -152,5 +155,4 @@ body {
 .nes-container {
   background-color: #ededed;
 }
-
 </style>

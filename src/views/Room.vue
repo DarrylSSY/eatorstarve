@@ -82,29 +82,21 @@
           <input type="text" class="nes-input is-primary" :value="currentUrl" />
         </div>
         <div class="col-2">
-          <button
-            type="button"
-            class="nes-btn is-warning d-flex justify-content-center"
-            @click="copy_link"
-          >
-            Copy Link
-          </button>
-
           <section>
             <button
               type="button"
               class="nes-btn is-warning"
-              onclick="document.getElementById('dialog-rounded').showModal();"
+              @click="copy_link"
             >
               Copy Link
-            </button>
+            </button>          
 
 
             <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
               <form method="dialog">
                 <p class="title">Link copied to clipboard!</p>
                 <menu class="dialog-menu">
-                  <button class="nes-btn is-primary">ok</button>
+                  <button class="nes-btn is-primary">Ok</button>
                 </menu>
               </form>
             </dialog>
@@ -134,8 +126,6 @@ export default {
       code: this.$route.params.code,
       bgm: null,
       currentUrl: "",
-
-      // username function need use
       validUser: false,
       currentUsername: "",
     };
@@ -160,17 +150,17 @@ export default {
       router.push("/");
     },
     copy_link: async function () {
+      document.getElementById('dialog-rounded').showModal();
       try {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
         await navigator.clipboard.writeText(window.location.href);
-      } catch ($e) {
+      } 
+      catch ($e) {
         alert("Error copying link to clipboard");
       }
     },
-    //not finished code to check username validity
-    //check if username repeated in same room from database
-    //username valid-> validUser=true -> can play game
+
     checkUsername() {
       axios.get(`${process.env.VUE_APP_BACKEND_URL}api/user/${this.code}/${this.currentUsername}`).then(response => {
         if (response.data == false) {
@@ -233,5 +223,9 @@ body {
 img {
   height: 200px;
   width: 100%;
+}
+
+.dialog-menu {
+  padding:0
 }
 </style>

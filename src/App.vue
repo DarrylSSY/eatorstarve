@@ -43,7 +43,6 @@ img {
   width: 100%;
 }
 
-
 @media (max-width: 992px) {
   h1 {
     font-size: 50px;
@@ -59,8 +58,6 @@ img {
     height: 150px;
     width: 100%;
   }
-
-
 }
 
 @media (max-width: 768px) {
