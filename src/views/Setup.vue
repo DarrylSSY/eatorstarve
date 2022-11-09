@@ -38,8 +38,11 @@
             </div>
 
             <!-- submit button -->
-            <div v-show="date" class="col">
-              <button type="button" class="nes-btn is-warning" @click="create">
+            <div class="col">
+              <button v-if="date == null" type="button" class="nes-btn is-disabled" @click="create">
+                Submit & Create
+              </button>
+              <button v-else type="button" class="nes-btn is-warning" @click="create">
                 Submit & Create
               </button>
             </div>

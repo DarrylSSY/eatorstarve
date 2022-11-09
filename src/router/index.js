@@ -13,6 +13,7 @@ import Question7View from "@/views/Question7";
 import HoldingView from "@/views/Holding";
 import StartingView from "@/views/Starting";
 import ResultView from "@/views/Result";
+import InstructionView from "@/views/Instruction";
 
 const routes = [
     {
@@ -31,7 +32,12 @@ const routes = [
         component: RoomView
     },
     {
-        path: '/room/:code/start',
+        path: '/room/:code/instruction',
+        name: 'Instruction',
+        component: InstructionView
+    },
+    {
+        path: '/room/:code/instruction/start',
         name: 'Starting',
         component: StartingView
     },

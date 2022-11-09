@@ -37,7 +37,7 @@
           </div>
         </div>
         <!-- bottom speech bubble with cat -->
-        <div class="col-11 align-self-start offset-1 gy-5">
+        <div class="col-11 align-self-start offset-1 gy-5 d-none d-md-block">
           <div class="nes-balloon from-left">
             <div>
               Welcome to <b>Eat or Starve</b> where we help to give suggestions
@@ -47,7 +47,16 @@
             </div>
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-12 gy-5 d-block d-md-none">
+          <div class="nes-container is-rounded is-centered">
+            Welcome to <b>Eat or Starve</b> where we help to give suggestions
+            on where your next food adventure should be. <br /><br />
+            Simply create a new game or join one hosted by your friend to
+            kickstart the game of choice!
+          </div>
+        </div>
+
+        <div class="col-1 d-none d-md-block">
           <i class="nes-octocat animate"></i>
         </div>
       </div>
@@ -87,6 +96,9 @@ input {
 }
 
 body {
+  display: flex;
+  flex: 1;
+  overflow: auto;
   background: linear-gradient(
       0deg,
       rgba(245, 200, 95, 0.66),
