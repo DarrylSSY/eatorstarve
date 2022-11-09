@@ -10,9 +10,9 @@
           <div class="nes-container is-rounded is-centered">
 
             <!-- date and time input -->
-            <div id="day" class="col-12">
+            <div id="day" class="col-12"> 
               <Datepicker 
-              v-model="date" class="nes-input is-primary dp__theme_dark" placeholder="Date & Time"
+              v-model="date" class="nes-input is-primary dp__theme_dark" placeholder=" Date & Time"
               :min-date="new Date()" :is24="false" >
               </Datepicker>
             </div>

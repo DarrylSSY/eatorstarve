@@ -29,12 +29,8 @@
 
             <!-- if username invalid, this will appear in red below username -->
             <div class="col-12 my-3">
-              <p
-                v-show="validUser == false && currentUsername != ''"
-                id="usernameError"
-              >
-                Username already exists.
-              </p>
+              <div id="usernameError"></div>
+
             </div>
 
             <div class="col-12">
@@ -77,32 +73,27 @@
         <div class="col-2"></div>
 
         <!-- copy link button -->
-        <div class="col-1"></div>
-        <div class="col-8 text-center is-rounded">
-          <input type="text" class="nes-input is-primary" :value="currentUrl" />
-        </div>
-        <div class="col-2">
-          <section>
-            <button
-              type="button"
-              class="nes-btn is-warning"
-              @click="copy_link"
-            >
-              Copy Link
-            </button>          
 
+        <div id="link" class="row ">
+          <div class="col-1"></div>
+          <div class="col-8 text-center is-rounded">
+            <input type="text" class="nes-input is-primary" :value="currentUrl" />
+          </div>
+          
+          <div class="col-2">
+              <button
+              id="copy"
+                type="button"
+                class="nes-btn is-warning"
+                @click="copy_link"
+              >
+                Copy Link
+              </button>  
+              <div v-show="copySuccess" class="nes-balloon from-left" data-bs-toggle="popover" data-bs-trigger="focus">
+                <p>Copied!</p>
+              </div>
+          </div>        
 
-            <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
-              <form method="dialog">
-                <p class="title">Link copied to clipboard!</p>
-                <menu class="dialog-menu">
-                  <button class="nes-btn is-primary">Ok</button>
-                </menu>
-              </form>
-            </dialog>
-          </section>
-
-          <div id="popup"></div>
           <RoomCheckerComponent :roomcode="code" />
         </div>
       </div>
@@ -117,6 +108,7 @@ import { useSessionStore } from "../stores/session";
 import axios from "axios";
 
 export default {
+  
   name: "RoomView",
   components: {
     RoomCheckerComponent,
@@ -128,6 +120,7 @@ export default {
       currentUrl: "",
       validUser: false,
       currentUsername: "",
+      copySuccess: false,
     };
   },
 
@@ -141,8 +134,15 @@ export default {
       if (this.validUser == true) {
         const username = useSessionStore();
         username.setUsername(this.currentUsername);
-        router.push({ name: "Starting", props: true });
+        router.push({ name: "Instruction" });
       }
+      else if (this.validUser == false && this.currentUsername != '') {
+        document.getElementById("usernameError").innerText= "Username already exists. Please enter a different username.";
+      }
+      else {
+        document.getElementById("usernameError").innerText="Please enter a username.";
+      }
+
     },
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -150,7 +150,7 @@ export default {
       router.push("/");
     },
     copy_link: async function () {
-      document.getElementById('dialog-rounded').showModal();
+      this.copySuccess = true;
       try {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
@@ -225,7 +225,12 @@ img {
   width: 100%;
 }
 
-.dialog-menu {
-  padding:0
+.nes-balloon{
+  position: absolute;
+  bottom:-4px;
+  right: 0px;
+  z-index: 1;
 }
+
+
 </style>
