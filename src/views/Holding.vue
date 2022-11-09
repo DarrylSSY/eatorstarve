@@ -22,12 +22,12 @@
   </dialog>
 
 
-  <div class="whole container">   
+  <div class="whole container">
 
     <div class="row">
       <div class="col-12">
         <div class="ending_container">
-        <h1 class="end">The End.</h1>
+        <h2 class="end">The End.</h2>
 
         <div class="hiders">
           <p>&nbsp;</p>
@@ -35,7 +35,7 @@
         </div>
 
       </div>
-    </div> 
+    </div>
 
 
     <div class="row">
@@ -49,7 +49,7 @@
               <div class="user_list col">
                 <ul>
                   <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
-                    <img style="width: 50px; height: auto;" :src="get_avatar(user)">   {{ user }}
+                    <img style="width: 40px; height: auto;" :src="get_avatar(user)">   {{ user }}
                   </li>
                 </ul>
               </div>
@@ -61,71 +61,68 @@
       <div class="col"></div>
     </div>
 
-    <div class="row mt-5">
-      <div class="col"></div>
+      <div class="result">
+        <div class="row ">
+          <div class="col"></div>
           <div class="col-4 col-md-4 col-lg-2">
-            <div :style="{'visibility': visible}" class="nes-container yesno">
-              <div class="row">
+            <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block">
+
                 <label>
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" @keydown.enter="enter()" checked />
                   <span>Yes</span>
                 </label>
-              </div>
 
-              <div class="row">
+
                 <label>
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter="enter()" />
                   <span>No</span>
                 </label>
-              </div>
+
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-12">
+          <div class="text_component container nes-container is-rounded">
 
-    <div class="row">
-      <div class="col-12">
-      <div class="text_component container nes-container is-rounded">
-        
-        <div class="row py-sm-4">
-          <div class="col-8 col-md-12 col-lg-12">
-            <div class="text_container">
-              <div class="typewriter">
-                Do you want to view results?
+            <div class="row py-sm-4">
+              <div class="col-8 col-md-12 col-lg-12">
+                <div class="text_container">
+                  <div class="typewriter">
+                    Do you want to view results?
+                  </div>
+                  <div class="hider">
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                  </div>
+                </div>
               </div>
 
-              <div class="hider">
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
+              <!-- <div class="col"></div> -->
+              <div class="col mt-md-5 mt-lg-5">
+                <div class="d-sm-none">
+                  <button type="button" class="nes-btn is-warning" @click="enter()" >Enter</button>
+                </div>
+
+                <div class="enter d-none d-sm-block">
+                  Press 'Enter' to continue
+                </div>
+
               </div>
-
-            </div>
           </div>
-        
-          <!-- <div class="col"></div> -->
-          <div class="col mt-md-5 mt-lg-5">
-            <div class="d-sm-none">
-              <button type="button" class="nes-btn is-warning" @click="enter()" >Enter</button>
-            </div>
-            
-            <div class="enter d-none d-sm-block">
-              Press 'Enter' to continue
-            </div>
-            
-          </div>
-      </div>
-          
-        
 
+
+          </div>
+        </div>
       </div>
-    </div>
   </div>
-    
+
 
   </div>
   <!-- <GenerateResultsComponent :code="code"/>
   <UsernameCheckerComponent /> -->
-  
-    
+
+
 
 </template>
 
@@ -176,10 +173,11 @@ export default {
     },
     get_avatar(user) {
       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
-    }, 
+    },
     enter() {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
+      router.push({ name: 'Result', params: {id:this.code} })
       if (this.value == 'yes') {
         // alert("yes")
         document.getElementById('dialog-rounded').showModal();
@@ -190,7 +188,7 @@ export default {
     }
   }
 
-  
+
 }
 </script>
 
@@ -200,7 +198,9 @@ export default {
   text-align: center;
   position: relative;
   margin: auto;
-  
+  width: 100%;
+  height: 100%;
+
 }
 
 @keyframes typing {
@@ -210,8 +210,8 @@ export default {
 
 .ending_container {
   position: relative;
-  margin-top: 150px;
-  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-bottom: 10px;
   text-align: center;
   width: 100%;
 }
@@ -234,8 +234,8 @@ export default {
 }
 
 .hiders p {
-  position: relative; 
-  clear: both; 
+  position: relative;
+  clear: both;
   margin: 0;
   float: right; /* makes animation go left-to-right */
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
@@ -244,7 +244,7 @@ export default {
   animation: typing 2s steps(30, end);
   animation-fill-mode: both;  /* load first keyframe on page load, leave on last frame at end */
 }
-  
+
 /* .hiders p:nth-child(2) {
   animation-delay: 2s;
 } */
@@ -254,28 +254,36 @@ div.main_component {
   margin-left: auto;
   margin-top: 100px;
   margin-bottom: 10px;
-  width: 60%;
+  width: 55%;
   height: auto;
   /* position: sticky; This shit doesnt work */
   bottom: 0;
   background-color: rgb(247, 213, 29);
-  margin-bottom: 20px;
-  
+  margin-bottom: 10px;
+
 }
 
 div.text_component {
+  /* position: absolute;
+  bottom: 0px; */
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   width: 100%;
   height: auto;
   /* position: sticky; This shit doesnt work */
   /* background-color: rgb(247, 213, 29); */
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   text-align: left;
-  
-  
+
+}
+
+.result {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  right: 10px;
 }
 
 .user_list {
@@ -291,9 +299,9 @@ div.text_component {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 700px;
-  position: sticky; 
+  position: sticky;
   bottom: 0; */
-  
+
 /* } */
 
 /* .heading {
@@ -311,9 +319,9 @@ div.text_component {
   position: relative;
 }
 
-.typewriter { 
+.typewriter {
   position: absolute;
-  font-size:larger;
+  /* font-size:large; */
   top: 0;
   margin: 0;
   z-index: -1;
@@ -326,18 +334,18 @@ div.text_component {
 }
 
 .hider p {
-  position: relative; 
-  clear: both; 
+  position: relative;
+  clear: both;
   margin: 0;
   float: right; /* makes animation go left-to-right */
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
-  height: 25px;
+  /* height: 15px; */
   background: white; /* same as page background */
   animation: typing 2s steps(30, end);
   animation-delay: 2s;
   animation-fill-mode:both;  /* load first keyframe on page load, leave on last frame at end */
 }
-  
+
 .hider p:nth-child(2) {
   animation-delay: 4s;
 }
@@ -351,7 +359,7 @@ li {
   list-style-type: none;
   text-align: left;
   margin: 10px;
-  
+
 }
 
 img {
@@ -364,7 +372,7 @@ img {
 } */
 
 .nes-btn {
-  
+
   right: 20px;
 }
 
@@ -380,6 +388,9 @@ img {
 .yesno {
   padding-left: 30%;
   text-align: left;
+  margin-top: 0px;
+  height: auto;
 }
+
 
 </style>

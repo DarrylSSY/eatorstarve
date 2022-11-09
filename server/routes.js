@@ -118,6 +118,20 @@ router.get('/createdroom/:code', (req, res) => {
         .catch(err => res.json(err));
 });
 
+// See if username exists
+router.get('/user/:code/:username', (req, res) => {
+    Answer.findOne({code: req.params.code, username: req.params.username})
+        .then(username=> {
+          if (username != null)
+            res.json(1)
+          else{
+            res.json(0)
+          }
+        }
+)
+        .catch(() => res.json("False"));
+});
+
 // Change created room status to input
 router.post('/createdroom/:code', (req, res) => {
     CreatedRoom.findOneAndUpdate({code: req.params.code}, {status: req.body["status"]}, {new: true})

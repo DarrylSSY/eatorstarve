@@ -79,11 +79,7 @@
         <!-- copy link button -->
         <div class="col-1"></div>
         <div class="col-8 text-center is-rounded">
-          <input
-            type="text"
-            class="nes-input is-primary"
-            :value="currentUrl"
-          />
+          <input type="text" class="nes-input is-primary" :value="currentUrl" />
         </div>
         <div class="col-2">
           <button
@@ -93,6 +89,28 @@
           >
             Copy Link
           </button>
+
+          <section>
+            <button
+              type="button"
+              class="nes-btn is-warning"
+              onclick="document.getElementById('dialog-rounded').showModal();"
+            >
+              Copy Link
+            </button>
+
+
+            <dialog id="dialog-rounded" class="nes-dialog is-rounded" >
+              <form method="dialog">
+                <p class="title">Link copied to clipboard!</p>
+                <menu class="dialog-menu">
+                  <button class="nes-btn is-primary">ok</button>
+                </menu>
+              </form>
+            </dialog>
+          </section>
+
+          <div id="popup"></div>
           <RoomCheckerComponent :roomcode="code" />
         </div>
       </div>
@@ -104,6 +122,7 @@
 import router from "@/router";
 import RoomCheckerComponent from "../components/RoomCheckerComponent";
 import { useSessionStore } from "../stores/session";
+import axios from "axios";
 
 export default {
   name: "RoomView",
@@ -129,9 +148,11 @@ export default {
     play: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play();
-      const username = useSessionStore();
-      username.setUsername(this.currentUsername);
-      router.push({ name: "Starting", props: true });
+      if (this.validUser == true) {
+        const username = useSessionStore();
+        username.setUsername(this.currentUsername);
+        router.push({ name: "Starting", props: true });
+      }
     },
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -143,14 +164,21 @@ export default {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
         await navigator.clipboard.writeText(window.location.href);
-        alert("Link copied to clipboard");
       } catch ($e) {
         alert("Error copying link to clipboard");
       }
     },
     //not finished code to check username validity
-    //username valid-> validUser=true -> show cfm btn -> once click -> show avatar
+    //check if username repeated in same room from database
+    //username valid-> validUser=true -> can play game
     checkUsername() {
+      axios.get(`${process.env.VUE_APP_BACKEND_URL}api/user/${this.code}/${this.currentUsername}`).then(response => {
+        if (response.data == false) {
+          this.validUser = true;
+        } else {
+          this.validUser = false;
+        }
+      })
       if (this.currentUsername != "") {
         this.validUser = true;
       } else {
@@ -189,15 +217,19 @@ body {
   height: fit-content;
   background-color: #ededed;
 }
+
 .room-body {
   height: 100%;
 }
+
 .container-sm {
   height: 100%;
 }
+
 #usernameError {
   color: red;
 }
+
 img {
   height: 200px;
   width: 100%;
