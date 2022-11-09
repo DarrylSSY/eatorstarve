@@ -11,6 +11,12 @@ $primary-colors: (
   shadow: #006bb3
 );
 
+$warning-colors: (
+  normal: #ffc53d,
+  hover: #ebb22f,
+  shadow: #c59040,
+);
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "scss/nes.scss";
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
