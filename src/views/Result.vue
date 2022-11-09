@@ -1,10 +1,15 @@
 <template>
     <dialog id="exitModal" class="nes-dialog is-rounded dialog">
         <div >
-            <h4>You are about to Exit to Home</h4>
-            <p>some text</p>
+            <h4>Wait!</h4>
+            <p>Heading back to Home Page?<br><br>
+            </p>
+            <small>
+                Note: You can check this results again by rejoining this room! <br>
+            </small>
 
-            <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Confirm</button>
+            <br>
+            <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Yes, Goodbye!</button>
             <a class="nes-btn" onclick="document.getElementById('exitModal').close()">Cancel</a>
         </div>
     </dialog>
@@ -218,7 +223,11 @@ body {
 }
 
 .dialog {
-    padding: 40px;
+    padding: 40px 60px;
     width: 40%;
+}
+
+small {
+    text-align: left;
 }
 </style>
