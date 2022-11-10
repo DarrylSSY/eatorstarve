@@ -10,7 +10,13 @@ $primary-colors: (
   hover: #108de0,
   shadow: #006bb3
 );
-
+.vc-time-weekday, .vc-time-month, .vc-time-day, .vc-time-year{
+  font-family: "Press Start 2P", cursive;
+  font-size: 10px;
+}
+.vc-time-year{
+  color: black
+}
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "scss/nes.scss";
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");

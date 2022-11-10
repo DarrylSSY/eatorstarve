@@ -9,16 +9,52 @@
         <div class="col-10 col-md-8 offset-1 offset-md-2 gy-5">
           <div class="nes-container is-rounded is-centered">
 
-            <!-- date and time input -->
-            <div id="day" class="col-12"> 
-              <Datepicker 
-              v-model="date" class="nes-input is-primary dp__theme_dark" placeholder=" Date & Time"
-              :min-date="new Date()" :is24="false" >
-              </Datepicker>
+            <!-- date input -->
+            <div class="row">
+              <div class="col-12 text-start mb-2">
+                Select date:
+              </div>
+            </div>
+            <v-date-picker v-model="date">
+              <template v-slot="{ inputValue, inputEvents }">
+                <div class="input-group">
+                  <input type="text" class="nes-input form-control" :placeholder="date" :value="inputValue"
+                    v-on="inputEvents">
+                  <span class="input-group-text border-0 sm-px-1 "><button type="button" class="nes-btn is-error"
+                      :disabled="!date" @click="date = new Date()">Clear</button></span>
+                </div>
+              </template>
+            </v-date-picker>
+
+            <!-- time input -->
+            <div class="row mt-3">
+              <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 text-start">
+                Select time:
+                  <v-date-picker id="timePicker" mode="time" v-model="date" :timezone="timezone"
+                  class="border-1 text-center col-lg-6 col-xl-6 col-md-12 col-sm-12 mt-2" />
+                
+              </div>
+
+              <!-- location input -->
+              <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 text-start ">
+                Location:
+                <div class="nes-select mt-2">
+                  <select required id="location">
+                    <option value="" disabled selected hidden>Select...</option>
+                    <option value="default">Use my current location</option>
+                    <option value="north">North</option>
+                    <option value="south">South</option>
+                    <option value="central">Central</option>
+                    <option value="east">East</option>
+                    <option value="west">West</option>
+                  </select>
+                </div>
+              </div>
+
             </div>
 
             <!-- dietary needs options -->
-            <div class="col-12 d-flex align-content-start my-3">Special Dietary Needs:</div>
+            <div class="col-12 d-flex align-content-start mt-3 mb-2">Special Dietary Needs:</div>
 
             <div id="options" class="row text-start mb-3 mx-auto">
               <div v-for="option of options" :key="option.id">
@@ -30,13 +66,12 @@
               <div class="col">
                 <label><input v-model="checked" type="checkbox" class="nes-checkbox col" />
                   <span>Others:
-                    <input 
-                    v-show="checked" v-model="extra" type="text" class="nes-input is-primary col mt-3" placeholder="Other requirements" /> 
+                    <input v-show="checked" v-model="extra" type="text" class="nes-input is-primary col mt-3"
+                      placeholder="Other requirements" />
                   </span>
                 </label>
               </div>
             </div>
-
             <!-- submit button -->
             <div class="col">
               <button v-if="date == null" type="button" class="nes-btn is-disabled" @click="create">
@@ -55,26 +90,15 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import Datepicker from "@vuepic/vue-datepicker";
-import "@vuepic/vue-datepicker/dist/main.css";
 import router from "@/router";
 import axios from "axios";
+
 export default {
   name: "SetupView",
-  components: { Datepicker },
-  setup() {
-    const today = ref(new Date());
-
-
-    return {
-      today,
-    };
-  },
 
   data() {
     return {
-      date: null,
+      date: new Date(), // date of meetup will update accordingly even if press clear
       time: "",
       options: ["Halal-certified", "Vegan", "Vegetarian", "Gluten-free"],
       dietaryNeeds: [],
@@ -121,20 +145,8 @@ export default {
 </script>
 
 <style scoped>
-#day {
-  background: rgb(234, 234, 168);
-  color: grey;
-  font-family: "Press Start 2P";
-}
 
-.dp__theme_dark {
-  --dp-background-color: rgb(234, 234, 168);
-  --dp-text-color: grey;
-  --dp-border-color: none;
-
-}
-
-input {
+input, #location {
   background: rgb(234, 234, 168);
   color: grey;
 }
@@ -154,5 +166,10 @@ body {
 
 .nes-container {
   background-color: #ededed;
+}
+
+#timePicker{
+  background: rgb(234, 234, 168);
+  border: solid black 1px
 }
 </style>
