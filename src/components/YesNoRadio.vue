@@ -1,20 +1,20 @@
 <template>
-  <div class="nes-container">
-    <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block">
+  <!-- <div class="nes-container"> -->
+    <!-- <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block"> -->
 
     <label>
-      <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" checked @keydown.enter.prevent="$emit('yesFunction')"/>
+      <input v-model="value" type="radio" class="nes-radio" name="answer" checked @keydown.enter.prevent="$emit('yesFunction')"/>
       <span>Yes</span>
     </label>
 
 
     <label>
-      <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter.prevent="$emit('noFunction')" />
+      <input v-model="value" type="radio" class="nes-radio" name="answer" @keydown.enter.prevent="$emit('noFunction')" />
       <span>No</span>
     </label>
 
-    </div>
-  </div>
+    <!-- </div> -->
+  <!-- </div> -->
 </template>
 
 <script>

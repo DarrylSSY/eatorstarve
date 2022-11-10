@@ -1,18 +1,21 @@
 <template>
   <body>
-  <dialog id="dialog-rounded" class="nes-dialog is-rounded">
-    <form >
-      <p class="title">Are you sure you want to exit?</p>
-      <p>Your progress will not be saved.</p>
-      <menu class="dialog-menu p-0">
-        <button>hello</button>
-        <button class="nes-btn">Cancel</button>
-        <button class="nes-btn is-primary" @click="home">Confirm</button>
-      </menu>
-    </form>
+  <dialog id="dialog-yes" class="nes-dialog is-rounded">
+    <div >
+            <h4>Are you sure?</h4>
+            <p>Heading back to Home Page?<br><br>
+            </p>
+            <small>
+                Note: You can check this results again by rejoining this room! <br>
+            </small>
+
+            <br>
+            <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Yes, Goodbye!</button>
+            <a class="nes-btn" onclick="document.getElementById('exitModal').close()">Cancel</a>
+        </div>
   </dialog>
 
-  <dialog id="dialog-rounded2" class="nes-dialog is-rounded">
+  <dialog id="dialog-no" class="nes-dialog is-rounded">
     <form >
       <p class="title">Are you sure you want to exit?</p>
       <p>Your progress will not be saved.</p>
@@ -66,10 +69,10 @@
       <div class="result">
         <div class="row ">
           <div class="col"></div>
-          <div class="col-4 col-md-4 col-lg-2">
-            <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block">
+          <div class="col-3 col-md-3 col-lg-3">
+            <div :style="{'visibility': visible}" class="nes-container yesno">
 
-                <label>
+                <!-- <label>
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" @keydown.enter="enter()" checked />
                   <span>Yes</span>
                 </label>
@@ -78,9 +81,13 @@
                 <label>
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter="enter()" />
                   <span>No</span>
-                </label>
+                </label> -->
+                <YesNoRadio @yesFunction="yesoption()" @noFunction="nooption()"  />
 
             </div>
+
+            
+
           </div>
         </div>
         <div class="row">
@@ -137,6 +144,7 @@ import { useSessionStore } from '../stores/session';
 // import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
 // import GenerateResultsComponent from "@/components/GenerateResultsComponent";
+import YesNoRadio  from '../components/YesNoRadio.vue';
 
 export default {
   name: "HoldingView",
@@ -170,6 +178,9 @@ export default {
       this.answered = response.data
     })
   },
+
+  components: { YesNoRadio },
+  
   methods: {
     next: function (){
       router.push({ name: 'Results', params: {id:this.code} })
@@ -177,17 +188,35 @@ export default {
     get_avatar(user) {
       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
     },
-    enter() {
+    // enter() {
+    //     let buttonpress = new Audio("../../buttonpress.mp3");
+    //     buttonpress.play();
+    //   router.push({ name: 'Result', params: {id:this.code} })
+    //   if (this.value == 'yes') {
+    //     // alert("yes")
+    //     document.getElementById('dialog-rounded').showModal();
+    //   } else {
+    //     // alert("no")
+    //     document.getElementById('dialog-rounded2').showModal();
+    //   }
+    // },
+    yesoption() {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
-      router.push({ name: 'Result', params: {id:this.code} })
-      if (this.value == 'yes') {
+      // router.push({ name: 'Result', params: {id:this.code} })
+
         // alert("yes")
-        document.getElementById('dialog-rounded').showModal();
-      } else {
-        // alert("no")
-        document.getElementById('dialog-rounded2').showModal();
-      }
+        document.getElementById('dialog-yes').showModal();
+       
+    },
+    nooption() {
+        let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
+      // router.push({ name: 'Result', params: {id:this.code} })
+
+      // alert("no")
+      document.getElementById('dialog-no').showModal();
+      
     }
   }
 
