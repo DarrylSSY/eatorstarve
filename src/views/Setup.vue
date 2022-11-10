@@ -100,13 +100,20 @@ export default {
     return {
       date: new Date(), // date of meetup will update accordingly even if press clear
       time: "",
+      coordinates: "1.3521, 103.8198",
       options: ["Halal-certified", "Vegan", "Vegetarian", "Gluten-free"],
       dietaryNeeds: [],
       extra: "",
       checked: null,
     };
   },
+  mounted() {
+    navigator.geolocation.getCurrentPosition(this.setCoordinates);
+  },
   methods: {
+    setCoordinates: function (position) {
+        this.coordinates = position.coords.latitude + ", " + position.coords.longitude;
+    },
     create: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play()
@@ -129,9 +136,13 @@ export default {
         error = false;
       }
       // Else create room
+
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom`, {
         code: generated_code,
-        status: "open"
+        status: "open",
+        coordinates: this.coordinates,
+        settings: this.dietaryNeeds.join(" ")
+
       }).then((response) => {
         console.log(response);
         router.push("room/" + generated_code);
