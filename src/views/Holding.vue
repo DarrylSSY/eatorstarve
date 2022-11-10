@@ -162,7 +162,7 @@ export default {
   },
 
   created() {
-    setTimeout(() => this.visible =  ``, 3500)
+    setTimeout(() => this.visible =  ``, 2500)
   },
 
   mounted() {
@@ -226,31 +226,6 @@ export default {
   margin: 0;
   z-index: 0;
 }
-
-.hiders {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0;
-  width: 100%;
-  /* height: 48px; */
-}
-
-.hiders p {
-  position: relative;
-  clear: both;
-  margin: 0;
-  float: right; /* makes animation go left-to-right */
-  width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
-  height: 70px;
-  background: white; /* same as page background */
-  animation: typing 2s steps(30, end);
-  animation-fill-mode: both;  /* load first keyframe on page load, leave on last frame at end */
-}
-
-/* .hiders p:nth-child(2) {
-  animation-delay: 2s;
-} */
 
 div.main_component {
   margin-right: auto;
@@ -346,7 +321,7 @@ div.text_component {
   /* height: 15px; */
   background: white; /* same as page background */
   animation: typing 2s steps(30, end);
-  animation-delay: 2s;
+  animation-delay: 1s;
   animation-fill-mode:both;  /* load first keyframe on page load, leave on last frame at end */
 }
 
