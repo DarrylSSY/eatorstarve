@@ -29,7 +29,7 @@
             <div class="gallery">
                 <div id="suggestions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner nes-container">
-                        <div v-for="(details, name) in top3_locations" :key="name" class="carousel-item active">
+                        <!-- <div v-for="(details, name) in top3_locations" :key="name" class="carousel-item active">
                             <div class="card">
                                 <div class="row gx-4">
                                     <div class="col-md-4">
@@ -48,14 +48,16 @@
                                                 Located in: {{details.building_name}}
                                                 <br>
                                                 Status: {{details.opening_time}}
-                                            </p>
+                                            </p> -->
                                             <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-                                            <button type="button" class="nes-btn is-warning open_map" @click="window.location.href='map_url'">Open URL</button>
+                                            <!-- <button type="button" class="nes-btn is-warning open_map" @click="window.location.href='map_url'">Open URL</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
+                        <GenerateResultsComponent :code="code"></GenerateResultsComponent>
+
                     </div>
                     <div class="arrow-buttons">
                         <button class="carousel-control-prev" type="button" data-bs-target="#suggestions" data-bs-slide="prev">
@@ -69,7 +71,6 @@
                     </div>
                 </div>
             </div>
-            <GenerateResultsComponent :code="code"></GenerateResultsComponent>
 
             <DialogueBox message="<insert funny shit>"></DialogueBox>
         </div>

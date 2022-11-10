@@ -11,7 +11,7 @@
     <form method="dialog">
       <p class="title">Uh oh!</p>
       <p>Game has ended. View results?</p>
-      <button @click="home" class="nes-btn is-primary">Results</button>
+      <button @click="results" class="nes-btn is-primary">Results</button>
       <button @click="home" class="nes-btn is-primary">Exit</button>
     </form>
   </dialog>
@@ -55,6 +55,11 @@ export default {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play()
       router.push("/")
+    },
+    results: function (){
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
+      router.push("/room/:code/result")
     },
   }
 }
