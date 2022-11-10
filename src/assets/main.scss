@@ -10,13 +10,18 @@ $primary-colors: (
   hover: #108de0,
   shadow: #006bb3
 );
-.vc-time-weekday, .vc-time-month, .vc-time-day, .vc-time-year{
+.vc-time-weekday, .vc-time-month, .vc-time-day, .vc-time-year, .vc-time, {
   font-family: "Press Start 2P", cursive;
-  font-size: 10px;
+  color: black;
+  font-weight: 0;
+  font-size:12px;
 }
-.vc-time-year{
-  color: black
+@media screen and (max-width: 600px) {
+  .vc-time-weekday, .vc-time-month, .vc-time-day, .vc-time-year, .vc-time{
+    font-size: 10px;
+  }
 }
+
 @import "../../node_modules/bootstrap/scss/bootstrap";
 @import "scss/nes.scss";
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");

@@ -3,10 +3,10 @@
   <body>
     <div class="container-sm">
       <div class="row">
-        <div class="col-12 gy-4 text-center">
+        <div class="col-12 gy-4 text-center sm-gy-2 md-gy-3">
           <h1 class="text-center">Pre-Game Setup</h1>
         </div>
-        <div class="col-10 col-md-8 offset-1 offset-md-2 gy-5">
+        <div class="col-10 col-md-8 offset-1 offset-md-2 gy-4">
           <div class="nes-container is-rounded is-centered">
 
             <!-- date input -->
@@ -28,15 +28,15 @@
 
             <!-- time input -->
             <div class="row mt-3">
-              <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 text-start">
+              <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 text-start">
                 Select time:
                   <v-date-picker id="timePicker" mode="time" v-model="date" :timezone="timezone"
-                  class="border-1 text-center col-lg-6 col-xl-6 col-md-12 col-sm-12 mt-2" />
-                
+                  class="text-center border-0 bg-white col-lg-6 col-xl-6 col-md-12 col-sm-12 mt-2" />
+
               </div>
 
               <!-- location input -->
-              <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 text-start ">
+              <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 mt-md-3 mt-sm-3 mt-xs-3 mt-lg-0 mt-xl-0 text-start ">
                 Location:
                 <div class="nes-select mt-2">
                   <select required id="location">
@@ -74,10 +74,7 @@
             </div>
             <!-- submit button -->
             <div class="col">
-              <button v-if="date == null" type="button" class="nes-btn is-disabled" @click="create">
-                Submit & Create
-              </button>
-              <button v-else type="button" class="nes-btn is-warning" @click="create">
+              <button type="button" class="nes-btn is-warning" @click="create">
                 Submit & Create
               </button>
             </div>
@@ -98,7 +95,7 @@ export default {
 
   data() {
     return {
-      date: new Date(), // date of meetup will update accordingly even if press clear
+      date: new Date(), // date of meetup will update accordingly even if press clear or changed
       time: "",
       coordinates: "1.3521, 103.8198",
       options: ["Halal-certified", "Vegan", "Vegetarian", "Gluten-free"],
@@ -157,7 +154,7 @@ export default {
 
 <style scoped>
 
-input, #location {
+.nes-input, #location {
   background: rgb(234, 234, 168);
   color: grey;
 }
