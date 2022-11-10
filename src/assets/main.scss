@@ -18,9 +18,12 @@ $warning-colors: (
 );
 
 $form-range-track-width:          100%;
-$form-range-track-height:         .5rem;
+$form-range-track-height:         1rem;
+$form-range-track-border-radius:  0rem;
 $form-range-track-cursor:         pointer;
 $form-range-track-bg:             rgb(214, 214, 214);
+$form-range-thumb-border-radius:           0rem;
+$form-range-thumb-width:                   2rem;
 
 $form-range-thumb-bg:                      #ffc53d;
 $form-range-thumb-active-bg:               #ebb22f;
