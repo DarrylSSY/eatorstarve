@@ -44,7 +44,7 @@
        code: this.$route.params.code,
        answered: [],
        value: "",
-       countDown: 5
+       countDown: 3
  
  
      }
