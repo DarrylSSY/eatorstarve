@@ -69,6 +69,7 @@
                     </div>
                 </div>
             </div>
+            <GenerateResultsComponent :code="code"></GenerateResultsComponent>
 
             <DialogueBox message="<insert funny shit>"></DialogueBox>
         </div>
@@ -77,11 +78,12 @@
 
 <script>
 import DialogueBox from '@/components/DialogueBox.vue';
+import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
 
 export default {
     name: "ResultView",
-    components: { DialogueBox },
+    components: { DialogueBox, GenerateResultsComponent },
     setup() {
         const store = useSessionStore();
         return {
