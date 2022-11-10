@@ -93,7 +93,8 @@ import DialogueBox from "@/components/DialogueBox.vue";
         else {
           router.push({ name: "Question1", props: true });
         }
-    },
+    }
+},
     components: { DialogueBox }
 }
  

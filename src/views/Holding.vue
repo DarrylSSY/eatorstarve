@@ -57,7 +57,7 @@
           <div class="col-3 col-md-3 col-lg-3">
             <div :style="{'visibility': visible}" class="nes-container yesno">
 
-                <!-- <label>
+                 <label>
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" @keydown.enter="enter()" checked />
                   <span>Yes</span>
                 </label>
@@ -66,7 +66,7 @@
                 <label>
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter="enter()" />
                   <span>No</span>
-                </label> -->
+                </label>
                 <YesNoRadio @yesFunction="yesoption()" @noFunction="nooption()"  />
 
             </div>
@@ -129,7 +129,7 @@ import { useSessionStore } from '../stores/session';
 // import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
 // import GenerateResultsComponent from "@/components/GenerateResultsComponent";
-import YesNoRadio  from '../components/YesNoRadio.vue';
+// import YesNoRadio  from '../components/YesNoRadio.vue';
 
 export default {
   name: "HoldingView",
@@ -164,7 +164,7 @@ export default {
     })
   },
 
-  components: { YesNoRadio },
+  // components: { YesNoRadio },
   
   methods: {
     next: function (){
@@ -173,18 +173,13 @@ export default {
     get_avatar(user) {
       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
     },
-    // enter() {
-    //     let buttonpress = new Audio("../../buttonpress.mp3");
-    //     buttonpress.play();
-    //   router.push({ name: 'Result', params: {id:this.code} })
-    //   if (this.value == 'yes') {
-    //     // alert("yes")
-    //     document.getElementById('dialog-rounded').showModal();
-    //   } else {
-    //     // alert("no")
-    //     document.getElementById('dialog-rounded2').showModal();
-    //   }
-    // },
+    enter() {
+        let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
+      // router.push({ name: 'Result', params: {id:this.code} }) 
+      document.getElementById('dialog-rounded').showModal();
+      
+    },
     yesoption() {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
