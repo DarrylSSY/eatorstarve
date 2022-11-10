@@ -15,13 +15,16 @@
     <h5>If you see a retro button, NES.css is working</h5>
     <button type="button" class="nes-btn is-primary">Primary</button>
   </div>
+  <YesNoRadioVue @yes-function="something()"/>
 </template>
 
 <script>
 import {Rive} from "@rive-app/canvas";
+import YesNoRadioVue from '../components/YesNoRadio.vue'
 import axios from "axios";
 export default {
   name: 'HomeView',
+  components: { YesNoRadioVue },
   props: {
     msg: String
   },
