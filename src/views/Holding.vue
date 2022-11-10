@@ -2,23 +2,11 @@
   <body>
   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
     <form >
-      <p class="title">Are you sure you want to exit?</p>
-      <p>Your progress will not be saved.</p>
+      <p class="title">Are you sure?</p>
+      <p>No other players will be allowed to join after results has been generated.</p>
       <menu class="dialog-menu p-0">
-        <button>hello</button>
-        <button class="nes-btn">Cancel</button>
-        <button class="nes-btn is-primary" @click="home">Confirm</button>
-      </menu>
-    </form>
-  </dialog>
-
-  <dialog id="dialog-rounded2" class="nes-dialog is-rounded">
-    <form >
-      <p class="title">Are you sure you want to exit?</p>
-      <p>Your progress will not be saved.</p>
-      <menu class="dialog-menu p-0">
-        <button class="nes-btn">Cancel</button>
-        <button class="nes-btn is-primary" @click="home">Confirm</button>
+        <button type="button" class="nes-btn" @click="close" >No</button>
+        <button type="button" class="nes-btn is-primary" @click="generate">Yes</button>
       </menu>
     </form>
   </dialog>
@@ -64,7 +52,7 @@
     </div>
 
       <div class="result">
-        <div class="row ">
+        <!-- <div class="row ">
           <div class="col"></div>
           <div class="col-4 col-md-4 col-lg-2">
             <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block">
@@ -82,16 +70,16 @@
 
             </div>
           </div>
-        </div>
-        <div class="row">
+        </div> -->
+        <!-- <div class="row"> -->
           <div class="col-12">
           <div class="text_component container nes-container is-rounded">
 
             <div class="row py-sm-4">
-              <div class="col-8 col-md-12 col-lg-12">
+              <div class="col-12 col-sm-8">
                 <div class="text_container">
                   <div class="typewriter">
-                    Do you want to view results?
+                    Do you want to generate results?
                   </div>
                   <div class="hider">
                     <p>&nbsp;</p>
@@ -101,21 +89,21 @@
               </div>
 
               <!-- <div class="col"></div> -->
-              <div class="col mt-md-5 mt-lg-5">
-                <div class="d-sm-none">
-                  <button type="button" class="nes-btn is-warning" @click="enter()" >Enter</button>
+              <div class="col">
+                <div>
+                  <button type="button" class="nes-btn is-warning" @click="enter()" >Generate</button>
                 </div>
 
-                <div class="enter d-none d-sm-block">
+                <!-- <div class="enter d-none d-sm-block">
                   Press 'Enter' to continue
-                </div>
+                </div> -->
 
               </div>
           </div>
 
 
           </div>
-        </div>
+        <!-- </div> -->
       </div>
   </div>
 
@@ -180,15 +168,19 @@ export default {
     enter() {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
+      // router.push({ name: 'Result', params: {id:this.code} })
+      // alert("yes")
+      document.getElementById('dialog-rounded').showModal();
+      
+    },
+    close() {
+      document.getElementById('dialog-rounded').close().preventDefault()
+    },
+    generate() {
       router.push({ name: 'Result', params: {id:this.code} })
-      if (this.value == 'yes') {
-        // alert("yes")
-        document.getElementById('dialog-rounded').showModal();
-      } else {
-        // alert("no")
-        document.getElementById('dialog-rounded2').showModal();
-      }
     }
+
+
   }
 
 
@@ -350,10 +342,10 @@ img {
   margin-right: 20px;
 } */
 
-.nes-btn {
+/* .nes-btn {
 
   right: 20px;
-}
+} */
 
 .enter {
   text-align: right;
