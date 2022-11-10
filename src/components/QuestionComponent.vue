@@ -238,7 +238,7 @@ export default {
 
 .game-option {
   width: 100%;
-  aspect-ratio: 7/1;
+  aspect-ratio: 10/1;
   height: auto;
   margin: 0px;
 }
