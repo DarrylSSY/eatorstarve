@@ -11,7 +11,6 @@ const CreatedRoom = require("./models/createdroom");
 router.post('/places', (req, res) => {
     axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&maxprice='+req.body["maxprice"]+'&minprice='+req.body["minprice"]+'&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
         .then(response => res.json({
-
             "name1": response.data["results"][0]["name"],
             "address1": response.data["results"][0]["formatted_address"],
             "photo1": response.data["results"][0]["photos"][0]["photo_reference"],
@@ -20,9 +19,16 @@ router.post('/places', (req, res) => {
             "photo2": response.data["results"][1]["photos"][0]["photo_reference"],
             "name3": response.data["results"][2]["name"],
             "address3": response.data["results"][2]["formatted_address"],
-            "photo3": response.data["results"][2]["photos"][0]["photo_reference"],ß
+            "photo3": response.data["results"][2]["photos"][0]["photo_reference"],
         }))
         .catch(err => res.json(err));
+});
+
+router.post('/photo', (req, res) => {
+  // Acts as a proxy, forward the image over to the client
+  axios.get('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference='+req.body["photo"]+'&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M').then(response => {
+    res.send(response.data);
+  })
 });
 
 // get list of answers

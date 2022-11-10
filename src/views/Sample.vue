@@ -9,6 +9,7 @@
     <p>{{ location }}</p>
     <h5>If you see the avatar below, DiceBear API is working</h5>
     <img style="width: 100px" src="https://avatars.dicebear.com/api/pixel-art/sarah.svg">
+    <img :src="image" />
     <h5>If you see a black button, SCSS is working</h5>
     <button type="button" class="btn btn-primary">Primary</button>
     <h5>If you see a retro button, NES.css is working</h5>
@@ -31,7 +32,8 @@ export default {
     return {
       place : null,
       location: null,
-      avatar: null
+      avatar: null,
+      image: null
     }
   },
   mounted() {
@@ -46,12 +48,14 @@ export default {
           this.place = response["data"]["name"]
           this.location = response["data"]["address"]
         })
-  },
+    axios.post(`${process.env.VUE_APP_BACKEND_URL}api/photo`,{"photo":"AW30NDywsbnpEINz6zUUcmszaJ4ACS057IryqfKz2kVyMi0Toc4c9-dei-faG10cpPggpFpvPK_Ps_nzgEieF_itLEXWil1rc9BxgoAGqTeVjhgDxsFq4fUG2NAsP2-0pXqxx8zxzVAUC61UNGKQb3Qczy7CzFB1jH4ZFpp35EOQcGU2wYeo"})
+        .then(response => {
+          console.log(response["data"])
+          let blob = new Blob([response["data"]], {type: 'image/jpeg'});
+          this.image = URL.createObjectURL(blob)
+          console.log(this.image)
+        })
 
-  method: {
-    something: function() {
-      alert('hi')
-    }
   }
 }
 
