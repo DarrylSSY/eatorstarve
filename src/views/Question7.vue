@@ -44,10 +44,10 @@ body {
   height: 100%;
   background: linear-gradient(
       0deg,
-      rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)
+      rgba(243, 243, 243, 0.66),
+      rgba(243, 243, 243, 0.66)
   ),
-  url(../assets/bg1.jpeg);
+  url(../assets/bguniqueness.jpg);
 }
 .container {
   height: 100%;
