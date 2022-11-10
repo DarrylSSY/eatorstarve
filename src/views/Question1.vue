@@ -44,10 +44,10 @@ body {
   height: 100%;
   background: linear-gradient(
       0deg,
-      rgba(245, 200, 95, 0.66),
-      rgba(245, 200, 95, 0.66)
+      rgba(112, 112, 110, 0.66),
+      rgba(112, 112, 110, 0.66)
   ),
-  url(../assets/bg1.jpeg);
+  url(../assets/bgcruisines.webp);
 }
 .container {
   height: 100%;

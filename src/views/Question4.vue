@@ -1,8 +1,10 @@
 <template>
-  <div class="container-sm">
-    <QuestionComponent category="texture" :code="code" />
-    <UsernameCheckerComponent />
-  </div>
+  <body>
+    <div class="container-sm">
+      <QuestionComponent category="texture" :code="code" />
+      <UsernameCheckerComponent />
+    </div>
+  </body>
 </template>
 
 <script>
@@ -45,7 +47,7 @@ body {
       rgba(245, 200, 95, 0.66),
       rgba(245, 200, 95, 0.66)
   ),
-  url(../assets/bg1.jpeg);
+  url(../assets/bgtexture.jpg);
 }
 .container {
   height: 100%;
