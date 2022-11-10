@@ -14,24 +14,35 @@
     <div class="card">
       <div class="row gx-4">
           <div class="col-md-4">
-              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result[2] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" style="height: 100%; width: 100%; object-fit: cover;">
+              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" style="height: 100%; width: 100%; object-fit: cover;">
           </div>
           <div class="col-md-8">
-              <div class="card-body">
-                  <h5 class="card-title">{{result[0]}}</h5>
+              <div class="card-body" style="position: relative;">
+                  <h5 class="card-title">{{result['name']}}</h5>
                   <p class="card-text">
-                      <!-- {{details.rating}} 
-                      <br> -->
-                      <!-- {{details.type}}
-                      <br> -->
-                      {{result[1]}}
-                      <br>
-                      <!-- Located in: {{details.building_name}}
-                      <br>
-                      Status: {{details.opening_time}} -->
+                    <small class="text-muted">
+                      <i class="nes-icon is-small star"></i>
+                      {{result['rating']}}/5
+                      ===>
+                      [{{result['userratings']}} Users<i class="nes-icon coin is-small"></i>]
+                    </small>
+
+                    <br><br>
+                    <br>
+                    <b>Address: </b><br>
+                    {{result['address']}}
+                    <br><br>
+                    <small class="price">
+                      Price level: {{printCost(result['pricelevel'])}}
+                    </small>
+                    <!-- Located in: {{details.building_name}}
+                    <br>
+                    Status: {{details.opening_time}} -->
                   </p>
                   <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-                  <!-- <button type="button" class="nes-btn is-warning open_map" @click="window.location.href='map_url'">Open URL</button> -->
+                  <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
+                    <button type="button" class="nes-btn is-warning open_map">Open URL</button>
+                  </a>
               </div>
           </div>
       </div>
@@ -59,9 +70,9 @@ export default {
       parameters: "",
       minprice: "",
       maxprice: "",
-      first: [],
-      second: [],
-      third: [],
+      first: {},
+      second: {},
+      third: {},
       result_list: [],
     }
   },
@@ -115,11 +126,30 @@ export default {
           axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
               .then(response => {
                 axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, {"status": "close"})
-                this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
-                this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
-                this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
+                // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
+                // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
+                // this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
                 // console.log(response.data)
+                for (let info in response['data']) {
+                  // console.log(info)
+                  let category = info.substring(0, info.length - 1)
+                  let idx = info.substring(info.length - 1, info.length)
+                  if (idx == 1) {
+                    this.first[category] = response['data'][info]
+                  }
+                  else if (idx == 2) {
+                    this.second[category] = response['data'][info]
+                  }
+                  else {
+                    this.third[category] = response['data'][info]
+                  }
+                }
+
+
+                
                 this.result_list = [this.first, this.second, this.third]
+                console.log(this.result_list)
+
 
               })
         })
@@ -127,15 +157,31 @@ export default {
       // this.result_list[0] = this.first
       // this.result_list[1] = this.second
       // this.result_list[2] = this.third
-      // console.log(this.result_list)
       // console.log(this.first)
     },
+
+    methods: {
+      printCost: function(num) {
+        if (num == null) {
+          return '-'
+        }
+        console.log(num)
+        let str = ''
+        for (let i = 0; i < num; i++) {
+          str += '$'
+        }
+        
+        return str
+      }
+    }
   }
 </script>
 
 <style>
   .open_map {
     width: 100%;
+    position: absolute;
+    bottom: 0;
   }
 
   .card, .card .row {
@@ -144,8 +190,16 @@ export default {
     border: 0px;
   }
 
+  .card-body {
+    height: 100%;
+  }
   .card {
     height: 392px;
     width: auto;
+  }
+
+  .price {
+    position: absolute;
+    bottom: 70px;
   }
 </style>
