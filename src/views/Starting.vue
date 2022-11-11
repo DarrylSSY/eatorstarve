@@ -82,7 +82,7 @@ import DialogueBox from "@/components/DialogueBox.vue";
             }
             else {
                 router.push({ name: "Question1", props: true });
-                // router.push({ name: "Starting", props: true });
+                // router.push({ name: "Starting", props: true });  
             }
         }
     },

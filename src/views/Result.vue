@@ -10,7 +10,7 @@
 
             <br>
             <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Yes, Goodbye!</button>
-            <a class="nes-btn" onclick="document.getElementById('exitModal').close()">Cancel</a>
+            <a class="nes-btn" @click="closeModal">Cancel</a>
         </div>
     </dialog>
 
@@ -25,7 +25,7 @@
                         <button
                             type="button"
                             class="nes-btn is-error"
-                            onclick="document.getElementById('exitModal').showModal();"
+                            @click="openModal"
                         >
                             Exit
                         </button>
@@ -36,7 +36,12 @@
                     </div>
 
                     <div class="user col-3 col-md-2 col-content nes-container">
-                        {{ username }}
+                        <p v-if="username == ''">
+                            {{code}}
+                        </p>
+                        <p v-else>
+                            {{ username }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -85,11 +90,11 @@
 
                     </div>
                     <div class="arrow-buttons">
-                        <button class="carousel-control-prev" type="button" data-bs-target="#suggestions" data-bs-slide="prev">
+                        <button class="carousel-control-prev" @click="playSound" type="button" data-bs-target="#suggestions" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#suggestions" data-bs-slide="next">
+                        <button class="carousel-control-next" @click="playSound" type="button" data-bs-target="#suggestions" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -98,9 +103,8 @@
             </div>
 
         </div>
-        <UsernameCheckerComponent />
         <div class="container p-0" style="margin: auto;">
-            <DialogueBox :message="keywords" type="developer"></DialogueBox>
+            <DialogueBox :message="choices" type="developer"></DialogueBox>
         </div>
     </body>
 </template>
@@ -110,11 +114,10 @@ import DialogueBox from '@/components/DialogueBox.vue';
 import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
 import router from "@/router";
-import UsernameCheckerComponent from '@/components/UsernameCheckerComponent.vue';
 
 export default {
     name: "ResultView",
-    components: { DialogueBox, GenerateResultsComponent, UsernameCheckerComponent },
+    components: { DialogueBox, GenerateResultsComponent},
     setup() {
         const store = useSessionStore();
         return {
@@ -125,13 +128,31 @@ export default {
     data() {
         return {
             code: this.$route.params.code,
+            choices: this.keywords
             }
     },
 
     methods: {
         home: function () {
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
             router.push("/");
         },
+        openModal: function() {
+            console.log('ji')
+            document.getElementById('exitModal').showModal();
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
+        },
+        closeModal: function() {
+            document.getElementById('exitModal').close()
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
+        },
+        playSound() {
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
+        }
     }
     
 }
@@ -199,8 +220,8 @@ body {
 
 .gallery {
     margin: auto;
-    padding-top: 20vh;
-    padding-bottom: 120px;
+    padding-top: 140px;
+    padding-bottom: 140px;
     width: 80%;
     /* height:max-content; */
     /* margin-bottom: 200px; */

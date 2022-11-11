@@ -40,7 +40,7 @@
                   </p>
                   <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                   <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
-                    <button type="button" class="nes-btn is-warning open_map">Open Map</button>
+                    <button type="button" class="nes-btn is-warning open_map" @click="playSound">Open Map</button>
                   </a>
               </div>
           </div>
@@ -169,6 +169,10 @@ export default {
         }
         
         return str
+      },
+      playSound() {
+          let buttonpress = new Audio("../../buttonpress.mp3");
+          buttonpress.play();
       }
     }
   }
