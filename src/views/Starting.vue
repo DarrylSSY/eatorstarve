@@ -14,7 +14,9 @@
        <!-- <div class="text_component container nes-container is-rounded">
          <h5>Remember to keep an eye on your HP!</h5>
        </div> -->
-      <DialogueBox message="Remember to keep an eye on your HP!" type="developer" style="text-align: left;"/>
+    <div class="container p-0" style="margin: auto;">
+        <DialogueBox message="Remember to keep an eye on your HP!" type="developer" style="text-align: left;"/>
+    </div>
    </div>
 </div>
 
