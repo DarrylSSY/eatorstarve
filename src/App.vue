@@ -58,10 +58,10 @@ p, body, button {
   font-size: 16px;
 }
 
-img {
+/* img {
   height: 20vh;
   width: 100px;
-}
+} */
 
 @media (max-width: 992px) {
   h1 {
@@ -76,7 +76,7 @@ img {
   button {
     font-size: 14px;
   }
-  h3, h6{
+  h3, h4, h6{
     font-size: 30px;
   }
 }
@@ -94,7 +94,7 @@ img {
   button  {
     font-size: 12px;
   }
-  h3{
+  h3, h4, h6{
     font-size: 20px;
   }
 
@@ -113,8 +113,11 @@ img {
   button  {
     font-size: 10px;
   }
-  h3, h6{
+  h3, h4{
     font-size: 15px;
+  }
+  h6{
+    font-size: 10px;
   }
 
 }

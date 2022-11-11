@@ -75,7 +75,7 @@
 
       <div class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0 ">
         <img
-          class="profile"
+          class="profile me-2"
           :src="
             'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
           "
