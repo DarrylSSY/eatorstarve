@@ -53,11 +53,11 @@
       </div>
 
       <div class="col-6 col-md-8 col-content">
-          <h1 class="logo">The End</h1>
+          <h4 class="logo">The End</h4>
       </div>
 
       <div class="user col-3 col-md-2 col-content nes-container">
-          {{ username }}
+          {{ code }}
       </div>
   </div>
 
@@ -67,7 +67,10 @@
       <div class="col"></div>
       <div class="col-12 col-md-10 col-lg-10">
         <div class="main_component nes-container is-rounded">
-          <h5> Completed: </h5>
+          <div style="margin-botton:10px">
+            <h5> Completed: </h5>
+            <!-- <button class="refresh nes-btn is-primary " onclick="window.location.reload()">Refresh</button> -->
+          </div>
           <div class="container">
             <div class="row">
               <!-- <div class="col"></div> -->
@@ -251,6 +254,13 @@ export default {
 
 <style scoped>
 
+@media (max-width: 576px) {
+  .typewriter {
+    font-size: 8px;
+  }
+
+}
+
 div.nes-container {
     background-color: white;
 }
@@ -273,12 +283,12 @@ button.is-error {
     text-align: center;
     margin: 0;
     padding-top: 10px;
-    /* font-size: 3.2vw ; */
+    font-size: 3.2vw ;
     
 }
 
 .user {
-    padding: 20px;
+  padding: 20px;
     text-align: center;
 }
 
@@ -290,12 +300,21 @@ button.is-error {
   top: 200px;
 }
 
+.refresh {
+  width: auto;
+  font-size: 8px;
+  
+}
+
 .whole {
   text-align: center;
   position: relative;
   margin: auto;
   width: 100%;
   height: 100%;
+   /* display: block; */
+  overflow: hidden; 
+
 
 }
 
@@ -343,9 +362,8 @@ div.main_component {
   overflow-y: auto;
   position: absolute;
   bottom: 20px;
-  top: 70px;
+  top: 60px;
   /* height: 50%; */
-  overflow-y: ;
   text-align: left;
   right: 15px;
 }
@@ -380,7 +398,6 @@ div.text_component {
 }
 
 .typewriter {
-  padding-top: ;
   position: absolute;
   /* font-size:large; */
   top: 0;
