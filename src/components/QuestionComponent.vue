@@ -57,15 +57,15 @@
   </div>
   <div class="dialogue-box container p-0">
     <!-- Question number, health bar and username -->
-    <div class="col-12 row px-0 mx-0">
-      <div class="info col-5 col-md-2 ps-0 py-0" style="height: 100%;">
+    <div class="col-12 row px-0 mx-0 gy-1">
+      <div class="info col-5 col-md-4 col-lg-3 col-xl-2 ps-0 py-0" style="height: 100%;">
         <!-- Username -->
-        <div class="nes-container is-centered is-rounded info-box">
+        <div class="nes-container is-centered is-rounded p-2">
           {{ username }}
         </div>
       </div>
-      <div class="info col-12 col-sm-10 col-md-5 ps-0 pt-0 info-box">
-        <div class="nes-container is-rounded">
+      <div class="info col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 col-xxl-3 ps-0 pt-0 info-box mb-2">
+        <div class="nes-container is-rounded py-2 px-0 ">
           <canvas id="canvas" height="20"></canvas>
         </div>
       </div>
@@ -78,7 +78,7 @@
           'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
         "
       />
-      <h3>{{ question }} {{ category }}!</h3>
+      <h3 class="col-7 col-sm-9">{{ question }} {{ category }}!</h3>
     </div>
   </div>
 
@@ -284,15 +284,14 @@ canvas {
 .question-body {
   height: 80vh;
 }
-/* .info {
-  height: fit-content;
-  height: 100%;
-} */
+.info {
+  /* height: fit-content; */
+  height: 50px;
+}
 
 .dialogue-box {
   position: absolute;
   bottom: 5px;
-  height: 120px;
 }
 
 .top {
