@@ -6,9 +6,8 @@
                 <i class="nes-octocat animate"></i>
             </div>
             <div class="col-9 col-sm-9 col-md-9 col-lg-10 text text-break px-2">
-                <p v-if="message.includes('spicy')">
-                    <b>THE GROUP'S SELECTION:</b> 
-                    <br>{{message}}
+                <p v-if="message.length > 30">
+                    {{message}}
                 </p>
                 <div v-else>
                     <p class="typewriter d-none d-lg-block ">
