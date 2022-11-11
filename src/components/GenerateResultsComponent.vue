@@ -110,7 +110,7 @@ export default {
             this.parameters += response.data + "|";
         });
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
-            if (response.data == "Stomachache Come!!") {
+            if (response.data == "Spicy Kick") {
                 this.parameters += "spicy|";
             }
             else if (response.data == "Little Kick") {
