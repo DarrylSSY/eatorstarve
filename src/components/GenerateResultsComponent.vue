@@ -158,6 +158,7 @@ export default {
                 }
                 this.result_list = [this.first, this.second, this.third];
                 console.log(this.result_list);
+                this.data_loaded = true
               }
               else {
                 axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`, {
