@@ -21,7 +21,7 @@
             <!-- Top Bar -->
             <div class=" container container-sm " style="position: relative; width: 100%;">
                 <div class="row top gx-4">
-                    <div class="col-4 col-md-4 col-lg-3 ps-0 col-content">
+                    <div class="col-4 col-md-3 col-lg-2 ps-0 col-content">
                         <button
                             type="button"
                             class="nes-btn is-error"
@@ -31,16 +31,13 @@
                         </button>
                     </div>
 
-                    <div class="col-4 col-md-4 col-lg-6 col-content px-2 px-sm-4 px-md-5 py-2 py-sm-2 py-md-2">
+                    <div class="col-4 col-md-6 col-lg-8 col-content px-2 px-sm-4 px-md-5 py-3">
                         <h4 class="logo">Eat or Starve</h4>
                     </div>
 
-                    <div class="user col-4 col-md-4 col-lg-3 col-content nes-container">
-                        <p v-if="username == ''">
+                    <div class="user col-4 col-md-3 col-lg-2 col-content nes-container ">
+                        <p>
                             {{code}}
-                        </p>
-                        <p v-else class="text-break">
-                            {{ username }}
                         </p>
                     </div>
                 </div>
@@ -431,12 +428,12 @@ small {
 
 .nes-balloon{
     position: absolute;
-    bottom: 9px;
+    bottom: 150px;
     right: 0px;
     z-index: 1;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 575px) {
         .logo {
             font-size: 1.8vh;
         }
