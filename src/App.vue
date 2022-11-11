@@ -50,6 +50,9 @@ h1 {
 h2 {
   font-size: 50px;
 }
+h3, h6{
+  font-size: 40px;
+}
 
 p, body, button {
   font-size: 16px;
@@ -73,6 +76,9 @@ img {
   button {
     font-size: 14px;
   }
+  h3, h6{
+    font-size: 30px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -87,6 +93,9 @@ img {
   .nes-input,
   button  {
     font-size: 12px;
+  }
+  h3{
+    font-size: 20px;
   }
 
 }
@@ -103,6 +112,9 @@ img {
   .nes-input,
   button  {
     font-size: 10px;
+  }
+  h3, h6{
+    font-size: 15px;
   }
 
 }
