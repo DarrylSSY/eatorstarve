@@ -47,15 +47,12 @@
       </div>
     </div>
   </div>
-  <div class="container p-0" style="margin: auto;">
-    <DialogueBox :message="parameters"></DialogueBox>
-  </div>
+
 </template>
 
 <script>
 import { useSessionStore } from '../stores/session';
 import axios from "axios";
-import DialogueBox from './DialogueBox.vue';
 export default {
     name: "GenerateResultsComponent",
     props: {
@@ -185,7 +182,6 @@ export default {
             buttonpress.play();
         },
     },
-    components: { DialogueBox }
 }
 </script>
 

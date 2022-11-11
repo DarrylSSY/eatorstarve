@@ -79,7 +79,7 @@
           'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
         "
       />
-      <h3 class="col-7 col-sm-9">{{ question }} {{ category }}!</h3>
+      <h3 class="col-7 col-sm-9">{{ question_front }} {{ category }} {{question_back}}</h3>
     </div>
   </div>
   <!-- END of 2 Question Template -->
@@ -180,6 +180,7 @@ export default {
       this.question_front = "Want some ";
       this.question_back = "?";
     }
+    // console.log(this.question_front,this.question_back)
     axios.get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`).then((response) => {
         this.generate2RandomOptions(response["data"].length, response)
 
