@@ -39,10 +39,10 @@ p, body, button {
   font-size: 16px;
 }
 
-img {
-  height: 200px;
-  width: 100%;
-}
+/* img {
+  height: 100px;
+  width: 100px;
+} */
 
 @media (max-width: 992px) {
   h1 {
@@ -58,8 +58,8 @@ img {
     font-size: 14px;
   }
   img {
-    height: 150px;
-    width: 100%;
+    height: 80px;
+    width: 80px;
   }
 }
 
@@ -77,8 +77,8 @@ img {
     font-size: 12px;
   }
   img {
-    height: 100px;
-    width: 100%;
+    height: 60px;
+    width: 60px;
   }
 }
 
@@ -97,7 +97,8 @@ img {
   }
   img {
     height: 50px;
-    width: 100%;
+    width: 50x;
+    size:20px
   }
 }
 

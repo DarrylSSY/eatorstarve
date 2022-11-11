@@ -7,12 +7,14 @@
           <h1>Welcome to Game Room</h1>
         </div>
 
-        <div class="col-12 text-center">
-          <h2>{{ code }}</h2>
+        <div class="col-12 d-flex justify-content-center">
+          <div class="nes-textarea bg-warning text-center">
+            <h2>{{code}}</h2>
+          </div>
         </div>
 
-        <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-2 px-0 py-0"></div>
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-8 px-0 py-0">
           <!-- username, avatar, home button and play buttons -->
           <div class="nes-container is-rounded is-centered">
             <div class="col-12">
@@ -29,12 +31,15 @@
 
             <!-- if username invalid, this will appear in red below username --> 
             <!-- need fix change username after its been taken and directed  -->
-            <div class="col-12 mb-3">
-              <div id="usernameError"></div>
+            <div class="col-12 ">
+              <div id="usernameError">
+                <p class="text-danger" v-if="currentUsername==''">{{ error1 }}</p>
+                <p class="text-danger" v-else-if="validUser == false && currentUsername != ''">{{ currentUsername }} has completed the game! View results or change username?</p>
+              </div>
 
             </div>
 
-            <div class="col-12">
+            <div class="col-12 mb-2">
               <img
                 :src="
                   'https://avatars.dicebear.com/api/pixel-art/' +
@@ -44,8 +49,8 @@
               />
             </div>
 
-            <!--home and start game button -->
-            <div class="row mt-3">
+            <!--home button -->
+            <div class="row">
               <div class="col-6">
                 <button
                   type="button"
@@ -59,15 +64,29 @@
                   Go Home
                 </button>
               </div>
+
+              <!-- start game button -->
               <div id="buttonNext" class="col-6">
-                
-                <button 
+                <button v-if="validUser == false && currentUsername!=''" 
+                type="button" class="nes-btn is-warning" @click="holding()">View Results!</button>
+
+                <button v-else-if="currentUsername == ''"
                   type="button"
-                  class="nes-btn is-warning col-6"
+                  class="nes-btn is-disabled"
                   @click="play()"
                 >
                   Start Game!
                 </button>
+
+                <button v-else
+                  type="button"
+                  class="nes-btn is-warning"
+                  @click="play()"
+                >
+                  Start Game!
+                </button>
+
+                
               </div>
             </div>
           </div>
@@ -77,23 +96,23 @@
         <!-- copy link button -->
         <div id="link" class="row ">
           <div class="col-1"></div>
-          <div class="col-8 text-center is-rounded">
-            <input type="text" class="nes-input is-primary" :value="currentUrl" />
-          </div>
+            <div class="col-8 text-center is-rounded">
+              <input type="text" class="nes-input is-primary" :value="currentUrl" />
+            </div>
           
-          <div class="col-2 px-0 py-0">
-              <button
-              id="copy"
-                type="button"
-                class="nes-btn is-warning text-center"
-                @click="copy_link"
-              >
-                Copy Link
-              </button>  
-              <div v-show="copySuccess" class="nes-balloon from-left" data-bs-toggle="popover" data-bs-trigger="focus">
-                <p>Copied!</p>
-              </div>
-          </div>        
+            <div class="col-2 px-0 py-0">
+                <button
+                id="copy"
+                  type="button"
+                  class="nes-btn is-warning text-center"
+                  @click="copy_link"
+                >
+                  Copy Link
+                </button>  
+                <div v-show="copySuccess" class="nes-balloon from-left hideElement" data-bs-toggle="popover" data-bs-trigger="focus">
+                  <p>Copied!</p>
+                </div>
+            </div>        
 
           <RoomCheckerComponent :roomcode="code" />
         </div>
@@ -122,10 +141,12 @@ export default {
       validUser: false,
       currentUsername: "",
       copySuccess: false,
+      error1: 'Please enter a username',
     };
   },
 
   created() {
+    
     this.currentUrl = window.location.href;
   },
   methods: {
@@ -137,21 +158,7 @@ export default {
         username.setUsername(this.currentUsername);
         router.push({ name: "Instruction" });
       }
-      else if (this.validUser == false && this.currentUsername != '') {
-        document.getElementById("usernameError").innerHTML= `
-        <p>${this.currentUsername} has finished the game. View results?</p>`;
-        document.getElementById("buttonNext").innerHTML = `
-        <button type="button" class="nes-btn is-warning" @click="holding()">View Results!</button>`;
-      }
-      else {
-        document.getElementById("usernameError").innerText="Please enter a username.";
-      }
 
-    },
-    default: function() {
-      document.getElementById("usernameError").innerHTML= "";
-      document.getElementById("buttonNext").innerHTML = `
-      <button type="button" class="nes-btn is-warning" @click="play()">Start Game!</button>`;
     },
     holding: function(){
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -169,6 +176,7 @@ export default {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
         await navigator.clipboard.writeText(window.location.href);
+        setTimeout(() => this.copySuccess = false, 5000)
       } 
       catch ($e) {
         alert("Error copying link to clipboard");
@@ -204,6 +212,8 @@ input {
 
 .nes-btn {
   width: 100%;
+  min-width: fit-content;
+  height: fit-content;
 }
 
 body {
@@ -214,7 +224,8 @@ body {
       rgba(245, 200, 95, 0.66)
     ),
     url(../assets/bg1.jpeg);
-  box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
+    display: block;
+    overflow: auto;
 }
 
 .nes-container {
@@ -244,6 +255,13 @@ img {
   bottom:-4px;
   right: 0px;
   z-index: 1;
+}
+.text-danger{
+  font-size: 12px;
+}
+.nes-textarea{
+  width: fit-content;
+  height: fit-content;
 }
 
 

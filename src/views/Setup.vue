@@ -3,10 +3,10 @@
   <body>
     <div class="container-sm">
       <div class="row">
-        <div class="col-12 gy-4 text-center sm-gy-2 md-gy-3">
+        <div class="col-12 gy-4 text-center">
           <h1 class="text-center">Pre-Game Setup</h1>
         </div>
-        <div class="col-10 col-md-8 offset-1 offset-md-2 gy-4">
+        <div class="col-10 col-lg-8 offset-1 offset-lg-2 gy-4 mb-4">
           <div class="nes-container is-rounded is-centered">
 
             <!-- date input -->
@@ -21,7 +21,7 @@
                   <input type="text" class="nes-input form-control" :placeholder="date" :value="inputValue"
                     v-on="inputEvents">
                   <span class="input-group-text border-0 sm-px-1 "><button type="button" class="nes-btn is-error"
-                      :disabled="!date" @click="date = new Date()">Clear</button></span>
+                      :disabled="!date" @click="date = new Date();clear()">Clear</button></span>
                 </div>
               </template>
             </v-date-picker>
@@ -29,26 +29,41 @@
             <!-- time input -->
             <div class="row mt-3">
               <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 text-start">
-                Select time:
-                  <v-date-picker id="timePicker" mode="time" v-model="date" :timezone="timezone"
-                  class="text-center border-0 bg-white col-lg-6 col-xl-6 col-md-12 col-sm-12 mt-2" />
-
+                <div class="row">
+                  <div class="col-12 text-start mb-2">
+                    Select time:
+                  </div>
+                  <div class="col-12">
+                    <v-date-picker id="timePicker" mode="time" v-model="date" :timezone="timezone"
+                      class="text-center border-0 bg-white col-lg-6 col-xl-6 col-md-12 col-sm-12 mt-2" />
+                  </div>
+                </div>
               </div>
 
+
               <!-- location input -->
-              <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 mt-md-3 mt-sm-3 mt-xs-3 mt-lg-0 mt-xl-0 text-start ">
-                Location:
-                <div class="nes-select mt-2">
-                  <select required id="location">
-                    <option value="" disabled selected hidden>Select...</option>
-                    <option value="default">Use my current location</option>
-                    <option value="north">North</option>
-                    <option value="south">South</option>
-                    <option value="central">Central</option>
-                    <option value="east">East</option>
-                    <option value="west">West</option>
-                  </select>
+              <div
+                class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 mt-md-3 mt-sm-3 mt-xs-3 mt-lg-0 mt-xl-0 text-start ">
+                <div class="row">
+                  <div class="col-12 text-start mb-2">
+                    Location:
+                  </div>
                 </div>
+
+                <div class="row">
+                  <div class="nes-select mt-2">
+                    <select required id="location">
+                      <option value="" disabled selected hidden>Select...</option>
+                      <option value="default">Use my current location</option>
+                      <option value="north">North</option>
+                      <option value="south">South</option>
+                      <option value="central">Central</option>
+                      <option value="east">East</option>
+                      <option value="west">West</option>
+                    </select>
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -109,7 +124,7 @@ export default {
   },
   methods: {
     setCoordinates: function (position) {
-        this.coordinates = position.coords.latitude + ", " + position.coords.longitude;
+      this.coordinates = position.coords.latitude + ", " + position.coords.longitude;
     },
     create: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -121,19 +136,18 @@ export default {
           this.dietaryNeeds.push(other[i]);
         }
       }
-      // Incomplete code
       // Generate random code
       let generated_code = Math.random().toString(36).slice(9);
-      // Check if room exists
+
 
       let error = false;
+      // Check if room exists
       // Keep generating until room doesn't exist
       while (error) {
         generated_code = Math.random().toString(36).slice(9);
         error = false;
       }
       // Else create room
-
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom`, {
         code: generated_code,
         status: "open",
@@ -148,13 +162,17 @@ export default {
       });
 
     },
+    clear: function(){
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play()
+    }
   },
 };
 </script>
 
 <style scoped>
-
-.nes-input, #location {
+.nes-input,
+#location {
   background: rgb(234, 234, 168);
   color: grey;
 }
@@ -166,6 +184,8 @@ button {
 
 body {
   height: 100%;
+  display: block;
+  overflow: auto;
   background: linear-gradient(0deg,
       rgba(245, 200, 95, 0.66),
       rgba(245, 200, 95, 0.66)),
@@ -176,7 +196,7 @@ body {
   background-color: #ededed;
 }
 
-#timePicker{
+#timePicker {
   background: rgb(234, 234, 168);
   border: solid black 1px
 }
