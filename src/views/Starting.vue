@@ -34,58 +34,67 @@ import DialogueBox from "@/components/DialogueBox.vue";
  
  
  export default {
-    name: "StartingView",
-    setup() {
-        const store = useSessionStore();
-        return {
-            username: store.getUsername
-        };
-    },
-    data() {
-        return {
-            code: this.$route.params.code,
-            answered: [],
-            value: "",
-            countDown: 5
-        };
-    },
-    created() {
-        // setInterval(this.countdown(), 1000)
-        this.countDownTimer();
-    },
-    mounted() {
-        axios.get("http://localhost:8081/api/room/" + this.code).then(response => {
-            this.answered = response.data;
-        });
-        // setTimeout(this.countdown(), 1000)
-    },
-    methods: {
-        next: function () {
-            router.push({ name: "Results", params: { id: this.code } });
-        },
-        get_avatar(user) {
-            return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg";
-        },
-        //  countdown() {
-        //   console.log("timer")
-        //   console.log(typeof(this.time))
-        //   console.log(this.time)
-        //   this.time -= 1
-        //   console.log(this.time)
-        //   //  setInterval(this.countdown(), 10000)
-        //  },
-        countDownTimer() {
-            if (this.countDown > 0) {
-                setTimeout(() => {
-                    this.countDown -= 1;
-                    this.countDownTimer();
-                }, 1000);
-            }
-            else {
-                router.push({ name: "Question1", props: true });
-            }
+   name: "StartingView",
+   setup() {
+     const store = useSessionStore()
+     return {
+       username: store.getUsername
+     }
+   },
+   data() {
+     return {
+       code: this.$route.params.code,
+       answered: [],
+       value: "",
+       countDown: 3
+ 
+ 
+     }
+   },
+ 
+   created() {
+      // setInterval(this.countdown(), 1000)
+      this.countDownTimer()
+           
+   },
+ 
+   mounted() {
+     axios.get('http://localhost:8081/api/room/' + this.code).then(response => {
+       this.answered = response.data
+     })
+
+   
+    
+    // setTimeout(this.countdown(), 1000)
+   },
+   methods: {
+     next: function (){
+       router.push({ name: 'Results', params: {id:this.code} })
+     },
+     get_avatar(user) {
+       return "https://avatars.dicebear.com/api/pixel-art/" + user + ".svg"
+     },
+    //  countdown() {
+    //   console.log("timer")
+    //   console.log(typeof(this.time))
+    //   console.log(this.time)
+    //   this.time -= 1
+    //   console.log(this.time)
+    //   //  setInterval(this.countdown(), 10000)
+
+    //  },
+
+     countDownTimer () { 
+      if (this.countDown > 0) { 
+        setTimeout(() => {
+          this.countDown -= 1 
+          this.countDownTimer() 
+        }, 1000) } 
+        else {
+          router.push({ name: "Question1", props: true });
         }
-    },
+    }
+},
     components: { DialogueBox }
 }
  
