@@ -59,32 +59,34 @@
       </div>
       <div class="col-1"></div>
     </div> 
-  
-    <!-- Question number, health bar and username -->
-    <div class="col-12 row px-0 mx-0 mb-2 mt-auto">
-      <div class="info col-5 col-md-2 ps-0 py-0">
-        <!-- Username -->
-        <div class="nes-container is-centered is-rounded">
-          {{ username }}
-        </div>
-      </div>
-      <div class="info col-9 col-md-5 ps-0">
-        <div class="nes-container is-rounded">
-          <canvas id="canvas" height="20"></canvas>
-        </div>
-      </div>
-    </div>
-
-    <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
-      <img
-        class="profile"
-        v-bind:src="
-          'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
-        "
-      />
-      <h4>{{ question_front }}{{ category }}{{ question_back }}</h4>
-    </div>
   </div>
+
+  <div class="dialogue-box container p-0">
+      <!-- Question number, health bar and username -->
+      <div class="col-12 row px-0 mx-0 gy-1">
+        <div class="info col-5 col-md-4 col-lg-3 col-xl-2 ps-0 py-0" style="height: 100%;">
+          <!-- Username -->
+          <div class="nes-container is-centered is-rounded p-2">
+            {{ username }}
+          </div>
+        </div>
+        <div class="info col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 col-xxl-3 ps-0 pt-0 info-box mb-2">
+          <div class="nes-container is-rounded py-2 px-0 ">
+            <canvas id="canvas" height="20"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0 ">
+        <img
+          class="profile"
+          :src="
+            'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
+          "
+        />
+        <h3 class="col-7 col-sm-9">{{ question_front }} {{ category }} {{question_back}}!</h3>
+      </div>
+    </div>
 
 <!-- END for Slider Template -->
 </template>
@@ -238,14 +240,13 @@ height: fit-content;
 /* padding: 16px 32px; */
 }
 .chat-box {
-height: 136px;
-width: calc(100% - 8px);
-display: flex;
-justify-content: center;
-align-items: center;
-margin-top: 0px;
-bottom: 0px;
-padding-right: 64px;
+  height: 136px;
+  width: calc(100% - 8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  bottom: 0px;
 }
 
 .nes-container {
@@ -260,12 +261,26 @@ bottom: -4px;
 }
 
 .question-body {
-height: 100vh;
+height: 80vh;
 }
 
 .info {
-/* height: fit-content; */
-height: 20;
-width: fit-content;
+  /* height: fit-content; */
+  height: 50px;
+}
+
+.dialogue-box {
+  position: absolute;
+  bottom: 5px;
+}
+
+.top {
+    padding-top: 24px;
+}
+
+.info-box {
+  /* padding: 10px; */
+  height: 60px;
+  margin-bottom: 20px;
 }
 </style>
