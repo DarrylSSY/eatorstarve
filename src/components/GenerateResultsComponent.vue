@@ -1,12 +1,52 @@
 <template>
-  <button type="button" class="nes-btn is-success" @click="generate">Generate results</button>
-  {{parameters}}
-  <br>
+  <!-- <button type="button" class="nes-btn is-success" @click="generate">Generate results</button> -->
+  <!-- {{parameters}} -->
+  <!-- <br>
   {{first}}
   <br>
   {{second}}
   <br>
-  {{third}}
+  {{third}} -->
+
+  
+<!-- {{parameters}} -->
+  <div v-for="result in result_list" :key="result.idx" class="carousel-item active">
+    <div class="card">
+      <div class="row gx-4" style="width: 100%; margin: auto;">
+          <div class="col-xs-12 col-md-4">
+              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" style="height: 100%; width: 100%; object-fit: cover;">
+          </div>
+          <div class=" col-xs-12 col-md-8">
+              <div class="card-body" style="position: relative;">
+                  <h5 class="card-title">{{result['name']}}</h5>
+                  <p class="card-text">
+                    <small class="text-muted">
+                      <i class="nes-icon is-small star"></i>
+                      {{result['rating']}}/5 <br>
+                      ===>
+                      [{{result['userratings']}} Users<i class="nes-icon coin is-small"></i>]
+                    </small>
+
+
+                    <br><br>
+                    <b>Address: </b><br>
+                    {{result['address']}}
+                    <br><br>
+                    <br><br>
+                    <small class="price">
+                      Price level: {{printCost(result['pricelevel'])}}
+                    </small>
+                    <br>
+                  </p>
+                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                  <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
+                    <button type="button" class="nes-btn is-warning open_map">Open Map</button>
+                  </a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -15,7 +55,7 @@ import axios from "axios";
 export default {
   name: "GenerateResultsComponent",
   props: {
-    code: String
+    code: String,
   },
   setup () {
     const store = useSessionStore()
@@ -28,21 +68,19 @@ export default {
       parameters: "",
       minprice: "",
       maxprice: "",
-      first: [],
-      second: [],
-      third: [],
+      first: {},
+      second: {},
+      third: {},
+      result_list: [],
     }
   },
   mounted() {
-  },
-  methods: {
-    generate: function (){
       // qn 1
       axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
-        this.parameters = response.data + " "
+        this.parameters = response.data + ", "
         // qn 2
         axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
-          this.parameters += response.data + " "
+          this.parameters += response.data + ", "
           // qn 3
           axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
             if (response.data == "Rich Tai-Tai") {
@@ -59,42 +97,105 @@ export default {
             }
             // qn 4
             axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
-              this.parameters += response.data + " "
+              this.parameters += response.data + ", "
               // qn 5
               axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
-                this.parameters += response.data + " "
+                this.parameters += response.data + ", "
                 axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
                   if (response.data == "Stomachache Come!!"){
                     this.parameters += "spicy "
                   }
                   else if (response.data == "Little Kick"){
-                    this.parameters += "mild-spicy "
+                    this.parameters += "mild-spicy, "
                   }
                   else {
-                    this.parameters += "non-spicy "
+                    this.parameters += "non-spicy, "
                   }
                   axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
                     if (response.data == "Exotic"){
                       this.parameters += "unique "
                     }
+
                   })
                 })
               })
             })
           })
+
           // generate place
           axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
               .then(response => {
+                const keywords = useSessionStore()
+                    keywords.setKeywords(this.parameters)
+                    // console.log(keywords.getKeywords())
+
+                    
                 axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, {"status": "close"})
-                this.first = [response["data"]["name1"], response["data"]["address1"]]
-                this.second = [response["data"]["name2"], response["data"]["address2"]]
-                this.third = [response["data"]["name3"], response["data"]["address3"]]
+                // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
+                // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
+                // this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
+                // console.log(response.data)
+                for (let info in response['data']) {
+                  // console.log(info)
+                  let category = info.substring(0, info.length - 1)
+                  let idx = info.substring(info.length - 1, info.length)
+                  if (idx == 1) {
+                    this.first[category] = response['data'][info]
+                  }
+                  else if (idx == 2) {
+                    this.second[category] = response['data'][info]
+                  }
+                  else {
+                    this.third[category] = response['data'][info]
+                  }
+                }
+
+                this.result_list = [this.first, this.second, this.third]
               })
         })
       })
-
     },
+
+    methods: {
+      printCost: function(num) {
+        if (num == null) {
+          return '-'
+        }
+        // console.log(num)
+        let str = ''
+        for (let i = 0; i < num; i++) {
+          str += '$'
+        }
+        
+        return str
+      }
+    }
+  }
+</script>
+
+<style>
+  .open_map {
+    width: 80%;
+    /* position: absolute;
+    bottom: 0; */
   }
 
-}
-</script>
+  .card, .card .row {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+  }
+
+  .card-body, .card-item {
+    height: 100%;
+  }
+  .card {
+    height: 90%;
+    width: auto;
+  }
+
+  /* .price {
+    position: absolute;
+    bottom: 70px;
+  } */
+</style>

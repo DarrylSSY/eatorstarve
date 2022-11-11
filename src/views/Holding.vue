@@ -258,7 +258,8 @@ div.main_component {
   height: auto;
   /* position: sticky; This shit doesnt work */
   bottom: 0;
-  background-color: rgb(247, 213, 29);
+  /* background-color: rgb(247, 213, 29); */
+  background-color: #ffc53d;
   margin-bottom: 10px;
 
 }

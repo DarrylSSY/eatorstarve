@@ -149,15 +149,7 @@
         </div>
       </div>
 
-      <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
-        <img
-          class="profile"
-          v-bind:src="
-            'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
-          "
-        />
-        <h3>{{ question }} {{ category }}!</h3>
-      </div>
+      <DialogueBox :question="question" :category="category" type='user'/>  
     </div>
   <!-- END of 2 Question Template -->
   </div>
@@ -168,6 +160,7 @@ import { useSessionStore } from "../stores/session";
 import axios from "axios";
 import router from "@/router";
 import { Rive, Layout } from "@rive-app/canvas";
+import DialogueBox from "./DialogueBox.vue";
 export default {
   name: "QuestionComponent",
   props: {
@@ -287,22 +280,38 @@ export default {
       optionpress.play()
       router.push({ name: this.next, params: { id: this.code } });
     },
-    option2: function () {
-      console.log(this.username + "selected" + this.answer2);
-      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
-        code: this.code,
-        username: this.username,
-        answer: this.answer2,
-        category: this.category,
-      });
-      let optionpress = new Audio("../../optionpress.mp3");
-      optionpress.play()
-      router.push({ name: this.next, params: { id: this.code } });
+    beforeUnmount() {
+        this.$timer.unsubscribeAll();
     },
-    home: function () {
-      router.push("/");
+    methods: {
+        option1: function () {
+            axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
+                code: this.code,
+                username: this.username,
+                answer: this.answer1,
+                category: this.category,
+            });
+            let optionpress = new Audio("../../optionpress.mp3");
+            optionpress.play();
+            router.push({ name: this.next, params: { id: this.code } });
+        },
+        option2: function () {
+            console.log(this.username + "selected" + this.answer2);
+            axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
+                code: this.code,
+                username: this.username,
+                answer: this.answer2,
+                category: this.category,
+            });
+            let optionpress = new Audio("../../optionpress.mp3");
+            optionpress.play();
+            router.push({ name: this.next, params: { id: this.code } });
+        },
+        home: function () {
+            router.push("/");
+        },
     },
-  },
+    components: { DialogueBox }
 };
 </script>
 
@@ -354,8 +363,17 @@ canvas {
   width: 100%;
 }
 
-.auto-layout h4 {
+/* .auto-layout h4 {
   margin-bottom: 0;
+} */
+
+.auto-layout p {
+  font-size: 20pt;
+  margin-bottom: 0;
+}
+
+h4 {
+  margin: 0;
 }
 
 .chat-box {
