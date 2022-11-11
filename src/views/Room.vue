@@ -71,7 +71,7 @@
                 <button v-if="validUser == false && currentUsername!=''"
                 type="button" class="nes-btn is-warning" @click="holding()">View Results!</button>
 
-                <button v-else-if="currentUsername == ''"
+                <button v-else-if="currentUsername == '' || regex.test(currentUsername) == false"
                   type="button"
                   class="nes-btn is-disabled"
                   @click="play()"
