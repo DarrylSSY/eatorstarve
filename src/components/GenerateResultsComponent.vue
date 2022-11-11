@@ -47,6 +47,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -129,7 +130,7 @@ export default {
                     keywords.setKeywords(this.parameters)
                     // console.log(keywords.getKeywords())
 
-                    
+
                 axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, {"status": "close"})
                 // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
                 // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]

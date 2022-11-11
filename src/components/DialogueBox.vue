@@ -1,34 +1,26 @@
 <template>
     <!-- <div class="container-sm" style="margin: auto;"> -->
-        <div class="container box nes-container is-rounded p-1"> 
-        <div v-if="type == 'developer'" class="row" style="width: 100%; margin:auto;">
+    <div class="container box nes-container is-rounded p-1"> 
+        <div class="row" style="width: 100%; margin:auto;">
             <div class="col-3 col-sm-2 col-md-2 col-lg-2 p-0" style="display: flex; justify-content:center;">
                 <i class="nes-octocat animate"></i>
             </div>
-            <div class="col-9 col-sm-9 col-md-9 col-lg-10 text text-wrap px-2">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-10 text text-break px-2">
                 <p v-if="text.includes('spicy')">
                     <b>THE GROUP'S SELECTION:</b> 
                     <br>{{text}}
                 </p>
-                <p v-else  class="typewriter ">
-                    {{text}}
-                </p>
+                <div v-else>
+                    <p class="typewriter d-none d-lg-block ">
+                        {{text}}
+                    </p>
+                    <p class="d-lg-none d-md-block">
+                        {{text}}
+                    </p>
+                </div>
             </div>
         </div>
-
-
-        <div v-if="type == 'user'" >
-            <h5 class="typewriter question text-wrap" style="text-align: center; margin:auto">{{ question }} {{ category }}!</h5>
-            <img
-                class="profile"
-                :src="
-                'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
-                "
-            />
-        </div>
     </div>
-<!-- </div> -->
-
 
 </template>
 
@@ -37,7 +29,7 @@ export default {
     name: "DialogueBox",
     props: {
         message: String,
-        type: String,
+        // type: String,
         question: String,
         category: String,
     },
