@@ -162,11 +162,11 @@ export default {
         });
         // qn 3
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
-            if (response.data == "Rich Tai-Tai") {
+            if (response.data == "2") {
                 this.maxprice = 4;
                 this.minprice = 3;
             }
-            else if (response.data == "Middle-Class") {
+            else if (response.data == "1") {
                 this.maxprice = 2;
                 this.minprice = 1;
             }
@@ -184,10 +184,10 @@ export default {
             this.parameters += response.data + "|";
         });
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
-            if (response.data == "Spicy Kick") {
+            if (response.data == "2") {
                 this.parameters += "spicy|";
             }
-            else if (response.data == "Little Kick") {
+            else if (response.data == "1") {
                 this.parameters += "mild-spicy|";
             }
             else {
