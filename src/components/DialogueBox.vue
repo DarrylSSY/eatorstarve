@@ -42,7 +42,7 @@ export default {
     created() {
     setTimeout(() => this.visible =  ``, 3500)
     },
-    mounted() {
+    async mounted() {
         console.log(this.text)
     }
 }

@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        <GenerateResultsComponent :code="code"></GenerateResultsComponent>
+                        <GenerateResultsComponent :code="code" @get-choices="getChoices" ></GenerateResultsComponent>
 
                     </div>
                     <div class="arrow-buttons">
@@ -124,26 +124,26 @@
             </div>
 
         </div>
-        <div class="container p-0" style="margin: auto;">
+        <!-- <div class="container p-0" style="margin: auto;">
             <DialogueBox :message="choices" type="developer"></DialogueBox>
-        </div>
+        </div> -->
     </body>
 </template>
 
 <script>
-import DialogueBox from '@/components/DialogueBox.vue';
+// import DialogueBox from '@/components/DialogueBox.vue';
 import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
 import router from "@/router";
 
 export default {
     name: "ResultView",
-    components: { DialogueBox, GenerateResultsComponent},
+    components: { GenerateResultsComponent},
     setup() {
         const store = useSessionStore();
         return {
             username: store.getUsername,
-            keywords: store.getKeywords,
+            // keywords: store.getKeywords,
             currentUrl: "",
         };
     },
@@ -151,6 +151,7 @@ export default {
         return {
             code: this.$route.params.code,
             choices: '',
+            received_keywords: ''
             }
     },
     
@@ -158,11 +159,16 @@ export default {
     this.currentUrl = window.location.href;
     },
 
-    mounted() {
-        if (this.keywords != '') {
-            this.choices = this.keywords
-        }
+    async updated() {
+        this.choices = this.received_keywords
+        console.log(this.choices, 'jl')
     },
+
+    // async mounted() {
+    //     if (this.keywords == '') {
+    //         this.choices = await fetchOnClient(/* ... */)
+    //     }
+    // },
 
     methods: {
         home: function () {
@@ -184,7 +190,12 @@ export default {
         playSound() {
             let buttonpress = new Audio("../../buttonpress.mp3");
             buttonpress.play();
+        },
+        getChoices: function(choices) {
+            this.received_keywords = choices
+            console.log(choices, "lol")
         }
+        
     }
     
 }
