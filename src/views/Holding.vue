@@ -38,7 +38,7 @@
       <div class="col-8 col-content">
           <h4 class="logo">Eat or Starve</h4>
       </div>
-    
+
       <div class="col-12">
         <div class="ending_container">
           <h2 class="end">The End.</h2>
@@ -73,7 +73,7 @@
               <!-- <div class="col"></div> -->
               <div class="user_list col">
                 <ul>
-                  <li v-for="user in answered" v-bind:key="user" v-bind:user="user" >
+                  <li v-for="user of answered.users" v-bind:key="user">
                     <img style="width: 40px; height: auto;" :src="get_avatar(user)">   {{ user }}
                   </li>
                 </ul>
@@ -166,7 +166,7 @@ import { useSessionStore } from '../stores/session';
 import axios from "axios";
 // import GenerateResultsComponent from "@/components/GenerateResultsComponent";
 // import YesNoRadio  from '../components/YesNoRadio.vue';
-
+import {reactive} from 'vue';
 export default {
   name: "HoldingView",
   // components: {
@@ -182,7 +182,7 @@ export default {
   data() {
     return {
       code: this.$route.params.code,
-      answered: [],
+      answered: reactive({users: []}),
       value: "",
       visible: "hidden",
 
@@ -196,18 +196,24 @@ export default {
 
   mounted() {
     axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}`).then(response => {
-      this.answered = response.data
+      this.answered.users = response.data
+
     })
+    setInterval(function() {
+      axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}`).then(response => {
+        this.answered.users = response.data
+      })}.bind(this),3000);
+
   },
 
   // components: { YesNoRadio },
-  
+
   methods: {
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play();
       router.push("/");
-    },    
+    },
     next: function (){
       router.push({ name: 'Results', params: {id:this.code} })
     },
@@ -217,9 +223,9 @@ export default {
     enter() {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
-      // router.push({ name: 'Result', params: {id:this.code} }) 
+      // router.push({ name: 'Result', params: {id:this.code} })
       document.getElementById('dialog-rounded').showModal();
-      
+
     },
     close() {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -274,7 +280,7 @@ button.is-error {
     margin: 0;
     padding-top: 10px;
     /* font-size: 3.2vw ; */
-    
+
 }
 
 .user {
