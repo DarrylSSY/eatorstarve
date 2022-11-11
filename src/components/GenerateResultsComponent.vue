@@ -109,16 +109,19 @@ export default {
     })
     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
       if (response.data == "Stomachache Come!!") {
-        this.parameters += "spicy "
+        this.parameters += "spicy"
       } else if (response.data == "Little Kick") {
-        this.parameters += "mild-spicy, "
+        this.parameters += "mild-spicy"
       } else {
-        this.parameters += "non-spicy, "
+        this.parameters += "non-spicy"
       }
     })
     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
       if (response.data == "Exotic") {
-        this.parameters += "unique, "
+        this.parameters += ", unique"
+      }
+      else {
+        this.parameters += ' '
       }
     })
     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
@@ -135,15 +138,17 @@ export default {
       "coordinates": this.coordinates
     })
       .then(response => {
-        const keywords = useSessionStore()
-        keywords.setKeywords(this.parameters)
-
 
         axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" })
         // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
         // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
         // this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
         // console.log(response.data)
+        // console.log(response['data'])
+        const keywords = useSessionStore()
+        keywords.setKeywords(this.parameters)
+
+        
         for (let info in response['data']) {
           // console.log(info)
           let category = info.substring(0, info.length - 1)
@@ -158,6 +163,7 @@ export default {
         }
 
         this.result_list = [this.first, this.second, this.third]
+        console.log(this.result_list)
       })
   },
 

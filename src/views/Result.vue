@@ -16,7 +16,7 @@
 
     <body>
 
-        <div class=" container container-sm p-0" style="align-items: end; height:100%">
+        <div class=" container container-sm p-0">
 
             <!-- Top Bar -->
             <div class=" container container-sm " style="position: relative; width: 100%;">
@@ -45,12 +45,13 @@
                     </div>
                 </div>
             </div>
-            
+        </div>
 
 
             <!-- Result Gallery -->
             <div class="gallery">
-                <div id="suggestions" class="carousel slide" data-bs-ride="carousel">
+
+                <div id="suggestions" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
                     <div class="carousel-inner nes-container px-1 py-2 p-sm-3">
                         <!-- <div v-for="(details, name) in top3_locations" :key="name" class="carousel-item active">
                             <div class="card">
@@ -100,6 +101,26 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- copylink -->
+                <div id="link" class="row justify-content-center">
+                        <div class="col-5 col-md-7 col-lg-7 text-center is-rounded px-0">
+                            <input type="text" class="nes-input is-primary" :value="currentUrl" />
+                        </div>
+                        <div class="col-1 p-0" style="width: 2%;"></div>
+                        <div class="col-5 col-md-3 col-lg-3 px-0 py-0">
+                            <button
+                            id="copy"
+                                type="button"
+                                class="nes-btn is-warning text-center"
+                                @click="copy_link"
+                            >
+                                Copy Link
+                            </button>  
+                        <div v-show="copySuccess" class="nes-balloon from-left" data-bs-toggle="popover" data-bs-trigger="focus">
+                        <p>Copied!</p>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -123,13 +144,24 @@ export default {
         return {
             username: store.getUsername,
             keywords: store.getKeywords,
+            currentUrl: "",
         };
     },
     data() {
         return {
             code: this.$route.params.code,
-            choices: this.keywords
+            choices: '',
             }
+    },
+    
+    created() {
+    this.currentUrl = window.location.href;
+    },
+
+    mounted() {
+        if (this.keywords != '') {
+            this.choices = this.keywords
+        }
     },
 
     methods: {
@@ -222,7 +254,7 @@ body {
     margin: auto;
     padding-top: 140px;
     padding-bottom: 140px;
-    width: 80%;
+    width: 75%;
     /* height:max-content; */
     /* margin-bottom: 200px; */
     /* border: 4px black solid; */
@@ -278,5 +310,16 @@ small {
     width: auto;
 }
 
+#link {
+    margin-top: 30px;
+}
+
+#copy {
+    height: 85%;
+}
+
+#link .nes-input {
+    height: 85;
+}
 
 </style>

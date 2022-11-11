@@ -4,8 +4,8 @@
       <p class="title">Are you sure you want to exit?</p>
       <p>Your progress will not be saved.</p>
       <menu class="dialog-menu p-0">
-        <button class="nes-btn">Cancel</button>
         <button class="nes-btn is-primary" @click="home">Confirm</button>
+        <button class="nes-btn">Cancel</button>
       </menu>
     </form>
   </dialog>
