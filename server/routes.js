@@ -9,7 +9,7 @@ const CreatedRoom = require("./models/createdroom");
 
 // get list of rooms
 router.post('/places', (req, res) => {
-    axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&maxprice='+req.body["maxprice"]+'&minprice='+req.body["minprice"]+'&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
+    axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&maxprice='+req.body["maxprice"]+'&minprice='+req.body["minprice"]+'&location='+req.body["coordinates"]+'&radius=5000&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
         .then(response => res.json({
                 "name1": response.data["results"][0]["name"],
                 "address1": response.data["results"][0]["formatted_address"],
@@ -154,6 +154,13 @@ router.post('/createdroom/:code', (req, res) => {
     CreatedRoom.findOneAndUpdate({code: req.params.code}, {status: req.body["status"]}, {new: true})
         .then(createdroom => res.json(createdroom))
         .catch(err => res.json(err));
+});
+
+// get created room info
+router.get('/createdroom/info/:code', (req, res) => {
+  CreatedRoom.find({code: req.params.code})
+    .then(createdroom => res.json(createdroom[0]))
+    .catch(err => res.json(err));
 });
 
 module.exports = router;

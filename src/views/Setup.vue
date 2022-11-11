@@ -39,14 +39,13 @@
               <div class="col-lg-6 col-xl-6 col-md-12 col-sm-12 col-xs-12 mt-md-3 mt-sm-3 mt-xs-3 mt-lg-0 mt-xl-0 text-start ">
                 Location:
                 <div class="nes-select mt-2">
-                  <select required id="location">
-                    <option value="" disabled selected hidden>Select...</option>
-                    <option value="default">Use my current location</option>
+                  <select required id="location" v-model="region">
                     <option value="north">North</option>
                     <option value="south">South</option>
-                    <option value="central">Central</option>
                     <option value="east">East</option>
                     <option value="west">West</option>
+                    <option value="central">Central</option>
+                    <option value="">Current Location</option>
                   </select>
                 </div>
               </div>
@@ -102,10 +101,11 @@ export default {
       dietaryNeeds: [],
       extra: "",
       checked: null,
+      region: "",
     };
   },
   mounted() {
-    navigator.geolocation.getCurrentPosition(this.setCoordinates);
+    navigator.geolocation.getCurrentPosition(this.setCoordinates)
   },
   methods: {
     setCoordinates: function (position) {
@@ -133,7 +133,24 @@ export default {
         error = false;
       }
       // Else create room
-
+      if (this.region == "") {
+        navigator.geolocation.getCurrentPosition(this.setCoordinates);
+      }
+      else if (this.region == "North") {
+        this.coordinates = "1.4304, 103.8354"
+      }
+      else if (this.region == "South") {
+        this.coordinates = "1.2655, 103.8239"
+      }
+      else if (this.region == "East") {
+        this.coordinates = "1.3496, 103.9568"
+      }
+      else if (this.region == "West") {
+        this.coordinates = "1.3368, 103.6942"
+      }
+      else if (this.region == "Central") {
+        this.coordinates = "1.2907, 103.8517"
+      }
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom`, {
         code: generated_code,
         status: "open",

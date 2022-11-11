@@ -8,7 +8,7 @@
   <br>
   {{third}} -->
 
-  
+
 <!-- {{parameters}} -->
   <div v-for="result in result_list" :key="result.idx" class="carousel-item active">
     <div class="card">
@@ -68,6 +68,7 @@ export default {
       parameters: "",
       minprice: "",
       maxprice: "",
+      coordinates: "",
       first: {},
       second: {},
       third: {},
@@ -113,8 +114,12 @@ export default {
                   }
                   axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
                     if (response.data == "Exotic"){
-                      this.parameters += "unique "
+                      this.parameters += "unique, "
                     }
+                    axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
+                      this.parameters += response.data["settings"]
+                      this.coordinates += response.data["coordinates"]
+                    })
 
                   })
                 })
@@ -123,13 +128,12 @@ export default {
           })
 
           // generate place
-          axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
+          axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice, "coordinates":this.coordinates})
               .then(response => {
                 const keywords = useSessionStore()
                     keywords.setKeywords(this.parameters)
-                    // console.log(keywords.getKeywords())
 
-                    
+
                 axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, {"status": "close"})
                 // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
                 // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
@@ -166,7 +170,7 @@ export default {
         for (let i = 0; i < num; i++) {
           str += '$'
         }
-        
+
         return str
       }
     }
