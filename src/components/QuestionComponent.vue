@@ -9,10 +9,10 @@
       </menu>
     </form>
   </dialog>
-  <div class="question-body row gx-4">
+  <div class="question-body row gx-4 justify-content-center" style="position: relative;">
     <!-- Header (Quit button and progress bar) -->
-    <div class="col-12"></div>
-    <div class="col-4 col-md-2 ps-0">
+    <!-- <div class="col-12"></div> -->
+    <div class="col-4 col-md-2 ps-0 top">
       <button
         type="button"
         class="nes-btn is-error"
@@ -21,7 +21,7 @@
         Quit
       </button>
     </div>
-    <div class="col-8 col-md-10 pe-0">
+    <div class="col-8 col-md-10 top">
       <progress
         class="nes-progress"
         :class="color"
@@ -30,7 +30,7 @@
       ></progress>
     </div>
     <!-- Options -->
-    <div class="col-1 col-md-0"></div>
+    <!-- <div class="col-1 col-md-0"></div> -->
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <button
         type="button"
@@ -54,31 +54,34 @@
         <h3>{{ answer2 }}</h3>
       </button>
     </div>
+  </div>
+  <div class="dialogue-box container p-0">
     <!-- Question number, health bar and username -->
     <div class="col-12 row px-0 mx-0">
-      <div class="info col-5 col-md-2 ps-0 py-0">
+      <div class="info col-5 col-md-2 ps-0 py-0" style="height: 100%;">
         <!-- Username -->
-        <div class="nes-container is-centered is-rounded">
+        <div class="nes-container is-centered is-rounded info-box">
           {{ username }}
         </div>
       </div>
-      <div class="info col-9 col-md-5 ps-0">
+      <div class="info col-12 col-sm-10 col-md-5 ps-0 pt-0 info-box">
         <div class="nes-container is-rounded">
           <canvas id="canvas" height="20"></canvas>
         </div>
       </div>
     </div>
 
-    <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
+    <div class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0 ">
       <img
         class="profile"
-        v-bind:src="
+        :src="
           'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
         "
       />
       <h3>{{ question }} {{ category }}!</h3>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -279,9 +282,26 @@ canvas {
   bottom: -4px;
 }
 .question-body {
-  height: 100vh;
+  height: 80vh;
 }
-.info {
+/* .info {
   height: fit-content;
+  height: 100%;
+} */
+
+.dialogue-box {
+  position: absolute;
+  bottom: 5px;
+  height: 120px;
+}
+
+.top {
+    padding-top: 24px;
+}
+
+.info-box {
+  /* padding: 10px; */
+  height: 60px;
+  margin-bottom: 20px;
 }
 </style>

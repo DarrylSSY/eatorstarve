@@ -1,6 +1,6 @@
 <template>
   <body>
-    <div class="container-sm">
+    <div class="container-sm p-0">
       <QuestionComponent category="base" :code="code" />
       <UsernameCheckerComponent />
     </div>
