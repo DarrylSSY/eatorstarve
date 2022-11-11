@@ -29,19 +29,19 @@
               />
             </div>
 
-            <!-- if username invalid, this will appear in red below username --> 
+            <!-- if username invalid, this will appear in red below username -->
             <!-- need fix change username after its been taken and directed  -->
             <div class="col-12 ">
               <div id="usernameError">
                 <p class="text-danger" v-if="validUse== false">Please enter a valid username</p>
                 <p class="text-danger" v-else-if="validUser == false && currentUsername != ''">{{ currentUsername }} has completed the game! View results or change username?</p>
+                <p class="text-danger" v-else-if="regex.test(currentUsername) == false">Invalid username <br>(12 characters max and no special characters)</p>
               </div>
 
             </div>
 
-            <div class="col-12 mb-2">
-              <img
-                :src="
+            <div class="col-12 mb-2" v-if="regex.test(currentUsername) == true">
+              <img :src="
                   'https://avatars.dicebear.com/api/pixel-art/' +
                   currentUsername +
                   '.svg'
@@ -67,10 +67,10 @@
 
               <!-- start game button -->
               <div id="buttonNext" class="col-6">
-                <button v-if="validUser == false && currentUsername!=''" 
+                <button v-if="validUser == false && currentUsername!=''"
                 type="button" class="nes-btn is-warning" @click="holding()">View Results!</button>
 
-                <button v-else-if="currentUsername == '' || currentUsername.includes(regex)"
+                <button v-else-if="currentUsername == '' || regex.test(currentUsername) == false"
                   type="button"
                   class="nes-btn is-disabled"
                   @click="play()"
@@ -86,7 +86,7 @@
                   Start Game!
                 </button>
 
-                
+
               </div>
             </div>
           </div>
@@ -99,8 +99,8 @@
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 text-center is-rounded">
               <input type="text" class="nes-input is-primary" :value="currentUrl" />
             </div>
-          
-            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
+
+            <div class="col-2 px-0 py-0">
                 <button
                 id="copy"
                   type="button"
@@ -108,11 +108,11 @@
                   @click="copy_link"
                 >
                   Copy Link
-                </button>  
+                </button>
                 <div v-show="copySuccess" class="nes-balloon from-left hideElement" data-bs-toggle="popover" data-bs-trigger="focus">
                   <p>Copied!</p>
                 </div>
-            </div>        
+            </div>
 
           <RoomCheckerComponent :roomcode="code" />
         </div>
@@ -128,7 +128,7 @@ import { useSessionStore } from "../stores/session";
 import axios from "axios";
 
 export default {
-  
+
   name: "RoomView",
   components: {
     RoomCheckerComponent,
@@ -141,13 +141,14 @@ export default {
       validUser: false,
       currentUsername: "",
       copySuccess: false,
+      regex: new RegExp("^[A-Za-z0-9]{1,12}$"),
       error1: 'Please enter a username',
       regex: /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g,
     };
   },
 
   created() {
-    
+
     this.currentUrl = window.location.href;
   },
   

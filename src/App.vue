@@ -5,8 +5,24 @@
 </template>
 
 <script>
+
+
 export default {
   name: "App",
+  data() {
+    return {
+      music: ""
+    };
+  },
+  watch: {
+    $route() {
+      this.music.play()
+
+    },
+  },
+  created() {
+    this.music = new Audio("../../bgm.mp3");
+  },
 };
 </script>
 
