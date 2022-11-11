@@ -26,7 +26,6 @@
                 class="nes-input is-primary"
                 placeholder="Enter a username"
                 @input="checkUsername()"
-                pattern="[A-Za-z0-9]{1,8}"
               />
             </div>
 
@@ -36,7 +35,7 @@
               <div id="usernameError">
                 <p class="text-danger" v-if="currentUsername==''">{{ error1 }}</p>
                 <p class="text-danger" v-else-if="validUser == false && currentUsername != ''">{{ currentUsername }} has completed the game! View results or change username?</p>
-                <p class="text-danger" v-else-if="regex.test(currentUsername) == false">Invalid username</p>
+                <p class="text-danger" v-else-if="regex.test(currentUsername) == false">Invalid username <br>(12 characters max and no special characters)</p>
               </div>
 
             </div>
@@ -142,7 +141,7 @@ export default {
       validUser: false,
       currentUsername: "",
       copySuccess: false,
-      regex: new RegExp("^[A-Za-z0-9]{1,8}$"),
+      regex: new RegExp("^[A-Za-z0-9]{1,12}$"),
       error1: 'Please enter a username',
     };
   },
