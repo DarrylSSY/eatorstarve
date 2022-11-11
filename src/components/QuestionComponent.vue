@@ -47,7 +47,7 @@
         <h5 class="col-2 text-center">{{ foption2 }}</h5>
       </div>
     </div>
-    
+
       <!-- Question number, health bar and username -->
       <div class="col-12 row px-0 mx-0 mb-2 mt-auto">
         <div class="info col-5 col-md-2 ps-0 py-0">
@@ -75,7 +75,7 @@
     </div>
 
   <!-- END for Slider Template -->
-  </div> 
+  </div>
   <div v-else>
     <!-- START for 2 Question Template -->
     <dialog id="dialog-rounded" class="nes-dialog is-rounded">
@@ -149,7 +149,7 @@
         </div>
       </div>
 
-      <DialogueBox :question="question" :category="category" type='user'/>  
+      <DialogueBox :question="question" :category="category" type='user'/>
     </div>
   <!-- END of 2 Question Template -->
   </div>
@@ -240,6 +240,7 @@ export default {
       this.progress = 90;
       this.color = "is-success";
     }
+
     function generate2RandomNumber(x) {
       let num1 = Math.floor(Math.random() * x);
       let num2 = Math.floor(Math.random() * x);
@@ -252,6 +253,7 @@ export default {
       }
       return [num1, num2];
     }
+
     axios
       .get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`)
       .then((response) => {
@@ -269,7 +271,7 @@ export default {
     this.$timer.unsubscribeAll();
   },
   methods: {
-    option1: function () {
+    option1: function() {
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,
@@ -281,37 +283,38 @@ export default {
       router.push({ name: this.next, params: { id: this.code } });
     },
     beforeUnmount() {
-        this.$timer.unsubscribeAll();
+      this.$timer.unsubscribeAll();
     },
     methods: {
-        option1: function () {
-            axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
-                code: this.code,
-                username: this.username,
-                answer: this.answer1,
-                category: this.category,
-            });
-            let optionpress = new Audio("../../optionpress.mp3");
-            optionpress.play();
-            router.push({ name: this.next, params: { id: this.code } });
-        },
-        option2: function () {
-            console.log(this.username + "selected" + this.answer2);
-            axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
-                code: this.code,
-                username: this.username,
-                answer: this.answer2,
-                category: this.category,
-            });
-            let optionpress = new Audio("../../optionpress.mp3");
-            optionpress.play();
-            router.push({ name: this.next, params: { id: this.code } });
-        },
-        home: function () {
-            router.push("/");
-        },
+      option1: function() {
+        axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
+          code: this.code,
+          username: this.username,
+          answer: this.answer1,
+          category: this.category,
+        });
+        let optionpress = new Audio("../../optionpress.mp3");
+        optionpress.play();
+        router.push({ name: this.next, params: { id: this.code } });
+      },
+      option2: function() {
+        console.log(this.username + "selected" + this.answer2);
+        axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
+          code: this.code,
+          username: this.username,
+          answer: this.answer2,
+          category: this.category,
+        });
+        let optionpress = new Audio("../../optionpress.mp3");
+        optionpress.play();
+        router.push({ name: this.next, params: { id: this.code } });
+      },
+      home: function() {
+        router.push("/");
+      },
     },
     components: { DialogueBox }
+  }
 };
 </script>
 
@@ -415,6 +418,6 @@ div.text_component {
   bottom: 40px;
   height: 150px;
   font-size: 25px;
-  
+
 }
 </style>
