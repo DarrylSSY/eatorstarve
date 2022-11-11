@@ -21,7 +21,7 @@
                   <input type="text" class="nes-input form-control" :placeholder="date" :value="inputValue"
                     v-on="inputEvents">
                   <span class="input-group-text border-0 sm-px-1 "><button type="button" class="nes-btn is-error"
-                      :disabled="!date" @click="date = new Date();clear()">Clear</button></span>
+                      :disabled="!date" @click="date = new Date();clear()">Reset Datetime</button></span>
                 </div>
               </template>
             </v-date-picker>
