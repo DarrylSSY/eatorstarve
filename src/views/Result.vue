@@ -72,7 +72,7 @@
                 </div>
             </div>
 
-            <DialogueBox message="<insert funny shit>"></DialogueBox>
+            <DialogueBox :message="keywords"></DialogueBox>
         </div>
     </body>
 </template>
@@ -89,39 +89,24 @@ export default {
         const store = useSessionStore();
         return {
             username: store.getUsername,
+            keywords: store.getKeywords,
         };
     },
     data() {
         return {
             code: this.$route.params.code,
             answered: [],
-            // will need retrive data after generation of result
-            top3_locations: {
-                "Name": {
-                    img_url: "",
-                    rating: "",
-                    type: "",
-                    address: "",
-                    building_name: "",
-                    opening_time: "",
-                    tags: [],
-                    map_url: ""
-                },
-                "Name2": {
-                    img_url: "",
-                    rating: "",
-                    type: "",
-                    address: "",
-                    building_name: "",
-                    opening_time: "",
-                    tags: [],
-                    map_url: ""
-                },
-            }
+            
         };
     },
+
+    mounted() {
+        console.log(this.keywords)
+    }
     
 }
+
+
 </script>
 
 <style scoped>

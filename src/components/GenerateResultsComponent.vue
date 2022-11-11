@@ -117,6 +117,8 @@ export default {
                     if (response.data == "Exotic"){
                       this.parameters += "unique "
                     }
+                    const keywords = useSessionStore()
+                    keywords.setKeywords(this.parameters)
                   })
                 })
               })
@@ -179,7 +181,7 @@ export default {
 
 <style>
   .open_map {
-    width: 100%;
+    width: 80%;
     position: absolute;
     bottom: 0;
   }

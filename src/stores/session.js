@@ -4,6 +4,7 @@ export const useSessionStore = defineStore('session', {
     state: () => {
         return {
             username: '',
+            keywords: '',
         }
 
     },
@@ -11,11 +12,19 @@ export const useSessionStore = defineStore('session', {
         getUsername() {
             return this.username
         },
+
+        getKeywords() {
+            return this.keywords
+        }
     },
     actions: {
         setUsername(username) {
             this.username = username
         },
+
+        setKeywords(keywords) {
+            this.keywords = keywords
+        }
 
     }
 });
