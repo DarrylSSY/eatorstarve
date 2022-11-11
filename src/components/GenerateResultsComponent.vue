@@ -12,11 +12,11 @@
 <!-- {{parameters}} -->
   <div v-for="result in result_list" :key="result.idx" class="carousel-item active">
     <div class="card">
-      <div class="row gx-4">
-          <div class="col-md-4">
+      <div class="row gx-4" style="width: 100%; margin: auto;">
+          <div class="col-xs-12 col-md-4">
               <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" style="height: 100%; width: 100%; object-fit: cover;">
           </div>
-          <div class="col-md-8">
+          <div class=" col-xs-12 col-md-8">
               <div class="card-body" style="position: relative;">
                   <h5 class="card-title">{{result['name']}}</h5>
                   <p class="card-text">
@@ -35,13 +35,10 @@
                     <small class="price">
                       Price level: {{printCost(result['pricelevel'])}}
                     </small>
-                    <!-- Located in: {{details.building_name}}
-                    <br>
-                    Status: {{details.opening_time}} -->
                   </p>
                   <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                   <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
-                    <button type="button" class="nes-btn is-warning open_map">Open URL</button>
+                    <button type="button" class="nes-btn is-warning open_map">Open Map</button>
                   </a>
               </div>
           </div>
@@ -78,10 +75,10 @@ export default {
   mounted() {
       // qn 1
       axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
-        this.parameters = response.data + " "
+        this.parameters = response.data + ", "
         // qn 2
         axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
-          this.parameters += response.data + " "
+          this.parameters += response.data + ", "
           // qn 3
           axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
             if (response.data == "Rich Tai-Tai") {
@@ -98,19 +95,19 @@ export default {
             }
             // qn 4
             axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
-              this.parameters += response.data + " "
+              this.parameters += response.data + ", "
               // qn 5
               axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
-                this.parameters += response.data + " "
+                this.parameters += response.data + ", "
                 axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
                   if (response.data == "Stomachache Come!!"){
                     this.parameters += "spicy "
                   }
                   else if (response.data == "Little Kick"){
-                    this.parameters += "mild-spicy "
+                    this.parameters += "mild-spicy, "
                   }
                   else {
-                    this.parameters += "non-spicy "
+                    this.parameters += "non-spicy, "
                   }
                   axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
                     if (response.data == "Exotic"){
@@ -118,11 +115,13 @@ export default {
                     }
                     const keywords = useSessionStore()
                     keywords.setKeywords(this.parameters)
+                    // console.log(keywords.getKeywords())
                   })
                 })
               })
             })
           })
+
           // generate place
           axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
               .then(response => {
@@ -146,10 +145,8 @@ export default {
                   }
                 }
 
-
-                
                 this.result_list = [this.first, this.second, this.third]
-                console.log(this.result_list)
+                // console.log(this.result_list)
 
 
               })
@@ -166,7 +163,7 @@ export default {
         if (num == null) {
           return '-'
         }
-        console.log(num)
+        // console.log(num)
         let str = ''
         for (let i = 0; i < num; i++) {
           str += '$'
@@ -181,8 +178,8 @@ export default {
 <style>
   .open_map {
     width: 80%;
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
   }
 
   .card, .card .row {
@@ -191,16 +188,16 @@ export default {
     border: 0px;
   }
 
-  .card-body {
+  .card-body, .card-item {
     height: 100%;
   }
   .card {
-    height: 392px;
+    height: 90%;
     width: auto;
   }
 
-  .price {
+  /* .price {
     position: absolute;
     bottom: 70px;
-  }
+  } */
 </style>

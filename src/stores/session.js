@@ -14,6 +14,7 @@ export const useSessionStore = defineStore('session', {
         },
 
         getKeywords() {
+            // console.log(this.keywords)
             return this.keywords
         }
     },

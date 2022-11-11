@@ -16,34 +16,37 @@
 
     <body>
 
-        <div class="container-sm">
+        <div class=" container container-sm p-0" style="align-items: end; height:100%">
 
             <!-- Top Bar -->
-            <div class="row top gx-4">
-                <div class="col-2 col-md-2 ps-0 col-content">
-                    <button
-                        type="button"
-                        class="nes-btn is-error"
-                        onclick="document.getElementById('exitModal').showModal();"
-                    >
-                        Exit
-                    </button>
-                </div>
+            <div class=" container container-sm " style="position: relative; width: 100%;">
+                <div class="row top gx-4">
+                    <div class="col-3 col-md-2 ps-0 col-content">
+                        <button
+                            type="button"
+                            class="nes-btn is-error"
+                            onclick="document.getElementById('exitModal').showModal();"
+                        >
+                            Exit
+                        </button>
+                    </div>
 
-                <div class="col-8 col-content">
-                    <h4 class="logo">Eat or Starve</h4>
-                </div>
+                    <div class="col-6 col-md-8 col-content px-2 px-sm-4 px-md-5 py-4 py-sm-2 py-md-2">
+                        <h4 class="logo">Eat or Starve</h4>
+                    </div>
 
-                <div class="user col-2 col-content nes-container">
-                    {{ username }}
+                    <div class="user col-3 col-md-2 col-content nes-container">
+                        {{ username }}
+                    </div>
                 </div>
             </div>
+            
 
 
             <!-- Result Gallery -->
             <div class="gallery">
                 <div id="suggestions" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner nes-container">
+                    <div class="carousel-inner nes-container px-1 py-2 p-sm-3">
                         <!-- <div v-for="(details, name) in top3_locations" :key="name" class="carousel-item active">
                             <div class="card">
                                 <div class="row gx-4">
@@ -71,7 +74,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                             <!-- <button type="button" class="nes-btn is-warning open_map" @click="window.location.href='map_url'">Open URL</button>
                                         </div>
                                     </div>
@@ -94,7 +97,10 @@
                 </div>
             </div>
 
-            <DialogueBox message="<insert funny shit>"></DialogueBox>
+        </div>
+        <!-- <RoomCheckerComponent :roomcode="code"/> -->
+        <div class="container p-0" style="margin: auto;">
+            <DialogueBox :message="keywords" type="developer"></DialogueBox>
         </div>
     </body>
 </template>
@@ -104,10 +110,11 @@ import DialogueBox from '@/components/DialogueBox.vue';
 import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
 import router from "@/router";
+// import RoomCheckerComponent from '@/components/RoomCheckerComponent.vue';
 
 export default {
     name: "ResultView",
-    components: { DialogueBox, GenerateResultsComponent },
+    components: { DialogueBox, GenerateResultsComponent},
     setup() {
         const store = useSessionStore();
         return {
@@ -118,31 +125,7 @@ export default {
     data() {
         return {
             code: this.$route.params.code,
-            answered: [],
-            // will need retrive data after generation of result
-            top3_locations: {
-                "Name": {
-                    img_url: "",
-                    rating: "",
-                    type: "",
-                    address: "",
-                    building_name: "",
-                    opening_time: "",
-                    tags: [],
-                    map_url: ""
-                },
-                "Name2": {
-                    img_url: "",
-                    rating: "",
-                    type: "",
-                    address: "",
-                    building_name: "",
-                    opening_time: "",
-                    tags: [],
-                    map_url: ""
-                },
             }
-        };
     },
 
     methods: {
@@ -164,6 +147,9 @@ div.nes-container {
 
 .top {
     padding-top: 24px;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 
 .col-content {
@@ -176,9 +162,10 @@ button.is-error {
 }
 
 .logo {
-    padding: 17.8px 0px;
+    /* padding-top: 17.8px; */
     text-align: center;
     margin: 0;
+    font-size: 3.2vw ;
 }
 
 .user {
@@ -196,19 +183,23 @@ body {
         rgba(245, 200, 95, 0.66),
         rgba(245, 200, 95, 0.66)),
         url(../assets/bg1.jpeg);
+    background-attachment:local;
     box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
+    align-items: center;
+
     /* background-color: black; */
 }
 
 .carousel-inner {
     margin: auto;
-    height: 460px;
+    height: 50%;
 }
 
 .gallery {
     margin: auto;
-    margin-top: 60px;
+    padding-top: 120px;
     width: 80%;
+    /* margin-bottom: 200px; */
     /* border: 4px black solid; */
 }
 
@@ -244,12 +235,12 @@ small {
     text-align: left;
 }
 
-.tag-style {
+/* .tag-style {
     font-size: 8pt;
     height: 30px;
     padding: 3px 10px;
     width: auto;
-}
+} */
 
 .card-body .col {
     /* width: fit-content; */
@@ -261,5 +252,6 @@ small {
 .card-body .row {
     width: auto;
 }
+
 
 </style>
