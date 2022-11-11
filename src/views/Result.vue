@@ -21,7 +21,7 @@
             <!-- Top Bar -->
             <div class=" container container-sm " style="position: relative; width: 100%;">
                 <div class="row top gx-4">
-                    <div class="col-3 col-md-3 col-lg-2 ps-0 col-content">
+                    <div class="col-4 col-md-4 col-lg-3 ps-0 col-content">
                         <button
                             type="button"
                             class="nes-btn is-error"
@@ -31,15 +31,15 @@
                         </button>
                     </div>
 
-                    <div class="col-6 col-md-6 col-lg-8 col-content px-2 px-sm-4 px-md-5 py-4 py-sm-2 py-md-2">
+                    <div class="col-4 col-md-4 col-lg-6 col-content px-2 px-sm-4 px-md-5 py-2 py-sm-2 py-md-2">
                         <h4 class="logo">Eat or Starve</h4>
                     </div>
 
-                    <div class="user col-3 col-md-3 col-lg-2 col-content nes-container">
+                    <div class="user col-4 col-md-4 col-lg-3 col-content nes-container">
                         <p v-if="username == ''">
                             {{code}}
                         </p>
-                        <p v-else>
+                        <p v-else class="text-break">
                             {{ username }}
                         </p>
                     </div>
@@ -49,7 +49,7 @@
 
 
             <!-- Result Gallery -->
-            <div class="gallery container">
+            <div class="gallery ">
 
                 <div id="suggestions" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
                     <div class="carousel-inner nes-container px-1 py-2 p-sm-3">
@@ -105,7 +105,7 @@
                 <!-- copylink -->
                 <div id="link" class="row justify-content-center gy-1">
                         <div class="col-8 col-md-7 col-lg-7 text-center is-rounded ps-0">
-                            <input type="text" class="nes-input is-primary text-center" :value="currentUrl" style="width:calc(100% + 8px);"/>
+                            <input type="text" class="nes-input is-primary text-center" :value="currentUrl" style="width:calc(100% + 16px);"/>
                         </div>
                         <div class="col-8 col-md-3 col-lg-3 p-0 py-0">
                             <button
@@ -324,7 +324,7 @@ button.is-error {
     /* padding-top: 17.8px; */
     text-align: center;
     margin: 0;
-    font-size: 3vw ;
+    font-size: 2vw;
 }
 
 .user {
@@ -418,6 +418,7 @@ small {
 
 #link {
     margin-top: 10px;
+    width: 100%;
 }
 
 #copy {
@@ -434,5 +435,17 @@ small {
     right: 0px;
     z-index: 1;
 }
+
+@media screen and (max-width: 767px) {
+        .logo {
+            font-size: 1.8vh;
+        }
+        .gallery {
+            margin: 0;
+            width: 100%;
+        }
+
+    }
+
 
 </style>

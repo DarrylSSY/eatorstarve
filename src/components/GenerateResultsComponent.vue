@@ -1,52 +1,51 @@
 <template>
-  <!-- <button type="button" class="nes-btn is-success" @click="generate">Generate results</button> -->
-  <!-- {{parameters}} -->
-  <!-- <br>
-  {{first}}
-  <br>
-  {{second}}
-  <br>
-  {{third}} -->
+
+    <div v-if="data_loaded">
+        <div v-for="result in result_list" :key="result.idx" class="carousel-item active">
+            <div class="card">
+            <div class="row gx-4" style="width: 100%; margin: auto;">
+                <div class="col-xs-12 col-md-4" style="height: fit-content;">
+                    <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
+                </div>
+                <div class=" col-xs-12 col-md-8">
+                    <div class="card-body" style="position: relative;">
+                        <h5 class="card-title">{{result['name']}}</h5>
+                        <p class="card-text">
+                            <small class="text-muted">
+                            <i class="nes-icon is-small star"></i>
+                            {{result['rating']}}/5 <br>
+                            ===>
+                            [{{result['userratings']}} Users<i class="nes-icon coin is-small"></i>]
+                            </small>
 
 
-<!-- {{parameters}} -->
-  <div v-for="result in result_list" :key="result.idx" class="carousel-item active">
-    <div class="card">
-      <div class="row gx-4" style="width: 100%; margin: auto;">
-          <div class="col-xs-12 col-md-4" style="height: fit-content;">
-              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
-          </div>
-          <div class=" col-xs-12 col-md-8">
-              <div class="card-body" style="position: relative;">
-                  <h5 class="card-title">{{result['name']}}</h5>
-                  <p class="card-text">
-                    <small class="text-muted">
-                      <i class="nes-icon is-small star"></i>
-                      {{result['rating']}}/5 <br>
-                      ===>
-                      [{{result['userratings']}} Users<i class="nes-icon coin is-small"></i>]
-                    </small>
-
-
-                    <br><br>
-                    <b>Address: </b><br>
-                    {{result['address']}}
-                    <br><br>
-                    <br><br>
-                    <small class="price">
-                      Price level: {{printCost(result['pricelevel'])}}
-                    </small>
-                    <br>
-                  </p>
-                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-                  <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
-                    <button type="button" class="nes-btn is-warning open_map" @click="playSound">Open Map</button>
-                  </a>
-              </div>
-          </div>
-      </div>
+                            <br><br>
+                            <b>Address: </b><br>
+                            {{result['address']}}
+                            <br><br>
+                            <br><br>
+                            <small class="price">
+                            Price level: {{printCost(result['pricelevel'])}}
+                            </small>
+                            <br>
+                        </p>
+                        <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                        <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
+                            <button type="button" class="nes-btn is-warning open_map" @click="playSound">Open Map</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <div v-else>
+        <div class="carousel-item active"  style="text-align: center; color: grey; height: 300px;">
+            <h3>Loading...</h3>
+            Meanwhile, let's chill a little.
+        </div>
+    </div>
 
 </template>
 
@@ -75,6 +74,7 @@ export default {
             second: {},
             third: {},
             result_list: [],
+            data_loaded: false
         };
     },
     async mounted() {
@@ -163,6 +163,7 @@ export default {
             }
             this.result_list = [this.first, this.second, this.third];
             console.log(this.result_list);
+            this.data_loaded = true
         });
     },
     methods: {
@@ -225,6 +226,7 @@ export default {
         .card img {
             height: 10vh;
         }
+
     }
 
 </style>
