@@ -12,7 +12,7 @@
   <div class="question-body row gx-4 justify-content-center" style="position: relative;">
     <!-- Header (Quit button and progress bar) -->
     <!-- <div class="col-12"></div> -->
-    <div class="col-4 col-md-2 ps-0 top">
+    <div class="col-4 col-md-4 col-lg-2 top">
       <button
         type="button"
         class="nes-btn is-error"
@@ -21,7 +21,7 @@
         Quit
       </button>
     </div>
-    <div class="col-8 col-md-10 top">
+    <div class="col-8 col-md-8 col-lg-10 top">
       <progress
         class="nes-progress"
         :class="color"
