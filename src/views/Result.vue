@@ -183,9 +183,11 @@ body {
         rgba(245, 200, 95, 0.66),
         rgba(245, 200, 95, 0.66)),
         url(../assets/bg1.jpeg);
-    background-attachment:local;
-    box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
-    align-items: center;
+    display: block;
+    overflow: auto;
+    /* background-attachment: fixed; */
+    /* box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25); */
+    /* align-items: center; */
 
     /* background-color: black; */
 }
@@ -197,8 +199,10 @@ body {
 
 .gallery {
     margin: auto;
-    padding-top: 120px;
+    padding-top: 20vh;
+    padding-bottom: 120px;
     width: 80%;
+    /* height:max-content; */
     /* margin-bottom: 200px; */
     /* border: 4px black solid; */
 }

@@ -22,19 +22,21 @@
                   <p class="card-text">
                     <small class="text-muted">
                       <i class="nes-icon is-small star"></i>
-                      {{result['rating']}}/5
+                      {{result['rating']}}/5 <br>
                       ===>
                       [{{result['userratings']}} Users<i class="nes-icon coin is-small"></i>]
                     </small>
 
+
                     <br><br>
-                    <br>
                     <b>Address: </b><br>
                     {{result['address']}}
+                    <br><br>
                     <br><br>
                     <small class="price">
                       Price level: {{printCost(result['pricelevel'])}}
                     </small>
+                    <br>
                   </p>
                   <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                   <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
