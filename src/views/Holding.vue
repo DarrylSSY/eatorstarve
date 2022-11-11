@@ -52,7 +52,7 @@
         <button type="button" class="nes-btn is-error" @click="exit">Exit</button>
       </div>
 
-      <div class="col-6 col-md-8 col-content">
+      <div class="col-6 col-md-8 col-content" style="display:flex; align-items:center; justify-content:center">
           <h4 class="logo">The End</h4>
       </div>
 
