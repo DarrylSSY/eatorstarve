@@ -20,6 +20,10 @@ $primary-colors: (
     font-size: 10px;
   }
 }
+.vc-time-picker, .vc-time-content{
+  width:fit-content;
+  height:fit-content
+}
 
 $warning-colors: (
   normal: #ffc53d,
