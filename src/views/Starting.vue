@@ -1,26 +1,25 @@
 <template>
     <div class="external" @load="starttimer">
-   <div class="whole container">   
- 
-     <div class="countdown">
-        <div>
-            <h3>Game Starting in...</h3>
-        </div>
-        <div class="cdcircle rounded rounded-circle">
-            <h1> {{countDown}}</h1>
-        </div>
-     </div>
+        <div class="whole container">   
         
-       <!-- <div class="text_component container nes-container is-rounded">
-         <h5>Remember to keep an eye on your HP!</h5>
-       </div> -->
-      <DialogueBox message="Remember to keep an eye on your HP!" type="developer" style="text-align: left;"/>
-   </div>
-</div>
+            <div class="countdown">
+                <div>
+                    <h3>Game Starting in...</h3>
+                </div>
+                <div class="cdcircle rounded rounded-circle">
+                    <h1> {{countDown}}</h1>
+                </div>
+            </div>
+                
+            <!-- <div class="text_component container nes-container is-rounded">
+                <h5>Remember to keep an eye on your HP!</h5>
+            </div> -->
 
-   
-     
- 
+        </div>
+    </div>
+    <div class="container p-0" style="margin: auto;">
+        <DialogueBox message="Remember to keep an eye on your HP!" type="developer" style="text-align: left;"/>
+    </div>
  </template>
  
  

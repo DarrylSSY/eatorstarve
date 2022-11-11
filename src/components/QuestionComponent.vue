@@ -1,18 +1,19 @@
 <template>
+  <!-- START for 2 Question Template -->
   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
     <form method="dialog">
       <p class="title">Are you sure you want to exit?</p>
       <p>Your progress will not be saved.</p>
       <menu class="dialog-menu p-0">
-        <button class="nes-btn">Cancel</button>
         <button class="nes-btn is-primary" @click="home">Confirm</button>
+        <button class="nes-btn">Cancel</button>
       </menu>
     </form>
   </dialog>
-  <div class="question-body row gx-4">
+  <div class="question-body row gx-4 justify-content-center" style="position: relative;">
     <!-- Header (Quit button and progress bar) -->
-    <div class="col-12"></div>
-    <div class="col-4 col-md-2 ps-0">
+    <!-- <div class="col-12"></div> -->
+    <div class="col-4 col-md-4 col-lg-2 top">
       <button
         type="button"
         class="nes-btn is-error"
@@ -21,7 +22,7 @@
         Quit
       </button>
     </div>
-    <div class="col-8 col-md-10 pe-0">
+    <div class="col-8 col-md-8 col-lg-10 top">
       <progress
         class="nes-progress"
         :class="color"
@@ -30,7 +31,7 @@
       ></progress>
     </div>
     <!-- Options -->
-    <div class="col-1 col-md-0"></div>
+    <!-- <div class="col-1 col-md-0"></div> -->
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <button
         type="button"
@@ -54,31 +55,34 @@
         <h3>{{ answer2 }}</h3>
       </button>
     </div>
+  </div>
+  <div class="dialogue-box container p-0">
     <!-- Question number, health bar and username -->
-    <div class="col-12 row px-0 mx-0">
-      <div class="info col-5 col-md-2 ps-0 py-0">
+    <div class="col-12 row px-0 mx-0 gy-1">
+      <div class="info col-5 col-md-4 col-lg-3 col-xl-2 ps-0 py-0" style="height: 100%;">
         <!-- Username -->
-        <div class="nes-container is-centered is-rounded">
+        <div class="nes-container is-centered is-rounded p-2">
           {{ username }}
         </div>
       </div>
-      <div class="info col-9 col-md-5 ps-0">
-        <div class="nes-container is-rounded">
+      <div class="info col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 col-xxl-3 ps-0 pt-0 info-box mb-2">
+        <div class="nes-container is-rounded py-2 px-0 ">
           <canvas id="canvas" height="20"></canvas>
         </div>
       </div>
     </div>
 
-    <div class="chat-box nes-container is-centered is-rounded col-12 my-0">
+    <div class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0 ">
       <img
         class="profile"
-        v-bind:src="
+        :src="
           'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
         "
       />
-      <h3>{{ question }} {{ category }}!</h3>
+      <h3 class="col-7 col-sm-9">{{ question }} {{ category }}!</h3>
     </div>
   </div>
+  <!-- END of 2 Question Template -->
 </template>
 
 <script>
@@ -104,7 +108,8 @@ export default {
       answer2: "Loading",
       btn_state_1: "is-disabled",
       btn_state_2: "is-disabled",
-      question: "Choose your ",
+      question_front: "Choose your ",
+      question_back: " !",
       next: "Question2",
       progress: 0,
       color: "",
@@ -136,30 +141,44 @@ export default {
       this.next = "Question2";
       this.progress = 0;
       this.color = "";
+      this.question_front = "Which ";
+      this.question_back = " are you feeling?";
     } else if (this.category == "poultry") {
       this.next = "Question3";
       this.progress = 10;
-      this.color = "is-error";
+      this.color = "is-error";      
+      this.question_front = "Select your ";
+      this.question_back = "!";
     } else if (this.category == "price") {
       this.next = "Question4";
       this.progress = 25;
       this.color = "is-error";
+      this.question_front = "Indicate the ";
+      this.question_back = " level!";
     } else if (this.category == "texture") {
       this.next = "Question5";
       this.progress = 40;
       this.color = "is-warning";
+      this.question_front = "Which ";
+      this.question_back = " do you prefer?";
     } else if (this.category == "base") {
       this.next = "Question6";
       this.progress = 55;
       this.color = "is-warning";
+      this.question_front = "Indicate your ";
+      this.question_back = " choice.";
     } else if (this.category == "spice") {
       this.next = "Question7";
       this.progress = 75;
       this.color = "is-success";
+      this.question_front = "What is your ";
+      this.question_back = " tolerance level?";
     } else {
       this.next = "Holding";
       this.progress = 90;
       this.color = "is-success";
+      this.question_front = "Want some ";
+      this.question_back = "?";
     }
     axios.get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`).then((response) => {
         this.generate2RandomOptions(response["data"].length, response)
@@ -279,9 +298,25 @@ canvas {
   bottom: -4px;
 }
 .question-body {
-  height: 100vh;
+  height: 80vh;
 }
 .info {
-  height: fit-content;
+  /* height: fit-content; */
+  height: 50px;
+}
+
+.dialogue-box {
+  position: absolute;
+  bottom: 5px;
+}
+
+.top {
+    padding-top: 24px;
+}
+
+.info-box {
+  /* padding: 10px; */
+  height: 60px;
+  margin-bottom: 20px;
 }
 </style>
