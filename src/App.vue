@@ -39,10 +39,10 @@ p, body, button {
   font-size: 16px;
 }
 
-/* img {
-  height: 100px;
+img {
+  height: 20vh;
   width: 100px;
-} */
+}
 
 @media (max-width: 992px) {
   h1 {
@@ -56,10 +56,6 @@ p, body, button {
   .nes-input,
   button {
     font-size: 14px;
-  }
-  img {
-    height: 80px;
-    width: 80px;
   }
 }
 
@@ -76,15 +72,12 @@ p, body, button {
   button  {
     font-size: 12px;
   }
-  img {
-    height: 60px;
-    width: 60px;
-  }
+
 }
 
 @media (max-width: 576px) {
   h1 {
-    font-size: 30px;
+    font-size: 25px;
   }
   h2 {
     font-size: 20px;
@@ -95,11 +88,7 @@ p, body, button {
   button  {
     font-size: 10px;
   }
-  img {
-    height: 50px;
-    width: 50x;
-    size:20px
-  }
+
 }
 
 .mute-btn {

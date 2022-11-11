@@ -33,7 +33,7 @@
             <!-- need fix change username after its been taken and directed  -->
             <div class="col-12 ">
               <div id="usernameError">
-                <p class="text-danger" v-if="currentUsername==''">{{ error1 }}</p>
+                <p class="text-danger" v-if="validUse== false">Please enter a valid username</p>
                 <p class="text-danger" v-else-if="validUser == false && currentUsername != ''">{{ currentUsername }} has completed the game! View results or change username?</p>
               </div>
 
@@ -70,7 +70,7 @@
                 <button v-if="validUser == false && currentUsername!=''" 
                 type="button" class="nes-btn is-warning" @click="holding()">View Results!</button>
 
-                <button v-else-if="currentUsername == ''"
+                <button v-else-if="currentUsername == '' || currentUsername.includes(regex)"
                   type="button"
                   class="nes-btn is-disabled"
                   @click="play()"
@@ -94,13 +94,13 @@
         <div class="col-2"></div>
 
         <!-- copy link button -->
-        <div id="link" class="row ">
-          <div class="col-1"></div>
-            <div class="col-8 text-center is-rounded">
+        <div id="link" class="row d-flex align-content-middle">
+          <div class="col-0 col-md-1"></div>
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 text-center is-rounded">
               <input type="text" class="nes-input is-primary" :value="currentUrl" />
             </div>
           
-            <div class="col-2 px-0 py-0">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 ">
                 <button
                 id="copy"
                   type="button"
@@ -142,6 +142,7 @@ export default {
       currentUsername: "",
       copySuccess: false,
       error1: 'Please enter a username',
+      regex: /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g,
     };
   },
 
@@ -149,7 +150,9 @@ export default {
     
     this.currentUrl = window.location.href;
   },
+  
   methods: {
+    
     play: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play();
@@ -163,6 +166,8 @@ export default {
     holding: function(){
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play();
+      const username = useSessionStore();
+      username.setUsername(this.currentUsername);
       router.push({ name: "Holding" });
     },
     home: function () {
@@ -176,7 +181,7 @@ export default {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
         await navigator.clipboard.writeText(window.location.href);
-        setTimeout(() => this.copySuccess = false, 5000)
+        setTimeout(() => this.copySuccess = false, 3000)
       } 
       catch ($e) {
         alert("Error copying link to clipboard");
@@ -196,6 +201,7 @@ export default {
       } else {
         this.validUser = false;
       }
+      
     },
   },
 };
@@ -213,7 +219,7 @@ input {
 .nes-btn {
   width: 100%;
   min-width: fit-content;
-  height: fit-content;
+  height: 100%;
 }
 
 body {
