@@ -1,6 +1,6 @@
 <template>
   <body>
-    <div class="container-sm">
+    <div class="container-sm p-0">
       <QuestionComponent category="cuisine" :code="code" />
       <UsernameCheckerComponent />
     </div>
@@ -33,7 +33,8 @@ export default {
   },
   methods: {
     next: function (){
-      router.push({ name: 'Question2', params: {id:this.code} })
+      router.push({ name: 'Question1', params: {id:this.code} })
+      // router.push({ name: 'Question2', params: {id:this.code} })
     },
   },
 }

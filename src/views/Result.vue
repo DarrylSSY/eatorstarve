@@ -10,13 +10,13 @@
 
             <br>
             <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Yes, Goodbye!</button>
-            <a class="nes-btn" onclick="document.getElementById('exitModal').close()">Cancel</a>
+            <a class="nes-btn" @click="closeModal">Cancel</a>
         </div>
     </dialog>
 
     <body>
 
-        <div class=" container container-sm p-0" style="align-items: end; height:100%">
+        <div class=" container container-sm p-0">
 
             <!-- Top Bar -->
             <div class=" container container-sm " style="position: relative; width: 100%;">
@@ -25,7 +25,7 @@
                         <button
                             type="button"
                             class="nes-btn is-error"
-                            onclick="document.getElementById('exitModal').showModal();"
+                            @click="openModal"
                         >
                             Exit
                         </button>
@@ -36,16 +36,22 @@
                     </div>
 
                     <div class="user col-3 col-md-2 col-content nes-container">
-                        {{ username }}
+                        <p v-if="username == ''">
+                            {{code}}
+                        </p>
+                        <p v-else>
+                            {{ username }}
+                        </p>
                     </div>
                 </div>
             </div>
-            
+        </div>
 
 
             <!-- Result Gallery -->
             <div class="gallery">
-                <div id="suggestions" class="carousel slide" data-bs-ride="carousel">
+
+                <div id="suggestions" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
                     <div class="carousel-inner nes-container px-1 py-2 p-sm-3">
                         <!-- <div v-for="(details, name) in top3_locations" :key="name" class="carousel-item active">
                             <div class="card">
@@ -81,57 +87,115 @@
                                 </div>
                             </div>
                         </div> -->
-                        <GenerateResultsComponent :code="code"></GenerateResultsComponent>
+                        <GenerateResultsComponent :code="code" @get-choices="getChoices" ></GenerateResultsComponent>
 
                     </div>
                     <div class="arrow-buttons">
-                        <button class="carousel-control-prev" type="button" data-bs-target="#suggestions" data-bs-slide="prev">
+                        <button class="carousel-control-prev" @click="playSound" type="button" data-bs-target="#suggestions" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#suggestions" data-bs-slide="next">
+                        <button class="carousel-control-next" @click="playSound" type="button" data-bs-target="#suggestions" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
                 </div>
+
+                <!-- copylink -->
+                <div id="link" class="row justify-content-center">
+                        <div class="col-5 col-md-7 col-lg-7 text-center is-rounded px-0">
+                            <input type="text" class="nes-input is-primary" :value="currentUrl" />
+                        </div>
+                        <div class="col-1 p-0" style="width: 2%;"></div>
+                        <div class="col-5 col-md-3 col-lg-3 px-0 py-0">
+                            <button
+                            id="copy"
+                                type="button"
+                                class="nes-btn is-warning text-center"
+                                @click="copy_link"
+                            >
+                                Copy Link
+                            </button>  
+                        <div v-show="copySuccess" class="nes-balloon from-left" data-bs-toggle="popover" data-bs-trigger="focus">
+                        <p>Copied!</p>
+                    </div>
+                </div>
             </div>
 
         </div>
-        <UsernameCheckerComponent />
-        <div class="container p-0" style="margin: auto;">
-            <DialogueBox :message="keywords" type="developer"></DialogueBox>
-        </div>
+        <!-- <div class="container p-0" style="margin: auto;">
+            <DialogueBox :message="choices" type="developer"></DialogueBox>
+        </div> -->
     </body>
 </template>
 
 <script>
-import DialogueBox from '@/components/DialogueBox.vue';
+// import DialogueBox from '@/components/DialogueBox.vue';
 import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
 import router from "@/router";
-import UsernameCheckerComponent from '@/components/UsernameCheckerComponent.vue';
 
 export default {
     name: "ResultView",
-    components: { DialogueBox, GenerateResultsComponent, UsernameCheckerComponent },
+    components: { GenerateResultsComponent},
     setup() {
         const store = useSessionStore();
         return {
             username: store.getUsername,
-            keywords: store.getKeywords,
+            // keywords: store.getKeywords,
+            currentUrl: "",
         };
     },
     data() {
         return {
             code: this.$route.params.code,
+            choices: '',
+            received_keywords: ''
             }
     },
+    
+    created() {
+    this.currentUrl = window.location.href;
+    },
+
+    async updated() {
+        this.choices = this.received_keywords
+        console.log(this.choices, 'jl')
+    },
+
+    // async mounted() {
+    //     if (this.keywords == '') {
+    //         this.choices = await fetchOnClient(/* ... */)
+    //     }
+    // },
 
     methods: {
         home: function () {
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
             router.push("/");
         },
+        openModal: function() {
+            console.log('ji')
+            document.getElementById('exitModal').showModal();
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
+        },
+        closeModal: function() {
+            document.getElementById('exitModal').close()
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
+        },
+        playSound() {
+            let buttonpress = new Audio("../../buttonpress.mp3");
+            buttonpress.play();
+        },
+        getChoices: function(choices) {
+            this.received_keywords = choices
+            console.log(choices, "lol")
+        }
+        
     }
     
 }
@@ -199,9 +263,9 @@ body {
 
 .gallery {
     margin: auto;
-    padding-top: 20vh;
-    padding-bottom: 120px;
-    width: 80%;
+    padding-top: 140px;
+    padding-bottom: 140px;
+    width: 75%;
     /* height:max-content; */
     /* margin-bottom: 200px; */
     /* border: 4px black solid; */
@@ -257,5 +321,16 @@ small {
     width: auto;
 }
 
+#link {
+    margin-top: 30px;
+}
+
+#copy {
+    height: 85%;
+}
+
+#link .nes-input {
+    height: 85;
+}
 
 </style>

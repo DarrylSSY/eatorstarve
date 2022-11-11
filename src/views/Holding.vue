@@ -1,48 +1,73 @@
 <template>
-   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
-    <form method="dialog">
-      <p class="title">Are you sure you want to exit?</p>
-      <p>Your progress will not be saved.</p>
+  <body>
+  <dialog id="dialog-rounded" class="nes-dialog is-rounded">
+    <form style="text-align:center;">
+      <h4 >Are you Sure?</h4><br><br>
+      <p>No other players will be allowed to join after results has been generated.</p>
       <menu class="dialog-menu p-0">
-        <button class="nes-btn">Cancel</button>
-        <button class="nes-btn is-primary" @click="home">Confirm</button>
+        <button type="button" class="nes-btn is-primary" @click="generate">Yes</button>
+        <button type="button" class="nes-btn" @click="close" >No</button>
       </menu>
     </form>
   </dialog>
 
-  <dialog id="dialog-rounded2" class="nes-dialog is-rounded">
-    <form method="dialog">
-      <p class="title">Are you sure you want to exit?</p>
-      <p>Your progress will not be saved.</p>
-      <menu class="dialog-menu p-0">
-        <button class="nes-btn">Cancel</button>
-        <button class="nes-btn is-primary" @click="home">Confirm</button>
-      </menu>
-    </form>
+  <dialog id="exitModal" class="nes-dialog is-rounded dialog">
+      <div style="text-align:center;">
+          <h4>Wait!</h4>
+          <p>Heading back to Home Page?<br><br>
+          </p>
+          <small>
+              Note: You can come back to this page by rejoining this room! <br>
+          </small>
+
+          <br>
+          <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Yes, Goodbye!</button>
+          <a class="nes-btn" @click="close2" >Cancel</a>
+      </div>
   </dialog>
 
 
-  <div class="whole container">
+  <div class="whole container container-sm">
 
-    <div class="row">
+    <!-- <div class="row">
+
+      <div class="col-2">
+        <button type="button" class="nes-btn is-error" onclick="document.getElementById('exitModal').showModal();">Exit</button>
+      </div>
+
+      <div class="col-8 col-content">
+          <h4 class="logo">Eat or Starve</h4>
+      </div>
+    
       <div class="col-12">
         <div class="ending_container">
-        <h2 class="end">The End.</h2>
-
-        <div class="hiders">
-          <p>&nbsp;</p>
-        </div>
+          <h2 class="end">The End.</h2>
         </div>
 
       </div>
-    </div>
+    </div> -->
 
+    <div class="row top gx-4">
+      <div class="col-3 col-md-2 ps-0 col-content">
+        <button type="button" class="nes-btn is-error" @click="exit">Exit</button>
+      </div>
 
-    <div class="row">
+      <div class="col-6 col-md-8 col-content">
+          <h1 class="logo">The End</h1>
+      </div>
+
+      <div class="user col-3 col-md-2 col-content nes-container">
+          {{ username }}
+      </div>
+  </div>
+
+    <!-- User List -->
+
+    <div class="row component">
       <div class="col"></div>
       <div class="col-12 col-md-10 col-lg-10">
         <div class="main_component nes-container is-rounded">
-          <p> Completed: </p>
+          <h5> Completed: </h5>
           <div class="container">
             <div class="row">
               <!-- <div class="col"></div> -->
@@ -62,12 +87,13 @@
     </div>
 
       <div class="result">
-        <div class="row ">
-          <div class="col"></div>
-          <div class="col-4 col-md-4 col-lg-2">
-            <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block">
 
-                <label>
+        <!-- <div class="row ">
+          <div class="col"></div>
+          <div class="col-3 col-md-3 col-lg-3">
+            <div :style="{'visibility': visible}" class="nes-container yesno">
+
+                 <label>
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" @keydown.enter="enter()" checked />
                   <span>Yes</span>
                 </label>
@@ -77,19 +103,23 @@
                   <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter="enter()" />
                   <span>No</span>
                 </label>
-
+                <YesNoRadio @yesFunction="yesoption()" @noFunction="nooption()"  />
             </div>
           </div>
-        </div>
+        </div> -->
+
+        <!-- Generate Result Dialog -->
+
         <div class="row">
+
           <div class="col-12">
           <div class="text_component container nes-container is-rounded">
 
             <div class="row py-sm-4">
-              <div class="col-8 col-md-12 col-lg-12">
+              <div class="col-12">
                 <div class="text_container">
                   <div class="typewriter">
-                    Do you want to view results?
+                    Do you want to generate results?
                   </div>
                   <div class="hider">
                     <p>&nbsp;</p>
@@ -99,14 +129,14 @@
               </div>
 
               <!-- <div class="col"></div> -->
-              <div class="col mt-md-5 mt-lg-5">
-                <div class="d-sm-none">
-                  <button type="button" class="nes-btn is-warning" @click="enter()" >Enter</button>
+              <div class="col-12">
+                <div>
+                  <button type="button" class="nes-btn is-warning" @click="enter()" >Generate</button>
                 </div>
 
-                <div class="enter d-none d-sm-block">
+                <!-- <div class="enter d-none d-sm-block">
                   Press 'Enter' to continue
-                </div>
+                </div> -->
 
               </div>
           </div>
@@ -121,6 +151,7 @@
   </div>
   <!-- <GenerateResultsComponent :code="code"/>
   <UsernameCheckerComponent /> -->
+</body>
 
 
 
@@ -134,6 +165,7 @@ import { useSessionStore } from '../stores/session';
 // import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
 // import GenerateResultsComponent from "@/components/GenerateResultsComponent";
+// import YesNoRadio  from '../components/YesNoRadio.vue';
 
 export default {
   name: "HoldingView",
@@ -159,7 +191,7 @@ export default {
   },
 
   created() {
-    setTimeout(() => this.visible =  ``, 3500)
+    setTimeout(() => this.visible =  ``, 2500)
   },
 
   mounted() {
@@ -167,7 +199,15 @@ export default {
       this.answered = response.data
     })
   },
+
+  // components: { YesNoRadio },
+  
   methods: {
+    home: function () {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play();
+      router.push("/");
+    },    
     next: function (){
       router.push({ name: 'Results', params: {id:this.code} })
     },
@@ -177,15 +217,32 @@ export default {
     enter() {
         let buttonpress = new Audio("../../buttonpress.mp3");
         buttonpress.play();
+      // router.push({ name: 'Result', params: {id:this.code} }) 
+      document.getElementById('dialog-rounded').showModal();
+      
+    },
+    close() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
+      document.getElementById('dialog-rounded').close().preventDefault()
+    },
+    close2() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
+        document.getElementById('exitModal').close()
+    },
+    exit() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
+        document.getElementById('exitModal').showModal();
+    },
+    generate() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
       router.push({ name: 'Result', params: {id:this.code} })
-      if (this.value == 'yes') {
-        // alert("yes")
-        document.getElementById('dialog-rounded').showModal();
-      } else {
-        // alert("no")
-        document.getElementById('dialog-rounded2').showModal();
-      }
     }
+
+
   }
 
 
@@ -193,6 +250,45 @@ export default {
 </script>
 
 <style scoped>
+
+div.nes-container {
+    background-color: white;
+}
+
+.top {
+    padding-top: 24px;
+}
+
+.col-content {
+    height: 70px;
+}
+
+button.is-error {
+    width: 100%;
+    height: 62.4px;
+}
+
+.logo {
+    /* padding: 17.8px 0px; */
+    text-align: center;
+    margin: 0;
+    padding-top: 10px;
+    /* font-size: 3.2vw ; */
+    
+}
+
+.user {
+    padding: 20px;
+    text-align: center;
+}
+
+.component {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 250px;
+  top: 200px;
+}
 
 .whole {
   text-align: center;
@@ -221,47 +317,37 @@ export default {
   left: 0;
   right: 0;
   margin: 0;
-  z-index: -1;
+  z-index: 0;
 }
-
-.hiders {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0;
-  width: 100%;
-  /* height: 48px; */
-}
-
-.hiders p {
-  position: relative;
-  clear: both;
-  margin: 0;
-  float: right; /* makes animation go left-to-right */
-  width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
-  height: 70px;
-  background: white; /* same as page background */
-  animation: typing 2s steps(30, end);
-  animation-fill-mode: both;  /* load first keyframe on page load, leave on last frame at end */
-}
-
-/* .hiders p:nth-child(2) {
-  animation-delay: 2s;
-} */
 
 div.main_component {
+  padding-top: 10px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 100px;
-  margin-bottom: 10px;
+  /* margin-top: 100px; */
+  /* margin-bottom: 10px; */
   width: 55%;
-  height: auto;
-  /* position: sticky; This shit doesnt work */
-  bottom: 0;
-  /* background-color: rgb(247, 213, 29); */
-  background-color: #ffc53d;
-  margin-bottom: 10px;
+  height: 100%;
+  background-color: rgb(247, 213, 29);
+  min-height: 250px;
+  min-width: 300px;
 
+}
+
+.user_list {
+  /* overflow-y: auto;
+  height: 180px;
+  overflow-y: scroll;
+  text-align: left; */
+
+  overflow-y: auto;
+  position: absolute;
+  bottom: 20px;
+  top: 70px;
+  /* height: 50%; */
+  overflow-y: ;
+  text-align: left;
+  right: 15px;
 }
 
 div.text_component {
@@ -277,7 +363,9 @@ div.text_component {
   /* background-color: rgb(247, 213, 29); */
   /* margin-bottom: 20px; */
   text-align: left;
-
+  background-color: white;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .result {
@@ -287,45 +375,17 @@ div.text_component {
   right: 10px;
 }
 
-.user_list {
-  overflow-y: auto;
-  height: 180px;
-  overflow-y: scroll;
-  text-align: left;
-}
-
-/* div.nes-container.scroll { */
-  /* margin-right: auto;
-  margin-left: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 700px;
-  position: sticky;
-  bottom: 0; */
-
-/* } */
-
-/* .heading {
-  font-size: large;
-  margin-top: 50px;
-  margin-bottom: 30px;
-  margin-bottom: 100px;
-} */
-
-
-/* typewriter , @keyframes typing and blink-caret can be removed to remove animation */
-
-
 .text_container {
   position: relative;
 }
 
 .typewriter {
+  padding-top: ;
   position: absolute;
   /* font-size:large; */
   top: 0;
   margin: 0;
-  z-index: -1;
+  z-index: 0;
 }
 
 .hider {
@@ -342,8 +402,8 @@ div.text_component {
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
   /* height: 15px; */
   background: white; /* same as page background */
-  animation: typing 2s steps(30, end);
-  animation-delay: 2s;
+  animation: typing 1s steps(30, end);
+  animation-delay: 1s;
   animation-fill-mode:both;  /* load first keyframe on page load, leave on last frame at end */
 }
 
@@ -372,10 +432,10 @@ img {
   margin-right: 20px;
 } */
 
-.nes-btn {
+/* .nes-btn {
 
   right: 20px;
-}
+} */
 
 .enter {
   text-align: right;
@@ -391,7 +451,22 @@ img {
   text-align: left;
   margin-top: 0px;
   height: auto;
+  background-color: white;
 }
 
+body {
+  height: 100%;
+  background: linear-gradient(
+      0deg,
+      rgba(245, 200, 95, 0.66),
+      rgba(245, 200, 95, 0.66)
+    ),
+    url(../assets/bg1.jpeg);
+  box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
+}
+
+.typewriter button {
+  width: 100px;;
+}
 
 </style>
