@@ -37,14 +37,14 @@
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <div class="row mt-5"></div>
       <div class="row mt-auto">
-          <input type="range" class="form-range" min="0" max="2" step="1" id="blank">
+          <input v-model="value" type="range" class="form-range" max="2" id="blank" @mouseup="nextpage()">
       </div>
-      <div class="row mt-4">
-        <h5 class="col-2 text-center">{{ foption0 }}</h5>
+      <div class="row mt-4 justify-content-evenly">
+        <h6 class="col-2 text-center ps-0">{{ foption0 }}</h6>
         <span class="col-3"></span>
-        <h5 class="col-2 text-center">{{ foption1 }}</h5>
+        <h6 class="col-2 text-center ps-0">{{ foption1 }}</h6>
         <span class="col-3"></span>
-        <h5 class="col-2 text-center">{{ foption2 }}</h5>
+        <h6 class="col-2 text-center ps-0">{{ foption2 }}</h6>
       </div>
     </div>
     
@@ -70,7 +70,7 @@
             'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
           "
         />
-        <h3>{{ question }} {{ category }}!</h3>
+        <h4>{{ question_front }}{{ category }}{{ question_back }}</h4>
       </div>
     </div>
 
@@ -156,7 +156,7 @@
             'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
           "
         />
-        <h3>{{ question }} {{ category }}!</h3>
+        <h4>{{ question_front }}{{ category }}{{ question_back }}</h4>
       </div>
     </div>
   <!-- END of 2 Question Template -->
@@ -189,11 +189,13 @@ export default {
       foption2: "Loading",
       btn_state_1: "is-disabled",
       btn_state_2: "is-disabled",
-      question: "Choose your ",
+      question_front: "Choose your ",
+      question_back: " !",
       next: "Question2",
       progress: 0,
       color: "",
       timer: null,
+      value: 1,
     };
   },
   mounted() {
@@ -222,30 +224,44 @@ export default {
       this.next = "Question2";
       this.progress = 0;
       this.color = "";
+      this.question_front = "Which ";
+      this.question_back = " are you feeling?";
     } else if (this.category == "poultry") {
       this.next = "Question3";
       this.progress = 10;
-      this.color = "is-error";
+      this.color = "is-error";      
+      this.question_front = "Select your ";
+      this.question_back = "!";
     } else if (this.category == "price") {
       this.next = "Question4";
       this.progress = 25;
       this.color = "is-error";
+      this.question_front = "Indicate the ";
+      this.question_back = " level!";
     } else if (this.category == "texture") {
       this.next = "Question5";
       this.progress = 40;
       this.color = "is-warning";
+      this.question_front = "Which ";
+      this.question_back = " do you prefer?";
     } else if (this.category == "base") {
       this.next = "Question6";
       this.progress = 55;
       this.color = "is-warning";
+      this.question_front = "Indicate your ";
+      this.question_back = " choice.";
     } else if (this.category == "spice") {
       this.next = "Question7";
       this.progress = 75;
       this.color = "is-success";
+      this.question_front = "What is your ";
+      this.question_back = " tolerance level?";
     } else {
       this.next = "Holding";
       this.progress = 90;
       this.color = "is-success";
+      this.question_front = "Want some ";
+      this.question_back = "?";
     }
     function generate2RandomNumber(x) {
       let num1 = Math.floor(Math.random() * x);
@@ -265,9 +281,11 @@ export default {
         let randomNum = generate2RandomNumber(response["data"].length);
         this.answer1 = response["data"][randomNum[0]]["answer"];
         this.answer2 = response["data"][randomNum[1]]["answer"];
-        this.foption0 = response["data"][0]["answer"];
-        this.foption1 = response["data"][1]["answer"];
-        this.foption2 = response["data"][2]["answer"];
+        if (this.category == 'price' || this.category == 'spice') {
+          this.foption0 = response["data"][0]["answer"];
+          this.foption1 = response["data"][1]["answer"];
+          this.foption2 = response["data"][2]["answer"];
+        }
         this.btn_state_1 = "is-primary";
         this.btn_state_2 = "is-warning";
       });
@@ -293,6 +311,18 @@ export default {
         code: this.code,
         username: this.username,
         answer: this.answer2,
+        category: this.category,
+      });
+      let optionpress = new Audio("../../optionpress.mp3");
+      optionpress.play()
+      router.push({ name: this.next, params: { id: this.code } });
+    },
+    nextpage: function () {
+      console.log(this.username + "selected" + this.value);
+      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
+        code: this.code,
+        username: this.username,
+        answer: this.value,
         category: this.category,
       });
       let optionpress = new Audio("../../optionpress.mp3");
@@ -342,6 +372,7 @@ canvas {
 
 .game-options {
   height: fit-content;
+  /* padding: 16px 32px; */
 }
 
 .auto-layout {
@@ -366,6 +397,7 @@ canvas {
   align-items: center;
   margin-top: 0px;
   bottom: 0px;
+  padding-right: 64px;
 }
 
 .nes-container {
@@ -389,14 +421,4 @@ canvas {
   width: fit-content;
 }
 
-div.text_component {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 40px;
-  height: 150px;
-  font-size: 25px;
-  
-}
 </style>
