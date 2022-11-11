@@ -80,11 +80,11 @@ export default {
     async mounted() {
         // qn 1
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
-            this.parameters = response.data + ", ";
+            this.parameters = response.data + "|";
             // qn 2
         });
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
-            this.parameters += response.data + ", ";
+            this.parameters += response.data + "|";
         });
         // qn 3
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
@@ -103,35 +103,33 @@ export default {
         });
         // qn 4
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
-            this.parameters += response.data + ", ";
+            this.parameters += response.data + "|";
         });
         // qn 5
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
-            this.parameters += response.data + ", ";
+            this.parameters += response.data + "|";
         });
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
             if (response.data == "Stomachache Come!!") {
-                this.parameters += "spicy";
+                this.parameters += "spicy|";
             }
             else if (response.data == "Little Kick") {
-                this.parameters += "mild-spicy";
+                this.parameters += "mild-spicy|";
             }
             else {
-                this.parameters += "non-spicy";
+                this.parameters += "non-spicy|";
             }
         });
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
             if (response.data == "Exotic") {
-                this.parameters += ", unique";
+                this.parameters += "unique";
             }
-            else {
-                this.parameters += " ";
-            }
-            // const keywords = useSessionStore()
-            // keywords.setKeywords(this.parameters)
         });
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
-            this.parameters += response.data["settings"];
+            if (response.data["settings"] != "") {
+              this.parameters = response.data["settings"] + "|" + this.parameters;
+            }
+
             this.coordinates += response.data["coordinates"];
         });
         this.$emit("getChoices", this.parameters);
