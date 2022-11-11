@@ -11,8 +11,8 @@
     <form method="dialog">
       <p class="title">Uh oh!</p>
       <p>Game has ended. View results?</p>
-      <button @click="results" class="nes-btn is-primary">Results</button>
-      <button @click="home" class="nes-btn is-primary">Exit</button>
+      <button @click="results" class="nes-btn is-warning">Results</button>
+      <button @click="home" class="nes-btn">Exit</button>
     </form>
   </dialog>
 </template>
@@ -67,4 +67,9 @@ export default {
 
 <style scoped>
 
+.nes-dialog {
+  width: fit-content;
+  align-items: center;
+  margin: auto;
+}
 </style>
