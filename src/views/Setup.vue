@@ -171,7 +171,7 @@ export default {
         code: generated_code,
         status: "open",
         coordinates: this.coordinates,
-        settings: this.dietaryNeeds.join(" ")
+        settings: this.dietaryNeeds.join("|")
 
       }).then((response) => {
         console.log(response);

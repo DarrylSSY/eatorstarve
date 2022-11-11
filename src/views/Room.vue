@@ -8,7 +8,7 @@
         </div>
 
         <div class="col-12 d-flex justify-content-center">
-          <div class="nes-textarea bg-warning text-center">
+          <div class="nes-textarea text-center">
             <h2>{{code}}</h2>
           </div>
         </div>
@@ -262,8 +262,11 @@ img {
 .nes-textarea{
   width: fit-content;
   height: fit-content;
+  background-color: white;
 }
 
-
+#link.row{
+  height: fit-content;
+}
 
 </style>

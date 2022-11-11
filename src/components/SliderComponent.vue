@@ -55,7 +55,7 @@
   <div class="row">
       <div class="col-8"></div>
       <div class="col-3">
-        <button type="button" class="nes-btn is-warning">Next ></button>
+        <button type="button" @click="nextpage" class="nes-btn is-warning">Next ></button>
       </div>
       <div class="col-1"></div>
     </div> 
@@ -84,7 +84,7 @@
             'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
           "
         />
-        <h3 class="col-7 col-sm-9">{{ question_front }} {{ category }} {{question_back}}!</h3>
+        <h3 class="col-7 col-sm-9">{{ question_front }} {{ category }} {{question_back}}</h3>
       </div>
     </div>
 
