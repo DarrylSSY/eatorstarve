@@ -115,9 +115,7 @@ export default {
                     if (response.data == "Exotic"){
                       this.parameters += "unique "
                     }
-                    const keywords = useSessionStore()
-                    keywords.setKeywords(this.parameters)
-                    // console.log(keywords.getKeywords())
+
                   })
                 })
               })
@@ -127,6 +125,11 @@ export default {
           // generate place
           axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice})
               .then(response => {
+                const keywords = useSessionStore()
+                    keywords.setKeywords(this.parameters)
+                    // console.log(keywords.getKeywords())
+
+                    
                 axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, {"status": "close"})
                 // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
                 // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
@@ -148,16 +151,9 @@ export default {
                 }
 
                 this.result_list = [this.first, this.second, this.third]
-                // console.log(this.result_list)
-
-
               })
         })
       })
-      // this.result_list[0] = this.first
-      // this.result_list[1] = this.second
-      // this.result_list[2] = this.third
-      // console.log(this.first)
     },
 
     methods: {

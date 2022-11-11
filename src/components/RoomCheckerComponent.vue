@@ -59,7 +59,7 @@ export default {
     results: function (){
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play()
-      router.push("/room/:code/result")
+      router.push("/room/" + this.roomcode + "/result")
     },
   }
 }

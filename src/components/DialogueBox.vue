@@ -6,7 +6,7 @@
                 <i class="nes-octocat animate"></i>
             </div>
             <div class="col-9 col-sm-9 col-md-9 col-lg-10 text text-wrap px-2">
-                <p v-if="text.length > 30">
+                <p v-if="text.includes('spicy')">
                     <b>THE GROUP'S SELECTION:</b> 
                     <br>{{text}}
                 </p>
@@ -18,7 +18,7 @@
 
 
         <div v-if="type == 'user'" >
-            <h5 class="typewriter question" style="text-align: center; margin:auto">{{ question }} {{ category }}!</h5>
+            <h5 class="typewriter question text-wrap" style="text-align: center; margin:auto">{{ question }} {{ category }}!</h5>
             <img
                 class="profile"
                 :src="
@@ -62,7 +62,7 @@ export default {
     }
 
     .box {
-        /* height: 100px; */
+        height: 120px;
         width: 98vw;
         position: fixed;
         bottom: 0;

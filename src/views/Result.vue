@@ -98,7 +98,7 @@
             </div>
 
         </div>
-        <!-- <RoomCheckerComponent :roomcode="code"/> -->
+        <UsernameCheckerComponent />
         <div class="container p-0" style="margin: auto;">
             <DialogueBox :message="keywords" type="developer"></DialogueBox>
         </div>
@@ -110,11 +110,11 @@ import DialogueBox from '@/components/DialogueBox.vue';
 import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
 import router from "@/router";
-// import RoomCheckerComponent from '@/components/RoomCheckerComponent.vue';
+import UsernameCheckerComponent from '@/components/UsernameCheckerComponent.vue';
 
 export default {
     name: "ResultView",
-    components: { DialogueBox, GenerateResultsComponent},
+    components: { DialogueBox, GenerateResultsComponent, UsernameCheckerComponent },
     setup() {
         const store = useSessionStore();
         return {
