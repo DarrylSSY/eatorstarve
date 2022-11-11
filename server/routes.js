@@ -10,8 +10,7 @@ const CreatedRoom = require("./models/createdroom");
 // get list of rooms
 router.post('/places', (req, res) => {
     axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&maxprice='+req.body["maxprice"]+'&minprice='+req.body["minprice"]+'&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
-        .then(response =>
-            res.json({
+        .then(response => res.json({
                 "name1": response.data["results"][0]["name"],
                 "address1": response.data["results"][0]["formatted_address"],
                 "photo1": response.data["results"][0]["photos"][0]["photo_reference"],
@@ -29,12 +28,11 @@ router.post('/places', (req, res) => {
                 "name3": response.data["results"][2]["name"],
                 "address3": response.data["results"][2]["formatted_address"],
                 "photo3": response.data["results"][2]["photos"][0]["photo_reference"],
-                "rating3": response.data["results"][3]["rating"],
-                "placeid3": response.data["results"][3]["place_id"],
-                "pricelevel3": response.data["results"][3]["price_level"],
-                "userratings3": response.data["results"][3]["user_ratings_total"],
-            }).catch(err => res.json(err))
-        )
+                "rating3": response.data["results"][2]["rating"],
+                "placeid3": response.data["results"][2]["place_id"],
+                "pricelevel3": response.data["results"][2]["price_level"],
+                "userratings3": response.data["results"][2]["user_ratings_total"],
+            })).catch(err => res.json(err))
 });
 
 router.post('/photo', (req, res) => {
