@@ -1,8 +1,8 @@
 <template>
   <body>
   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
-    <form >
-      <p class="title">Are you sure?</p>
+    <form style="text-align:center;">
+      <h4 >Are you Sure?</h4><br><br>
       <p>No other players will be allowed to join after results has been generated.</p>
       <menu class="dialog-menu p-0">
         <button type="button" class="nes-btn is-primary" @click="generate">Yes</button>
@@ -11,21 +11,55 @@
     </form>
   </dialog>
 
+  <dialog id="exitModal" class="nes-dialog is-rounded dialog">
+      <div style="text-align:center;">
+          <h4>Wait!</h4>
+          <p>Heading back to Home Page?<br><br>
+          </p>
+          <small>
+              Note: You can come back to this page by rejoining this room! <br>
+          </small>
+
+          <br>
+          <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Yes, Goodbye!</button>
+          <a class="nes-btn" @click="close2" >Cancel</a>
+      </div>
+  </dialog>
+
 
   <div class="whole container">
 
-    <div class="row">
+    <!-- <div class="row">
+
+      <div class="col-2">
+        <button type="button" class="nes-btn is-error" onclick="document.getElementById('exitModal').showModal();">Exit</button>
+      </div>
+
+      <div class="col-8 col-content">
+          <h4 class="logo">Eat or Starve</h4>
+      </div>
+    
       <div class="col-12">
         <div class="ending_container">
-        <h2 class="end">The End.</h2>
-
-        <div class="hiders">
-          <p>&nbsp;</p>
-        </div>
+          <h2 class="end">The End.</h2>
         </div>
 
       </div>
-    </div>
+    </div> -->
+
+    <div class="row top gx-4">
+      <div class="col-2 col-md-2 ps-0 col-content">
+        <button type="button" class="nes-btn is-error" @click="exit">Exit</button>
+      </div>
+
+      <div class="col-8 col-content">
+          <h4 class="logo">The End.</h4>
+      </div>
+
+      <div class="user col-2 col-content nes-container">
+          {{ username }}
+      </div>
+  </div>
 
     <!-- User List -->
 
@@ -169,6 +203,11 @@ export default {
   // components: { YesNoRadio },
   
   methods: {
+    home: function () {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play();
+      router.push("/");
+    },    
     next: function (){
       router.push({ name: 'Results', params: {id:this.code} })
     },
@@ -182,15 +221,24 @@ export default {
       document.getElementById('dialog-rounded').showModal();
       
     },
-    yesoption() {
-        let buttonpress = new Audio("../../buttonpress.mp3");
-        buttonpress.play();
-      document.getElementById('dialog-rounded').showModal();
-    },
     close() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
       document.getElementById('dialog-rounded').close().preventDefault()
     },
+    close2() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
+        document.getElementById('exitModal').close()
+    },
+    exit() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
+        document.getElementById('exitModal').showModal();
+    },
     generate() {
+      let buttonpress = new Audio("../../buttonpress.mp3");
+        buttonpress.play();
       router.push({ name: 'Result', params: {id:this.code} })
     }
 
@@ -202,6 +250,34 @@ export default {
 </script>
 
 <style scoped>
+
+div.nes-container {
+    background-color: white;
+}
+
+.top {
+    padding-top: 24px;
+}
+
+.col-content {
+    height: 70px;
+}
+
+button.is-error {
+    width: 100%;
+    height: 62.4px;
+}
+
+.logo {
+    padding: 17.8px 0px;
+    text-align: center;
+    margin: 0;
+}
+
+.user {
+    padding: 20px;
+    text-align: center;
+}
 
 .component {
   position: absolute;
