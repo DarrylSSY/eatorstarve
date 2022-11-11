@@ -5,8 +5,8 @@
       <p class="title">Are you sure?</p>
       <p>No other players will be allowed to join after results has been generated.</p>
       <menu class="dialog-menu p-0">
-        <button type="button" class="nes-btn" @click="close" >No</button>
         <button type="button" class="nes-btn is-primary" @click="generate">Yes</button>
+        <button type="button" class="nes-btn" @click="close" >No</button>
       </menu>
     </form>
   </dialog>
@@ -27,8 +27,9 @@
       </div>
     </div>
 
+    <!-- User List -->
 
-    <div class="row">
+    <div class="row component">
       <div class="col"></div>
       <div class="col-12 col-md-10 col-lg-10">
         <div class="main_component nes-container is-rounded">
@@ -52,6 +53,7 @@
     </div>
 
       <div class="result">
+
         <!-- <div class="row ">
           <div class="col"></div>
           <div class="col-3 col-md-3 col-lg-3">
@@ -68,19 +70,19 @@
                   <span>No</span>
                 </label>
                 <YesNoRadio @yesFunction="yesoption()" @noFunction="nooption()"  />
-
             </div>
-
-            
-
           </div>
         </div> -->
-        <!-- <div class="row"> -->
+
+        <!-- Generate Result Dialog -->
+
+        <div class="row">
+
           <div class="col-12">
           <div class="text_component container nes-container is-rounded">
 
             <div class="row py-sm-4">
-              <div class="col-12 col-sm-8">
+              <div class="col-12">
                 <div class="text_container">
                   <div class="typewriter">
                     Do you want to generate results?
@@ -93,7 +95,7 @@
               </div>
 
               <!-- <div class="col"></div> -->
-              <div class="col">
+              <div class="col-12">
                 <div>
                   <button type="button" class="nes-btn is-warning" @click="enter()" >Generate</button>
                 </div>
@@ -107,7 +109,7 @@
 
 
           </div>
-        <!-- </div> -->
+        </div>
       </div>
   </div>
 
@@ -201,6 +203,14 @@ export default {
 
 <style scoped>
 
+.component {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 250px;
+  top: 200px;
+}
+
 .whole {
   text-align: center;
   position: relative;
@@ -232,18 +242,34 @@ export default {
 }
 
 div.main_component {
-  margin-right: auto;
+  /* margin-right: auto;
   margin-left: auto;
   margin-top: 100px;
   margin-bottom: 10px;
   width: 55%;
   height: auto;
-  /* position: sticky; This shit doesnt work */
   bottom: 0;
   /* background-color: yellow; */
-  background-color: rgb(247, 213, 29);
-  margin-bottom: 10px;
+  /* background-color: rgb(247, 213, 29);
+  margin-bottom: 10px;  */
 
+  margin-right: auto;
+  margin-left: auto;
+  /* margin-top: 100px; */
+  /* margin-bottom: 10px; */
+  width: 55%;
+  height: 100%;
+  /* bottom: 0; */
+  /* background-color: yellow; */
+  background-color: rgb(247, 213, 29);
+
+}
+
+.user_list {
+  overflow-y: auto;
+  height: 180px;
+  overflow-y: scroll;
+  text-align: left;
 }
 
 div.text_component {
@@ -260,6 +286,8 @@ div.text_component {
   /* margin-bottom: 20px; */
   text-align: left;
   background-color: white;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .result {
@@ -269,12 +297,7 @@ div.text_component {
   right: 10px;
 }
 
-.user_list {
-  overflow-y: auto;
-  height: 180px;
-  overflow-y: scroll;
-  text-align: left;
-}
+
 
 /* div.nes-container.scroll { */
   /* margin-right: auto;
@@ -324,7 +347,7 @@ div.text_component {
   width:0; /* graceful degradation: if animation doesn't work, these are invisible by default */
   /* height: 15px; */
   background: white; /* same as page background */
-  animation: typing 2s steps(30, end);
+  animation: typing 1s steps(30, end);
   animation-delay: 1s;
   animation-fill-mode:both;  /* load first keyframe on page load, leave on last frame at end */
 }
@@ -385,6 +408,10 @@ body {
     ),
     url(../assets/bg1.jpeg);
   box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25);
+}
+
+.typewriter button {
+  width: 100px;;
 }
 
 </style>
