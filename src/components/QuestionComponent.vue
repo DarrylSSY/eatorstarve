@@ -206,7 +206,7 @@ export default {
     });
     let oof = new Audio("../../oof.mp3");
 
-    // this.$timer.play("Timer");
+    this.$timer.play("Timer");
     this.$timer.on("stop", () => {
       console.log("ended");
       oof.play();
