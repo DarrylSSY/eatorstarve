@@ -141,29 +141,53 @@ export default {
             "coordinates": this.coordinates
         })
             .then(response => {
-            axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" });
-            // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
-            // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
-            // this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
-            // console.log(response.data)
-            // console.log(response['data'])
-            for (let info in response["data"]) {
-                // console.log(info)
-                let category = info.substring(0, info.length - 1);
-                let idx = info.substring(info.length - 1, info.length);
-                if (idx == 1) {
+              if (!response["data"]) {
+                console.log("hi")
+                axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" });
+                for (let info in response["data"]) {
+                  // console.log(info)
+                  let category = info.substring(0, info.length - 1);
+                  let idx = info.substring(info.length - 1, info.length);
+                  if (idx == 1) {
                     this.first[category] = response["data"][info];
-                }
-                else if (idx == 2) {
+                  } else if (idx == 2) {
                     this.second[category] = response["data"][info];
-                }
-                else {
+                  } else {
                     this.third[category] = response["data"][info];
+                  }
                 }
-            }
-            this.result_list = [this.first, this.second, this.third];
-            console.log(this.result_list);
-        });
+                this.result_list = [this.first, this.second, this.third];
+                console.log(this.result_list);
+              }
+              else {
+                axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`, {
+                  "parameters": "",
+                  "maxprice": 4,
+                  "minprice": 0,
+                  "coordinates": this.coordinates
+                })
+                  .then(response => {
+                    console.log("hie")
+                    if (response["data"]) {
+                      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" });
+                      for (let info in response["data"]) {
+                        // console.log(info)
+                        let category = info.substring(0, info.length - 1);
+                        let idx = info.substring(info.length - 1, info.length);
+                        if (idx == 1) {
+                          this.first[category] = response["data"][info];
+                        } else if (idx == 2) {
+                          this.second[category] = response["data"][info];
+                        } else {
+                          this.third[category] = response["data"][info];
+                        }
+                      }
+                      this.result_list = [this.first, this.second, this.third];
+                      console.log(this.result_list);
+                    }
+                  })
+              }
+              });
     },
     methods: {
         printCost: function (num) {
