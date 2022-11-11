@@ -9,6 +9,17 @@ $primary-colors: (
   hover: #108de0,
   shadow: #006bb3
 );
+.vc-time-weekday, .vc-time-month, .vc-time-day, .vc-time-year, .vc-time, {
+  font-family: "Press Start 2P", cursive;
+  color: black;
+  font-weight: 0;
+  font-size:12px;
+}
+@media screen and (max-width: 600px) {
+  .vc-time-weekday, .vc-time-month, .vc-time-day, .vc-time-year, .vc-time{
+    font-size: 10px;
+  }
+}
 
 $warning-colors: (
   normal: #ffc53d,

@@ -24,6 +24,7 @@ export default {
 
 .nes-input {
   width: 100%;
+  font-size: 16px;
 }
 
 h1 {
@@ -34,7 +35,7 @@ h2 {
   font-size: 50px;
 }
 
-p, body {
+p, body, button {
   font-size: 16px;
 }
 
@@ -51,7 +52,9 @@ img {
     font-size: 40px;
   }
   p,
-  body {
+  body,
+  .nes-input,
+  button {
     font-size: 14px;
   }
   img {
@@ -68,7 +71,9 @@ img {
     font-size: 30px;
   }
   p,
-  body {
+  body,
+  .nes-input,
+  button  {
     font-size: 12px;
   }
   img {
@@ -85,7 +90,9 @@ img {
     font-size: 20px;
   }
   p,
-  body {
+  body,
+  .nes-input,
+  button  {
     font-size: 10px;
   }
   img {

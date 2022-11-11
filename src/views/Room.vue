@@ -3,7 +3,7 @@
     <div class="container-sm">
       <br />
       <div class="row gx-4 room-body">
-        <div class="col-12 text-center">
+        <div class="col-12 text-center ">
           <h1>Welcome to Game Room</h1>
         </div>
 
@@ -27,8 +27,9 @@
               />
             </div>
 
-            <!-- if username invalid, this will appear in red below username -->
-            <div class="col-12 my-3">
+            <!-- if username invalid, this will appear in red below username --> 
+            <!-- need fix change username after its been taken and directed  -->
+            <div class="col-12 mb-3">
               <div id="usernameError"></div>
 
             </div>
@@ -58,11 +59,12 @@
                   Go Home
                 </button>
               </div>
-              <div class="col-6">
-                <button
+              <div id="buttonNext" class="col-6">
+                
+                <button 
                   type="button"
                   class="nes-btn is-warning col-6"
-                  @click="play"
+                  @click="play()"
                 >
                   Start Game!
                 </button>
@@ -73,18 +75,17 @@
         <div class="col-2"></div>
 
         <!-- copy link button -->
-
         <div id="link" class="row ">
           <div class="col-1"></div>
           <div class="col-8 text-center is-rounded">
             <input type="text" class="nes-input is-primary" :value="currentUrl" />
           </div>
           
-          <div class="col-2">
+          <div class="col-2 px-0 py-0">
               <button
               id="copy"
                 type="button"
-                class="nes-btn is-warning"
+                class="nes-btn is-warning text-center"
                 @click="copy_link"
               >
                 Copy Link
@@ -137,12 +138,25 @@ export default {
         router.push({ name: "Instruction" });
       }
       else if (this.validUser == false && this.currentUsername != '') {
-        document.getElementById("usernameError").innerText= "Username already exists. Please enter a different username.";
+        document.getElementById("usernameError").innerHTML= `
+        <p>${this.currentUsername} has finished the game. View results?</p>`;
+        document.getElementById("buttonNext").innerHTML = `
+        <button type="button" class="nes-btn is-warning" @click="holding()">View Results!</button>`;
       }
       else {
         document.getElementById("usernameError").innerText="Please enter a username.";
       }
 
+    },
+    default: function() {
+      document.getElementById("usernameError").innerHTML= "";
+      document.getElementById("buttonNext").innerHTML = `
+      <button type="button" class="nes-btn is-warning" @click="play()">Start Game!</button>`;
+    },
+    holding: function(){
+      let buttonpress = new Audio("../../buttonpress.mp3");
+      buttonpress.play();
+      router.push({ name: "Holding" });
     },
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -231,6 +245,7 @@ img {
   right: 0px;
   z-index: 1;
 }
+
 
 
 </style>
