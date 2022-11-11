@@ -36,7 +36,7 @@
   <div class="nes-container is-rounded col-10 col-md-10 game-options">
     <div class="row mt-5"></div>
     <div class="row mt-auto">
-        <input v-model="value" type="range" class="form-range" max="2" id="blank" @mouseup="nextpage()">
+        <input v-model="value" type="range" class="form-range" max="2" @mouseup="nextpage">
     </div>
     <div class="row mt-4 justify-content-evenly">
       <h6 class="col-2 text-center ps-0">{{ foption0 }}</h6>

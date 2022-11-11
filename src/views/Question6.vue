@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="container-sm">
-      <QuestionComponent category="spice" :code="code" />
+      <SliderComponent category="spice" :code="code" />
       <UsernameCheckerComponent />
     </div>
   </body>
@@ -10,14 +10,14 @@
 <script>
 import router from "@/router";
 import { useSessionStore } from '../stores/session';
-import QuestionComponent from "../components/QuestionComponent";
+import SliderComponent from "../components/SliderComponent";
 import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 
 export default {
   name: "Question6View",
   components: {
     UsernameCheckerComponent,
-    QuestionComponent
+    SliderComponent
   },
   setup() {
     const store = useSessionStore()
