@@ -33,7 +33,7 @@
       <div class="col"></div>
       <div class="col-12 col-md-10 col-lg-10">
         <div class="main_component nes-container is-rounded">
-          <p> Completed: </p>
+          <h5> Completed: </h5>
           <div class="container">
             <div class="row">
               <!-- <div class="col"></div> -->
@@ -253,6 +253,7 @@ div.main_component {
   /* background-color: rgb(247, 213, 29);
   margin-bottom: 10px;  */
 
+  padding-top: 30px;
   margin-right: auto;
   margin-left: auto;
   /* margin-top: 100px; */
@@ -266,10 +267,19 @@ div.main_component {
 }
 
 .user_list {
-  overflow-y: auto;
+  /* overflow-y: auto;
   height: 180px;
   overflow-y: scroll;
+  text-align: left; */
+
+  overflow-y: auto;
+  position: absolute;
+  bottom: 20px;
+  top: 70px;
+  /* height: 50%; */
+  overflow-y: ;
   text-align: left;
+  right: 15px;
 }
 
 div.text_component {
