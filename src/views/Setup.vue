@@ -117,10 +117,11 @@ export default {
       dietaryNeeds: [],
       extra: "",
       checked: null,
+      region: "",
     };
   },
   mounted() {
-    navigator.geolocation.getCurrentPosition(this.setCoordinates);
+    navigator.geolocation.getCurrentPosition(this.setCoordinates)
   },
   methods: {
     setCoordinates: function (position) {
@@ -148,6 +149,24 @@ export default {
         error = false;
       }
       // Else create room
+      if (this.region == "") {
+        navigator.geolocation.getCurrentPosition(this.setCoordinates);
+      }
+      else if (this.region == "North") {
+        this.coordinates = "1.4304, 103.8354"
+      }
+      else if (this.region == "South") {
+        this.coordinates = "1.2655, 103.8239"
+      }
+      else if (this.region == "East") {
+        this.coordinates = "1.3496, 103.9568"
+      }
+      else if (this.region == "West") {
+        this.coordinates = "1.3368, 103.6942"
+      }
+      else if (this.region == "Central") {
+        this.coordinates = "1.2907, 103.8517"
+      }
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom`, {
         code: generated_code,
         status: "open",

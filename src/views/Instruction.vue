@@ -51,7 +51,7 @@ export default {
   methods: {
     start: function (){
       //fix button sound now cant play
-      let buttonpress = new Audio("../../buttonpress.mp3");
+      let buttonpress = new Audio("../../../buttonpress.mp3");
       buttonpress.play();
       router.push({ name: "Starting", props: true });
     },
