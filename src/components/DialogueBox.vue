@@ -6,16 +6,16 @@
                 <i class="nes-octocat animate"></i>
             </div>
             <div class="col-9 col-sm-9 col-md-9 col-lg-10 text text-break px-2">
-                <p v-if="text.includes('spicy')">
+                <p v-if="message.includes('spicy')">
                     <b>THE GROUP'S SELECTION:</b> 
-                    <br>{{text}}
+                    <br>{{message}}
                 </p>
                 <div v-else>
                     <p class="typewriter d-none d-lg-block ">
-                        {{text}}
+                        {{message}}
                     </p>
                     <p class="d-lg-none d-md-block">
-                        {{text}}
+                        {{message}}
                     </p>
                 </div>
             </div>
@@ -32,11 +32,6 @@ export default {
         // type: String,
         question: String,
         category: String,
-    },
-    data() {
-        return {
-            text: this.message
-        }
     },
     
     created() {
