@@ -1,5 +1,5 @@
 <template>
-    <dialog id="exitModal" class="nes-dialog is-rounded dialog">
+    <dialog id="exitModal" class="nes-dialog is-rounded dialog p-2 p-sm-4">
         <div >
             <h4>Wait!</h4>
             <p>Heading back to Home Page?<br><br>
@@ -370,8 +370,8 @@ body {
 }
 
 .dialog {
-    padding: 40px 60px;
-    width: 40%;
+    /* padding: 40px 60px; */
+    width: fit-content;
 }
 
 small {
