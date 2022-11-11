@@ -27,7 +27,7 @@
   </dialog>
 
 
-  <div class="whole container">
+  <div class="whole container container-sm">
 
     <!-- <div class="row">
 
@@ -48,15 +48,15 @@
     </div> -->
 
     <div class="row top gx-4">
-      <div class="col-2 col-md-2 ps-0 col-content">
+      <div class="col-3 col-md-2 ps-0 col-content">
         <button type="button" class="nes-btn is-error" @click="exit">Exit</button>
       </div>
 
-      <div class="col-8 col-content">
-          <h4 class="logo">The End.</h4>
+      <div class="col-6 col-md-8 col-content">
+          <h1 class="logo">The End</h1>
       </div>
 
-      <div class="user col-2 col-content nes-container">
+      <div class="user col-3 col-md-2 col-content nes-container">
           {{ username }}
       </div>
   </div>
@@ -269,9 +269,12 @@ button.is-error {
 }
 
 .logo {
-    padding: 17.8px 0px;
+    /* padding: 17.8px 0px; */
     text-align: center;
     margin: 0;
+    padding-top: 10px;
+    /* font-size: 3.2vw ; */
+    
 }
 
 .user {
@@ -318,27 +321,16 @@ button.is-error {
 }
 
 div.main_component {
-  /* margin-right: auto;
-  margin-left: auto;
-  margin-top: 100px;
-  margin-bottom: 10px;
-  width: 55%;
-  height: auto;
-  bottom: 0;
-  /* background-color: yellow; */
-  /* background-color: rgb(247, 213, 29);
-  margin-bottom: 10px;  */
-
-  padding-top: 30px;
+  padding-top: 10px;
   margin-right: auto;
   margin-left: auto;
   /* margin-top: 100px; */
   /* margin-bottom: 10px; */
   width: 55%;
   height: 100%;
-  /* bottom: 0; */
-  /* background-color: yellow; */
   background-color: rgb(247, 213, 29);
+  min-height: 250px;
+  min-width: 300px;
 
 }
 
@@ -383,35 +375,12 @@ div.text_component {
   right: 10px;
 }
 
-
-
-/* div.nes-container.scroll { */
-  /* margin-right: auto;
-  margin-left: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  width: 700px;
-  position: sticky;
-  bottom: 0; */
-
-/* } */
-
-/* .heading {
-  font-size: large;
-  margin-top: 50px;
-  margin-bottom: 30px;
-  margin-bottom: 100px;
-} */
-
-
-/* typewriter , @keyframes typing and blink-caret can be removed to remove animation */
-
-
 .text_container {
   position: relative;
 }
 
 .typewriter {
+  padding-top: ;
   position: absolute;
   /* font-size:large; */
   top: 0;
