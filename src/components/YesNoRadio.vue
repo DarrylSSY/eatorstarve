@@ -1,34 +1,39 @@
 <template>
-<div class="nes-container">
+  <div class="nes-container">
+    <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block">
+
     <label>
-      <input v-model="response" type="radio" class="nes-radio"  value="yes"  @keyup.enter="onEnter" />
+      <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" checked @keydown.enter.prevent="$emit('yesFunction')"/>
       <span>Yes</span>
     </label>
+
+
     <label>
-      <input  v-model="response" type="radio" class="nes-radio" value="no" @keyup.enter="onEnter" />
+      <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter.prevent="$emit('noFunction')" />
       <span>No</span>
     </label>
 
-    {{ response }}
-</div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "YesNoRadio",
   prop: {
-    test: String
+    test: String,
   },
+
+  emits: {
+    yesFunction: null,
+    noFunction: null
+  },
+
   data() {
     return {
       response: ''
     }
   },
-  methods: {
-    onEnter: function() {
-      alert('success');
-    }
-  }
 }
 </script>
 
