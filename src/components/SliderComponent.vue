@@ -36,7 +36,7 @@
   <div class="nes-container is-rounded col-10 col-md-10 game-options">
     <div class="row mt-5"></div>
     <div class="row mt-auto">
-        <input v-model="value" type="range" class="form-range" max="2" @mouseup="nextpage">
+        <input v-model="value" type="range" class="form-range" max="2" @mouseup="nextpage()">
     </div>
     <div class="row mt-4 justify-content-evenly">
       <h6 class="col-2 text-center ps-0">{{ foption0 }}</h6>
@@ -45,7 +45,20 @@
       <span class="col-3"></span>
       <h6 class="col-2 text-center ps-0">{{ foption2 }}</h6>
     </div>
+    <!-- <div class="row pt-3">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <button type="button" class="nes-btn is-warning">Next ></button>
+      </div>
+    </div> -->
   </div>
+  <div class="row">
+      <div class="col-8"></div>
+      <div class="col-3">
+        <button type="button" class="nes-btn is-warning">Next ></button>
+      </div>
+      <div class="col-1"></div>
+    </div> 
   
     <!-- Question number, health bar and username -->
     <div class="col-12 row px-0 mx-0 mb-2 mt-auto">
@@ -118,7 +131,7 @@ mounted() {
   });
   let oof = new Audio("../../oof.mp3");
 
-  this.$timer.play("Timer");
+  // this.$timer.play("Timer");
   this.$timer.on("stop", () => {
     console.log("ended");
     oof.play();
