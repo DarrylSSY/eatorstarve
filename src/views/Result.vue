@@ -153,7 +153,8 @@ export default {
             code: this.$route.params.code,
             choices: 'Test',
             received_keywords: '',
-            parameters: ''
+            parameters: '',
+            copySuccess: false,
             }
     },
     async beforeCreate() {
@@ -409,7 +410,7 @@ small {
 
 .nes-balloon{
     position: absolute;
-    /* bottom: 9px; */
+    bottom: 9px;
     right: 0px;
     z-index: 1;
 }
