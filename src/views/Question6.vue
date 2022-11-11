@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="container-sm p-0">
-      <QuestionComponent category="spice" :code="code" />
+      <SliderComponent category="spice" :code="code" />
       <UsernameCheckerComponent />
     </div>
   </body>
