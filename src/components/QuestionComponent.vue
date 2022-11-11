@@ -129,7 +129,6 @@ export default {
     let oof = new Audio("../../oof.mp3");
     this.$timer.play("Timer");
     this.$timer.on("stop", () => {
-      console.log("ended");
       oof.play();
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
@@ -148,7 +147,7 @@ export default {
     } else if (this.category == "poultry") {
       this.next = "Question3";
       this.progress = 10;
-      this.color = "is-error";      
+      this.color = "is-error";
       this.question_front = "Select your ";
       this.question_back = "!";
     } else if (this.category == "price") {
@@ -182,7 +181,6 @@ export default {
       this.question_front = "Want some ";
       this.question_back = "?";
     }
-    // console.log(this.question_front,this.question_back)
     axios.get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`).then((response) => {
         this.generate2RandomOptions(response["data"].length, response)
 
@@ -221,7 +219,6 @@ export default {
       router.push({ name: this.next, params: { id: this.code } });
     },
     option2: function () {
-      console.log(this.username + "selected" + this.answer2);
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
         code: this.code,
         username: this.username,

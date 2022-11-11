@@ -50,7 +50,6 @@ export default {
         })
     axios.post(`${process.env.VUE_APP_BACKEND_URL}api/photo`,{"photo":"AW30NDywsbnpEINz6zUUcmszaJ4ACS057IryqfKz2kVyMi0Toc4c9-dei-faG10cpPggpFpvPK_Ps_nzgEieF_itLEXWil1rc9BxgoAGqTeVjhgDxsFq4fUG2NAsP2-0pXqxx8zxzVAUC61UNGKQb3Qczy7CzFB1jH4ZFpp35EOQcGU2wYeo"})
         .then(response => {
-          console.log(response["data"])
           let blob = new Blob([response["data"]], {type: 'image/jpeg'});
           this.image = URL.createObjectURL(blob)
           console.log(this.image)

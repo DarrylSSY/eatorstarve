@@ -60,7 +60,7 @@
                                         <div class="card-body">
                                             <h5 class="card-title">{{name}}</h5>
                                             <div class="card-text">
-                                                {{details.rating}} 
+                                                {{details.rating}}
                                                 <br>
                                                 {{details.type}}
                                                 <br>
@@ -112,7 +112,7 @@
                                 @click="copy_link"
                             >
                                 Copy Link
-                            </button>  
+                            </button>
                         <div v-show="copySuccess" class="nes-balloon from-left" data-bs-toggle="popover" data-bs-trigger="focus">
                         <p>Copied!</p>
                     </div>
@@ -171,7 +171,6 @@ export default {
     },
     // async beforeCreate() {
     //     // this.choices = this.received_keywords
-    //     // console.log(this.choices, 'jl')
 
     //     // qn 1
     //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
@@ -231,10 +230,10 @@ export default {
     //     });
     //     // this.$emit("getChoices", this.parameters);
     //     // generate place
-        
+
     // },
 
-    
+
     created() {
     this.currentUrl = window.location.href;
     },
@@ -256,7 +255,6 @@ export default {
             router.push("/");
         },
         openModal: function() {
-            console.log('ji')
             document.getElementById('exitModal').showModal();
             let buttonpress = new Audio("../../buttonpress.mp3");
             buttonpress.play();
@@ -272,7 +270,6 @@ export default {
         },
         // getChoices: function(choices) {
         //     this.received_keywords = choices
-        //     console.log(choices, "lol")
         // },
         copy_link: async function () {
             this.copySuccess = true;
@@ -281,15 +278,15 @@ export default {
                 buttonpress.play();
                 await navigator.clipboard.writeText(window.location.href);
                 setTimeout(() => this.copySuccess = false, 5000)
-            } 
+            }
             catch ($e) {
                 alert("Error copying link to clipboard");
             }
         },
 
-        
+
     }
-    
+
 }
 
 

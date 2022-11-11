@@ -32,7 +32,7 @@
       </div>
       <!-- <div class="col-1 col-md-0"></div> -->
     </div>
-    
+
 
   <!--Slider Options -->
   <div class="col-1 col-md-0"></div>
@@ -131,7 +131,6 @@ mounted() {
 
   this.$timer.play("Timer");
   this.$timer.on("stop", () => {
-    console.log("ended");
     oof.play();
     axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
       code: this.code,
@@ -197,7 +196,6 @@ beforeUnmount() {
 },
 methods: {
   nextpage: function () {
-    console.log(this.username + "selected" + this.value);
     axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
       code: this.code,
       username: this.username,

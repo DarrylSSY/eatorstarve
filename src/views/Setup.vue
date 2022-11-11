@@ -147,7 +147,6 @@ export default {
         generated_code = Math.random().toString(36).slice(9);
         error = false;
       }
-      console.log(this.region)
       // Else create room
       if (this.region == "") {
         navigator.geolocation.getCurrentPosition(this.setCoordinates);
