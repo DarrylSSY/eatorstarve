@@ -1,25 +1,40 @@
 <template>
+    <dialog id="exitModal" class="nes-dialog is-rounded dialog">
+        <div >
+            <h4>Wait!</h4>
+            <p>Heading back to Home Page?<br><br>
+            </p>
+            <small>
+                Note: You can check this results again by rejoining this room! <br>
+            </small>
+
+            <br>
+            <button type="button" class="nes-btn is-warning" style="margin-bottom:10px;" @click="home">Yes, Goodbye!</button>
+            <a class="nes-btn" onclick="document.getElementById('exitModal').close()">Cancel</a>
+        </div>
+    </dialog>
+
     <body>
 
         <div class="container-sm">
 
             <!-- Top Bar -->
             <div class="row top gx-4">
-                <div class="col-2 col-md-2 ps-0">
+                <div class="col-2 col-md-2 ps-0 col-content">
                     <button
                         type="button"
                         class="nes-btn is-error"
-                        onclick="document.getElementById('dialog-rounded').showModal();"
+                        onclick="document.getElementById('exitModal').showModal();"
                     >
                         Exit
                     </button>
                 </div>
 
-                <div class="col-8">
+                <div class="col-8 col-content">
                     <h4 class="logo">Eat or Starve</h4>
                 </div>
 
-                <div class="col-2 nes-container">
+                <div class="user col-2 col-content nes-container">
                     {{ username }}
                 </div>
             </div>
@@ -38,7 +53,7 @@
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{name}}</h5>
-                                            <p class="card-text">
+                                            <div class="card-text">
                                                 {{details.rating}} 
                                                 <br>
                                                 {{details.type}}
@@ -48,7 +63,14 @@
                                                 Located in: {{details.building_name}}
                                                 <br>
                                                 Status: {{details.opening_time}}
-                                            </p> -->
+                                                <div class="row">
+                                                    <div v-for="tag in tags" :key="tag.id" class="col">
+                                                        <a class="nes-btn is-error tag-style" :href="'https://www.google.com/search?q=' + tag" target="_blank">
+                                                            <span>{{tag}}</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
                                             <!-- <button type="button" class="nes-btn is-warning open_map" @click="window.location.href='map_url'">Open URL</button>
                                         </div>
@@ -72,7 +94,7 @@
                 </div>
             </div>
 
-            <DialogueBox :message="keywords"></DialogueBox>
+            <DialogueBox message="<insert funny shit>"></DialogueBox>
         </div>
     </body>
 </template>
@@ -81,6 +103,7 @@
 import DialogueBox from '@/components/DialogueBox.vue';
 import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
+import router from "@/router";
 
 export default {
     name: "ResultView",
@@ -95,10 +118,38 @@ export default {
     data() {
         return {
             code: this.$route.params.code,
-            string: '',
-            
+            answered: [],
+            // will need retrive data after generation of result
+            top3_locations: {
+                "Name": {
+                    img_url: "",
+                    rating: "",
+                    type: "",
+                    address: "",
+                    building_name: "",
+                    opening_time: "",
+                    tags: [],
+                    map_url: ""
+                },
+                "Name2": {
+                    img_url: "",
+                    rating: "",
+                    type: "",
+                    address: "",
+                    building_name: "",
+                    opening_time: "",
+                    tags: [],
+                    map_url: ""
+                },
+            }
         };
     },
+
+    methods: {
+        home: function () {
+            router.push("/");
+        },
+    }
     
 }
 
@@ -115,6 +166,10 @@ div.nes-container {
     padding-top: 24px;
 }
 
+.col-content {
+    height: 70px;
+}
+
 button.is-error {
     width: 100%;
     height: 62.4px;
@@ -124,6 +179,11 @@ button.is-error {
     padding: 17.8px 0px;
     text-align: center;
     margin: 0;
+}
+
+.user {
+    padding: 20px;
+    text-align: center;
 }
 
 body {
@@ -147,8 +207,7 @@ body {
 
 .gallery {
     margin: auto;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 60px;
     width: 80%;
     /* border: 4px black solid; */
 }
@@ -175,4 +234,32 @@ body {
     width: 6%;
     /* border-radius: 50%; */
 }
+
+.dialog {
+    padding: 40px 60px;
+    width: 40%;
+}
+
+small {
+    text-align: left;
+}
+
+.tag-style {
+    font-size: 8pt;
+    height: 30px;
+    padding: 3px 10px;
+    width: auto;
+}
+
+.card-body .col {
+    /* width: fit-content; */
+    width: fit-content;
+    /* margin: 1em auto; */
+    /* padding: 5px; */
+}
+
+.card-body .row {
+    width: auto;
+}
+
 </style>
