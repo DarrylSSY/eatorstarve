@@ -1,4 +1,5 @@
 <template>
+  <!-- START for 2 Question Template -->
   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
     <form method="dialog">
       <p class="title">Are you sure you want to exit?</p>
@@ -81,7 +82,7 @@
       <h3 class="col-7 col-sm-9">{{ question }} {{ category }}!</h3>
     </div>
   </div>
-
+  <!-- END of 2 Question Template -->
 </template>
 
 <script>
@@ -107,7 +108,8 @@ export default {
       answer2: "Loading",
       btn_state_1: "is-disabled",
       btn_state_2: "is-disabled",
-      question: "Choose your ",
+      question_front: "Choose your ",
+      question_back: " !",
       next: "Question2",
       progress: 0,
       color: "",
@@ -139,30 +141,44 @@ export default {
       this.next = "Question2";
       this.progress = 0;
       this.color = "";
+      this.question_front = "Which ";
+      this.question_back = " are you feeling?";
     } else if (this.category == "poultry") {
       this.next = "Question3";
       this.progress = 10;
-      this.color = "is-error";
+      this.color = "is-error";      
+      this.question_front = "Select your ";
+      this.question_back = "!";
     } else if (this.category == "price") {
       this.next = "Question4";
       this.progress = 25;
       this.color = "is-error";
+      this.question_front = "Indicate the ";
+      this.question_back = " level!";
     } else if (this.category == "texture") {
       this.next = "Question5";
       this.progress = 40;
       this.color = "is-warning";
+      this.question_front = "Which ";
+      this.question_back = " do you prefer?";
     } else if (this.category == "base") {
       this.next = "Question6";
       this.progress = 55;
       this.color = "is-warning";
+      this.question_front = "Indicate your ";
+      this.question_back = " choice.";
     } else if (this.category == "spice") {
       this.next = "Question7";
       this.progress = 75;
       this.color = "is-success";
+      this.question_front = "What is your ";
+      this.question_back = " tolerance level?";
     } else {
       this.next = "Holding";
       this.progress = 90;
       this.color = "is-success";
+      this.question_front = "Want some ";
+      this.question_back = "?";
     }
     axios.get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`).then((response) => {
         this.generate2RandomOptions(response["data"].length, response)
