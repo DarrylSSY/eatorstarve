@@ -19,7 +19,7 @@
                 <i class="nes-icon is-medium heart pe-4"></i>For each question, select one answer.
               </div><br>
               <div class="d-flex flex-row  align-items-center">
-                <i class="nes-icon is-medium heart pe-4"></i>Watch out for your health as there is a 10s time limit for
+                <i class="nes-icon is-medium heart pe-4"></i>Watch out for your health as there is a 5s time limit for
                 each question.
               </div><br>
               <div class="d-flex flex-row  align-items-center">

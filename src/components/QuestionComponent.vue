@@ -125,6 +125,7 @@ export default {
       layout: new Layout({ fit: "fitHeight", alignment: "right" }),
       autoplay: false,
       animations: "Timer",
+
     });
     let oof = new Audio("../../oof.mp3");
     this.$timer.play("Timer");
