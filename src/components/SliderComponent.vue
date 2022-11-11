@@ -35,25 +35,26 @@
     
 
   <!--Slider Options -->
-    <div class="col-1 col-md-0"></div>
-    <div class="nes-container is-rounded col-10 col-md-10 game-options">
-      <div class="row mt-2 justify-content-evenly">
-        <h6 class="col-2 text-center ps-0">{{ foption0 }}</h6>
-        <span class="col-3"></span>
-        <h6 class="col-2 text-center ps-0">{{ foption1 }}</h6>
-        <span class="col-3"></span>
-        <h6 class="col-2 text-center ps-0">{{ foption2 }}</h6>
-      </div>
-      <div class="row mt-auto">
-          <input v-model="value" type="range" class="form-range" max="2" @mouseup="nextpage()">
-      </div>
-      <div class="row pt-3">
-        <div class="col-9"></div>
-        <div class="col-3">
-          <button type="button" class="nes-btn is-warning fit">Next ></button>
-        </div>
-      </div>
+  <div class="col-1 col-md-0"></div>
+  <div class="nes-container is-rounded col-10 col-md-10 game-options">
+    <div class="row mt-5"></div>
+    <div class="row mt-auto">
+        <input v-model="value" type="range" class="form-range" max="2" @mouseup="nextpage()" @touchend="nextpage()">
     </div>
+    <div class="row mt-4 justify-content-evenly">
+      <h6 class="col-2 text-center ps-0">{{ foption0 }}</h6>
+      <span class="col-3"></span>
+      <h6 class="col-2 text-center ps-0">{{ foption1 }}</h6>
+      <span class="col-3"></span>
+      <h6 class="col-2 text-center ps-0">{{ foption2 }}</h6>
+    </div>
+    <!-- <div class="row pt-3">
+      <div class="col-10"></div>
+      <div class="col-2">
+        <button type="button" class="nes-btn is-warning">Next ></button>
+      </div>
+    </div> -->
+  </div>
   </div>
 
   <div class="dialogue-box container p-0">
@@ -135,7 +136,7 @@ mounted() {
     axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
       code: this.code,
       username: this.username,
-      answer: this.answer1,
+      answer: this.value,
       category: this.category,
     });
     router.push({ name: this.next, params: { id: this.code } });
@@ -149,7 +150,7 @@ mounted() {
   } else if (this.category == "poultry") {
     this.next = "Question3";
     this.progress = 10;
-    this.color = "is-error";      
+    this.color = "is-error";
     this.question_front = "Select your ";
     this.question_back = "!";
   } else if (this.category == "price") {
