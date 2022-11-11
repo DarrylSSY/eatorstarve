@@ -75,90 +75,90 @@ export default {
       result_list: [],
     }
   },
-  mounted() {
-      // qn 1
-      axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
-        this.parameters = response.data + ", "
-        // qn 2
-        axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
-          this.parameters += response.data + ", "
-          // qn 3
-          axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
-            if (response.data == "Rich Tai-Tai") {
-              this.maxprice = 4
-              this.minprice = 3
-            }
-            else if (response.data == "Middle-Class") {
-              this.maxprice = 2
-              this.minprice = 1
-            }
-            else {
-              this.maxprice = 1
-              this.minprice = 0
-            }
-            // qn 4
-            axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
-              this.parameters += response.data + ", "
-              // qn 5
-              axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
-                this.parameters += response.data + ", "
-                axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
-                  if (response.data == "Stomachache Come!!"){
-                    this.parameters += "spicy "
-                  }
-                  else if (response.data == "Little Kick"){
-                    this.parameters += "mild-spicy, "
-                  }
-                  else {
-                    this.parameters += "non-spicy, "
-                  }
-                  axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
-                    if (response.data == "Exotic"){
-                      this.parameters += "unique, "
-                    }
-                    axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
-                      this.parameters += response.data["settings"]
-                      this.coordinates += response.data["coordinates"]
-                    })
+  async mounted() {
+    // qn 1
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
+      this.parameters = response.data + ", "
+      // qn 2
+    })
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
+      this.parameters += response.data + ", "
+    })
+    // qn 3
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
+      if (response.data == "Rich Tai-Tai") {
+        this.maxprice = 4
+        this.minprice = 3
+      } else if (response.data == "Middle-Class") {
+        this.maxprice = 2
+        this.minprice = 1
+      } else {
+        this.maxprice = 1
+        this.minprice = 0
+      }
+    })
+          // qn 4
 
-                  })
-                })
-              })
-            })
-          })
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
+      this.parameters += response.data + ", "
+    })
+      // qn 5
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
+      this.parameters += response.data + ", "
+    })
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
+      if (response.data == "Stomachache Come!!") {
+        this.parameters += "spicy "
+      } else if (response.data == "Little Kick") {
+        this.parameters += "mild-spicy, "
+      } else {
+        this.parameters += "non-spicy, "
+      }
+    })
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
+      if (response.data == "Exotic") {
+        this.parameters += "unique, "
+      }
+    })
+    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
+      this.parameters += response.data["settings"]
+      this.coordinates += response.data["coordinates"]
+    })
 
-          // generate place
-          axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`,{"parameters":this.parameters, "maxprice":this.maxprice, "minprice":this.minprice, "coordinates":this.coordinates})
-              .then(response => {
-                const keywords = useSessionStore()
-                    keywords.setKeywords(this.parameters)
+    console.log(this.parameters)
+    // generate place
+    axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`, {
+      "parameters": this.parameters,
+      "maxprice": this.maxprice,
+      "minprice": this.minprice,
+      "coordinates": this.coordinates
+    })
+      .then(response => {
+        const keywords = useSessionStore()
+        keywords.setKeywords(this.parameters)
 
 
-                axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, {"status": "close"})
-                // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
-                // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
-                // this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
-                // console.log(response.data)
-                for (let info in response['data']) {
-                  // console.log(info)
-                  let category = info.substring(0, info.length - 1)
-                  let idx = info.substring(info.length - 1, info.length)
-                  if (idx == 1) {
-                    this.first[category] = response['data'][info]
-                  }
-                  else if (idx == 2) {
-                    this.second[category] = response['data'][info]
-                  }
-                  else {
-                    this.third[category] = response['data'][info]
-                  }
-                }
+        axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" })
+        // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
+        // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
+        // this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
+        // console.log(response.data)
+        for (let info in response['data']) {
+          // console.log(info)
+          let category = info.substring(0, info.length - 1)
+          let idx = info.substring(info.length - 1, info.length)
+          if (idx == 1) {
+            this.first[category] = response['data'][info]
+          } else if (idx == 2) {
+            this.second[category] = response['data'][info]
+          } else {
+            this.third[category] = response['data'][info]
+          }
+        }
 
-                this.result_list = [this.first, this.second, this.third]
-              })
-        })
+        this.result_list = [this.first, this.second, this.third]
       })
-    },
+  },
 
     methods: {
       printCost: function(num) {
