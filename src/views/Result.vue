@@ -21,7 +21,7 @@
             <!-- Top Bar -->
             <div class=" container container-sm " style="position: relative; width: 100%;">
                 <div class="row top gx-4">
-                    <div class="col-3 col-md-2 ps-0 col-content">
+                    <div class="col-3 col-md-3 col-lg-2 ps-0 col-content">
                         <button
                             type="button"
                             class="nes-btn is-error"
@@ -31,11 +31,11 @@
                         </button>
                     </div>
 
-                    <div class="col-6 col-md-8 col-content px-2 px-sm-4 px-md-5 py-4 py-sm-2 py-md-2">
+                    <div class="col-6 col-md-6 col-lg-8 col-content px-2 px-sm-4 px-md-5 py-4 py-sm-2 py-md-2">
                         <h4 class="logo">Eat or Starve</h4>
                     </div>
 
-                    <div class="user col-3 col-md-2 col-content nes-container">
+                    <div class="user col-3 col-md-3 col-lg-2 col-content nes-container">
                         <p v-if="username == ''">
                             {{code}}
                         </p>
@@ -49,7 +49,7 @@
 
 
             <!-- Result Gallery -->
-            <div class="gallery">
+            <div class="gallery container">
 
                 <div id="suggestions" class="carousel slide" data-bs-ride="carousel" data-bs-touch="true">
                     <div class="carousel-inner nes-container px-1 py-2 p-sm-3">
@@ -103,12 +103,11 @@
                 </div>
 
                 <!-- copylink -->
-                <div id="link" class="row justify-content-center">
-                        <div class="col-5 col-md-7 col-lg-7 text-center is-rounded px-0">
-                            <input type="text" class="nes-input is-primary" :value="currentUrl" />
+                <div id="link" class="row justify-content-center gy-1">
+                        <div class="col-8 col-md-7 col-lg-7 text-center is-rounded ps-0">
+                            <input type="text" class="nes-input is-primary text-center" :value="currentUrl" style="width:calc(100% + 8px);"/>
                         </div>
-                        <div class="col-1 p-0" style="width: 2%;"></div>
-                        <div class="col-5 col-md-3 col-lg-3 px-0 py-0">
+                        <div class="col-8 col-md-3 col-lg-3 p-0 py-0">
                             <button
                             id="copy"
                                 type="button"
@@ -125,7 +124,7 @@
 
         </div>
         <div class="container p-0" style="margin: auto;">
-            <DialogueBox :message="parameters"></DialogueBox>
+            <DialogueBox :message="joke_list[rand_num]"></DialogueBox>
         </div>
     </body>
 </template>
@@ -134,7 +133,7 @@
 import DialogueBox from '@/components/DialogueBox.vue';
 import GenerateResultsComponent from '@/components/GenerateResultsComponent.vue';
 import { useSessionStore } from '../stores/session';
-import axios from "axios";
+// import axios from "axios";
 import router from "@/router";
 
 export default {
@@ -153,78 +152,98 @@ export default {
             code: this.$route.params.code,
             choices: 'Test',
             received_keywords: '',
-            parameters: '',
+            // parameters: '',
             copySuccess: false,
+            joke_list: [
+                "What’s the best way to burn vegetables?\n Roast them.",
+                "Which condiment adds the most kick?\n Horseradish.",
+                "Why are butchers so hilarious?\n They always ham it up.",
+                "What’s the best food when you’re so hungry you could eat a house?\n Cottage cheese, wall nuts, and kitchen sink cookies.",
+                "Why are chefs so harsh?\n They’re always beating eggs.",
+                "What’s the most desirable kitchen appliance?\n A “hot” plate.",
+                "Which friends should you always take out to dinner?\n Your taste buds.",
+                "How do you make a recipe pop with ginger?\n Play “Spice Girls” songs while you cook.",
+                "What’s the best food to eat before a workout?\n Mussels.",
+                "What part of a meal makes you the most sleepy?\n The nap-kin.",
+                "What’s the main ingredient in canned laughter?\n Processed cheese.",
+                "When is eating just like school?\n When you have three or four courses.",
+                "What’s the most relaxing type of pasta?<\n Spa-ghetti.",
+            ],
+            rand_num: 0,
             }
     },
-    async beforeCreate() {
-        // this.choices = this.received_keywords
-        // console.log(this.choices, 'jl')
+    // async beforeCreate() {
+    //     // this.choices = this.received_keywords
+    //     // console.log(this.choices, 'jl')
 
-        // qn 1
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
-            this.parameters = response.data + ", ";
-            // qn 2
-        });
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
-            this.parameters += response.data + ", ";
-        });
-        // qn 3
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
-            if (response.data == "Rich Tai-Tai") {
-                this.maxprice = 4;
-                this.minprice = 3;
-            }
-            else if (response.data == "Middle-Class") {
-                this.maxprice = 2;
-                this.minprice = 1;
-            }
-            else {
-                this.maxprice = 1;
-                this.minprice = 0;
-            }
-        });
-        // qn 4
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
-            this.parameters += response.data + ", ";
-        });
-        // qn 5
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
-            this.parameters += response.data + ", ";
-        });
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
-            if (response.data == "Stomachache Come!!") {
-                this.parameters += "spicy";
-            }
-            else if (response.data == "Little Kick") {
-                this.parameters += "mild-spicy";
-            }
-            else {
-                this.parameters += "non-spicy";
-            }
-        });
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
-            if (response.data == "Exotic") {
-                this.parameters += ", unique";
-            }
-            else {
-                this.parameters += " ";
-            }
-            // const keywords = useSessionStore()
-            // keywords.setKeywords(this.parameters)
-        });
-        await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
-            this.parameters += response.data["settings"];
-            this.coordinates += response.data["coordinates"];
-        });
-        // this.$emit("getChoices", this.parameters);
-        // generate place
+    //     // qn 1
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
+    //         this.parameters = response.data + ", ";
+    //         // qn 2
+    //     });
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
+    //         this.parameters += response.data + ", ";
+    //     });
+    //     // qn 3
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
+    //         if (response.data == "Rich Tai-Tai") {
+    //             this.maxprice = 4;
+    //             this.minprice = 3;
+    //         }
+    //         else if (response.data == "Middle-Class") {
+    //             this.maxprice = 2;
+    //             this.minprice = 1;
+    //         }
+    //         else {
+    //             this.maxprice = 1;
+    //             this.minprice = 0;
+    //         }
+    //     });
+    //     // qn 4
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
+    //         this.parameters += response.data + ", ";
+    //     });
+    //     // qn 5
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
+    //         this.parameters += response.data + ", ";
+    //     });
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
+    //         if (response.data == "Stomachache Come!!") {
+    //             this.parameters += "spicy";
+    //         }
+    //         else if (response.data == "Little Kick") {
+    //             this.parameters += "mild-spicy";
+    //         }
+    //         else {
+    //             this.parameters += "non-spicy";
+    //         }
+    //     });
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
+    //         if (response.data == "Exotic") {
+    //             this.parameters += ", unique";
+    //         }
+    //         else {
+    //             this.parameters += " ";
+    //         }
+    //         // const keywords = useSessionStore()
+    //         // keywords.setKeywords(this.parameters)
+    //     });
+    //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
+    //         this.parameters += response.data["settings"];
+    //         this.coordinates += response.data["coordinates"];
+    //     });
+    //     // this.$emit("getChoices", this.parameters);
+    //     // generate place
         
-    },
+    // },
 
     
     created() {
     this.currentUrl = window.location.href;
+    },
+
+    beforeMount() {
+        this.rand_num = Math.floor(Math.random() * this.joke_list.length)
     },
 
     // async mounted() {
@@ -254,10 +273,10 @@ export default {
             let buttonpress = new Audio("../../buttonpress.mp3");
             buttonpress.play();
         },
-        getChoices: function(choices) {
-            this.received_keywords = choices
-            console.log(choices, "lol")
-        },
+        // getChoices: function(choices) {
+        //     this.received_keywords = choices
+        //     console.log(choices, "lol")
+        // },
         copy_link: async function () {
             this.copySuccess = true;
             try {
@@ -270,6 +289,7 @@ export default {
                 alert("Error copying link to clipboard");
             }
         },
+
         
     }
     
@@ -397,7 +417,7 @@ small {
 }
 
 #link {
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 #copy {

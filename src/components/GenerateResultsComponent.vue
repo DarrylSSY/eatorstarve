@@ -13,8 +13,8 @@
   <div v-for="result in result_list" :key="result.idx" class="carousel-item active">
     <div class="card">
       <div class="row gx-4" style="width: 100%; margin: auto;">
-          <div class="col-xs-12 col-md-4">
-              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" style="height: 100%; width: 100%; object-fit: cover;">
+          <div class="col-xs-12 col-md-4" style="height: fit-content;">
+              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
           </div>
           <div class=" col-xs-12 col-md-8">
               <div class="card-body" style="position: relative;">
@@ -210,4 +210,21 @@ export default {
     position: absolute;
     bottom: 70px;
   } */
+
+  .card-title {
+    font-size: (2vw,5vw);
+  }
+
+  .card img {
+    height: 50vh;
+    /* max-height: 50vh; */
+    width: 100%;
+    object-fit: cover;
+  }
+  @media screen and (max-width: 767px) {
+        .card img {
+            height: 10vh;
+        }
+    }
+
 </style>
