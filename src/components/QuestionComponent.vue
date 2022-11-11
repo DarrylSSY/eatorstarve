@@ -33,15 +33,19 @@
       </div>
 
     <!--Slider Options -->
-    <div class="row gx-4 mt-auto">
-        <input type="range" class="form-range" min="0" max="2" step="1" id="blank">
-    </div>
-    <div class="row mt-5">
-      <h5 class="col-2 text-center">{{ foption0 }}</h5>
-      <span class="col-3"></span>
-      <h5 class="col-2 text-center">{{ foption1 }}</h5>
-      <span class="col-3"></span>
-      <h5 class="col-2 text-center">{{ foption2 }}</h5>
+    <div class="col-1 col-md-0"></div>
+    <div class="nes-container is-rounded col-10 col-md-10 game-options">
+      <div class="row mt-5"></div>
+      <div class="row mt-auto">
+          <input type="range" class="form-range" min="0" max="2" step="1" id="blank">
+      </div>
+      <div class="row mt-4">
+        <h5 class="col-2 text-center">{{ foption0 }}</h5>
+        <span class="col-3"></span>
+        <h5 class="col-2 text-center">{{ foption1 }}</h5>
+        <span class="col-3"></span>
+        <h5 class="col-2 text-center">{{ foption2 }}</h5>
+      </div>
     </div>
     
       <!-- Question number, health bar and username -->
@@ -202,7 +206,7 @@ export default {
     });
     let oof = new Audio("../../oof.mp3");
 
-    this.$timer.play("Timer");
+    // this.$timer.play("Timer");
     this.$timer.on("stop", () => {
       console.log("ended");
       oof.play();
