@@ -57,7 +57,6 @@ export default {
   name: "GenerateResultsComponent",
   props: {
     code: String,
-    para: Array,
   },
   setup () {
     const store = useSessionStore()

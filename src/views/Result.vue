@@ -95,14 +95,10 @@ export default {
     data() {
         return {
             code: this.$route.params.code,
-            answered: [],
+            string: '',
             
         };
     },
-
-    mounted() {
-        console.log(this.keywords)
-    }
     
 }
 
