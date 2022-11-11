@@ -9,19 +9,30 @@ const CreatedRoom = require("./models/createdroom");
 
 // get list of rooms
 router.post('/places', (req, res) => {
-    axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&maxprice='+req.body["maxprice"]+'&minprice='+req.body["minprice"]+'&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
+    axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+req.body["parameters"]+'&maxprice='+req.body["maxprice"]+'&minprice='+req.body["minprice"]+'&location='+req.body["coordinates"]+'&radius=5000&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M&type=restaurant')
         .then(response => res.json({
-            "name1": response.data["results"][0]["name"],
-            "address1": response.data["results"][0]["formatted_address"],
-            "photo1": response.data["results"][0]["photos"][0]["photo_reference"],
-            "name2": response.data["results"][1]["name"],
-            "address2": response.data["results"][1]["formatted_address"],
-            "photo2": response.data["results"][1]["photos"][0]["photo_reference"],
-            "name3": response.data["results"][2]["name"],
-            "address3": response.data["results"][2]["formatted_address"],
-            "photo3": response.data["results"][2]["photos"][0]["photo_reference"],
-        }))
-        .catch(err => res.json(err));
+                "name1": response.data["results"][0]["name"],
+                "address1": response.data["results"][0]["formatted_address"],
+                "photo1": response.data["results"][0]["photos"][0]["photo_reference"],
+                "rating1": response.data["results"][0]["rating"],
+                "placeid1": response.data["results"][0]["place_id"],
+                "pricelevel1": response.data["results"][0]["price_level"],
+                "userratings1": response.data["results"][0]["user_ratings_total"],
+                "name2": response.data["results"][1]["name"],
+                "address2": response.data["results"][1]["formatted_address"],
+                "photo2": response.data["results"][1]["photos"][0]["photo_reference"],
+                "rating2": response.data["results"][1]["rating"],
+                "placeid2": response.data["results"][1]["place_id"],
+                "pricelevel2": response.data["results"][1]["price_level"],
+                "userratings2": response.data["results"][1]["user_ratings_total"],
+                "name3": response.data["results"][2]["name"],
+                "address3": response.data["results"][2]["formatted_address"],
+                "photo3": response.data["results"][2]["photos"][0]["photo_reference"],
+                "rating3": response.data["results"][2]["rating"],
+                "placeid3": response.data["results"][2]["place_id"],
+                "pricelevel3": response.data["results"][2]["price_level"],
+                "userratings3": response.data["results"][2]["user_ratings_total"],
+            })).catch(err => res.json(err))
 });
 
 router.post('/photo', (req, res) => {
@@ -143,6 +154,13 @@ router.post('/createdroom/:code', (req, res) => {
     CreatedRoom.findOneAndUpdate({code: req.params.code}, {status: req.body["status"]}, {new: true})
         .then(createdroom => res.json(createdroom))
         .catch(err => res.json(err));
+});
+
+// get created room info
+router.get('/createdroom/info/:code', (req, res) => {
+  CreatedRoom.find({code: req.params.code})
+    .then(createdroom => res.json(createdroom[0]))
+    .catch(err => res.json(err));
 });
 
 module.exports = router;

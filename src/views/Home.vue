@@ -103,6 +103,8 @@ body {
       rgba(245, 200, 95, 0.66)
     ),
     url(../assets/bg1.jpeg);
+  display: block;
+  overflow: auto;
 }
 
 .nes-container {
