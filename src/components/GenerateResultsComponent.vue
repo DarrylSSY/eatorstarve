@@ -79,7 +79,7 @@
         <div class="card">
           <div class="row gx-4" style="width: 100%; margin: auto;">
             <div class="col-xs-12 col-md-4" style="height: fit-content;">
-              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result_list[0]['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
+              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result_list[2]['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
             </div>
             <div class=" col-xs-12 col-md-8">
               <div class="card-body" style="position: relative;">
