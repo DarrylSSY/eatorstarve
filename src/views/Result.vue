@@ -278,7 +278,7 @@ export default {
                 setTimeout(() => this.copySuccess = false, 5000)
             }
             catch ($e) {
-                alert($e);
+                console.log($e);
             }
         },
 

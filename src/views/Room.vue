@@ -162,7 +162,7 @@ export default {
         setTimeout(() => this.copySuccess = false, 3000)
       }
       catch ($e) {
-        alert($e);
+        console.log($e);
       }
     },
 
