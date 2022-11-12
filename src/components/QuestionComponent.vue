@@ -10,10 +10,9 @@
       </menu>
     </form>
   </dialog>
-  <div class="question-body row gx-4">
+  <div class="question-body row mx-0">
     <!-- Header (Quit button and progress bar) -->
-    <div class="row pe-0">
-      <div class="col-3 col-md-2 mt-2 ps-8 pe-0">
+      <div class="col-3 col-md-2 mt-2 px-0">
         <button
           type="button"
           class="nes-btn is-error pr-6"
@@ -22,24 +21,21 @@
           Quit
         </button>
       </div>
-      <div class="col-9 col-md-10 pe-0 h-10 mt-2">
-        <progress
+      <div class="col-9 col-md-10 pe-2 h-10 mt-2">
+        <progress style="width: 100%"
           class="nes-progress"
           :class="color"
           :value="progress"
           max="100"
         ></progress>
       </div>
-      <!-- <div class="col-1 col-md-0"></div> -->
-    </div>
-    <!-- Options -->
     <div class="col-1 col-md-0"></div>
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <button
-        type="button"
-        class="game-option nes-btn"
-        :class="btn_state_1"
-        @click="option1"
+          type="button"
+          class="game-option nes-btn"
+          :class="btn_state_1"
+          @click="option1"
       >
         <h3>{{ answer1 }}</h3>
       </button>
@@ -49,15 +45,18 @@
 
       </div>
       <button
-        type="button"
-        class="game-option nes-btn"
-        :class="btn_state_2"
-        @click="option2"
+          type="button"
+          class="game-option nes-btn"
+          :class="btn_state_2"
+          @click="option2"
       >
         <h3>{{ answer2 }}</h3>
       </button>
     </div>
-  </div>
+      <!-- <div class="col-1 col-md-0"></div> -->
+    </div>
+    <!-- Options -->
+
   <div class="dialogue-box container p-0">
     <!-- Question number, health bar and username -->
     <div class="col-12 row px-0 mx-0 gy-1">
