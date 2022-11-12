@@ -33,7 +33,6 @@ export default {
   methods: {
     next: function () {
       router.push({ name: "Question1", params: { id: this.code } });
-      // router.push({ name: 'Question2', params: {id:this.code} })
     },
   },
 };
@@ -50,9 +49,6 @@ body {
     url(../assets/bgcruisines.webp);
 }
 
-.container {
-  height: 100%;
-}
 
 .container-sm {
   height: 100%;

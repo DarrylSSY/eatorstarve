@@ -51,40 +51,6 @@
         data-bs-touch="true"
       >
         <div class="carousel-inner nes-container px-1 py-2 p-sm-3">
-          <!-- <div v-for="(details, name) in top3_locations" :key="name" class="carousel-item active">
-            <div class="card">
-                <div class="row gx-4">
-                    <div class="col-md-4">
-                        <img :src="details.img_url" class="img-fluid rounded-start" alt="result1">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">{{name}}</h5>
-                            <div class="card-text">
-                                {{details.rating}}
-                                <br>
-                                {{details.type}}
-                                <br>
-                                {{details.address}}
-                                <br>
-                                Located in: {{details.building_name}}
-                                <br>
-                                Status: {{details.opening_time}}
-                                <div class="row">
-                                    <div v-for="tag in tags" :key="tag.id" class="col">
-                                        <a class="nes-btn is-error tag-style" :href="'https://www.google.com/search?q=' + tag" target="_blank">
-                                            <span>{{tag}}</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-          <!-- <button type="button" class="nes-btn is-warning open_map" @click="window.location.href='map_url'">Open URL</button>
-    </div>
-</div>
-</div>
-</div>
-</div> -->
           <GenerateResultsComponent
             :code="code"
             @get-choices="getChoices"
@@ -164,7 +130,6 @@ export default {
     const store = useSessionStore();
     return {
       username: store.getUsername,
-      // keywords: store.getKeywords,
       currentUrl: "",
     };
   },
@@ -173,7 +138,6 @@ export default {
       code: this.$route.params.code,
       choices: "Test",
       received_keywords: "",
-      // parameters: '',
       copySuccess: false,
       joke_list: [
         "What’s the best way to burn vegetables?\n Roast them.",
@@ -193,69 +157,6 @@ export default {
       rand_num: 0,
     };
   },
-  // async beforeCreate() {
-  //     // this.choices = this.received_keywords
-
-  //     // qn 1
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/cuisine`).then(response => {
-  //         this.parameters = response.data + ", ";
-  //         // qn 2
-  //     });
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/poultry`).then(response => {
-  //         this.parameters += response.data + ", ";
-  //     });
-  //     // qn 3
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
-  //         if (response.data == "Rich Tai-Tai") {
-  //             this.maxprice = 4;
-  //             this.minprice = 3;
-  //         }
-  //         else if (response.data == "Middle-Class") {
-  //             this.maxprice = 2;
-  //             this.minprice = 1;
-  //         }
-  //         else {
-  //             this.maxprice = 1;
-  //             this.minprice = 0;
-  //         }
-  //     });
-  //     // qn 4
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/texture`).then(response => {
-  //         this.parameters += response.data + ", ";
-  //     });
-  //     // qn 5
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/base`).then(response => {
-  //         this.parameters += response.data + ", ";
-  //     });
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
-  //         if (response.data == "Stomachache Come!!") {
-  //             this.parameters += "spicy";
-  //         }
-  //         else if (response.data == "Little Kick") {
-  //             this.parameters += "mild-spicy";
-  //         }
-  //         else {
-  //             this.parameters += "non-spicy";
-  //         }
-  //     });
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/uniqueness`).then(response => {
-  //         if (response.data == "Exotic") {
-  //             this.parameters += ", unique";
-  //         }
-  //         else {
-  //             this.parameters += " ";
-  //         }
-  //         // const keywords = useSessionStore()
-  //         // keywords.setKeywords(this.parameters)
-  //     });
-  //     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/info/${this.code}`).then(response => {
-  //         this.parameters += response.data["settings"];
-  //         this.coordinates += response.data["coordinates"];
-  //     });
-  //     // this.$emit("getChoices", this.parameters);
-  //     // generate place
-
-  // },
 
   created() {
     this.currentUrl = window.location.href;
@@ -265,11 +166,6 @@ export default {
     this.rand_num = Math.floor(Math.random() * this.joke_list.length);
   },
 
-  // async mounted() {
-  //     if (this.keywords == '') {
-  //         this.choices = await fetchOnClient(/* ... */)
-  //     }
-  // },
 
   methods: {
     home: function () {
@@ -291,9 +187,6 @@ export default {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play();
     },
-    // getChoices: function(choices) {
-    //     this.received_keywords = choices
-    // },
     copy_link: async function () {
       this.copySuccess = true;
       try {
@@ -319,28 +212,14 @@ div.nes-container {
   height: 56px;
 }
 
-.top {
-  padding-top: 24px;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.col-content {
-  height: 70px;
-}
 
 .logo {
-  /* padding-top: 17.8px; */
   text-align: center;
   margin: 0;
   padding-top: 10px;
 }
 
-.user {
-  padding: 20px;
-  text-align: center;
-}
+
 
 body {
   width: 100%;
@@ -353,11 +232,6 @@ body {
     url(../assets/bg1.jpeg);
   display: block;
   overflow: auto;
-  /* background-attachment: fixed; */
-  /* box-shadow: 7px 12px 18px rgba(0, 0, 0, 0.25); */
-  /* align-items: center; */
-
-  /* background-color: black; */
 }
 
 .carousel-inner {
@@ -371,26 +245,14 @@ body {
   padding-top: 20px;
   padding-bottom: 140px;
   width: 75%;
-  /* height:max-content; */
-  /* margin-bottom: 200px; */
-  /* border: 4px black solid; */
 }
 
-.card,
-.card .row {
-  width: 100%;
-  height: 100%;
-  border: 0px;
-}
 
 .arrow-buttons {
   width: 80%;
   top: 20%;
 }
 
-.open_map {
-  width: 100%;
-}
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -398,11 +260,9 @@ body {
   background-color: #f7d51d;
   height: 15%;
   width: 6%;
-  /* border-radius: 50%; */
 }
 
 .dialog {
-  /* padding: 40px 60px; */
   width: fit-content;
 }
 
@@ -410,23 +270,6 @@ small {
   text-align: left;
 }
 
-/* .tag-style {
-    font-size: 8pt;
-    height: 30px;
-    padding: 3px 10px;
-    width: auto;
-} */
-
-.card-body .col {
-  /* width: fit-content; */
-  width: fit-content;
-  /* margin: 1em auto; */
-  /* padding: 5px; */
-}
-
-.card-body .row {
-  width: auto;
-}
 
 #link {
   margin-top: 10px;
@@ -435,10 +278,6 @@ small {
 
 #copy {
   height: 85%;
-}
-
-#link .nes-input {
-  height: 85;
 }
 
 .code {

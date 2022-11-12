@@ -50,12 +50,6 @@
         <span class="col-3"></span>
         <h6 class="col-2 text-center ps-0">{{ foption2 }}</h6>
       </div>
-      <!-- <div class="row pt-3">
-        <div class="col-10"></div>
-        <div class="col-2">
-          <button type="button" class="nes-btn is-warning">Next ></button>
-        </div>
-      </div> -->
     </div>
   </div>
 
@@ -243,7 +237,6 @@ canvas {
 
 .game-options {
   height: fit-content;
-  /* padding: 16px 32px; */
 }
 .chat-box {
   height: 136px;
@@ -271,7 +264,6 @@ canvas {
 }
 
 .info {
-  /* height: fit-content; */
   height: 50px;
 }
 
@@ -280,17 +272,10 @@ canvas {
   bottom: 3px;
 }
 
-.top {
-  padding-top: 24px;
-}
 
 .info-box {
-  /* padding: 10px; */
   height: 60px;
   margin-bottom: 20px;
 }
 
-.fit {
-  width: fit-content;
-}
 </style>

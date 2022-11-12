@@ -80,25 +80,6 @@
       <!-- User List -->
 
       <div class="result">
-        <!-- <div class="row ">
-        <div class="col"></div>
-        <div class="col-3 col-md-3 col-lg-3">
-          <div :style="{'visibility': visible}" class="nes-container yesno">
-
-               <label>
-                <input v-model="value" type="radio" class="nes-radio" name="answer" value="yes" @keydown.enter="enter()" checked />
-                <span>Yes</span>
-              </label>
-
-
-              <label>
-                <input v-model="value" type="radio" class="nes-radio" name="answer" value="no" @keydown.enter="enter()" />
-                <span>No</span>
-              </label>
-              <YesNoRadio @yesFunction="yesoption()" @noFunction="nooption()"  />
-          </div>
-        </div>
-      </div> -->
 
         <!-- Generate Result Dialog -->
 
@@ -145,18 +126,11 @@
 <script>
 import router from "@/router";
 import { useSessionStore } from "../stores/session";
-// import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 import axios from "axios";
-// import GenerateResultsComponent from "@/components/GenerateResultsComponent";
-// import YesNoRadio  from '../components/YesNoRadio.vue';
 import { reactive } from "vue";
 
 export default {
   name: "HoldingView",
-  // components: {
-  //   GenerateResultsComponent,
-  //   UsernameCheckerComponent,
-  // },
   setup() {
     const store = useSessionStore();
     return {
@@ -194,8 +168,6 @@ export default {
     );
   },
 
-  // components: { YesNoRadio },
-
   methods: {
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -211,7 +183,6 @@ export default {
     enter() {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play();
-      // router.push({ name: 'Result', params: {id:this.code} })
       document.getElementById("dialog-rounded").showModal();
     },
     close() {
@@ -243,13 +214,6 @@ div.nes-container {
   background-color: white;
 }
 
-.top {
-  padding-top: 24px;
-}
-
-.col-content {
-  height: 70px;
-}
 
 .nes-btn {
   width: calc(100% - 8px);
@@ -257,11 +221,9 @@ div.nes-container {
 }
 
 .logo {
-  /* padding: 17.8px 0px; */
   text-align: center;
   margin: 0;
   padding-top: 10px;
-  /* font-size: 3.2vw ; */
 }
 
 .user {
@@ -269,21 +231,6 @@ div.nes-container {
   text-align: center;
 }
 
-.component {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 250px;
-  top: 200px;
-}
-
-.whole {
-  text-align: center;
-  position: relative;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-}
 
 @keyframes typing {
   from {
@@ -294,28 +241,12 @@ div.nes-container {
   }
 }
 
-.ending_container {
-  position: relative;
-  margin-top: 50px;
-  margin-bottom: 10px;
-  text-align: center;
-  width: 100%;
-}
 
-.end {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: 0;
-  z-index: 0;
-}
 
 div.main_component {
   padding-top: 10px;
   margin-right: auto;
   margin-left: auto;
-  /* margin-top: 100px; */
-  /* margin-bottom: 10px; */
   width: 55%;
   height: 100%;
   background-color: rgb(247, 213, 29);
@@ -324,31 +255,19 @@ div.main_component {
 }
 
 .user_list {
-  /* overflow-y: auto;
-  height: 180px;
-  overflow-y: scroll;
-  text-align: left; */
-
   overflow-y: auto;
   bottom: 20px;
   top: 70px;
-  /* height: 50%; */
   text-align: left;
   right: 15px;
 }
 
 div.text_component {
-  /* position: absolute;
-  bottom: 0px; */
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
-  /* margin-bottom: 10px; */
   width: 100%;
   height: auto;
-  /* position: sticky; This shit doesnt work */
-  /* background-color: rgb(247, 213, 29); */
-  /* margin-bottom: 20px; */
   text-align: left;
   background-color: white;
   padding-top: 0px;
@@ -364,15 +283,6 @@ div.text_component {
 
 .text_container {
   position: relative;
-}
-
-.typewriter {
-  padding-top: ;
-  position: absolute;
-  /* font-size:large; */
-  top: 0;
-  margin: 0;
-  z-index: 0;
 }
 
 .hider {
@@ -410,33 +320,6 @@ li {
 
 img {
   margin-right: 20px;
-}
-
-/* button {
-  margin-left: 20px;
-  margin-right: 20px;
-} */
-
-/* .nes-btn {
-
-  right: 20px;
-} */
-
-.enter {
-  text-align: right;
-  color: grey;
-}
-
-/* .row{
-  height: 100px;
-} */
-
-.yesno {
-  padding-left: 30%;
-  text-align: left;
-  margin-top: 0px;
-  height: auto;
-  background-color: white;
 }
 
 body {

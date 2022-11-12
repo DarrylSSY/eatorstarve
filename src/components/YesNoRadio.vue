@@ -1,6 +1,4 @@
 <template>
-  <!-- <div class="nes-container"> -->
-  <!-- <div :style="{'visibility': visible}" class="nes-container yesno d-inline-block"> -->
 
   <label>
     <input
@@ -24,9 +22,6 @@
     />
     <span>No</span>
   </label>
-
-  <!-- </div> -->
-  <!-- </div> -->
 </template>
 
 <script>

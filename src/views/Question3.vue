@@ -49,9 +49,6 @@ body {
     url(../assets/bgprice.jpg);
 }
 
-.container {
-  height: 100%;
-}
 
 .container-sm {
   height: 100%;

@@ -95,7 +95,6 @@
                 </small>
                 <br />
               </p>
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
               <a
                 :href="
                   'https://www.google.com/maps/search/?api=1&query=' +
@@ -153,7 +152,6 @@
                 </small>
                 <br />
               </p>
-              <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
               <a
                 :href="
                   'https://www.google.com/maps/search/?api=1&query=' +
@@ -375,8 +373,6 @@ export default {
 <style>
 .open_map {
   width: 100%;
-  /* position: absolute;
-    bottom: 0; */
 }
 
 .card,
@@ -386,22 +382,12 @@ export default {
   border: 0px;
 }
 
-.card-body,
-.card-item {
+.card-body {
   height: 100%;
 }
 .card {
   height: 90%;
   width: auto;
-}
-
-/* .price {
-    position: absolute;
-    bottom: 70px;
-  } */
-
-.card-title {
-  font-size: (2vw, 5vw);
 }
 
 .card img {

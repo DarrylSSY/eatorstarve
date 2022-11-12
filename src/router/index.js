@@ -1,5 +1,4 @@
 import { createWebHistory, createRouter } from "vue-router";
-import SampleView from '@/views/Sample'
 import RoomView from "@/views/Room";
 import HomeView from "@/views/Home";
 import SetupView from "@/views/Setup";

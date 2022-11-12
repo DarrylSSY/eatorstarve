@@ -251,12 +251,6 @@ export default {
   width: calc(100% - 8px);
   height: 56px;
 }
-.line {
-  width: 32%;
-  border: 4px solid #000000;
-  margin: 8px;
-  vertical-align: top;
-}
 .game-option {
   width: 100%;
   aspect-ratio: 10/1;
@@ -265,10 +259,6 @@ export default {
 }
 canvas {
   padding: 0px;
-}
-.nes-icon {
-  transform: scale(1.1);
-  margin: 2px;
 }
 .game-options {
   height: fit-content;
@@ -307,7 +297,6 @@ canvas {
   height: 60vh;
 }
 .info {
-  /* height: fit-content; */
   height: 50px;
 }
 
@@ -316,12 +305,7 @@ canvas {
   bottom: 3px;
 }
 
-.top {
-  padding-top: 24px;
-}
-
 .info-box {
-  /* padding: 10px; */
   height: 60px;
   margin-bottom: 20px;
 }

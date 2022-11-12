@@ -10,9 +10,6 @@
         </div>
       </div>
 
-      <!-- <div class="text_component container nes-container is-rounded">
-          <h5>Remember to keep an eye on your HP!</h5>
-      </div> -->
     </div>
   </div>
   <div class="container p-0" style="margin: auto">
@@ -50,7 +47,6 @@ export default {
   },
 
   created() {
-    // setInterval(this.countdown(), 1000)
     this.countDownTimer();
   },
 
@@ -61,7 +57,6 @@ export default {
         this.answered = response.data;
       });
 
-    // setTimeout(this.countdown(), 1000)
   },
   methods: {
     next: function () {
@@ -97,7 +92,6 @@ export default {
 }
 
 .whole {
-  /* text-align: center; */
   position: relative;
   margin: auto;
   width: 100%;
@@ -125,26 +119,5 @@ export default {
   align-items: center;
 }
 
-div.main_component {
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 100px;
-  margin-bottom: 10px;
-  width: 60%;
-  height: auto;
-  /* position: sticky; This shit doesnt work */
-  bottom: 0;
-  background-color: rgb(247, 213, 29);
-  margin-bottom: 20px;
-}
 
-div.text_component {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 40px;
-  height: 150px;
-  font-size: 25px;
-}
 </style>

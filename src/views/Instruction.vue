@@ -60,7 +60,6 @@
 <script>
 import router from "@/router";
 import { useSessionStore } from "../stores/session";
-//import axios from "axios";
 
 export default {
   name: "InstructionView",
@@ -97,7 +96,4 @@ body {
   background: white;
 }
 
-.svg-inline--fa {
-  font-size: 10px;
-}
 </style>
