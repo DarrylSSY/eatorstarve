@@ -229,6 +229,7 @@ div.nes-container {
 .user {
   padding: 20px;
   text-align: center;
+  height: 70px;
 }
 
 
