@@ -2,8 +2,8 @@
   <!-- START for Slider Template -->
   <dialog id="dialog-rounded" class="nes-dialog is-rounded">
     <form method="dialog">
-      <p class="title">Are you sure you want to exit?</p>
-      <p>Your progress will not be saved.</p>
+      <p class="title text-center">Are you sure you want to exit?</p>
+      <p class="text-center">You cannot return to this page.</p>
       <menu class="dialog-menu p-0">
         <button class="nes-btn">Cancel</button>
         <button class="nes-btn is-primary" @click="home">Confirm</button>
@@ -12,24 +12,27 @@
   </dialog>
   <div class="question-body row gx-4">
     <!-- Header (Quit button and progress bar) -->
-    <div class="col-12"></div>
-    <div class="col-4 col-md-2 ps-0">
-      <button
-        type="button"
-        class="nes-btn is-error"
-        onclick="document.getElementById('dialog-rounded').showModal();"
-      >
-        Quit
-      </button>
+    <div class="row pe-0">
+      <div class="col-3 col-md-2 mt-2 ps-8 pe-0">
+        <button
+          type="button"
+          class="nes-btn is-error pr-6"
+          onclick="document.getElementById('dialog-rounded').showModal();"
+        >
+          Quit
+        </button>
+      </div>
+      <div class="col-9 col-md-10 pe-0 h-10 mt-2">
+        <progress
+          class="nes-progress"
+          :class="color"
+          :value="progress"
+          max="100"
+        ></progress>
+      </div>
+      <!-- <div class="col-1 col-md-0"></div> -->
     </div>
-    <div class="col-8 col-md-10 pe-0">
-      <progress
-        class="nes-progress"
-        :class="color"
-        :value="progress"
-        max="100"
-      ></progress>
-    </div>
+
 
   <!--Slider Options -->
   <div class="col-1 col-md-0"></div>
@@ -63,7 +66,7 @@
             {{ username }}
           </div>
         </div>
-        <div class="info col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 col-xxl-3 ps-0 pt-0 info-box mb-2">
+        <div class="info col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 col-xxl-3 ps-0 pt-0 info-box mb-2 px-0">
           <div class="nes-container is-rounded py-2 px-0 ">
             <canvas id="canvas" height="20"></canvas>
           </div>
@@ -72,12 +75,12 @@
 
       <div class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0 ">
         <img
-          class="profile"
+          class="profile me-2"
           :src="
             'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
           "
         />
-        <h3 class="col-7 col-sm-9">{{ question_front }} {{ category }} {{question_back}}</h3>
+        <h3 class="col-7 col-sm-9">{{ question_front }}{{ category }}{{question_back}}</h3>
       </div>
     </div>
 
@@ -126,9 +129,8 @@ mounted() {
   });
   let oof = new Audio("../../oof.mp3");
 
-  // this.$timer.play("Timer");
+  this.$timer.play("Timer");
   this.$timer.on("stop", () => {
-    console.log("ended");
     oof.play();
     axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
       code: this.code,
@@ -194,7 +196,6 @@ beforeUnmount() {
 },
 methods: {
   nextpage: function () {
-    console.log(this.username + "selected" + this.value);
     axios.post(`${process.env.VUE_APP_BACKEND_URL}api/answers`, {
       code: this.code,
       username: this.username,
@@ -254,7 +255,7 @@ bottom: -4px;
 }
 
 .question-body {
-height: 80vh;
+height: 60vh;
 }
 
 .info {
@@ -275,5 +276,9 @@ height: 80vh;
   /* padding: 10px; */
   height: 60px;
   margin-bottom: 20px;
+}
+
+.fit{
+  width: fit-content;
 }
 </style>

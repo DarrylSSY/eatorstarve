@@ -34,18 +34,13 @@ export default {
   async mounted() {
     await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.roomcode}`).then(response => {
       if (response.data == "open") {
-        console.log("hi")
         this.status = "open"
       } else if (response.data == "close") {
-        console.log("hi2")
         this.status = "close"
       } else {
-        console.log("hi3")
         this.status = "missing"
       }
     })
-    console.log(this.status)
-
     if (document.getElementById('dialog-default')) {
       document.getElementById('dialog-default').showModal();
     }

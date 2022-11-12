@@ -1,52 +1,125 @@
 <template>
-  <!-- <button type="button" class="nes-btn is-success" @click="generate">Generate results</button> -->
-  <!-- {{parameters}} -->
-  <!-- <br>
-  {{first}}
-  <br>
-  {{second}}
-  <br>
-  {{third}} -->
 
-
-<!-- {{parameters}} -->
-  <div v-for="result in result_list" :key="result.idx" class="carousel-item active">
-    <div class="card">
-      <div class="row gx-4" style="width: 100%; margin: auto;">
-          <div class="col-xs-12 col-md-4">
-              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" style="height: 100%; width: 100%; object-fit: cover;">
-          </div>
-          <div class=" col-xs-12 col-md-8">
+    <div v-if="data_loaded">
+      <div class="carousel-item active">
+        <div class="card">
+          <div class="row gx-4" style="width: 100%; margin: auto;">
+            <div class="col-xs-12 col-md-4" style="height: fit-content;">
+              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result_list[0]['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
+            </div>
+            <div class=" col-xs-12 col-md-8">
               <div class="card-body" style="position: relative;">
-                  <h5 class="card-title">{{result['name']}}</h5>
-                  <p class="card-text">
-                    <small class="text-muted">
-                      <i class="nes-icon is-small star"></i>
-                      {{result['rating']}}/5 <br>
-                      ===>
-                      [{{result['userratings']}} Users<i class="nes-icon coin is-small"></i>]
-                    </small>
+                <h5 class="card-title">{{result_list[0]['name']}}</h5>
+                <p class="card-text">
+                  <small class="text-muted">
+                    <i class="nes-icon is-small star"></i>
+                    {{result_list[0]['rating']}}/5 <br>
+                    ===>
+                    [{{result_list[0]['userratings']}} Users<i class="nes-icon coin is-small"></i>]
+                  </small>
 
 
-                    <br><br>
-                    <b>Address: </b><br>
-                    {{result['address']}}
-                    <br><br>
-                    <br><br>
-                    <small class="price">
-                      Price level: {{printCost(result['pricelevel'])}}
-                    </small>
-                    <br>
-                  </p>
-                  <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-                  <a :href="'https://www.google.com/maps/search/?api=1&query=' + result['name']" target="_blank">
-                    <button type="button" class="nes-btn is-warning open_map" @click="playSound">Open Map</button>
-                  </a>
+                  <br><br>
+                  <b>Address: </b><br>
+                  {{result_list[0]['address']}}
+                  <br><br>
+                  <br><br>
+                  <small class="price">
+                    Price level: {{printCost(result_list[0]['pricelevel'])}}
+                  </small>
+                  <br>
+                </p>
+                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                <a :href="'https://www.google.com/maps/search/?api=1&query=' + result_list[0]['name']" target="_blank">
+                  <button type="button" class="nes-btn is-warning open_map" @click="playSound">Open Map</button>
+                </a>
               </div>
+            </div>
           </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="card">
+          <div class="row gx-4" style="width: 100%; margin: auto;">
+            <div class="col-xs-12 col-md-4" style="height: fit-content;">
+              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result_list[1]['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
+            </div>
+            <div class=" col-xs-12 col-md-8">
+              <div class="card-body" style="position: relative;">
+                <h5 class="card-title">{{result_list[1]['name']}}</h5>
+                <p class="card-text">
+                  <small class="text-muted">
+                    <i class="nes-icon is-small star"></i>
+                    {{result_list[1]['rating']}}/5 <br>
+                    ===>
+                    [{{result_list[1]['userratings']}} Users<i class="nes-icon coin is-small"></i>]
+                  </small>
+
+
+                  <br><br>
+                  <b>Address: </b><br>
+                  {{result_list[1]['address']}}
+                  <br><br>
+                  <br><br>
+                  <small class="price">
+                    Price level: {{printCost(result_list[1]['pricelevel'])}}
+                  </small>
+                  <br>
+                </p>
+                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                <a :href="'https://www.google.com/maps/search/?api=1&query=' + result_list[1]['name']" target="_blank">
+                  <button type="button" class="nes-btn is-warning open_map" @click="playSound">Open Map</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="card">
+          <div class="row gx-4" style="width: 100%; margin: auto;">
+            <div class="col-xs-12 col-md-4" style="height: fit-content;">
+              <img :src="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' + result_list[2]['photo'] + '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'" class="img-fluid rounded-start" alt="result" >
+            </div>
+            <div class=" col-xs-12 col-md-8">
+              <div class="card-body" style="position: relative;">
+                <h5 class="card-title">{{result_list[2]['name']}}</h5>
+                <p class="card-text">
+                  <small class="text-muted">
+                    <i class="nes-icon is-small star"></i>
+                    {{result_list[2]['rating']}}/5 <br>
+                    ===>
+                    [{{result_list[2]['userratings']}} Users<i class="nes-icon coin is-small"></i>]
+                  </small>
+
+
+                  <br><br>
+                  <b>Address: </b><br>
+                  {{result_list[2]['address']}}
+                  <br><br>
+                  <br><br>
+                  <small class="price">
+                    Price level: {{printCost(result_list[2]['pricelevel'])}}
+                  </small>
+                  <br>
+                </p>
+                <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                <a :href="'https://www.google.com/maps/search/?api=1&query=' + result_list[2]['name']" target="_blank">
+                  <button type="button" class="nes-btn is-warning open_map" @click="playSound">Open Map</button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
+    <div v-else>
+        <div class="carousel-item active"  style="text-align: center; color: grey; height: 300px;">
+            <h3>Loading...</h3>
+            Meanwhile, let's chill a little.
+        </div>
+    </div>
 
 </template>
 
@@ -75,6 +148,7 @@ export default {
             second: {},
             third: {},
             result_list: [],
+            data_loaded: false
         };
     },
     async mounted() {
@@ -88,11 +162,11 @@ export default {
         });
         // qn 3
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/price`).then(response => {
-            if (response.data == "Rich Tai-Tai") {
+            if (response.data == "2") {
                 this.maxprice = 4;
                 this.minprice = 3;
             }
-            else if (response.data == "Middle-Class") {
+            else if (response.data == "1") {
                 this.maxprice = 2;
                 this.minprice = 1;
             }
@@ -110,10 +184,10 @@ export default {
             this.parameters += response.data + "|";
         });
         await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/room/${this.code}/spice`).then(response => {
-            if (response.data == "Stomachache Come!!") {
+            if (response.data == "2") {
                 this.parameters += "spicy|";
             }
-            else if (response.data == "Little Kick") {
+            else if (response.data == "1") {
                 this.parameters += "mild-spicy|";
             }
             else {
@@ -141,36 +215,55 @@ export default {
             "coordinates": this.coordinates
         })
             .then(response => {
-            axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" });
-            // this.first = [response["data"]["name1"], response["data"]["address1"], response["data"]["photo1"]]
-            // this.second = [response["data"]["name2"], response["data"]["address2"], response["data"]["photo2"]]
-            // this.third = [response["data"]["name3"], response["data"]["address3"], response["data"]["photo3"]]
-            // console.log(response.data)
-            // console.log(response['data'])
-            for (let info in response["data"]) {
-                // console.log(info)
-                let category = info.substring(0, info.length - 1);
-                let idx = info.substring(info.length - 1, info.length);
-                if (idx == 1) {
+              if (response["data"]["name1"]) {
+                axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" });
+                for (let info in response["data"]) {
+                  let category = info.substring(0, info.length - 1);
+                  let idx = info.substring(info.length - 1, info.length);
+                  if (idx == 1) {
                     this.first[category] = response["data"][info];
-                }
-                else if (idx == 2) {
+                  } else if (idx == 2) {
                     this.second[category] = response["data"][info];
-                }
-                else {
+                  } else {
                     this.third[category] = response["data"][info];
+                  }
                 }
-            }
-            this.result_list = [this.first, this.second, this.third];
-            console.log(this.result_list);
-        });
+                this.result_list = [this.first, this.second, this.third];
+                this.data_loaded = true
+              }
+              else {
+                axios.post(`${process.env.VUE_APP_BACKEND_URL}api/places`, {
+                  "parameters": "",
+                  "maxprice": 4,
+                  "minprice": 0,
+                  "coordinates": this.coordinates
+                })
+                  .then(response => {
+                    if (response["data"]) {
+                      axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.code}`, { "status": "close" });
+                      for (let info in response["data"]) {
+                        let category = info.substring(0, info.length - 1);
+                        let idx = info.substring(info.length - 1, info.length);
+                        if (idx == 1) {
+                          this.first[category] = response["data"][info];
+                        } else if (idx == 2) {
+                          this.second[category] = response["data"][info];
+                        } else {
+                          this.third[category] = response["data"][info];
+                        }
+                      }
+                      this.result_list = [this.first, this.second, this.third];
+                      this.data_loaded = true
+                    }
+                  })
+              }
+              });
     },
     methods: {
         printCost: function (num) {
             if (num == null) {
                 return "-";
             }
-            // console.log(num)
             let str = "";
             for (let i = 0; i < num; i++) {
                 str += "$";
@@ -210,4 +303,22 @@ export default {
     position: absolute;
     bottom: 70px;
   } */
+
+  .card-title {
+    font-size: (2vw,5vw);
+  }
+
+  .card img {
+    height: 50vh;
+    /* max-height: 50vh; */
+    width: 100%;
+    object-fit: cover;
+  }
+  @media screen and (max-width: 767px) {
+        .card img {
+            height: 10vh;
+        }
+
+    }
+
 </style>

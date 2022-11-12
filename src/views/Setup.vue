@@ -21,7 +21,7 @@
                   <input type="text" class="nes-input form-control" :placeholder="date" :value="inputValue"
                     v-on="inputEvents">
                   <span class="input-group-text border-0 sm-px-1 "><button type="button" class="nes-btn is-error"
-                      :disabled="!date" @click="date = new Date();clear()">Clear</button></span>
+                      :disabled="!date" @click="date = new Date();clear()">Reset Datetime</button></span>
                 </div>
               </template>
             </v-date-picker>
@@ -52,13 +52,13 @@
 
                 <div class="row">
                   <div class="nes-select mt-2">
-                    <select required id="location">
+                    <select required id="location" v-model="region">
                       <option value="">Current location</option>
-                      <option value="north">North</option>
-                      <option value="south">South</option>
-                      <option value="central">Central</option>
-                      <option value="east">East</option>
-                      <option value="west">West</option>
+                      <option value="North">North</option>
+                      <option value="South">South</option>
+                      <option value="Central">Central</option>
+                      <option value="East">East</option>
+                      <option value="West">West</option>
                     </select>
                   </div>
                 </div>
@@ -153,18 +153,24 @@ export default {
       }
       else if (this.region == "North") {
         this.coordinates = "1.4304, 103.8354"
+
       }
+
       else if (this.region == "South") {
         this.coordinates = "1.2655, 103.8239"
+
       }
       else if (this.region == "East") {
         this.coordinates = "1.3496, 103.9568"
+
       }
       else if (this.region == "West") {
         this.coordinates = "1.3368, 103.6942"
+
       }
       else if (this.region == "Central") {
         this.coordinates = "1.2907, 103.8517"
+
       }
       axios.post(`${process.env.VUE_APP_BACKEND_URL}api/createdroom`, {
         code: generated_code,
