@@ -10,10 +10,9 @@
       </menu>
     </form>
   </dialog>
-  <div class="question-body row gx-4">
+  <div class="question-body row mx-0">
     <!-- Header (Quit button and progress bar) -->
-    <div class="row pe-0">
-      <div class="col-3 col-md-2 mt-2 ps-8 pe-0">
+      <div class="col-3 col-md-2 mt-2 px-0">
         <button
           type="button"
           class="nes-btn is-error pr-6"
@@ -22,7 +21,7 @@
           Quit
         </button>
       </div>
-      <div class="col-9 col-md-10 pe-0 h-10 mt-2">
+      <div class="col-9 col-md-10 pe-2 h-10 mt-2">
         <progress
           class="nes-progress"
           :class="color"
@@ -31,31 +30,31 @@
         ></progress>
       </div>
       <!-- <div class="col-1 col-md-0"></div> -->
+    <div class="col-1 col-md-0"></div>
+    <div class="nes-container is-rounded col-10 col-md-10 px-5 game-options">
+      <div class="row mt-5"></div>
+      <div class="row mt-auto">
+        <input v-model="value" type="range" class="form-range" max="2" @mouseup="nextpage()" @touchend="nextpage()">
+      </div>
+      <div class="row mt-4 justify-content-evenly">
+        <h6 class="col-2 text-center ps-0">{{ foption0 }}</h6>
+        <span class="col-3"></span>
+        <h6 class="col-2 text-center ps-0">{{ foption1 }}</h6>
+        <span class="col-3"></span>
+        <h6 class="col-2 text-center ps-0">{{ foption2 }}</h6>
+      </div>
+      <!-- <div class="row pt-3">
+        <div class="col-10"></div>
+        <div class="col-2">
+          <button type="button" class="nes-btn is-warning">Next ></button>
+        </div>
+      </div> -->
+    </div>
     </div>
 
 
   <!--Slider Options -->
-  <div class="col-1 col-md-0"></div>
-  <div class="nes-container is-rounded col-10 col-md-10 game-options">
-    <div class="row mt-5"></div>
-    <div class="row mt-auto">
-        <input v-model="value" type="range" class="form-range" max="2" @mouseup="nextpage()" @touchend="nextpage()">
-    </div>
-    <div class="row mt-4 justify-content-evenly">
-      <h6 class="col-2 text-center ps-0">{{ foption0 }}</h6>
-      <span class="col-3"></span>
-      <h6 class="col-2 text-center ps-0">{{ foption1 }}</h6>
-      <span class="col-3"></span>
-      <h6 class="col-2 text-center ps-0">{{ foption2 }}</h6>
-    </div>
-    <!-- <div class="row pt-3">
-      <div class="col-10"></div>
-      <div class="col-2">
-        <button type="button" class="nes-btn is-warning">Next ></button>
-      </div>
-    </div> -->
-  </div>
-  </div>
+
 
   <div class="dialogue-box container p-0">
       <!-- Question number, health bar and username -->
@@ -265,7 +264,7 @@ height: 60vh;
 
 .dialogue-box {
   position: absolute;
-  bottom: 5px;
+  bottom: 3px;
 }
 
 .top {
