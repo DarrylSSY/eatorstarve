@@ -2,14 +2,14 @@
     <div class="external" @load="starttimer">
         <div class="whole container">   
         
-            <div class="countdown">
-                <div>
+            <!-- <div class="countdown"> -->
+                <div class="text-title">
                     <h3>Game Starting in...</h3>
                 </div>
                 <div class="cdcircle rounded rounded-circle">
                     <h1> {{countDown}}</h1>
                 </div>
-            </div>
+            <!-- </div> -->
                 
             <!-- <div class="text_component container nes-container is-rounded">
                 <h5>Remember to keep an eye on your HP!</h5>
@@ -118,14 +118,16 @@ import DialogueBox from "@/components/DialogueBox.vue";
    margin: auto;
    width: 100%;
    height: 100%;
+   display: flex;
    
  }
 
- .countdown {
+ .text-title {
     position: absolute;
     left: 0;
     right: 0;
-    top: 25%;
+    top: 15%;
+    /* margin-top: 25%; */
 
  }
  
@@ -134,7 +136,8 @@ import DialogueBox from "@/components/DialogueBox.vue";
   width: 210px;
   height: 210px;
   display: flex;
-  margin-top: 50px;
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: auto;
   margin-right: auto;
 
@@ -146,21 +149,8 @@ import DialogueBox from "@/components/DialogueBox.vue";
  
 
  
- div.main_component {
-   margin-right: auto;
-   margin-left: auto;
-   margin-top: 100px;
-   margin-bottom: 10px;
-   width: 60%;
-   height: auto;
-   /* position: sticky; This shit doesnt work */
-   bottom: 0;
-   background-color: rgb(247, 213, 29);
-   margin-bottom: 20px;
-   
- }
- 
-div.text_component {
+
+/* div.text_component {
     position: absolute;
     display: flex;
     justify-content: center;
@@ -169,7 +159,7 @@ div.text_component {
     height: 150px;
     font-size: 25px;
    
- }
+ } */
    
    
  
