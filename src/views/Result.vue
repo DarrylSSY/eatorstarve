@@ -16,33 +16,31 @@
 
     <body>
 
-        <div class=" container container-sm p-0">
+        <div class="container-sm p-0">
 
             <!-- Top Bar -->
-            <div class=" container container-sm " style="position: relative; width: 100%;">
-                <div class="row top gx-4">
-                    <div class="col-4 col-md-3 col-lg-2 ps-0 col-content">
+                <div class="row mx-0">
+                    <div class="col-3 col-md-2 mt-2 px-0">
                         <button
                             type="button"
                             class="nes-btn is-error"
                             @click="openModal"
                         >
-                            Exit
+                            Quit
                         </button>
                     </div>
 
-                    <div class="col-4 col-md-6 col-lg-8 col-content px-2 px-sm-4 px-md-5 py-3">
-                        <h4 class="logo">Eat or Starve</h4>
+                    <div class="col-6 col-md-8 mt-2 px-2">
+                        <h1 class="logo">Eat or Starve</h1>
                     </div>
 
-                    <div class="user col-4 col-md-3 col-lg-2 col-content nes-container ">
+                    <div class="code col-3 col-md-2 mt-2 px-0 mb-2 nes-container">
                         <p>
                             {{code}}
                         </p>
                     </div>
                 </div>
             </div>
-        </div>
 
 
             <!-- Result Gallery -->
@@ -298,6 +296,11 @@ div.nes-container {
     background-color: white;
 }
 
+.nes-btn {
+  width: calc(100% - 8px);
+  height: 56px;
+}
+
 .top {
     padding-top: 24px;
     position: absolute;
@@ -309,16 +312,12 @@ div.nes-container {
     height: 70px;
 }
 
-button.is-error {
-    width: 100%;
-    height: 62.4px;
-}
 
 .logo {
     /* padding-top: 17.8px; */
     text-align: center;
     margin: 0;
-    font-size: 2vw;
+    padding-top: 10px;
 }
 
 .user {
@@ -345,12 +344,14 @@ body {
 
 .carousel-inner {
     margin: auto;
-    height: 50%;
+    height: 60vh;
+    min-height: 100%;
 }
+
 
 .gallery {
     margin: auto;
-    padding-top: 140px;
+    padding-top: 20px;
     padding-bottom: 140px;
     width: 75%;
     /* height:max-content; */
@@ -421,6 +422,11 @@ small {
     height: 85;
 }
 
+.code {
+  padding: 20px;
+  text-align: center;
+}
+
 .nes-balloon{
     position: absolute;
     bottom: 150px;
@@ -429,9 +435,6 @@ small {
 }
 
 @media screen and (max-width: 575px) {
-        .logo {
-            font-size: 1.8vh;
-        }
         .gallery {
             margin: 0;
             width: 100%;

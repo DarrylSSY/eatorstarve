@@ -38,7 +38,7 @@
           <h1 class="logo">The End</h1>
       </div>
       <div class="user col-3 col-md-2 mt-2 px-0 mb-2 nes-container">
-          {{ username }}
+          {{ code }}
       </div>
       <div class="col-md-1 col-lg-1"/>
       <div class="col-12 col-md-10 col-lg-10 mt-5">
