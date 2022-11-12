@@ -53,8 +53,7 @@
                 <div class="row">
                   <div class="nes-select mt-2">
                     <select required id="location">
-                      <option value="" disabled selected hidden>Select...</option>
-                      <option value="default">Use my current location</option>
+                      <option value="">Current location</option>
                       <option value="north">North</option>
                       <option value="south">South</option>
                       <option value="central">Central</option>
@@ -171,7 +170,7 @@ export default {
         code: generated_code,
         status: "open",
         coordinates: this.coordinates,
-        settings: this.dietaryNeeds.join(" ")
+        settings: this.dietaryNeeds.join("|")
 
       }).then((response) => {
         console.log(response);
