@@ -21,7 +21,7 @@
 
                   <br><br>
                   <b>Address: </b><br>
-                  {{result_list[0]['address']}}
+                  {{printAddress(result_list[0]['address'])}}
                   <br><br>
                   <br><br>
                   <small class="price">
@@ -58,7 +58,7 @@
 
                   <br><br>
                   <b>Address: </b><br>
-                  {{result_list[1]['address']}}
+                  {{printAddress(result_list[1]['address'])}}
                   <br><br>
                   <br><br>
                   <small class="price">
@@ -95,7 +95,7 @@
 
                   <br><br>
                   <b>Address: </b><br>
-                  {{result_list[2]['address']}}
+                  {{printAddress(result_list[2]['address'])}}
                   <br><br>
                   <br><br>
                   <small class="price">
@@ -274,13 +274,22 @@ export default {
             let buttonpress = new Audio("../../buttonpress.mp3");
             buttonpress.play();
         },
+        printAddress: function (address) {
+            console.log(address)
+            if (address == null) {
+                return "No address available. Open map to see more."
+            }
+            else {
+                return address
+            }
+        }
     },
 }
 </script>
 
 <style>
   .open_map {
-    width: 80%;
+    width: 100%;
     /* position: absolute;
     bottom: 0; */
   }
