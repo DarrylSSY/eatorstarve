@@ -14,17 +14,23 @@
               <div class="col-12 text-start mb-2">
                 Select date:
               </div>
+           
+              <v-date-picker v-model="date">
+                <template v-slot="{ inputValue, inputEvents }">
+                  <div class="row mx-auto">
+                    <div class="col-md-6 col-sm-12 col-xs-12 ps-0">
+                      <input type="text" class="nes-input" :placeholder="date" :value="inputValue" v-on="inputEvents">
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12 ps-0">
+                      <button type="button" class="nes-btn is-error" :disabled="!date"
+                        @click="date = new Date(); clear()">Reset Datetime</button>
+                    </div>
+
+                  </div>
+                </template>
+              </v-date-picker>
             </div>
-            <v-date-picker v-model="date">
-              <template v-slot="{ inputValue, inputEvents }">
-                <div class="input-group">
-                  <input type="text" class="nes-input form-control " :placeholder="date" :value="inputValue"
-                    v-on="inputEvents">
-                  <span class="input-group-text border-0"><button type="button" class="nes-btn is-error"
-                      :disabled="!date" @click="date = new Date();clear()">Reset Datetime</button></span>
-                </div>
-              </template>
-            </v-date-picker>
 
             <!-- time input -->
             <div class="row mt-3">
@@ -186,7 +192,7 @@ export default {
       });
 
     },
-    clear: function(){
+    clear: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
       buttonpress.play()
     }
@@ -203,7 +209,8 @@ export default {
 
 button {
   width: 100%;
-  height: 100%;
+  min-width: fit-content;
+  height: fit-content;
 }
 
 body {
