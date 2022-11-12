@@ -307,7 +307,7 @@ canvas {
 
 .dialogue-box {
   position: absolute;
-  bottom: 5px;
+  bottom: 3px;
 }
 
 .top {
