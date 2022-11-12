@@ -17,10 +17,12 @@
             </div>
             <v-date-picker v-model="date">
               <template v-slot="{ inputValue, inputEvents }">
-                <div class="input-group">
-                  <input type="text" class="nes-input form-control" :placeholder="date" :value="inputValue"
+                <div class="input-group row m-0">
+                  <input type="text" class="nes-input form-control col-12 col-md-6 col-xl-5 col-xxl-8" :placeholder="date" :value="inputValue"
                     v-on="inputEvents">
-                  <span class="input-group-text border-0 sm-px-1 "><button type="button" class="nes-btn is-error"
+                  <span class="input-group-text border-0 px-0 sm-px-1 col-12 col-md-6 col-xl-7 col-xxl-4">
+                    <p class=" d-none d-md-block p-0" style="color: white;width:10px">.</p>
+                    <button type="button" class="nes-btn is-error " width="100%"
                       :disabled="!date" @click="date = new Date();clear()">Reset Datetime</button></span>
                 </div>
               </template>
