@@ -11,34 +11,26 @@
           <div class="nes-container is-rounded is-centered">
             <!-- date input -->
             <div class="row">
-              <div class="col-12 text-start mb-2">Select date:</div>
+              <div class="col-12 text-start mb-2">
+                Select date:
+              </div>
+           
+              <v-date-picker v-model="date">
+                <template v-slot="{ inputValue, inputEvents }">
+                  <div class="row mx-auto">
+                    <div class="col-md-6 col-sm-12 col-xs-12 ps-0">
+                      <input type="text" class="nes-input" :placeholder="date" :value="inputValue" v-on="inputEvents">
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12 ps-0">
+                      <button type="button" class="nes-btn is-error" :disabled="!date"
+                        @click="date = new Date(); clear()">Reset Datetime</button>
+                    </div>
+
+                  </div>
+                </template>
+              </v-date-picker>
             </div>
-            <v-date-picker v-model="date">
-              <template #default="{ inputValue, inputEvents }">
-                <div class="input-group">
-                  <input
-                    :placeholder="date"
-                    :value="inputValue"
-                    class="nes-input form-control"
-                    type="text"
-                    v-on="inputEvents"
-                  />
-                  <span class="input-group-text border-0"
-                    ><button
-                      :disabled="!date"
-                      class="nes-btn is-error"
-                      type="button"
-                      @click="
-                        date = new Date();
-                        clear();
-                      "
-                    >
-                      Reset Datetime
-                    </button></span
-                  >
-                </div>
-              </template>
-            </v-date-picker>
 
             <!-- time input -->
             <div class="row mt-3">
@@ -225,7 +217,8 @@ export default {
 
 button {
   width: 100%;
-  height: 100%;
+  min-width: fit-content;
+  height: fit-content;
 }
 
 body {
