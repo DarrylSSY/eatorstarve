@@ -27,46 +27,22 @@
   </dialog>
 
 
-  <div class="whole container container-sm">
+  <div class="container-sm p-0">
 
-    <!-- <div class="row">
-
-      <div class="col-2">
-        <button type="button" class="nes-btn is-error" onclick="document.getElementById('exitModal').showModal();">Exit</button>
+    <div class="row mx-0">
+      <div class="col-3 col-md-2 mt-2 px-0">
+        <button type="button" class="nes-btn is-error" @click="exit">Quit</button>
       </div>
 
-      <div class="col-8 col-content">
-          <h4 class="logo">Eat or Starve</h4>
-      </div>
-
-      <div class="col-12">
-        <div class="ending_container">
-          <h2 class="end">The End.</h2>
-        </div>
-
-      </div>
-    </div> -->
-
-    <div class="row top gx-4">
-      <div class="col-3 col-md-2 ps-0 col-content">
-        <button type="button" class="nes-btn is-error" @click="exit">Exit</button>
-      </div>
-
-      <div class="col-6 col-md-8 col-content">
+      <div class="col-6 col-md-8 mt-2 px-2">
           <h1 class="logo">The End</h1>
       </div>
-
-      <div class="user col-3 col-md-2 col-content nes-container">
+      <div class="user col-3 col-md-2 mt-2 px-0 mb-2 nes-container">
           {{ username }}
       </div>
-  </div>
-
-    <!-- User List -->
-
-    <div class="row component">
-      <div class="col"></div>
-      <div class="col-12 col-md-10 col-lg-10">
-        <div class="main_component nes-container is-rounded">
+      <div class="col-md-1 col-lg-1"/>
+      <div class="col-12 col-md-10 col-lg-10 mt-5">
+        <div class="main_component nes-container is-rounded text-center">
           <h5> Completed: </h5>
           <div class="container">
             <div class="row">
@@ -83,8 +59,11 @@
           </div>
         </div>
       </div>
-      <div class="col"></div>
-    </div>
+  </div>
+
+    <!-- User List -->
+
+
 
       <div class="result">
 
@@ -110,7 +89,6 @@
 
         <!-- Generate Result Dialog -->
 
-        <div class="row">
 
           <div class="col-12">
           <div class="text_component container nes-container is-rounded">
@@ -118,9 +96,9 @@
             <div class="row py-sm-4">
               <div class="col-12">
                 <div class="text_container">
-                  <div class="typewriter">
+
                     Do you want to generate results?
-                  </div>
+
                   <div class="hider">
                     <p>&nbsp;</p>
                     <p>&nbsp;</p>
@@ -145,7 +123,6 @@
           </div>
         </div>
       </div>
-  </div>
 
 
   </div>
@@ -269,9 +246,9 @@ div.nes-container {
     height: 70px;
 }
 
-button.is-error {
-    width: 100%;
-    height: 62.4px;
+.nes-btn {
+  width: calc(100% - 8px);
+  height: 56px;
 }
 
 .logo {
@@ -347,11 +324,9 @@ div.main_component {
   text-align: left; */
 
   overflow-y: auto;
-  position: absolute;
   bottom: 20px;
   top: 70px;
   /* height: 50%; */
-  overflow-y: ;
   text-align: left;
   right: 15px;
 }
@@ -376,9 +351,9 @@ div.text_component {
 
 .result {
   position: absolute;
-  bottom: 20px;
-  left: 10px;
-  right: 10px;
+  bottom: 0px;
+  left: 4px;
+  right: 4px;
 }
 
 .text_container {
