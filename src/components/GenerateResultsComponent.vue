@@ -289,7 +289,7 @@ export default {
 
 <style>
   .open_map {
-    width: 80%;
+    width: 100%;
     /* position: absolute;
     bottom: 0; */
   }
