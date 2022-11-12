@@ -329,9 +329,7 @@ button.is-error {
 body {
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg,
-        rgba(255, 255, 255, 0.3),
-        rgba(255, 255, 255, 0.3)),
+    background: 
     linear-gradient(0deg,
         rgba(245, 200, 95, 0.66),
         rgba(245, 200, 95, 0.66)),
