@@ -130,9 +130,11 @@ p, body, button {
 
 html {
   height: 100vh;
+  max-height: 100%;
 }
 
 body {
   height: 100vh;
+  max-height: 100%;
 }
 </style>
