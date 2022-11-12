@@ -6,7 +6,7 @@
         <div class="col-12 gy-4 text-center">
           <h1 class="text-center">Pre-Game Setup</h1>
         </div>
-        <div class="col-10 col-lg-8 offset-1 offset-lg-2 gy-4 mb-4">
+        <div class="col-10 col-lg-8 col-md-8 col-sm-12 col-xs-12 mx-auto gy-4 mb-4">
           <div class="nes-container is-rounded is-centered">
 
             <!-- date input -->
@@ -18,9 +18,9 @@
             <v-date-picker v-model="date">
               <template v-slot="{ inputValue, inputEvents }">
                 <div class="input-group">
-                  <input type="text" class="nes-input form-control" :placeholder="date" :value="inputValue"
+                  <input type="text" class="nes-input form-control " :placeholder="date" :value="inputValue"
                     v-on="inputEvents">
-                  <span class="input-group-text border-0 sm-px-1 "><button type="button" class="nes-btn is-error"
+                  <span class="input-group-text border-0"><button type="button" class="nes-btn is-error"
                       :disabled="!date" @click="date = new Date();clear()">Reset Datetime</button></span>
                 </div>
               </template>
@@ -35,7 +35,7 @@
                   </div>
                   <div class="col-12">
                     <v-date-picker id="timePicker" mode="time" v-model="date" :timezone="timezone"
-                      class="text-center border-0 bg-white col-lg-6 col-xl-6 col-md-12 col-sm-12 mt-2" />
+                      class="text-center border-0 bg-white col-12" />
                   </div>
                 </div>
               </div>
