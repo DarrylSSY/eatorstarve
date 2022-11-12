@@ -12,85 +12,91 @@
   </dialog>
   <div class="question-body row mx-0">
     <!-- Header (Quit button and progress bar) -->
-      <div class="col-3 col-md-2 mt-2 px-0">
-        <button
-          type="button"
-          class="nes-btn is-error pr-6"
-          onclick="document.getElementById('dialog-rounded').showModal();"
-        >
-          Quit
-        </button>
-      </div>
-      <div class="col-9 col-md-10 pe-2 h-10 mt-2">
-        <progress style="width: 100%"
-          class="nes-progress"
-          :class="color"
-          :value="progress"
-          max="100"
-        ></progress>
-      </div>
+    <div class="col-3 col-md-2 mt-2 px-0">
+      <button
+        type="button"
+        class="nes-btn is-error pr-6"
+        onclick="document.getElementById('dialog-rounded').showModal();"
+      >
+        Quit
+      </button>
+    </div>
+    <div class="col-9 col-md-10 pe-2 h-10 mt-2">
+      <progress
+        style="width: 100%"
+        class="nes-progress"
+        :class="color"
+        :value="progress"
+        max="100"
+      ></progress>
+    </div>
     <div class="col-1 col-md-0"></div>
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <button
-          type="button"
-          class="game-option nes-btn"
-          :class="btn_state_1"
-          @click="option1"
+        type="button"
+        class="game-option nes-btn"
+        :class="btn_state_1"
+        @click="option1"
       >
         <h3>{{ answer1 }}</h3>
       </button>
       <div class="auto-layout">
-
         <h4>-- OR --</h4>
-
       </div>
       <button
-          type="button"
-          class="game-option nes-btn"
-          :class="btn_state_2"
-          @click="option2"
+        type="button"
+        class="game-option nes-btn"
+        :class="btn_state_2"
+        @click="option2"
       >
         <h3>{{ answer2 }}</h3>
       </button>
     </div>
-      <!-- <div class="col-1 col-md-0"></div> -->
-    </div>
-    <!-- Options -->
+    <!-- <div class="col-1 col-md-0"></div> -->
+  </div>
+  <!-- Options -->
 
   <div class="dialogue-box container p-0">
     <!-- Question number, health bar and username -->
     <div class="col-12 row px-0 mx-0 gy-1">
-      <div class="info col-5 col-md-4 col-lg-3 col-xl-2 ps-0 py-0" style="height: 100%;">
+      <div
+        class="info col-5 col-md-4 col-lg-3 col-xl-2 ps-0 py-0"
+        style="height: 100%"
+      >
         <!-- Username -->
         <div class="nes-container is-centered is-rounded p-2">
           {{ username }}
         </div>
       </div>
-      <div class="info col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 col-xxl-3 ps-0 pt-0 info-box mb-2 px-0">
-        <div class="nes-container is-rounded py-2 px-0 ">
+      <div
+        class="info col-12 col-sm-8 col-md-7 col-lg-5 col-xl-4 col-xxl-3 ps-0 pt-0 info-box mb-2 px-0"
+      >
+        <div class="nes-container is-rounded py-2 px-0">
           <canvas id="canvas" height="20"></canvas>
         </div>
       </div>
     </div>
 
-    <div class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0 ">
+    <div
+      class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0"
+    >
       <img
         class="profile me-2"
-        :src="
-          'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'
-        "
+        :src="'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'"
       />
-      <h3 class="col-7 col-sm-9">{{ question_front }}{{ category }}{{question_back}}</h3>
+      <h3 class="col-7 col-sm-9">
+        {{ question_front }}{{ category }}{{ question_back }}
+      </h3>
     </div>
   </div>
   <!-- END of 2 Question Template -->
 </template>
 
 <script>
-import {useSessionStore} from "../stores/session";
+import { useSessionStore } from "../stores/session";
 import axios from "axios";
 import router from "@/router";
-import {Layout, Rive} from "@rive-app/canvas";
+import { Layout, Rive } from "@rive-app/canvas";
 
 export default {
   name: "QuestionComponent",
@@ -125,7 +131,6 @@ export default {
       layout: new Layout({ fit: "fitHeight", alignment: "right" }),
       autoplay: false,
       animations: "Timer",
-
     });
     let oof = new Audio("../../oof.mp3");
     this.$timer.play("Timer");
@@ -182,9 +187,10 @@ export default {
       this.question_front = "Want some ";
       this.question_back = "?";
     }
-    axios.get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`).then((response) => {
-        this.generate2RandomOptions(response["data"].length, response)
-
+    axios
+      .get(`${process.env.VUE_APP_BACKEND_URL}api/questions/${this.category}`)
+      .then((response) => {
+        this.generate2RandomOptions(response["data"].length, response);
       });
   },
   beforeUnmount() {
@@ -192,7 +198,6 @@ export default {
   },
   methods: {
     generate2RandomOptions: function (x, response) {
-
       let num1 = Math.floor(Math.random() * x);
       let num2 = Math.floor(Math.random() * x);
       if (num1 == num2) {
@@ -216,7 +221,7 @@ export default {
         category: this.category,
       });
       let optionpress = new Audio("../../optionpress.mp3");
-      optionpress.play()
+      optionpress.play();
       router.push({ name: this.next, params: { id: this.code } });
     },
     option2: function () {
@@ -227,7 +232,7 @@ export default {
         category: this.category,
       });
       let optionpress = new Audio("../../optionpress.mp3");
-      optionpress.play()
+      optionpress.play();
       router.push({ name: this.next, params: { id: this.code } });
     },
     home: function () {
@@ -312,7 +317,7 @@ canvas {
 }
 
 .top {
-    padding-top: 24px;
+  padding-top: 24px;
 }
 
 .info-box {
