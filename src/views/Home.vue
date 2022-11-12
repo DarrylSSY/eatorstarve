@@ -12,26 +12,30 @@
             <!-- room code input -->
             <input
               v-model="code"
-              type="text"
               class="nes-input is-primary my-2 mb-4"
               placeholder="Room Code"
+              type="text"
             />
             <!-- join button -->
             <button
               v-if="code != ''"
-              type="button"
               class="nes-btn is-primary my-2"
+              type="button"
               @click="join"
             >
               Join
             </button>
 
-            <button v-else type="button" class="nes-btn is-disabled my-2">
+            <button v-else class="nes-btn is-disabled my-2" type="button">
               Join
             </button>
-            <div class="my-2"> --- OR --- </div>
+            <div class="my-2">--- OR ---</div>
             <!-- create room button -->
-            <button type="button" class="nes-btn is-warning my-2" @click="create">
+            <button
+              class="nes-btn is-warning my-2"
+              type="button"
+              @click="create"
+            >
               Create
             </button>
           </div>
@@ -49,8 +53,8 @@
         </div>
         <div class="col-12 gy-5 d-block d-md-none">
           <div class="nes-container is-rounded is-centered">
-            Welcome to <b>Eat or Starve</b> where we help to give suggestions
-            on where your next food adventure should be. <br /><br />
+            Welcome to <b>Eat or Starve</b> where we help to give suggestions on
+            where your next food adventure should be. <br /><br />
             Simply create a new game or join one hosted by your friend to
             kickstart the game of choice!
           </div>
@@ -66,6 +70,7 @@
 
 <script>
 import router from "@/router";
+
 export default {
   name: "RoomView",
   data() {
@@ -96,8 +101,7 @@ input {
 }
 
 body {
-  background: 
-  linear-gradient(
+  background: linear-gradient(
       0deg,
       rgba(245, 200, 95, 0.66),
       rgba(245, 200, 95, 0.66)

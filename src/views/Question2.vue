@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="container-sm p-0">
-      <QuestionComponent category="poultry" :code="code" />
+      <QuestionComponent :code="code" category="poultry" />
       <UsernameCheckerComponent />
     </div>
   </body>
@@ -9,7 +9,7 @@
 
 <script>
 import router from "@/router";
-import { useSessionStore } from '../stores/session';
+import { useSessionStore } from "../stores/session";
 import QuestionComponent from "../components/QuestionComponent";
 import UsernameCheckerComponent from "../components/UsernameCheckerComponent";
 
@@ -17,26 +17,25 @@ export default {
   name: "Question2View",
   components: {
     UsernameCheckerComponent,
-    QuestionComponent
+    QuestionComponent,
   },
   setup() {
-    const store = useSessionStore()
+    const store = useSessionStore();
     return {
-      username: store.getUsername
-    }
+      username: store.getUsername,
+    };
   },
   data() {
     return {
       code: this.$route.params.code,
-
-    }
+    };
   },
   methods: {
-    next: function (){
-      router.push({ name: 'Holding', params: {id:this.code} })
+    next: function () {
+      router.push({ name: "Holding", params: { id: this.code } });
     },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -46,9 +45,10 @@ body {
       0deg,
       rgba(203, 147, 117, 0.66),
       rgba(203, 147, 117, 0.66)
-  ),
-  url(../assets/bgpoultry.jpg);
+    ),
+    url(../assets/bgpoultry.jpg);
 }
+
 .container {
   height: 100%;
 }
