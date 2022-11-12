@@ -283,6 +283,7 @@ small {
 .code {
   padding: 20px;
   text-align: center;
+  height: 70px;
 }
 
 .nes-balloon {
