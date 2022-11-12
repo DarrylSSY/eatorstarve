@@ -87,10 +87,11 @@
 </template>
 
 <script>
-import { useSessionStore } from "../stores/session";
+import {useSessionStore} from "../stores/session";
 import axios from "axios";
 import router from "@/router";
-import { Rive, Layout } from "@rive-app/canvas";
+import {Layout, Rive} from "@rive-app/canvas";
+
 export default {
   name: "QuestionComponent",
   props: {

@@ -86,12 +86,6 @@ const routes = [
         name: 'Holding',
         component: HoldingView,
     },
-    {
-        path: '/sample',
-        name: 'Sample',
-        component: SampleView,
-        props: { msg: Math.random().toString(36).slice(9)}
-    },
 
 ]
 

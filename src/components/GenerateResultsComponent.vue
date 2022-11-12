@@ -124,8 +124,9 @@
 </template>
 
 <script>
-import { useSessionStore } from '../stores/session';
+import {useSessionStore} from '../stores/session';
 import axios from "axios";
+
 export default {
     name: "GenerateResultsComponent",
     props: {
