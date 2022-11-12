@@ -1,18 +1,18 @@
 <!--This checks if the user currently has a username, else it will show error-->
 <template>
-  <dialog v-if="status==='missing'" class="nes-dialog" id="dialog-default">
+  <dialog v-if="status === 'missing'" id="dialog-default" class="nes-dialog">
     <form method="dialog">
       <p class="title">Uh oh!</p>
       <p>Room does not exist</p>
-        <button @click="home" class="nes-btn is-primary">Exit</button>
+      <button class="nes-btn is-primary" @click="home">Exit</button>
     </form>
   </dialog>
-  <dialog v-if="status==='close'" class="nes-dialog" id="dialog-default">
+  <dialog v-if="status === 'close'" id="dialog-default" class="nes-dialog">
     <form method="dialog">
       <p class="title">Uh oh!</p>
       <p>Game has ended. View results?</p>
-      <button @click="results" class="nes-btn is-warning">Results</button>
-      <button @click="home" class="nes-btn">Exit</button>
+      <button class="nes-btn is-warning" @click="results">Results</button>
+      <button class="nes-btn" @click="home">Exit</button>
     </form>
   </dialog>
 </template>
@@ -26,42 +26,43 @@ export default {
   props: {
     roomcode: String,
   },
-  data () {
+  data() {
     return {
-      status: 'open'
-    }
+      status: "open",
+    };
   },
   async mounted() {
-    await axios.get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.roomcode}`).then(response => {
-      if (response.data == "open") {
-        this.status = "open"
-      } else if (response.data == "close") {
-        this.status = "close"
-      } else {
-        this.status = "missing"
-      }
-    })
-    if (document.getElementById('dialog-default')) {
-      document.getElementById('dialog-default').showModal();
+    await axios
+      .get(`${process.env.VUE_APP_BACKEND_URL}api/createdroom/${this.roomcode}`)
+      .then((response) => {
+        if (response.data == "open") {
+          this.status = "open";
+        } else if (response.data == "close") {
+          this.status = "close";
+        } else {
+          this.status = "missing";
+        }
+      });
+    if (document.getElementById("dialog-default")) {
+      document.getElementById("dialog-default").showModal();
     }
   },
   methods: {
-    home: function (){
+    home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
-      buttonpress.play()
-      router.push("/")
+      buttonpress.play();
+      router.push("/");
     },
-    results: function (){
+    results: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
-      buttonpress.play()
-      router.push("/room/" + this.roomcode + "/result")
+      buttonpress.play();
+      router.push("/room/" + this.roomcode + "/result");
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-
 .nes-dialog {
   width: fit-content;
   align-items: center;
