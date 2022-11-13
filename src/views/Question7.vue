@@ -48,6 +48,7 @@ body {
     ),
     url(../assets/bguniqueness.jpg);
 }
+
 .container-sm {
   height: 100%;
 }

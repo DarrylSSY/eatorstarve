@@ -1,12 +1,11 @@
 <template>
-
   <label>
     <input
       v-model="value"
-      type="radio"
+      checked
       class="nes-radio"
       name="answer"
-      checked
+      type="radio"
       @keydown.enter.prevent="$emit('yesFunction')"
     />
     <span>Yes</span>
@@ -15,9 +14,9 @@
   <label>
     <input
       v-model="value"
-      type="radio"
       class="nes-radio"
       name="answer"
+      type="radio"
       @keydown.enter.prevent="$emit('noFunction')"
     />
     <span>No</span>

@@ -49,7 +49,6 @@ body {
     url(../assets/bgtexture.jpg);
 }
 
-
 .container-sm {
   height: 100%;
 }

@@ -117,19 +117,33 @@
 
         <!-- copy link button -->
         <div id="link" class="row d-flex justify-content-center mx-auto">
-          <div class="col-md-8 col-sm-12 col-xs-12 px-0 text-center is-rounded me-md-3">
-            <input type="text" class="nes-input is-primary" :value="currentUrl" />
+          <div
+            class="col-md-8 col-sm-12 col-xs-12 px-0 text-center is-rounded me-md-3"
+          >
+            <input
+              :value="currentUrl"
+              class="nes-input is-primary"
+              type="text"
+            />
           </div>
 
           <div class="col-md-2 col-sm-12 col-xs-12 px-0">
-              <button id="copy" type="button" class="nes-btn is-warning text-center" @click="copy_link">
-                Copy Link
-                <div v-show="copySuccess" class="nes-balloon from-left hideElement" data-bs-toggle="popover"
-                  data-bs-trigger="focus">
-                  <p>Copied!</p>
-                </div>
-              </button>
-
+            <button
+              id="copy"
+              class="nes-btn is-warning text-center"
+              type="button"
+              @click="copy_link"
+            >
+              Copy Link
+              <div
+                v-show="copySuccess"
+                class="nes-balloon from-left hideElement"
+                data-bs-toggle="popover"
+                data-bs-trigger="focus"
+              >
+                <p>Copied!</p>
+              </div>
+            </button>
           </div>
 
           <RoomCheckerComponent :roomcode="code" />

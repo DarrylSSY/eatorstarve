@@ -34,7 +34,7 @@
         >
           Yes, Goodbye!
         </button>
-        <a class="nes-btn" @click="close2">Cancel</a>
+        <button class="nes-btn" @click="close2">Cancel</button>
       </div>
     </dialog>
 
@@ -80,7 +80,6 @@
       <!-- User List -->
 
       <div class="result">
-
         <!-- Generate Result Dialog -->
 
         <div class="col-12">
@@ -110,8 +109,8 @@
                 </div>
 
                 <!-- <div class="enter d-none d-sm-block">
-                Press 'Enter' to continue
-              </div> -->
+              Press 'Enter' to continue
+            </div> -->
               </div>
             </div>
           </div>
@@ -119,7 +118,7 @@
       </div>
     </div>
     <!-- <GenerateResultsComponent :code="code"/>
-  <UsernameCheckerComponent /> -->
+<UsernameCheckerComponent /> -->
   </body>
 </template>
 
@@ -214,7 +213,6 @@ div.nes-container {
   background-color: white;
 }
 
-
 .nes-btn {
   width: calc(100% - 8px);
   height: 56px;
@@ -232,7 +230,6 @@ div.nes-container {
   height: 70px;
 }
 
-
 @keyframes typing {
   from {
     width: 100%;
@@ -241,8 +238,6 @@ div.nes-container {
     width: 0;
   }
 }
-
-
 
 div.main_component {
   padding-top: 10px;

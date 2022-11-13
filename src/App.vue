@@ -5,19 +5,16 @@
 </template>
 
 <script>
-
-
 export default {
   name: "App",
   data() {
     return {
-      music: ""
+      music: "",
     };
   },
   watch: {
     $route() {
-      this.music.play()
-
+      this.music.play();
     },
   },
   created() {
@@ -34,6 +31,7 @@ export default {
   text-align: center;
   height: 100%;
 }
+
 .nes-btn {
   width: 100%;
 }
@@ -50,11 +48,15 @@ h1 {
 h2 {
   font-size: 50px;
 }
-h3, h6{
+
+h3,
+h6 {
   font-size: 40px;
 }
 
-p, body, button {
+p,
+body,
+button {
   font-size: 16px;
 }
 
@@ -67,16 +69,21 @@ p, body, button {
   h1 {
     font-size: 50px;
   }
+
   h2 {
     font-size: 40px;
   }
+
   p,
   body,
   .nes-input,
   button {
     font-size: 14px;
   }
-  h3, h4, h6{
+
+  h3,
+  h4,
+  h6 {
     font-size: 30px;
   }
 }
@@ -85,41 +92,49 @@ p, body, button {
   h1 {
     font-size: 40px;
   }
+
   h2 {
     font-size: 30px;
   }
+
   p,
   body,
   .nes-input,
-  button  {
+  button {
     font-size: 12px;
   }
-  h3, h4, h6{
+
+  h3,
+  h4,
+  h6 {
     font-size: 20px;
   }
-
 }
 
 @media (max-width: 576px) {
   h1 {
     font-size: 25px;
   }
+
   h2 {
     font-size: 20px;
   }
+
   p,
   body,
   .nes-input,
-  button  {
-    font-size: 10px;
-  }
-  h3, h4{
-    font-size: 15px;
-  }
-  h6{
+  button {
     font-size: 10px;
   }
 
+  h3,
+  h4 {
+    font-size: 15px;
+  }
+
+  h6 {
+    font-size: 10px;
+  }
 }
 
 .mute-btn {

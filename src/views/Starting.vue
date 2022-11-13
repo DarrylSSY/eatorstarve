@@ -9,7 +9,6 @@
           <h1>{{ countDown }}</h1>
         </div>
       </div>
-
     </div>
   </div>
   <div class="container p-0" style="margin: auto">
@@ -56,7 +55,6 @@ export default {
       .then((response) => {
         this.answered = response.data;
       });
-
   },
   methods: {
     next: function () {
@@ -118,6 +116,4 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
-
 </style>
