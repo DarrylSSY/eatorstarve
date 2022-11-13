@@ -166,7 +166,6 @@ export default {
     this.rand_num = Math.floor(Math.random() * this.joke_list.length);
   },
 
-
   methods: {
     home: function () {
       let buttonpress = new Audio("../../buttonpress.mp3");
@@ -212,14 +211,11 @@ div.nes-container {
   height: 56px;
 }
 
-
 .logo {
   text-align: center;
   margin: 0;
   padding-top: 10px;
 }
-
-
 
 body {
   width: 100%;
@@ -247,12 +243,10 @@ body {
   width: 75%;
 }
 
-
 .arrow-buttons {
   width: 80%;
   top: 20%;
 }
-
 
 .carousel-control-prev,
 .carousel-control-next {
@@ -269,7 +263,6 @@ body {
 small {
   text-align: left;
 }
-
 
 #link {
   margin-top: 10px;

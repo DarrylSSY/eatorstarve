@@ -10,6 +10,16 @@ npm install
 npm run start
 ```
 
+### Start only the frontend service
+```
+npm run client
+```
+
+### Start only the backend service
+```
+npm run server
+```
+
 ### Configure the backend API host
 ```
 1. Open the file '.env'
@@ -22,6 +32,8 @@ VUE_APP_BACKEND_URL=http://localhost:8081/
 1. The backend service is running on port 8081 and frontend service is running on port 8080
 2. Copy Link feature only works if page has SSL certificate or hosted on localhost
 3. If issue with Pinia dependency, run "npm install pinia --legacy-peer-deps"
+4. Backend Files: /server
+5. Frontend Files: /src and /public
 ```
 
 ### Project Contributors

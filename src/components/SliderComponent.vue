@@ -14,18 +14,18 @@
     <!-- Header (Quit button and progress bar) -->
     <div class="col-3 col-md-2 mt-2 px-0">
       <button
-        type="button"
         class="nes-btn is-error pr-6"
         onclick="document.getElementById('dialog-rounded').showModal();"
+        type="button"
       >
         Quit
       </button>
     </div>
     <div class="col-9 col-md-10 pe-2 h-10 mt-2">
       <progress
-        class="nes-progress"
         :class="color"
         :value="progress"
+        class="nes-progress"
         max="100"
       ></progress>
     </div>
@@ -36,9 +36,9 @@
       <div class="row mt-auto">
         <input
           v-model="value"
-          type="range"
           class="form-range"
           max="2"
+          type="range"
           @mouseup="nextpage()"
           @touchend="nextpage()"
         />
@@ -80,8 +80,8 @@
       class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0"
     >
       <img
-        class="profile me-2"
         :src="'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'"
+        class="profile me-2"
       />
       <h3 class="col-7 col-sm-9">
         {{ question_front }}{{ category }}{{ question_back }}
@@ -238,6 +238,7 @@ canvas {
 .game-options {
   height: fit-content;
 }
+
 .chat-box {
   height: 136px;
   width: calc(100% - 8px);
@@ -272,10 +273,8 @@ canvas {
   bottom: 3px;
 }
 
-
 .info-box {
   height: 60px;
   margin-bottom: 20px;
 }
-
 </style>

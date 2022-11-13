@@ -95,5 +95,4 @@ body {
 .nes-container {
   background: white;
 }
-
 </style>

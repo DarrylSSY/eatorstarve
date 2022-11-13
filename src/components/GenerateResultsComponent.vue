@@ -10,8 +10,8 @@
                 result_list[0]['photo'] +
                 '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'
               "
-              class="img-fluid rounded-start"
               alt="result"
+              class="img-fluid rounded-start"
             />
           </div>
           <div class="col-xs-12 col-md-8">
@@ -46,8 +46,8 @@
                 target="_blank"
               >
                 <button
-                  type="button"
                   class="nes-btn is-warning open_map"
+                  type="button"
                   @click="playSound"
                 >
                   Open Map
@@ -68,8 +68,8 @@
                 result_list[1]['photo'] +
                 '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'
               "
-              class="img-fluid rounded-start"
               alt="result"
+              class="img-fluid rounded-start"
             />
           </div>
           <div class="col-xs-12 col-md-8">
@@ -103,8 +103,8 @@
                 target="_blank"
               >
                 <button
-                  type="button"
                   class="nes-btn is-warning open_map"
+                  type="button"
                   @click="playSound"
                 >
                   Open Map
@@ -125,8 +125,8 @@
                 result_list[2]['photo'] +
                 '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'
               "
-              class="img-fluid rounded-start"
               alt="result"
+              class="img-fluid rounded-start"
             />
           </div>
           <div class="col-xs-12 col-md-8">
@@ -160,8 +160,8 @@
                 target="_blank"
               >
                 <button
-                  type="button"
                   class="nes-btn is-warning open_map"
+                  type="button"
                   @click="playSound"
                 >
                   Open Map
@@ -385,6 +385,7 @@ export default {
 .card-body {
   height: 100%;
 }
+
 .card {
   height: 90%;
   width: auto;
@@ -396,6 +397,7 @@ export default {
   width: 100%;
   object-fit: cover;
 }
+
 @media screen and (max-width: 767px) {
   .card img {
     height: 10vh;

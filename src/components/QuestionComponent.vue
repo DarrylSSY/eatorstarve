@@ -14,28 +14,28 @@
     <!-- Header (Quit button and progress bar) -->
     <div class="col-3 col-md-2 mt-2 px-0">
       <button
-        type="button"
         class="nes-btn is-error pr-6"
         onclick="document.getElementById('dialog-rounded').showModal();"
+        type="button"
       >
         Quit
       </button>
     </div>
     <div class="col-9 col-md-10 pe-2 h-10 mt-2">
       <progress
-        style="width: 100%"
-        class="nes-progress"
         :class="color"
         :value="progress"
+        class="nes-progress"
         max="100"
+        style="width: 100%"
       ></progress>
     </div>
     <div class="col-1 col-md-0"></div>
     <div class="nes-container is-rounded col-10 col-md-10 game-options">
       <button
-        type="button"
-        class="game-option nes-btn"
         :class="btn_state_1"
+        class="game-option nes-btn"
+        type="button"
         @click="option1"
       >
         <h3>{{ answer1 }}</h3>
@@ -44,9 +44,9 @@
         <h4>-- OR --</h4>
       </div>
       <button
-        type="button"
-        class="game-option nes-btn"
         :class="btn_state_2"
+        class="game-option nes-btn"
+        type="button"
         @click="option2"
       >
         <h3>{{ answer2 }}</h3>
@@ -81,8 +81,8 @@
       class="chat-box container nes-container p-0 is-centered is-rounded col-12 my-0"
     >
       <img
-        class="profile me-2"
         :src="'https://avatars.dicebear.com/api/pixel-art/' + username + '.svg'"
+        class="profile me-2"
       />
       <h3 class="col-7 col-sm-9">
         {{ question_front }}{{ category }}{{ question_back }}
@@ -247,22 +247,27 @@ export default {
   height: 56px;
   width: calc(100% - 8px);
 }
+
 .nes-progress {
   width: calc(100% - 8px);
   height: 56px;
 }
+
 .game-option {
   width: 100%;
   aspect-ratio: 10/1;
   height: auto;
   margin: 0px;
 }
+
 canvas {
   padding: 0px;
 }
+
 .game-options {
   height: fit-content;
 }
+
 .auto-layout {
   display: flex;
   flex-direction: row;
@@ -272,9 +277,11 @@ canvas {
   gap: 28px;
   width: 100%;
 }
+
 .auto-layout h4 {
   margin-bottom: 0;
 }
+
 .chat-box {
   height: 136px;
   width: calc(100% - 8px);
@@ -284,18 +291,22 @@ canvas {
   margin-top: 20px;
   bottom: 0px;
 }
+
 .nes-container {
   background-color: #ffffff;
 }
+
 .profile {
   width: 15vw;
   right: -15px;
   position: absolute;
   bottom: -4px;
 }
+
 .question-body {
   height: 60vh;
 }
+
 .info {
   height: 50px;
 }

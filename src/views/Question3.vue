@@ -49,7 +49,6 @@ body {
     url(../assets/bgprice.jpg);
 }
 
-
 .container-sm {
   height: 100%;
 }

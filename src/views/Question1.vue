@@ -49,7 +49,6 @@ body {
     url(../assets/bgcruisines.webp);
 }
 
-
 .container-sm {
   height: 100%;
 }
