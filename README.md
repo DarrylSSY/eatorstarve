@@ -1,9 +1,11 @@
 # Eat or Starve
 Play a game with your friends to get a food recommendation place for their next hangout.
 ## Project setup
-```
-npm install
-```
+1. Install packages with ``npm install``
+2. If dependency error with installing package, try``npm install pinia --legacy-peer-deps``
+3. Create a file named ".env" and type in the relevant variables, ``VUE_APP_BACKEND_URL=http://localhost:8081/``
+4. Once all packages are installed, run the project with ``npm run start``
+5. The project will be running on ``http://localhost:8080/``
 
 ### Start the backend and frontend service
 ```
