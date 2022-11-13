@@ -16,7 +16,7 @@
       >
         Yes, Goodbye!
       </button>
-      <a class="nes-btn" @click="closeModal">Cancel</a>
+      <button class="nes-btn" @click="closeModal">Cancel</button>
     </div>
   </dialog>
 

@@ -34,7 +34,7 @@
         >
           Yes, Goodbye!
         </button>
-        <a class="nes-btn" @click="close2">Cancel</a>
+        <button class="nes-btn" @click="close2">Cancel</button>
       </div>
     </dialog>
 
