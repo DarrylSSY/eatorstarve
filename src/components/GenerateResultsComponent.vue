@@ -66,7 +66,7 @@
               :src="
                 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' +
                 result_list[1]['photo'] +
-                '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'
+                '&key=REDACTED'
               "
               alt="result"
               class="img-fluid rounded-start"
@@ -123,7 +123,7 @@
               :src="
                 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=' +
                 result_list[2]['photo'] +
-                '&key=AIzaSyCDluC6rpLOcgskAumfnCWAOdGrAE1bb5M'
+                '&key=REDACTED'
               "
               alt="result"
               class="img-fluid rounded-start"
